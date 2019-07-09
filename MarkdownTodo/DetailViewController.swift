@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 class DetailViewController: UIViewController {
 
@@ -28,7 +29,7 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    var detailItem: NSDate? {
+    var detailItem: EKCalendar? {
         didSet {
             // Update the view.
             configureView()
