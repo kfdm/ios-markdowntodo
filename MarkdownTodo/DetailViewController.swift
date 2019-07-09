@@ -16,15 +16,15 @@ class DetailViewController: UITableViewController {
     func configureView() {
         guard let calendar = detailItem else { return }
 
-
         container.fetchReminders(for: calendar) { (newReminders) in
             print(newReminders)
-            self.reminders = newReminders
+            self.reminders = newReminders.filter({ (reminder) -> Bool in
+                return !reminder.isCompleted
+            })
             DispatchQueue.main.async {
-            self.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
-
     }
 
     override func viewDidLoad() {
@@ -41,7 +41,6 @@ class DetailViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(reminders.count)
         return reminders.count
     }
 
@@ -58,4 +57,3 @@ class DetailViewController: UITableViewController {
         return cell
     }
 }
-

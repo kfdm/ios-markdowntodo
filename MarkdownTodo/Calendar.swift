@@ -11,7 +11,7 @@ import EventKit
 
 class CalendarController {
     let store = EKEventStore.init()
-    var calendars = [EKSource:[EKCalendar]]()
+    var calendars = [EKSource: [EKCalendar]]()
     var sources = [EKSource]()
 
     func source(for section: Int) -> [EKCalendar] {
@@ -19,7 +19,7 @@ class CalendarController {
         return calendars[source]!
     }
 
-    func calendar(for indexPath:  IndexPath) -> EKCalendar {
+    func calendar(for indexPath: IndexPath) -> EKCalendar {
         let source = sources[indexPath.section]
         return calendars[source]![indexPath.row]
     }
@@ -32,7 +32,7 @@ class CalendarController {
         case .denied:
             print("Denied")
         case .notDetermined:
-            store.requestAccess(to: .reminder) { (granted, error) in
+            store.requestAccess(to: .reminder) { (granted, _) in
                 if granted {
                     print("Granted")
                     self.fetch()
@@ -47,7 +47,7 @@ class CalendarController {
         }
     }
 
-    func fetchReminders(for calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) -> () {
+    func fetchReminders(for calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
         let pred = store.predicateForReminders(in: [calendar])
         store.fetchReminders(matching: pred) { (fetchedReminders) in
             if let newReminders = fetchedReminders {
@@ -56,17 +56,15 @@ class CalendarController {
         }
     }
 
-
     func fetch() {
         sources = store.sources.filter({ (source) -> Bool in
             source.sourceType != .birthdays
         })
 
         sources.forEach { (source) in
-
-                calendars[source] = Array(source.calendars(for: .reminder))
-
-
+            calendars[source] = Array(source.calendars(for: .reminder)).sorted(by: { (a, b) -> Bool in
+                a.cgColor.hashValue > b.cgColor.hashValue
+            })
         }
     }
 }

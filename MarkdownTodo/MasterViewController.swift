@@ -10,10 +10,9 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: DetailViewController?
     var objects = [Any]()
     var container = CalendarController()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +93,4 @@ class MasterViewController: UITableViewController {
         return container.sources[section].title
     }
 
-
-
 }
-
