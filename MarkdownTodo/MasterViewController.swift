@@ -72,6 +72,7 @@ class MasterViewController: UITableViewController {
         let cal = container.calendar(for: indexPath)
 
         cell.textLabel!.text = cal.title
+        cell.backgroundColor = UIColor(cgColor: cal.cgColor)
         return cell
     }
 
@@ -92,6 +93,7 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return container.sources[section].title
     }
+
 
 
 }
