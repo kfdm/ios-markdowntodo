@@ -9,18 +9,22 @@
 import UIKit
 import EventKit
 
-class DetailViewController: UIViewController {
-
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+class DetailViewController: UITableViewController {
+    var container = CalendarController()
+    var reminders = [EKReminder]()
 
     func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
+        guard let calendar = detailItem else { return }
+
+
+        container.fetchReminders(for: calendar) { (newReminders) in
+            print(newReminders)
+            self.reminders = newReminders
+            DispatchQueue.main.async {
+            self.tableView.reloadData()
             }
         }
+
     }
 
     override func viewDidLoad() {
@@ -36,6 +40,22 @@ class DetailViewController: UIViewController {
         }
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(reminders.count)
+        return reminders.count
+    }
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let reminder = reminders[indexPath.row]
+
+        cell.textLabel?.text =  reminder.title
+        cell.detailTextLabel?.text = "\(reminder.completionDate)"
+        return cell
+    }
 }
 

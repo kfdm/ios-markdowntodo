@@ -47,6 +47,16 @@ class CalendarController {
         }
     }
 
+    func fetchReminders(for calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) -> () {
+        let pred = store.predicateForReminders(in: [calendar])
+        store.fetchReminders(matching: pred) { (fetchedReminders) in
+            if let newReminders = fetchedReminders {
+                completionHandler(newReminders)
+            }
+        }
+    }
+
+
     func fetch() {
         sources = store.sources.filter({ (source) -> Bool in
             source.sourceType != .birthdays
