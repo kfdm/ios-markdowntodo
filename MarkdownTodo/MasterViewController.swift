@@ -19,11 +19,6 @@ class MasterViewController: UITableViewController {
 
         container.setup()
 
-        // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = editButtonItem
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -33,13 +28,6 @@ class MasterViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-    }
-
-    @objc
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     // MARK: - Segues
@@ -54,6 +42,13 @@ class MasterViewController: UITableViewController {
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+    }
+    @IBAction func clickSettingsButton(_ sender: UIBarButtonItem) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+    }
+
+    @IBAction func clickAboutButton(_ sender: UIBarButtonItem) {
+        UIApplication.shared.open(URL(string: "https://github.com/kfdm/ios-markdowntodo")!)
     }
 
     // MARK: - Table View
@@ -71,7 +66,7 @@ class MasterViewController: UITableViewController {
         let cal = container.calendar(for: indexPath)
 
         cell.textLabel!.text = cal.title
-        cell.backgroundColor = UIColor(cgColor: cal.cgColor)
+        cell.textLabel?.textColor = UIColor(cgColor: cal.cgColor)
         return cell
     }
 

@@ -19,8 +19,7 @@ class DetailViewController: UITableViewController {
     func configureView() {
         guard let calendar = detailItem else { return }
 
-        container.fetchReminders(for: calendar) { (newReminders) in
-            print(newReminders)
+        container.predicateForReminders(in: calendar) { (newReminders) in
             self.reminders = newReminders.filter({ (reminder) -> Bool in
                 return !reminder.isCompleted
             })

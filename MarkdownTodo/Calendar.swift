@@ -28,14 +28,14 @@ class CalendarController {
         switch EKEventStore.authorizationStatus(for: .reminder) {
         case .authorized:
             print("Authorized")
-            fetch()
+            refreshData()
         case .denied:
             print("Denied")
         case .notDetermined:
             store.requestAccess(to: .reminder) { (granted, _) in
                 if granted {
                     print("Granted")
-                    self.fetch()
+                    self.refreshData()
                 } else {
                     print("Access Denied")
                 }
@@ -47,7 +47,7 @@ class CalendarController {
         }
     }
 
-    func fetchReminders(for calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
+    func predicateForReminders(in calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
         let pred = store.predicateForReminders(in: [calendar])
         store.fetchReminders(matching: pred) { (fetchedReminders) in
             if let newReminders = fetchedReminders {
@@ -56,7 +56,8 @@ class CalendarController {
         }
     }
 
-    func fetch() {
+    func refreshData() {
+        store.refreshSourcesIfNecessary()
         sources = store.sources.filter({ (source) -> Bool in
             source.sourceType != .birthdays
         })
