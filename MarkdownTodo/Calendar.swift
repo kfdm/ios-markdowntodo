@@ -103,4 +103,12 @@ class CalendarController {
             })
         }
     }
+
+    func save(reminder: EKReminder, commit: Bool) {
+        do {
+            try store.save(reminder, commit: commit)
+        } catch {
+            print("Error creating and saving new reminder : \(error)")
+        }
+    }
 }

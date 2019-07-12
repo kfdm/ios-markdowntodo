@@ -80,4 +80,27 @@ class DetailViewController: UITableViewController {
         }
 
     }
+
+    func actionToday(action: UITableViewRowAction, index: IndexPath) {
+        let reminder = self.tableData.reminderForRowAt(index)
+        let date = Date()
+        let calendar = Calendar.current
+        reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        container.save(reminder: reminder, commit: true)
+        configureView()
+    }
+
+    func actionUnschedule(action: UITableViewRowAction, index: IndexPath) {
+        let reminder = self.tableData.reminderForRowAt(index)
+        reminder.dueDateComponents = nil
+        container.save(reminder: reminder, commit: true)
+        configureView()
+    }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [
+            UITableViewRowAction(style: .normal, title: "Today", handler: actionToday),
+            UITableViewRowAction(style: .destructive, title: "Unschedule", handler: actionUnschedule)
+        ]
+    }
 }
