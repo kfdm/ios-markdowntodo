@@ -9,6 +9,41 @@
 import Foundation
 import EventKit
 
+class GroupedReminders {
+    var reminders: [Date: [EKReminder]]
+    var sections: [Date]
+
+    var numberOfSections: Int { get { return self.sections.count }}
+
+    init () {
+        self.reminders = [Date: [EKReminder]]()
+        self.sections = [Date]()
+    }
+
+    init(reminders: [EKReminder]) {
+        self.reminders = Dictionary.init(grouping: reminders) {
+            if let completed = $0.completionDate { return completed }
+            if let due = $0.dueDateComponents?.date { return due}
+            return Date.distantFuture
+        }
+        self.sections = self.reminders.keys.sorted()
+    }
+
+    func section(_ for_: Int) -> Date {
+        return self.sections[for_]
+    }
+
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        let date = self.sections[section]
+        return self.reminders[date]!.count
+    }
+
+    func reminderForRowAt(_ indexPath: IndexPath) -> EKReminder {
+        let date = self.sections[indexPath.section]
+        return reminders[date]![indexPath.row]
+    }
+}
+
 class CalendarController {
     let store = EKEventStore.init()
     var calendars = [EKSource: [EKCalendar]]()
