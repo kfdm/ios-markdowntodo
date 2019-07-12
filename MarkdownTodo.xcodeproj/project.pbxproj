@@ -14,6 +14,7 @@
 		8706298422D4AC140084441A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8706298322D4AC140084441A /* Assets.xcassets */; };
 		8706298722D4AC140084441A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8706298522D4AC140084441A /* LaunchScreen.storyboard */; };
 		8706298F22D4AD1D0084441A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706298E22D4AD1D0084441A /* Calendar.swift */; };
+		873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AC79C22D8B5570059F70F /* ReminderViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8706298622D4AC140084441A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8706298822D4AC140084441A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8706298E22D4AD1D0084441A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				8706297A22D4AC120084441A /* AppDelegate.swift */,
 				8706297C22D4AC120084441A /* MasterViewController.swift */,
 				8706297E22D4AC120084441A /* DetailViewController.swift */,
+				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
 				8706298022D4AC120084441A /* Main.storyboard */,
 				8706298322D4AC140084441A /* Assets.xcassets */,
 				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8706297F22D4AC120084441A /* DetailViewController.swift in Sources */,
+				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* MasterViewController.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,

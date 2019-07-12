@@ -56,11 +56,16 @@ class DetailViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ReminderViewCell
         let reminder = tableData.reminderForRowAt(indexPath)
-        cell.textLabel?.text =  reminder.title
-        cell.detailTextLabel?.text = "\(reminder.creationDate)"
+        cell.update(reminder)
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        let date = tableData.section(section)
+        header.textLabel?.textColor = date < Date.init() ? UIColor.red : UIColor.black
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
