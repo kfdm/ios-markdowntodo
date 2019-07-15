@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class DetailViewController: UITableViewController {
+class ReminderListViewController: UITableViewController {
 
     var container = CalendarController()
     var tableData = GroupedReminders.init()

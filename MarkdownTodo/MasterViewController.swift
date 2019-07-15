@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController?
+    var detailViewController: ReminderListViewController?
     var objects = [Any]()
     var container = CalendarController()
 
@@ -21,7 +21,7 @@ class MasterViewController: UITableViewController {
 
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ReminderListViewController
         }
     }
 
@@ -36,7 +36,7 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cal = container.calendar(for: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
                 controller.detailItem = cal
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true

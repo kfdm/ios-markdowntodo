@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8706297B22D4AC120084441A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297A22D4AC120084441A /* AppDelegate.swift */; };
 		8706297D22D4AC120084441A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297C22D4AC120084441A /* MasterViewController.swift */; };
-		8706297F22D4AC120084441A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297E22D4AC120084441A /* DetailViewController.swift */; };
+		8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297E22D4AC120084441A /* ReminderListViewController.swift */; };
 		8706298222D4AC120084441A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8706298022D4AC120084441A /* Main.storyboard */; };
 		8706298422D4AC140084441A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8706298322D4AC140084441A /* Assets.xcassets */; };
 		8706298722D4AC140084441A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8706298522D4AC140084441A /* LaunchScreen.storyboard */; };
@@ -21,7 +21,7 @@
 		8706297722D4AC120084441A /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8706297A22D4AC120084441A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8706297C22D4AC120084441A /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		8706297E22D4AC120084441A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8706297E22D4AC120084441A /* ReminderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewController.swift; sourceTree = "<group>"; };
 		8706298122D4AC120084441A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8706298322D4AC140084441A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8706298622D4AC140084441A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			children = (
 				8706297A22D4AC120084441A /* AppDelegate.swift */,
 				8706297C22D4AC120084441A /* MasterViewController.swift */,
-				8706297E22D4AC120084441A /* DetailViewController.swift */,
+				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
 				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
 				8706298022D4AC120084441A /* Main.storyboard */,
 				8706298322D4AC140084441A /* Assets.xcassets */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8706297F22D4AC120084441A /* DetailViewController.swift in Sources */,
+				8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* MasterViewController.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
