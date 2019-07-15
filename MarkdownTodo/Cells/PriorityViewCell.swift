@@ -34,7 +34,7 @@ class PriorityViewCell: UITableViewCell {
         case .Low:
             return Priority.Low.rawValue
         case .Medium:
-            return Priority.Med.rawValue
+            return Priority.Medium.rawValue
         case .High:
             return Priority.High.rawValue
         }
@@ -46,7 +46,7 @@ class PriorityViewCell: UITableViewCell {
             selectorPriority.selectedSegmentIndex = Options.Unset.rawValue
         case .Low:
             selectorPriority.selectedSegmentIndex = Options.Low.rawValue
-        case .Med:
+        case .Medium:
             selectorPriority.selectedSegmentIndex = Options.Medium.rawValue
         case .High:
             selectorPriority.selectedSegmentIndex = Options.High.rawValue

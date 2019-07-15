@@ -18,12 +18,12 @@ class Colors {
     let DateOverdue = UIColor.red
 
     static func priority(for reminder: EKReminder) -> UIColor {
-        switch Priority.convert(from: reminder.priority) {
+        switch Priority.convert(rawValue: reminder.priority) {
         case .Unset:
             return UIColor.lightGray
         case .Low:
             return UIColor.blue
-        case .Med:
+        case .Medium:
             return UIColor.orange
         case .High:
             return UIColor.red

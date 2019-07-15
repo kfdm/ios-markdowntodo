@@ -138,7 +138,7 @@ class ReminderListViewController: UITableViewController {
         }))
 
         alert.addAction(UIAlertAction(title: "Medium", style: .default, handler: { (_) in
-            reminder.priority = Priority.Med.rawValue
+            reminder.priority = Priority.Medium.rawValue
             self.container.save(reminder: reminder, commit: true)
             self.configureView()
         }))
