@@ -22,6 +22,10 @@
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
 		87F2221822DC8D9E005B2CB7 /* DequeNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* DequeNib.swift */; };
+		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
+		87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221E22DC907D005B2CB7 /* StringViewCell.xib */; };
+		87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* TextViewCell.swift */; };
+		87F2222422DC92E5005B2CB7 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2222222DC92E5005B2CB7 /* TextViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +47,10 @@
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
 		87F2221722DC8D9E005B2CB7 /* DequeNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DequeNib.swift; sourceTree = "<group>"; };
+		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
+		87F2221E22DC907D005B2CB7 /* StringViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StringViewCell.xib; sourceTree = "<group>"; };
+		87F2222122DC92E5005B2CB7 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		87F2222222DC92E5005B2CB7 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,10 @@
 				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
 				87094FFB22DC52820047D672 /* PriorityViewCell.swift */,
 				87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */,
+				87F2221D22DC907D005B2CB7 /* StringViewCell.swift */,
+				87F2221E22DC907D005B2CB7 /* StringViewCell.xib */,
+				87F2222122DC92E5005B2CB7 /* TextViewCell.swift */,
+				87F2222222DC92E5005B2CB7 /* TextViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -181,7 +193,9 @@
 				8706298722D4AC140084441A /* LaunchScreen.storyboard in Resources */,
 				8706298422D4AC140084441A /* Assets.xcassets in Resources */,
 				87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */,
+				87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */,
 				8706298222D4AC120084441A /* Main.storyboard in Resources */,
+				87F2222422DC92E5005B2CB7 /* TextViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,12 +211,14 @@
 				8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* MasterViewController.swift in Sources */,
+				87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */,
 				87094FFF22DC63E90047D672 /* Priorities.swift in Sources */,
 				87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
 				87F2221822DC8D9E005B2CB7 /* DequeNib.swift in Sources */,
+				87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

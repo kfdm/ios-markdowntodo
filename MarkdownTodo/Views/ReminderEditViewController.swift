@@ -9,6 +9,14 @@
 import UIKit
 import EventKit
 
+enum TableRows: Int {
+    case title = 0
+    case url
+    case priority
+    case due
+    case notes
+}
+
 class ReminderEditViewController: UITableViewController, Storyboarded {
     var container = CalendarController.shared
     var currentReminder: EKReminder? {
@@ -20,7 +28,9 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        StringViewCell.register(tableView)
         PriorityViewCell.register(tableView)
+        TextViewCell.register(tableView)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
         configureView()
     }
@@ -36,32 +46,47 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Info", for: indexPath)
-            cell.textLabel?.text = NSLocalizedString("Title", comment: "Reminder Title")
-            cell.detailTextLabel?.text = currentReminder?.title
+        switch TableRows.init(rawValue: indexPath.row)! {
+        case .title:
+            let cell = StringViewCell.dequeueReusableCell(tableView)
+            cell.labelField.text = NSLocalizedString("Title", comment: "Reminder Title")
+            cell.textField.text = currentReminder?.title
             return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Info", for: indexPath)
-            cell.textLabel?.text = NSLocalizedString("URL", comment: "Reminder URL")
-            cell.detailTextLabel?.text = currentReminder?.url?.absoluteString
+        case .url:
+            let cell = StringViewCell.dequeueReusableCell(tableView)
+            cell.labelField.text = NSLocalizedString("URL", comment: "Reminder URL")
+            cell.textField.text = currentReminder?.url?.absoluteString
+            cell.textField.keyboardType = .URL
             return cell
-        case 2:
+        case .priority:
             let cell = PriorityViewCell.dequeueReusableCell(tableView)
             cell.setPriority(for: currentReminder!)
             cell.selectorPriority.addTarget(self, action: #selector(updatedPriority(_:)), for: .valueChanged)
             return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Info", for: indexPath)
-
+        case .due:
+            let cell = StringViewCell.dequeueReusableCell(tableView)
+            cell.labelField.text = NSLocalizedString("Due", comment: "Due Date")
+            cell.textField.text = "<date> \(currentReminder?.dueDateComponents)"
+            return cell
+        case .notes:
+            let cell = TextViewCell.dequeueReusableCell(tableView)
+            cell.labelField.text = NSLocalizedString("Notes", comment: "Reminder Notes")
+            cell.textField.text = currentReminder?.notes
             return cell
         }
+    }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch TableRows.init(rawValue: indexPath.row)! {
+        case .notes:
+            return 256
+        default:
+            return 44
+        }
     }
 
     // MARK: Selectors
