@@ -72,16 +72,13 @@
 		8706297922D4AC120084441A /* MarkdownTodo */ = {
 			isa = PBXGroup;
 			children = (
+				8709500022DC72ED0047D672 /* Helpers */,
 				87094FFD22DC57F80047D672 /* Cells */,
 				8761EAA122DC28D500A8474A /* Views */,
-				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 				8706297A22D4AC120084441A /* AppDelegate.swift */,
 				8706298322D4AC140084441A /* Assets.xcassets */,
 				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
 				8706298822D4AC140084441A /* Info.plist */,
-				8706298E22D4AD1D0084441A /* Calendar.swift */,
-				87094FF522DC42BD0047D672 /* Colors.swift */,
-				87094FFE22DC63E90047D672 /* Priorities.swift */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -93,6 +90,17 @@
 				87094FFB22DC52820047D672 /* PriorityViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8709500022DC72ED0047D672 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
+				87094FFE22DC63E90047D672 /* Priorities.swift */,
+				87094FF522DC42BD0047D672 /* Colors.swift */,
+				8706298E22D4AD1D0084441A /* Calendar.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		8761EAA122DC28D500A8474A /* Views */ = {
