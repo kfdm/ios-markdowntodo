@@ -37,7 +37,7 @@ class MasterViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cal = container.calendar(for: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
-                controller.detailItem = cal
+                controller.selectedCalendar = cal
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -66,7 +66,7 @@ class MasterViewController: UITableViewController {
         let cal = container.calendar(for: indexPath)
 
         cell.textLabel!.text = cal.title
-        cell.textLabel?.textColor = UIColor(cgColor: cal.cgColor)
+        cell.textLabel?.textColor = Colors.calendar(for: cal)
         return cell
     }
 

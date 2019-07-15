@@ -89,15 +89,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8HK-0b-FpZ">
-                        <barButtonItem key="rightBarButtonItem" id="XYQ-Im-eaU">
-                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Cds-ci-Scj">
-                                <rect key="frame" x="343" y="6.5" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="6cg-ye-i57">
                                 <connections>
-                                    <action selector="toggleShowCompleted:" destination="Z8C-gi-x1H" eventType="valueChanged" id="hWt-vC-uE7"/>
+                                    <action selector="actionNewReminder:" destination="Z8C-gi-x1H" id="fU6-xJ-ZjC"/>
                                 </connections>
-                            </switch>
-                        </barButtonItem>
+                            </barButtonItem>
+                            <barButtonItem id="XYQ-Im-eaU">
+                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Cds-ci-Scj">
+                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <connections>
+                                        <action selector="toggleShowCompleted:" destination="Z8C-gi-x1H" eventType="valueChanged" id="hWt-vC-uE7"/>
+                                    </connections>
+                                </switch>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQh-1A-k8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,6 +241,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

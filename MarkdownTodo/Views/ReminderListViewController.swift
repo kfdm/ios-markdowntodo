@@ -16,7 +16,7 @@ class ReminderListViewController: UITableViewController {
     var showCompleted = false
 
     func configureView() {
-        guard let calendar = detailItem else { return }
+        guard let calendar = selectedCalendar else { return }
 
         container.predicateForReminders(in: calendar) { (newReminders) in
             self.tableData = self.showCompleted ? GroupedReminders.init(reminders: newReminders) : GroupedReminders.init(reminders: newReminders.filter({ (r) -> Bool in
@@ -39,7 +39,7 @@ class ReminderListViewController: UITableViewController {
         configureView()
     }
 
-    var detailItem: EKCalendar? {
+    var selectedCalendar: EKCalendar? {
         didSet {
             // Update the view.
             configureView()
@@ -65,7 +65,7 @@ class ReminderListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         let date = tableData.section(section)
-        header.textLabel?.textColor = date < Date.init() ? UIColor.red : UIColor.black
+        header.textLabel?.textColor = Colors.isOverdue(for: date)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -116,4 +116,23 @@ class ReminderListViewController: UITableViewController {
         controller.navigationItem.leftItemsSupplementBackButton = true
         navigationController?.pushViewController(controller, animated: true)
     }
+
+    // MARK: - Actions
+
+    @IBAction func actionNewReminder(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController.init(title: "New Reminder", message: "Please enter new reminder", preferredStyle: .alert)
+        alert.addTextField { (field) in
+            field.placeholder = "New Todo"
+        }
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: "New", style: .default, handler: { (action) in
+            guard let selectedCalendar = self.selectedCalendar else { return }
+            let reminder = self.container.newReminder(for: selectedCalendar)
+            reminder.title = alert.textFields?.first?.text
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }

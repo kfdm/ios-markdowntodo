@@ -14,6 +14,7 @@
 		8706298422D4AC140084441A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8706298322D4AC140084441A /* Assets.xcassets */; };
 		8706298722D4AC140084441A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8706298522D4AC140084441A /* LaunchScreen.storyboard */; };
 		8706298F22D4AD1D0084441A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706298E22D4AD1D0084441A /* Calendar.swift */; };
+		87094FF622DC42BD0047D672 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FF522DC42BD0047D672 /* Colors.swift */; };
 		873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AC79C22D8B5570059F70F /* ReminderViewCell.swift */; };
 		8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */; };
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
@@ -30,6 +31,7 @@
 		8706298822D4AC140084441A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8706298E22D4AD1D0084441A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		87094FF222DC40A50047D672 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		87094FF522DC42BD0047D672 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 		8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEditViewController.swift; sourceTree = "<group>"; };
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
 				8706298822D4AC140084441A /* Info.plist */,
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
+				87094FF522DC42BD0047D672 /* Colors.swift */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */,
+				87094FF622DC42BD0047D672 /* Colors.swift in Sources */,
 				8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* MasterViewController.swift in Sources */,

@@ -111,4 +111,11 @@ class CalendarController {
             print("Error creating and saving new reminder : \(error)")
         }
     }
+
+    func newReminder(for calendar: EKCalendar) -> EKReminder {
+        let calendar = store.calendar(withIdentifier: calendar.calendarIdentifier)
+        let reminder = EKReminder.init(eventStore: store)
+        reminder.calendar = calendar
+        return reminder
+    }
 }

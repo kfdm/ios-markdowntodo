@@ -33,7 +33,7 @@ class ReminderViewCell: UITableViewCell {
             }
         }
 
-        colorStrip.backgroundColor = reminder.priorityColor()
+        colorStrip.backgroundColor = Colors.priority(for: reminder)
     }
 }
 
@@ -42,19 +42,5 @@ extension EKReminder {
         if isCompleted {return false}
         if dueDateComponents == nil {return false}
         return true
-    }
-
-    func priorityColor() -> UIColor {
-        switch priority {
-        case 0:
-            return UIColor.clear
-        case 4:
-            return UIColor.green
-        case 6:
-            return UIColor.orange
-        default:
-            print("Unknown priority \(priority)")
-            return UIColor.black
-        }
     }
 }
