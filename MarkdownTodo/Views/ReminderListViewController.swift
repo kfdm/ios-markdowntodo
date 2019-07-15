@@ -105,4 +105,15 @@ class ReminderListViewController: UITableViewController {
             UITableViewRowAction(style: .destructive, title: "Unschedule", handler: actionUnschedule)
         ]
     }
+
+    // MARK: - Segues
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = tableData.reminderForRowAt(indexPath)
+        let controller = ReminderEditViewController.instantiate()
+        controller.currentReminder = reminder
+        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        controller.navigationItem.leftItemsSupplementBackButton = true
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
