@@ -20,6 +20,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        PriorityViewCell.register(tableView)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
         configureView()
     }
@@ -51,7 +52,8 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             cell.detailTextLabel?.text = currentReminder?.url?.absoluteString
             return cell
         case 2:
-            let cell = PriorityViewCell.create(tableView, for: currentReminder!)
+            let cell = PriorityViewCell.dequeueReusableCell(tableView)
+            cell.setPriority(for: currentReminder!)
             cell.selectorPriority.addTarget(self, action: #selector(updatedPriority(_:)), for: .valueChanged)
             return cell
         default:

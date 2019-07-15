@@ -18,14 +18,8 @@ enum Options: Int {
     case High = 3
 }
 
-class PriorityViewCell: UITableViewCell {
+class PriorityViewCell: UITableViewCell, DequeNib {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
-
-    static func create(_ tableView: UITableView, for reminder: EKReminder) -> PriorityViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "Priority") as! PriorityViewCell
-        cell.setPriority(for: reminder)
-        return cell
-    }
 
     static func getPriority(for sender: UISegmentedControl) -> Int {
         switch Options.init(rawValue: sender.selectedSegmentIndex)! {
