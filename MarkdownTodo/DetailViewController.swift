@@ -74,7 +74,9 @@ class DetailViewController: UITableViewController {
         case Date.distantFuture:
             return "Unscheduled"
         default:
+
             let format = DateFormatter()
+            format.locale = .current
             format.dateStyle = .full
             return format.string(from: date)
         }
