@@ -29,6 +29,7 @@
 		8706298622D4AC140084441A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8706298822D4AC140084441A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8706298E22D4AD1D0084441A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		87094FF222DC40A50047D672 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 		8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEditViewController.swift; sourceTree = "<group>"; };
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		8706296E22D4AC120084441A = {
 			isa = PBXGroup;
 			children = (
+				87094FF222DC40A50047D672 /* README.md */,
 				8706297922D4AC120084441A /* MarkdownTodo */,
 				8706297822D4AC120084441A /* Products */,
 			);
