@@ -12,7 +12,7 @@ class MasterViewController: UITableViewController {
 
     var detailViewController: ReminderListViewController?
     var objects = [Any]()
-    var container = CalendarController()
+    var container = CalendarController.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()

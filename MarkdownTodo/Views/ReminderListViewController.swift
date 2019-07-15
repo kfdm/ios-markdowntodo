@@ -11,7 +11,7 @@ import EventKit
 
 class ReminderListViewController: UITableViewController {
 
-    var container = CalendarController()
+    var container = CalendarController.shared
     var tableData = GroupedReminders.init()
     var showCompleted = false
 
@@ -36,6 +36,11 @@ class ReminderListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureView()
     }
 
@@ -83,27 +88,77 @@ class ReminderListViewController: UITableViewController {
 
     }
 
-    func actionToday(action: UITableViewRowAction, index: IndexPath) {
+    func actionSchedule(action: UITableViewRowAction, index: IndexPath) {
         let reminder = self.tableData.reminderForRowAt(index)
-        let date = Date()
-        let calendar = Calendar.current
-        reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-        container.save(reminder: reminder, commit: true)
-        configureView()
+        let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
+            reminder.dueDateComponents = nil
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Today", style: .default, handler: { (_) in
+            let date = Date()
+            let calendar = Calendar.current
+            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Tomorrow", style: .default, handler: { (_) in
+            var dateComponent = DateComponents()
+            dateComponent.day = 1
+            let date = Calendar.current.date(byAdding: dateComponent, to: Date())!
+
+            let calendar = Calendar.current
+            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
-    func actionUnschedule(action: UITableViewRowAction, index: IndexPath) {
+    func actionPriority(action: UITableViewRowAction, index: IndexPath) {
         let reminder = self.tableData.reminderForRowAt(index)
-        reminder.dueDateComponents = nil
-        container.save(reminder: reminder, commit: true)
-        configureView()
+        let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
+            reminder.priority = Priority.Unset.rawValue
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Low", style: .default, handler: { (_) in
+            reminder.priority = Priority.Low.rawValue
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Medium", style: .default, handler: { (_) in
+            reminder.priority = Priority.Med.rawValue
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "High", style: .default, handler: { (_) in
+            reminder.priority = Priority.High.rawValue
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return [
-            UITableViewRowAction(style: .normal, title: "Today", handler: actionToday),
-            UITableViewRowAction(style: .destructive, title: "Unschedule", handler: actionUnschedule)
-        ]
+        let schedule = UITableViewRowAction(style: .normal, title: "Schedule", handler: actionSchedule)
+        schedule.backgroundColor=UIColor.blue
+        let priority = UITableViewRowAction(style: .normal, title: "Priority", handler: actionPriority)
+        priority.backgroundColor = UIColor.orange
+        return [schedule, priority]
     }
 
     // MARK: - Segues
@@ -125,7 +180,7 @@ class ReminderListViewController: UITableViewController {
             field.placeholder = "New Todo"
         }
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction.init(title: "New", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: "New", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendar else { return }
             let reminder = self.container.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text

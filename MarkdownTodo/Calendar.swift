@@ -45,6 +45,8 @@ class GroupedReminders {
 }
 
 class CalendarController {
+    static let shared = CalendarController()
+
     let store = EKEventStore.init()
     var calendars = [EKSource: [EKCalendar]]()
     var sources = [EKSource]()

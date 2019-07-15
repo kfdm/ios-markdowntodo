@@ -15,6 +15,8 @@
 		8706298722D4AC140084441A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8706298522D4AC140084441A /* LaunchScreen.storyboard */; };
 		8706298F22D4AD1D0084441A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706298E22D4AD1D0084441A /* Calendar.swift */; };
 		87094FF622DC42BD0047D672 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FF522DC42BD0047D672 /* Colors.swift */; };
+		87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FFB22DC52820047D672 /* PriorityViewCell.swift */; };
+		87094FFF22DC63E90047D672 /* Priorities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FFE22DC63E90047D672 /* Priorities.swift */; };
 		873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AC79C22D8B5570059F70F /* ReminderViewCell.swift */; };
 		8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */; };
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
@@ -32,6 +34,8 @@
 		8706298E22D4AD1D0084441A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		87094FF222DC40A50047D672 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		87094FF522DC42BD0047D672 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		87094FFB22DC52820047D672 /* PriorityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewCell.swift; sourceTree = "<group>"; };
+		87094FFE22DC63E90047D672 /* Priorities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priorities.swift; sourceTree = "<group>"; };
 		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 		8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEditViewController.swift; sourceTree = "<group>"; };
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -68,17 +72,27 @@
 		8706297922D4AC120084441A /* MarkdownTodo */ = {
 			isa = PBXGroup;
 			children = (
+				87094FFD22DC57F80047D672 /* Cells */,
 				8761EAA122DC28D500A8474A /* Views */,
 				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 				8706297A22D4AC120084441A /* AppDelegate.swift */,
-				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
 				8706298322D4AC140084441A /* Assets.xcassets */,
 				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
 				8706298822D4AC140084441A /* Info.plist */,
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
 				87094FF522DC42BD0047D672 /* Colors.swift */,
+				87094FFE22DC63E90047D672 /* Priorities.swift */,
 			);
 			path = MarkdownTodo;
+			sourceTree = "<group>";
+		};
+		87094FFD22DC57F80047D672 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
+				87094FFB22DC52820047D672 /* PriorityViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8761EAA122DC28D500A8474A /* Views */ = {
@@ -168,6 +182,8 @@
 				8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* MasterViewController.swift in Sources */,
+				87094FFF22DC63E90047D672 /* Priorities.swift in Sources */,
+				87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
