@@ -155,13 +155,17 @@ class ReminderListViewController: UITableViewController {
 
     // MARK: - Segues
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let reminder = tableData.reminderForRowAt(indexPath)
+    func showReminder(_ reminder: EKReminder, animated: Bool) {
         let controller = ReminderEditViewController.instantiate()
         controller.currentReminder = reminder
         controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller.navigationItem.leftItemsSupplementBackButton = true
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: animated)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = tableData.reminderForRowAt(indexPath)
+        showReminder(reminder, animated: true)
     }
 
     // MARK: - Actions
@@ -177,7 +181,7 @@ class ReminderListViewController: UITableViewController {
             let reminder = self.container.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
             self.container.save(reminder: reminder, commit: true)
-            self.configureView()
+            self.showReminder(reminder, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }
