@@ -18,12 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4IE-qu-iGL">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg7-yF-bp8">
                         <rect key="frame" x="16" y="0.0" width="43.5" height="43.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="43.5" id="rnw-pe-id1"/>
+                            <constraint firstAttribute="width" constant="43.5" id="Apd-T3-LFo"/>
                         </constraints>
-                    </imageView>
+                        <connections>
+                            <action selector="actionClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="IM1-Jg-vTg"/>
+                        </connections>
+                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFH-wR-iEz">
                         <rect key="frame" x="0.0" y="0.0" width="16" height="43.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,13 +36,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2B-lh-AMv">
-                        <rect key="frame" x="67.5" y="4" width="338.5" height="20.5"/>
+                        <rect key="frame" x="63.5" y="4" width="342.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xv-jQ-r2Q">
-                        <rect key="frame" x="67.5" y="28.5" width="338.5" height="20.5"/>
+                        <rect key="frame" x="63.5" y="28.5" width="342.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -48,22 +51,22 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="pFH-wR-iEz" secondAttribute="bottom" id="3Ps-Bp-zCt"/>
                     <constraint firstAttribute="trailing" secondItem="p2B-lh-AMv" secondAttribute="trailing" constant="8" id="6rB-dL-qSR"/>
-                    <constraint firstItem="4IE-qu-iGL" firstAttribute="leading" secondItem="pFH-wR-iEz" secondAttribute="trailing" id="94K-Uz-Z2q"/>
                     <constraint firstItem="p2B-lh-AMv" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" constant="4" id="CjO-Qo-2EO"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="4IE-qu-iGL" secondAttribute="trailing" constant="8" id="DNe-o2-2Rg"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="Ftc-I9-u3f"/>
                     <constraint firstItem="pFH-wR-iEz" firstAttribute="leading" secondItem="goT-Bb-8UR" secondAttribute="leading" id="LeI-Hd-F2u"/>
-                    <constraint firstItem="4IE-qu-iGL" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="VXJ-KT-ds6"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="leading" secondItem="pFH-wR-iEz" secondAttribute="trailing" id="RCA-PD-g30"/>
                     <constraint firstItem="pFH-wR-iEz" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="cet-Z6-KEI"/>
                     <constraint firstAttribute="trailing" secondItem="5Xv-jQ-r2Q" secondAttribute="trailing" constant="8" id="fuU-Jk-j1p"/>
-                    <constraint firstAttribute="bottom" secondItem="4IE-qu-iGL" secondAttribute="bottom" id="glo-rI-e5Q"/>
-                    <constraint firstItem="5Xv-jQ-r2Q" firstAttribute="leading" secondItem="4IE-qu-iGL" secondAttribute="trailing" constant="8" id="uB8-Cc-J45"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="4" id="lQo-bb-cgn"/>
+                    <constraint firstItem="5Xv-jQ-r2Q" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="4" id="lZI-Uy-ZLt"/>
+                    <constraint firstAttribute="bottom" secondItem="eg7-yF-bp8" secondAttribute="bottom" id="sqO-uP-T7I"/>
                     <constraint firstItem="5Xv-jQ-r2Q" firstAttribute="top" secondItem="p2B-lh-AMv" secondAttribute="bottom" constant="4" id="vGb-HN-Sux"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="colorStrip" destination="pFH-wR-iEz" id="y2D-ZB-ItU"/>
                 <outlet property="dateLabel" destination="5Xv-jQ-r2Q" id="ukN-xm-yUf"/>
-                <outlet property="imageCheckbox" destination="4IE-qu-iGL" id="J3o-2w-P1Q"/>
+                <outlet property="statusButton" destination="eg7-yF-bp8" id="JUM-BH-goI"/>
                 <outlet property="titleLabel" destination="p2B-lh-AMv" id="uqU-so-apy"/>
             </connections>
             <point key="canvasLocation" x="111.59420289855073" y="59.598214285714285"/>

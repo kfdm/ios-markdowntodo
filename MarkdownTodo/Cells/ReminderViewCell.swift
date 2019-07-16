@@ -13,7 +13,11 @@ class ReminderViewCell: UITableViewCell {
     @IBOutlet weak var colorStrip: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var imageCheckbox: UIImageView!
+    @IBOutlet weak var statusButton: UIButton!
+
+    @IBAction func actionClick(_ sender: UIButton) {
+        print("Clicked button \(sender)")
+    }
 
     func update(_ reminder: EKReminder) {
         self.titleLabel?.text = reminder.title
