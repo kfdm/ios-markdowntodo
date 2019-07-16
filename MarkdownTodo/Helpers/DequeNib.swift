@@ -20,4 +20,10 @@ extension UITableView {
         let className = fullName.components(separatedBy: ".")[1]
         return dequeueReusableCell(withIdentifier: className) as! T
     }
+
+    func dequeueReusableCell<T: UITableViewCell>(withIdentifier: T.Type, for indexPath: IndexPath) -> T {
+        let fullName = NSStringFromClass(withIdentifier)
+        let className = fullName.components(separatedBy: ".")[1]
+        return dequeueReusableCell(withIdentifier: className, for: indexPath) as! T
+    }
 }

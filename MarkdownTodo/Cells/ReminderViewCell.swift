@@ -13,6 +13,7 @@ class ReminderViewCell: UITableViewCell {
     @IBOutlet weak var colorStrip: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var imageCheckbox: UIImageView!
 
     func update(_ reminder: EKReminder) {
         self.titleLabel?.text = reminder.title

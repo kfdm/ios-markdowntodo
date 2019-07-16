@@ -17,6 +17,7 @@ class ReminderListViewController: UITableViewController {
 
     func configureView() {
         guard let calendar = selectedCalendar else { return }
+        self.title = calendar.title
 
         container.predicateForReminders(in: calendar) { (newReminders) in
             self.tableData = self.showCompleted ? GroupedReminders.init(reminders: newReminders) : GroupedReminders.init(reminders: newReminders.filter({ (r) -> Bool in
@@ -36,6 +37,7 @@ class ReminderListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.registerReusableCell(tableViewCell: ReminderViewCell.self)
         configureView()
     }
 
@@ -61,7 +63,7 @@ class ReminderListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ReminderViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReminderViewCell.self, for: indexPath)
         let reminder = tableData.reminderForRowAt(indexPath)
         cell.update(reminder)
         return cell

@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum Priority : Int {
+enum Priority: Int {
     typealias RawValue = Int
-    
+
     case Unset = 0
     case Low = 4
     case Medium = 6
