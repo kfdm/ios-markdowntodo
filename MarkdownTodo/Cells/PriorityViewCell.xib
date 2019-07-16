@@ -24,10 +24,16 @@
                             <constraint firstAttribute="width" constant="233" id="MFi-jy-DXa"/>
                         </constraints>
                         <segments>
-                            <segment title="Unset"/>
-                            <segment title="Low"/>
-                            <segment title="Medium"/>
-                            <segment title="High"/>
+                            <segment title="0"/>
+                            <segment title="1"/>
+                            <segment title="2"/>
+                            <segment title="3"/>
+                            <segment title=""/>
+                            <segment title=""/>
+                            <segment title=""/>
+                            <segment title=""/>
+                            <segment title=""/>
+                            <segment title=""/>
                         </segments>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOY-XC-ZO5">

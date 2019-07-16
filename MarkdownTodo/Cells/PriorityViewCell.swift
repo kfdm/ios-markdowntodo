@@ -9,41 +9,22 @@
 import UIKit
 import EventKit
 
-enum Options: Int {
-    typealias RawValue = Int
-
-    case Unset = 0
-    case Low = 1
-    case Medium = 2
-    case High = 3
-}
 
 class PriorityViewCell: UITableViewCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
 
-    static func getPriority(for sender: UISegmentedControl) -> Int {
-        switch Options.init(rawValue: sender.selectedSegmentIndex)! {
-        case .Unset:
-            return Priority.Unset.rawValue
-        case .Low:
-            return Priority.Low.rawValue
-        case .Medium:
-            return Priority.Medium.rawValue
-        case .High:
-            return Priority.High.rawValue
+    override func awakeFromNib() {
+        selectorPriority.removeAllSegments()
+        for i in 0...9 {
+            selectorPriority.insertSegment(withTitle: "\(i)", at: i, animated: false)
         }
     }
 
+    static func getPriority(for sender: UISegmentedControl) -> Int {
+        return sender.selectedSegmentIndex
+    }
+
     func setPriority(for reminder: EKReminder) {
-        switch Priority.init(rawValue: reminder.priority)! {
-        case .Unset:
-            selectorPriority.selectedSegmentIndex = Options.Unset.rawValue
-        case .Low:
-            selectorPriority.selectedSegmentIndex = Options.Low.rawValue
-        case .Medium:
-            selectorPriority.selectedSegmentIndex = Options.Medium.rawValue
-        case .High:
-            selectorPriority.selectedSegmentIndex = Options.High.rawValue
-        }
+        selectorPriority.selectedSegmentIndex = reminder.priority
     }
 }

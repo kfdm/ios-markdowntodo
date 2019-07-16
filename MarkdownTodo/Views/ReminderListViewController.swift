@@ -128,28 +128,18 @@ class ReminderListViewController: UITableViewController {
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
-            reminder.priority = Priority.Unset.rawValue
+            reminder.priority = 0
             self.container.save(reminder: reminder, commit: true)
             self.configureView()
         }))
 
-        alert.addAction(UIAlertAction(title: "Low", style: .default, handler: { (_) in
-            reminder.priority = Priority.Low.rawValue
-            self.container.save(reminder: reminder, commit: true)
-            self.configureView()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Medium", style: .default, handler: { (_) in
-            reminder.priority = Priority.Medium.rawValue
-            self.container.save(reminder: reminder, commit: true)
-            self.configureView()
-        }))
-
-        alert.addAction(UIAlertAction(title: "High", style: .default, handler: { (_) in
-            reminder.priority = Priority.High.rawValue
-            self.container.save(reminder: reminder, commit: true)
-            self.configureView()
-        }))
+        for i in 1...9 {
+            alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
+                reminder.priority = i
+                self.container.save(reminder: reminder, commit: true)
+                self.configureView()
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
