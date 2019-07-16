@@ -14,8 +14,9 @@ class ReminderListViewController: UITableViewController {
     var container = CalendarController.shared
     var tableData = GroupedReminders.init()
     var showCompleted = false
+    private let myRefreshControl = UIRefreshControl()
 
-    func configureView() {
+    @objc func configureView() {
         guard let calendar = selectedCalendar else { return }
         self.title = calendar.title
 
@@ -25,6 +26,7 @@ class ReminderListViewController: UITableViewController {
             }))
 
             DispatchQueue.main.async {
+                self.myRefreshControl.endRefreshing()
                 self.tableView.reloadData()
             }
         }
@@ -37,6 +39,9 @@ class ReminderListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.refreshControl = myRefreshControl
+        myRefreshControl.addTarget(self, action: #selector(configureView), for: .valueChanged)
+
         tableView.registerReusableCell(tableViewCell: ReminderViewCell.self)
         configureView()
     }

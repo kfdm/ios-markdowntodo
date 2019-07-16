@@ -14,10 +14,19 @@ class MasterViewController: UITableViewController {
     var objects = [Any]()
     var container = CalendarController.shared
 
+    private let myRefreshControl = UIRefreshControl()
+
+    @objc func configureView() {
+        container.setup()
+        myRefreshControl.endRefreshing()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        container.setup()
+        tableView.refreshControl = myRefreshControl
+        myRefreshControl.addTarget(self, action: #selector(configureView), for: .valueChanged)
+        configureView()
 
         if let split = splitViewController {
             let controllers = split.viewControllers
