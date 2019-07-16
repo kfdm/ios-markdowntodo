@@ -100,7 +100,7 @@ class CalendarController {
         })
 
         sources.forEach { (source) in
-            calendars[source] = Array(source.calendars(for: .reminder)).sorted(by: { (a, b) -> Bool in
+            calendars[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
                 a.cgColor.hashValue > b.cgColor.hashValue
             })
         }
