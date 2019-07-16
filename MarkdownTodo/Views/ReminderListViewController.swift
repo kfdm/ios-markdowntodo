@@ -189,7 +189,14 @@ class ReminderListViewController: UITableViewController {
             field.placeholder = "New Todo"
         }
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction.init(title: "New", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction.init(title: "Save", style: .default, handler: { (_) in
+            guard let selectedCalendar = self.selectedCalendar else { return }
+            let reminder = self.container.newReminder(for: selectedCalendar)
+            reminder.title = alert.textFields?.first?.text
+            self.container.save(reminder: reminder, commit: true)
+            self.configureView()
+        }))
+        alert.addAction(UIAlertAction.init(title: "Save and Edit", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendar else { return }
             let reminder = self.container.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
