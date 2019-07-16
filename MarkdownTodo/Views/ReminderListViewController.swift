@@ -145,12 +145,25 @@ class ReminderListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    func actionDelete(action: UITableViewRowAction, index: IndexPath) {
+        let reminder = self.tableData.reminderForRowAt(index)
+        let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+            try? self.container.store.remove(reminder, commit: true)
+            self.configureView()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let schedule = UITableViewRowAction(style: .normal, title: "Schedule", handler: actionSchedule)
         schedule.backgroundColor=UIColor.blue
         let priority = UITableViewRowAction(style: .normal, title: "Priority", handler: actionPriority)
         priority.backgroundColor = UIColor.orange
-        return [schedule, priority]
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: actionDelete)
+        delete.backgroundColor =  UIColor.red
+        return [delete, schedule, priority]
     }
 
     // MARK: - Segues

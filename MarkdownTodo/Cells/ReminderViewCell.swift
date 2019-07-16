@@ -17,7 +17,6 @@ class ReminderViewCell: UITableViewCell {
 
     func update(_ reminder: EKReminder) {
         self.titleLabel?.text = reminder.title
-        let now = Date.init()
 
         switch reminder {
         case _ where reminder.isCompleted:
@@ -26,12 +25,6 @@ class ReminderViewCell: UITableViewCell {
             self.dateLabel?.text = dateformat.string(from: reminder.completionDate!)
         default:
             self.dateLabel?.text = ""
-
-            if let comp = reminder.dueDateComponents, let date = comp.date, date > now {
-                self.accessoryType = .detailButton
-            } else {
-                self.accessoryType = .none
-            }
         }
 
         colorStrip.backgroundColor = Colors.priority(for: reminder)
