@@ -28,9 +28,9 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        StringViewCell.register(tableView)
-        PriorityViewCell.register(tableView)
-        TextViewCell.register(tableView)
+        tableView.registerReusableCell(tableViewCell: StringViewCell.self)
+        tableView.registerReusableCell(tableViewCell: PriorityViewCell.self)
+        tableView.registerReusableCell(tableViewCell: TextViewCell.self)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
         configureView()
     }
@@ -52,28 +52,28 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch TableRows.init(rawValue: indexPath.row)! {
         case .title:
-            let cell = StringViewCell.dequeueReusableCell(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
             cell.labelField.text = NSLocalizedString("Title", comment: "Reminder Title")
             cell.textField.text = currentReminder?.title
             return cell
         case .url:
-            let cell = StringViewCell.dequeueReusableCell(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
             cell.labelField.text = NSLocalizedString("URL", comment: "Reminder URL")
             cell.textField.text = currentReminder?.url?.absoluteString
             cell.textField.keyboardType = .URL
             return cell
         case .priority:
-            let cell = PriorityViewCell.dequeueReusableCell(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier: PriorityViewCell.self)
             cell.setPriority(for: currentReminder!)
             cell.selectorPriority.addTarget(self, action: #selector(updatedPriority(_:)), for: .valueChanged)
             return cell
         case .due:
-            let cell = StringViewCell.dequeueReusableCell(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
             cell.labelField.text = NSLocalizedString("Due", comment: "Due Date")
             cell.textField.text = "<date> \(currentReminder?.dueDateComponents)"
             return cell
         case .notes:
-            let cell = TextViewCell.dequeueReusableCell(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier: TextViewCell.self)
             cell.labelField.text = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.textField.text = currentReminder?.notes
             return cell

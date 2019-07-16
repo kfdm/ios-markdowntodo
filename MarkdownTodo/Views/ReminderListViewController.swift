@@ -36,7 +36,6 @@ class ReminderListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        PriorityViewCell.register(tableView)
         configureView()
     }
 

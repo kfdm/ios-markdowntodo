@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StringViewCell: UITableViewCell, DequeNib {
+class StringViewCell: UITableViewCell {
     @IBOutlet weak var
     labelField: UILabel!
     @IBOutlet weak var textField: UITextField!

@@ -18,7 +18,7 @@ enum Options: Int {
     case High = 3
 }
 
-class PriorityViewCell: UITableViewCell, DequeNib {
+class PriorityViewCell: UITableViewCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
 
     static func getPriority(for sender: UISegmentedControl) -> Int {
