@@ -39,7 +39,8 @@ class ReminderViewCell: UITableViewCell {
 extension EKReminder {
     func isOverdue() -> Bool {
         if isCompleted {return false}
-        if dueDateComponents == nil {return false}
-        return true
+        guard let dueDate = dueDateComponents?.date else { return false}
+        let date = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        return dueDate < date
     }
 }
