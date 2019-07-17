@@ -12,24 +12,22 @@ import EventKit
 class CalendarListViewController: UIViewController {
 
     var detailViewController: ReminderListViewController?
-    private var calendars = GroupedCalendarBySource()
+    private var groupedCalendars = GroupedCalendarBySource()
 
     @IBOutlet weak private var tableView: UITableView!
 
-    private let myRefreshControl = UIRefreshControl()
-
     @objc func fetchCalendar() {
         CalendarController.shared.authenticated(completionHandler: {
-            self.calendars = GroupedCalendarBySource()
-            self.myRefreshControl.endRefreshing()
+            self.groupedCalendars = GroupedCalendarBySource()
+            self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.refreshControl = myRefreshControl
-        myRefreshControl.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
 
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -85,16 +83,16 @@ class CalendarListViewController: UIViewController {
 extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return calendars.numberOfSections
+        return groupedCalendars.numberOfSections
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return calendars.numberOfRowsInSection(section)
+        return groupedCalendars.numberOfRowsInSection(section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let calendar = calendars.cellForRowAt(indexPath)
+        let calendar = groupedCalendars.cellForRowAt(indexPath)
 
         cell.textLabel!.text = calendar.title
         cell.textLabel?.textColor = Colors.calendar(for: calendar)
@@ -102,11 +100,11 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return calendars.titleForHeader(section)
+        return groupedCalendars.titleForHeader(section)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let calendar = calendars.cellForRowAt(indexPath)
+        let calendar = groupedCalendars.cellForRowAt(indexPath)
         let predicate = CalendarController.shared.predicateForReminders(in: calendar)
         showReminderController { (controller) in
             controller.title = calendar.title
