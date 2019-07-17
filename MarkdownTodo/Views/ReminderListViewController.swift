@@ -12,47 +12,47 @@ import EventKit
 class ReminderListViewController: UITableViewController {
     private var tableData = GroupedReminders.init()
     private var showCompleted = false
-    
+
     var selectedCalendar: EKCalendar? {
         didSet {
             // Update the view.
             fetchReminders()
         }
     }
-    
+
     private let myRefreshControl = UIRefreshControl()
-    
+
     @objc func fetchReminders() {
         guard let calendar = selectedCalendar else { return }
         self.title = calendar.title
-        
+
         CalendarController.shared.predicateForReminders(in: calendar) { (newReminders) in
             self.tableData = self.showCompleted ? GroupedReminders.init(reminders: newReminders) : GroupedReminders.init(reminders: newReminders.filter({ (r) -> Bool in
                 return !r.isCompleted
             }))
-            
+
             DispatchQueue.main.async {
                 self.myRefreshControl.endRefreshing()
                 self.tableView.reloadData()
             }
         }
     }
-    
+
     @IBAction func toggleShowCompleted(_ sender: UISwitch) {
         showCompleted = sender.isOn
         fetchReminders()
     }
-    
+
     func actionSchedule(action: UITableViewRowAction, index: IndexPath) {
         let reminder = self.tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
-        
+
         alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
             reminder.dueDateComponents = nil
             CalendarController.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Today", style: .default, handler: { (_) in
             let date = Date()
             let calendar = Calendar.current
@@ -60,32 +60,32 @@ class ReminderListViewController: UITableViewController {
             CalendarController.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Tomorrow", style: .default, handler: { (_) in
             var dateComponent = DateComponents()
             dateComponent.day = 1
             let date = Calendar.current.date(byAdding: dateComponent, to: Date())!
-            
+
             let calendar = Calendar.current
             reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
             CalendarController.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
+
     func actionPriority(action: UITableViewRowAction, index: IndexPath) {
         let reminder = self.tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
-        
+
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
             reminder.priority = 0
             CalendarController.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
-        
+
         for i in 1...9 {
             alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
                 reminder.priority = i
@@ -93,24 +93,24 @@ class ReminderListViewController: UITableViewController {
                 self.fetchReminders()
             }))
         }
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
+
     func actionDelete(action: UITableViewRowAction, index: IndexPath) {
         let reminder = self.tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
             try? CalendarController.shared.store.remove(reminder, commit: true)
             self.fetchReminders()
         }))
         present(alert, animated: true, completion: nil)
     }
-    
+
     // MARK: - Segues
-    
+
     func showReminder(_ reminder: EKReminder, animated: Bool) {
         let controller = ReminderEditViewController.instantiate()
         controller.currentReminder = reminder
@@ -118,9 +118,9 @@ class ReminderListViewController: UITableViewController {
         controller.navigationItem.leftItemsSupplementBackButton = true
         navigationController?.pushViewController(controller, animated: animated)
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func actionNewReminder(_ sender: UIBarButtonItem) {
         let alert = UIAlertController.init(title: "New Reminder", message: "Please enter new reminder", preferredStyle: .alert)
         alert.addTextField { (field) in
@@ -143,7 +143,7 @@ class ReminderListViewController: UITableViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
 }
 
 // MARK: - Lifecycle
@@ -152,11 +152,11 @@ extension ReminderListViewController {
         super.viewDidLoad()
         tableView.refreshControl = myRefreshControl
         myRefreshControl.addTarget(self, action: #selector(fetchReminders), for: .valueChanged)
-        
+
         tableView.registerReusableCell(tableViewCell: ReminderViewCell.self)
         fetchReminders()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchReminders()
@@ -167,46 +167,46 @@ extension ReminderListViewController {
 extension ReminderListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.numberOfRowsInSection(section)
-        
+
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tableData.numberOfSections
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReminderViewCell.self, for: indexPath)
         let reminder = tableData.reminderForRowAt(indexPath)
         cell.update(reminder)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         let date = tableData.section(section)
         header.textLabel?.textColor = Colors.isOverdue(for: date)
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = tableData.section(section)
         switch date {
         case Date.distantFuture:
             return "Unscheduled"
         default:
-            
+
             let format = DateFormatter()
             format.locale = .current
             format.dateStyle = .full
             return format.string(from: date)
         }
-        
+
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let reminder = tableData.reminderForRowAt(indexPath)
         showReminder(reminder, animated: true)
     }
-    
+
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let schedule = UITableViewRowAction(style: .normal, title: "Schedule", handler: actionSchedule)
         schedule.backgroundColor=UIColor.blue

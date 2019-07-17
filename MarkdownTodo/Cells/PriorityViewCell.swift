@@ -9,7 +9,6 @@
 import UIKit
 import EventKit
 
-
 class PriorityViewCell: UITableViewCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
 

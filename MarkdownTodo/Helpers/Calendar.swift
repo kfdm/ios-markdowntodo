@@ -15,14 +15,14 @@ let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 class GroupedReminders {
     var reminders: [Date: [EKReminder]]
     var sections: [Date]
-    
+
     var numberOfSections: Int { get { return self.sections.count }}
-    
+
     init () {
         self.reminders = [Date: [EKReminder]]()
         self.sections = [Date]()
     }
-    
+
     init(reminders: [EKReminder]) {
         self.reminders = Dictionary.init(grouping: reminders) {
             if let completed = $0.completionDate { return completed }
@@ -31,16 +31,16 @@ class GroupedReminders {
         }
         self.sections = self.reminders.keys.sorted()
     }
-    
+
     func section(_ for_: Int) -> Date {
         return self.sections[for_]
     }
-    
+
     func numberOfRowsInSection(_ section: Int) -> Int {
         let date = self.sections[section]
         return self.reminders[date]!.count
     }
-    
+
     func reminderForRowAt(_ indexPath: IndexPath) -> EKReminder {
         let date = self.sections[indexPath.section]
         return reminders[date]![indexPath.row]
@@ -48,23 +48,23 @@ class GroupedReminders {
 }
 
 class GroupedCalendarBySource {
-    private var sources : [EKSource]?
-    private var calendars : [EKSource:[EKCalendar]]?
+    private var sources: [EKSource]?
+    private var calendars: [EKSource: [EKCalendar]]?
     private var store = CalendarController.shared.store
-    
+
     var numberOfSections: Int { get { return sources?.count ?? 0 } }
-    
+
     func numberOfRowsInSection(_ section: Int) -> Int {
         guard let section = sources?[section] else { return 0 }
         guard let source = calendars?[section] else { return 0 }
         return source.count
     }
-    
+
     func cellForRowAt(_ indexPath: IndexPath) -> EKCalendar {
         let section = sources![indexPath.section]
         return calendars![section]![indexPath.row]
     }
-    
+
     func titleForHeader(_ section: Int) -> String {
         return sources![section].title
     }
@@ -78,8 +78,8 @@ class GroupedCalendarBySource {
             a.title < b.title
         })
 
-        calendars = [EKSource:[EKCalendar]]()
-        
+        calendars = [EKSource: [EKCalendar]]()
+
         sources?.forEach { (source) in
             calendars?[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
                 a.cgColor.hashValue > b.cgColor.hashValue
@@ -90,23 +90,23 @@ class GroupedCalendarBySource {
 
 class CalendarController {
     static let shared = CalendarController()
-    
+
     var isAuthenticated = false
-    
+
     let store = EKEventStore.init()
     private var calendars = [EKSource: [EKCalendar]]()
     private var sources = [EKSource]()
-    
+
     func source(for section: Int) -> [EKCalendar] {
         let source = sources[section]
         return calendars[source]!
     }
-    
+
     func calendar(for indexPath: IndexPath) -> EKCalendar {
         let source = sources[indexPath.section]
         return calendars[source]![indexPath.row]
     }
-    
+
     func authenticated(completionHandler handler: @escaping () -> Void) {
         switch EKEventStore.authorizationStatus(for: .reminder) {
         case .authorized:
@@ -131,7 +131,7 @@ class CalendarController {
             os_log("Unknown Case", log: logger, type: .error)
         }
     }
-    
+
     func fetchReminders(matching predicate: NSPredicate, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
         store.fetchReminders(matching: predicate) { (fetchedReminders) in
             if let newReminders = fetchedReminders {
@@ -139,26 +139,26 @@ class CalendarController {
             }
         }
     }
-    
+
     func remindersForToday(completionHandler handler: @escaping (_ result: [EKReminder]) -> Void) {
         let pred = store.predicateForEvents(withStart: Date(), end: Date(), calendars: nil)
         fetchReminders(matching: pred, completionHandler: handler)
     }
-    
+
     func remindersForCompleted(_ calendar: EKCalendar, completionHandler handler: @escaping (_ result: [EKReminder]) -> Void) {
         let pred = store.predicateForCompletedReminders(withCompletionDateStarting: nil, ending: nil, calendars: [calendar])
         fetchReminders(matching: pred, completionHandler: handler)
     }
-    
+
     func predicateForReminders(in calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
         let pred = store.predicateForReminders(in: [calendar])
         fetchReminders(matching: pred, completionHandler: completionHandler)
     }
-    
-    func fetchCalendarList() -> [EKSource:[EKCalendar]] {
+
+    func fetchCalendarList() -> [EKSource: [EKCalendar]] {
         store.refreshSourcesIfNecessary()
-        var calendars = [EKSource:[EKCalendar]]()
-        
+        var calendars = [EKSource: [EKCalendar]]()
+
         store.sources.filter({ (source) -> Bool in
             source.sourceType != .birthdays
         }).forEach { (source) in
