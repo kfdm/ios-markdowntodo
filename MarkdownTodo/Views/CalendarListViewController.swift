@@ -11,23 +11,20 @@ import UIKit
 class CalendarListViewController: UIViewController {
     
     var detailViewController: ReminderListViewController?
-    private var container = CalendarController.shared
     
     @IBOutlet weak private var tableView: UITableView!
     
     private let myRefreshControl = UIRefreshControl()
     
-    @objc func configureView() {
-        container.setup()
+    @objc func fetchCalendar() {
+        CalendarController.shared.setup()
         myRefreshControl.endRefreshing()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.refreshControl = myRefreshControl
-        myRefreshControl.addTarget(self, action: #selector(configureView), for: .valueChanged)
-        configureView()
+        myRefreshControl.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -35,12 +32,17 @@ class CalendarListViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchCalendar()
+    }
+    
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let cal = container.calendar(for: indexPath)
+                let cal = CalendarController.shared.calendar(for: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
                 controller.selectedCalendar = cal
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -63,16 +65,16 @@ class CalendarListViewController: UIViewController {
 extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return container.sources.count
+        return CalendarController.shared.sources.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return container.source(for: section).count
+        return CalendarController.shared.source(for: section).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let cal = container.calendar(for: indexPath)
+        let cal = CalendarController.shared.calendar(for: indexPath)
         
         cell.textLabel!.text = cal.title
         cell.textLabel?.textColor = Colors.calendar(for: cal)
@@ -80,6 +82,6 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return container.sources[section].title
+        return CalendarController.shared.sources[section].title
     }
 }
