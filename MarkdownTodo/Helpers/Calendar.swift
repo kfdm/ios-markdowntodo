@@ -13,14 +13,13 @@ import os.log
 let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 
 class GroupedRemindersByDate {
-    var reminders: [Date: [EKReminder]]
-    var sections: [Date]
+    private var reminders = [Date: [EKReminder]]()
+    private var sections = [Date]()
 
     var numberOfSections: Int { get { return self.sections.count }}
 
-    init () {
-        self.reminders = [Date: [EKReminder]]()
-        self.sections = [Date]()
+    init() {
+
     }
 
     init(reminders: [EKReminder]) {
@@ -31,7 +30,7 @@ class GroupedRemindersByDate {
         }
         self.sections = self.reminders.keys.sorted()
     }
-    
+
     static func remindersForPredicate(predicate: NSPredicate, completionHandler: @escaping (GroupedRemindersByDate) -> Void) {
         CalendarController.shared.store.fetchReminders(matching: predicate) { (reminders) in
             guard let reminders = reminders else { return }
@@ -44,8 +43,9 @@ class GroupedRemindersByDate {
     }
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        let date = self.sections[section]
-        return self.reminders[date]!.count
+        let date = sections[section]
+        guard let source = reminders[date] else { return 0}
+        return source.count
     }
 
     func reminderForRowAt(_ indexPath: IndexPath) -> EKReminder {

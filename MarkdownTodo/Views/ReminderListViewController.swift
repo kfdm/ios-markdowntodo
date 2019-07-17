@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 
 class ReminderListViewController: UITableViewController {
-    private var tableData = GroupedRemindersByDate.init()
+    private var tableData = GroupedRemindersByDate()
     private var showCompleted = false
 
     var selectedCalendar: EKCalendar? {
@@ -25,11 +25,11 @@ class ReminderListViewController: UITableViewController {
     @objc func fetchReminders() {
         guard let calendar = selectedCalendar else { return }
         self.title = calendar.title
-        
+
         let pred = CalendarController.shared.predicateForReminders(in: calendar)
         GroupedRemindersByDate.remindersForPredicate(predicate: pred) { (reminders) in
             self.tableData = reminders
-            
+
             DispatchQueue.main.async {
                 self.myRefreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -43,7 +43,7 @@ class ReminderListViewController: UITableViewController {
     }
 
     func actionSchedule(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = self.tableData.reminderForRowAt(index)
+        let reminder = tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
@@ -76,7 +76,7 @@ class ReminderListViewController: UITableViewController {
     }
 
     func actionPriority(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = self.tableData.reminderForRowAt(index)
+        let reminder = tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
@@ -98,7 +98,7 @@ class ReminderListViewController: UITableViewController {
     }
 
     func actionDelete(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = self.tableData.reminderForRowAt(index)
+        let reminder = tableData.reminderForRowAt(index)
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
