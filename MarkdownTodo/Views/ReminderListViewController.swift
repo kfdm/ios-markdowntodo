@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 
 class ReminderListViewController: UITableViewController {
-    private var tableData = GroupedReminders.init()
+    private var tableData = GroupedRemindersByDate.init()
     private var showCompleted = false
 
     var selectedCalendar: EKCalendar? {
@@ -25,12 +25,11 @@ class ReminderListViewController: UITableViewController {
     @objc func fetchReminders() {
         guard let calendar = selectedCalendar else { return }
         self.title = calendar.title
-
-        CalendarController.shared.predicateForReminders(in: calendar) { (newReminders) in
-            self.tableData = self.showCompleted ? GroupedReminders.init(reminders: newReminders) : GroupedReminders.init(reminders: newReminders.filter({ (r) -> Bool in
-                return !r.isCompleted
-            }))
-
+        
+        let pred = CalendarController.shared.predicateForReminders(in: calendar)
+        GroupedRemindersByDate.remindersForPredicate(predicate: pred) { (reminders) in
+            self.tableData = reminders
+            
             DispatchQueue.main.async {
                 self.myRefreshControl.endRefreshing()
                 self.tableView.reloadData()

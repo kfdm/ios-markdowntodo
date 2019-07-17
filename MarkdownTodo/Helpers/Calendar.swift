@@ -12,7 +12,7 @@ import os.log
 
 let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 
-class GroupedReminders {
+class GroupedRemindersByDate {
     var reminders: [Date: [EKReminder]]
     var sections: [Date]
 
@@ -30,6 +30,13 @@ class GroupedReminders {
             return Date.distantFuture
         }
         self.sections = self.reminders.keys.sorted()
+    }
+    
+    static func remindersForPredicate(predicate: NSPredicate, completionHandler: @escaping (GroupedRemindersByDate) -> Void) {
+        CalendarController.shared.store.fetchReminders(matching: predicate) { (reminders) in
+            guard let reminders = reminders else { return }
+            completionHandler(GroupedRemindersByDate(reminders: reminders))
+        }
     }
 
     func section(_ for_: Int) -> Date {
@@ -150,9 +157,8 @@ class CalendarController {
         fetchReminders(matching: pred, completionHandler: handler)
     }
 
-    func predicateForReminders(in calendar: EKCalendar, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
-        let pred = store.predicateForReminders(in: [calendar])
-        fetchReminders(matching: pred, completionHandler: completionHandler)
+    func predicateForReminders(in calendar: EKCalendar) -> NSPredicate {
+        return store.predicateForReminders(in: [calendar])
     }
 
     func fetchCalendarList() -> [EKSource: [EKCalendar]] {

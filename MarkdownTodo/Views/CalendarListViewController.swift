@@ -47,7 +47,7 @@ class CalendarListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let cal = CalendarController.shared.calendar(for: indexPath)
+                let cal = calendars.cellForRowAt(indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
                 controller.selectedCalendar = cal
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
