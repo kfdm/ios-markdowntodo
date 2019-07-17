@@ -31,7 +31,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     @objc func fetchReminders() {
         guard let pred = selectedPredicate else { return }
 
-        GroupedRemindersByDate.remindersForPredicate(predicate: pred) { (reminders) in
+        GroupedRemindersByDate.remindersForPredicate(predicate: pred, showCompleted: showCompleted) { (reminders) in
             self.tableData = reminders
 
             DispatchQueue.main.async {
