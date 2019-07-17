@@ -42,28 +42,34 @@ class CalendarListViewController: UIViewController {
         fetchCalendar()
     }
 
-    func showReminderController(calendar: EKCalendar? = nil, predicate: NSPredicate?, title: String = "", color: UIColor = UIColor.groupTableViewBackground) {
-        //let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
-
+    func showReminderController(_ completionHandler: (ReminderListViewController) -> Void) {
         let controller = ReminderListViewController.instantiate()
         let nav = UINavigationController(rootViewController: controller)
-
-        controller.title = title
-        controller.navigationController?.navigationBar.barTintColor = color
-
-        controller.selectedCalendar = calendar
-        controller.selectedPredicate = predicate
+        completionHandler(controller)
         controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller.navigationItem.leftItemsSupplementBackButton = true
-
         splitViewController?.showDetailViewController(nav, sender: self)
     }
 
     @IBAction func clickToday(_ sender: Any) {
-        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
-
-        showReminderController(predicate: pred, title: "Today")
-
+        let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
+        showReminderController { (controller) in
+            controller.title = "Today"
+            controller.selectedCalendar = nil
+            controller.selectedPredicate = pred
+            controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
+        }
+    }
+    @IBAction func clickUpcoming(_ sender: UIButton) {
+        let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
+        showReminderController { (controller) in
+            controller.title = "Upcoming"
+            controller.selectedCalendar = nil
+            controller.selectedPredicate = pred
+            controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
+        }
     }
 
     @IBAction func clickSettingsButton(_ sender: UIBarButtonItem) {
@@ -102,6 +108,11 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = calendars.cellForRowAt(indexPath)
         let predicate = CalendarController.shared.predicateForReminders(in: calendar)
-        showReminderController(calendar: calendar, predicate: predicate, title: calendar.title, color: Colors.calendar(for: calendar))
+        showReminderController { (controller) in
+            controller.title = calendar.title
+            controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)
+            controller.selectedPredicate = predicate
+            controller.selectedCalendar = calendar
+        }
     }
 }

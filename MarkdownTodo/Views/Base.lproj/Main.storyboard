@@ -156,9 +156,12 @@
                                                     <action selector="clickToday:" destination="0wO-p5-WRs" eventType="primaryActionTriggered" id="pnd-G6-n2q"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1k-uJ-I1e">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1k-uJ-I1e" userLabel="Upcoming">
                                                 <rect key="frame" x="207" y="0.0" width="207" height="60"/>
-                                                <state key="normal" title="Due"/>
+                                                <state key="normal" title="Upcoming"/>
+                                                <connections>
+                                                    <action selector="clickUpcoming:" destination="0wO-p5-WRs" eventType="primaryActionTriggered" id="g2M-it-yoS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
