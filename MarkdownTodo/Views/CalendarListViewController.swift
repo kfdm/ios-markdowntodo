@@ -43,13 +43,33 @@ class CalendarListViewController: UIViewController {
     }
 
     // MARK: - Segues
+    func showReminders(calendar: EKCalendar?, predicate: NSPredicate?) {
+        //let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
+        let controller = ReminderListViewController.instantiate()
+        controller.selectedCalendar = calendar
+        controller.selectedPredicate = predicate
+        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        controller.navigationItem.leftItemsSupplementBackButton = true
+        splitViewController?.showDetailViewController(controller, sender: self)
+//        splitViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    @IBAction func clickToday(_ sender: Any) {
+        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
+
+        showReminders(calendar: nil, predicate: pred)
+
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cal = calendars.cellForRowAt(indexPath)
+                let pred = CalendarController.shared.predicateForReminders(in: cal)
+
                 let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
                 controller.selectedCalendar = cal
+                controller.selectedPredicate = pred
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }

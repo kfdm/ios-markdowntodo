@@ -9,9 +9,15 @@
 import UIKit
 import EventKit
 
-class ReminderListViewController: UITableViewController {
+class ReminderListViewController: UITableViewController, Storyboarded {
     private var tableData = GroupedRemindersByDate()
     private var showCompleted = false
+
+    var selectedPredicate: NSPredicate? {
+        didSet {
+            fetchReminders()
+        }
+    }
 
     var selectedCalendar: EKCalendar? {
         didSet {
@@ -24,9 +30,10 @@ class ReminderListViewController: UITableViewController {
 
     @objc func fetchReminders() {
         guard let calendar = selectedCalendar else { return }
+        guard let pred = selectedPredicate else { return }
+
         self.title = calendar.title
 
-        let pred = CalendarController.shared.predicateForReminders(in: calendar)
         GroupedRemindersByDate.remindersForPredicate(predicate: pred) { (reminders) in
             self.tableData = reminders
 
