@@ -184,25 +184,8 @@ extension ReminderListViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        let date = tableData.section(section)
-        header.textLabel?.textColor = Colors.isOverdue(for: date)
-    }
-
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = tableData.section(section)
-        switch date {
-        case Date.distantFuture:
-            return "Unscheduled"
-        default:
-
-            let format = DateFormatter()
-            format.locale = .current
-            format.dateStyle = .full
-            return format.string(from: date)
-        }
-
+        return tableData.titleForHeader(section)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -21,6 +21,7 @@ class ReminderViewCell: UITableViewCell {
 
     func update(_ reminder: EKReminder) {
         self.titleLabel?.text = reminder.title
+        self.titleLabel.textColor = reminder.isOverdue() ? UIColor.red : UIColor.black
 
         switch reminder {
         case _ where reminder.isCompleted:

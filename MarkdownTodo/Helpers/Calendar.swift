@@ -12,7 +12,7 @@ import os.log
 
 let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 
-class GroupedRemindersByDate {
+class GroupedRemindersByDate: GroupedReminders {
     private var reminders = [Date: [EKReminder]]()
     private var sections = [Date]()
 
@@ -20,6 +20,16 @@ class GroupedRemindersByDate {
 
     init() {
 
+    }
+
+    func titleForHeader(_ section: Int) -> String {
+        let date = sections[section]
+        if date == Date.distantFuture { return "Unscheduled" }
+
+        let format = DateFormatter()
+        format.locale = .current
+        format.dateStyle = .full
+        return format.string(from: date)
     }
 
     init(reminders: [EKReminder]) {
@@ -36,10 +46,6 @@ class GroupedRemindersByDate {
             guard let reminders = reminders else { return }
             completionHandler(GroupedRemindersByDate(reminders: reminders))
         }
-    }
-
-    func section(_ for_: Int) -> Date {
-        return self.sections[for_]
     }
 
     func numberOfRowsInSection(_ section: Int) -> Int {
