@@ -135,9 +135,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="6S0-TO-JiA"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -157,7 +154,6 @@
                                                 <state key="normal" title="Today"/>
                                                 <connections>
                                                     <action selector="clickToday:" destination="0wO-p5-WRs" eventType="primaryActionTriggered" id="pnd-G6-n2q"/>
-                                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showToday" id="dxo-sD-8jH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1k-uJ-I1e">
@@ -226,7 +222,4 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="dxo-sD-8jH"/>
-    </inferredMetricsTieBreakers>
 </document>

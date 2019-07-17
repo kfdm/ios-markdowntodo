@@ -42,53 +42,30 @@ class CalendarListViewController: UIViewController {
         fetchCalendar()
     }
 
-    // MARK: - Segues
-    func showReminders(calendar: EKCalendar?, predicate: NSPredicate?) {
+    func showReminderController(calendar: EKCalendar? = nil, predicate: NSPredicate?, title: String = "", color: UIColor = UIColor.groupTableViewBackground) {
         //let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
+
         let controller = ReminderListViewController.instantiate()
+        let nav = UINavigationController(rootViewController: controller)
+
+        controller.title = title
+        controller.navigationController?.navigationBar.barTintColor = color
+
         controller.selectedCalendar = calendar
         controller.selectedPredicate = predicate
         controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller.navigationItem.leftItemsSupplementBackButton = true
-        splitViewController?.showDetailViewController(controller, sender: self)
-//        splitViewController?.navigationController?.pushViewController(controller, animated: true)
+
+        splitViewController?.showDetailViewController(nav, sender: self)
     }
 
     @IBAction func clickToday(_ sender: Any) {
         let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
 
-        showReminders(calendar: nil, predicate: pred)
+        showReminderController(predicate: pred, title: "Today")
 
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let cal = calendars.cellForRowAt(indexPath)
-                let pred = CalendarController.shared.predicateForReminders(in: cal)
-
-                let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
-                controller.title = cal.title
-                controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: cal)
-                controller.selectedCalendar = cal
-                controller.selectedPredicate = pred
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-        if segue.identifier == "showToday" {
-            let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: Date(), calendars: nil)
-
-            let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
-
-            controller.navigationController?.navigationBar.barTintColor = UIColor.lightGray
-            controller.title = "Today"
-            controller.selectedCalendar = nil
-            controller.selectedPredicate = pred
-            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            controller.navigationItem.leftItemsSupplementBackButton = true
-        }
-    }
     @IBAction func clickSettingsButton(_ sender: UIBarButtonItem) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
@@ -120,5 +97,11 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return calendars.titleForHeader(section)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let calendar = calendars.cellForRowAt(indexPath)
+        let predicate = CalendarController.shared.predicateForReminders(in: calendar)
+        showReminderController(calendar: calendar, predicate: predicate, title: calendar.title, color: Colors.calendar(for: calendar))
     }
 }
