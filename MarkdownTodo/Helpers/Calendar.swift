@@ -8,6 +8,9 @@
 
 import Foundation
 import EventKit
+import os.log
+
+let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 
 class GroupedReminders {
     var reminders: [Date: [EKReminder]]
@@ -64,17 +67,17 @@ class CalendarController {
     func setup() {
         switch EKEventStore.authorizationStatus(for: .reminder) {
         case .authorized:
-            print("Authorized")
+            os_log("Authorized", log: logger, type: .info)
             refreshData()
         case .denied:
-            print("Denied")
+            os_log("Denied", log: logger, type: .error)
         case .notDetermined:
             store.requestAccess(to: .reminder) { (granted, _) in
                 if granted {
-                    print("Granted")
+                    os_log("Granted", log: logger, type: .info)
                     self.refreshData()
                 } else {
-                    print("Access Denied")
+                    os_log("Denied", log: logger, type: .error)
                 }
             }
         case.restricted:
