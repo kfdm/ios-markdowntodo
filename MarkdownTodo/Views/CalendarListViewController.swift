@@ -68,11 +68,25 @@ class CalendarListViewController: UIViewController {
                 let pred = CalendarController.shared.predicateForReminders(in: cal)
 
                 let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
+                controller.title = cal.title
+                controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: cal)
                 controller.selectedCalendar = cal
                 controller.selectedPredicate = pred
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
+        }
+        if segue.identifier == "showToday" {
+            let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: Date(), calendars: nil)
+
+            let controller = (segue.destination as! UINavigationController).topViewController as! ReminderListViewController
+
+            controller.navigationController?.navigationBar.barTintColor = UIColor.lightGray
+            controller.title = "Today"
+            controller.selectedCalendar = nil
+            controller.selectedPredicate = pred
+            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
     @IBAction func clickSettingsButton(_ sender: UIBarButtonItem) {

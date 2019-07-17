@@ -29,10 +29,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     private let myRefreshControl = UIRefreshControl()
 
     @objc func fetchReminders() {
-        guard let calendar = selectedCalendar else { return }
         guard let pred = selectedPredicate else { return }
-
-        self.title = calendar.title
 
         GroupedRemindersByDate.remindersForPredicate(predicate: pred) { (reminders) in
             self.tableData = reminders

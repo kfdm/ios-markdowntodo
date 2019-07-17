@@ -47,7 +47,7 @@
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-VF-PUN">
                                     <rect key="frame" x="357" y="6" width="51" height="31"/>
                                     <connections>
-                                        <action selector="showCompletedToggle:" destination="Z8C-gi-x1H" eventType="valueChanged" id="f1x-9u-sYT"/>
+                                        <action selector="toggleShowCompleted:" destination="Z8C-gi-x1H" eventType="valueChanged" id="jQh-II-3yq"/>
                                     </connections>
                                 </switch>
                             </subviews>
@@ -157,6 +157,7 @@
                                                 <state key="normal" title="Today"/>
                                                 <connections>
                                                     <action selector="clickToday:" destination="0wO-p5-WRs" eventType="primaryActionTriggered" id="pnd-G6-n2q"/>
+                                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showToday" id="dxo-sD-8jH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1k-uJ-I1e">
@@ -226,6 +227,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="dxo-sD-8jH"/>
     </inferredMetricsTieBreakers>
 </document>
