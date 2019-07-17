@@ -63,11 +63,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8HK-0b-FpZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6cg-ye-i57">
-                            <connections>
-                                <action selector="actionNewReminder:" destination="Z8C-gi-x1H" id="fU6-xJ-ZjC"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="compose" id="6cg-ye-i57">
+                                <connections>
+                                    <action selector="actionNewReminder:" destination="Z8C-gi-x1H" id="fU6-xJ-ZjC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="bookmarks" id="5dj-sa-EQh"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQh-1A-k8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
