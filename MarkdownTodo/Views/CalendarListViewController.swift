@@ -17,7 +17,7 @@ class CalendarListViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
 
     @objc func fetchCalendar() {
-        CalendarController.shared.authenticated(completionHandler: {
+        CalendarManager.shared.authenticated(completionHandler: {
             self.groupedCalendars = GroupedCalendarBySource()
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
@@ -51,7 +51,7 @@ class CalendarListViewController: UIViewController {
 
     @IBAction func clickToday(_ sender: Any) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
+        let pred = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Today"
             controller.selectedCalendar = nil
@@ -61,7 +61,7 @@ class CalendarListViewController: UIViewController {
     }
     @IBAction func clickUpcoming(_ sender: UIButton) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let pred = CalendarController.shared.store.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
+        let pred = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Upcoming"
             controller.selectedCalendar = nil
@@ -105,7 +105,7 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = groupedCalendars.cellForRowAt(indexPath)
-        let predicate = CalendarController.shared.predicateForReminders(in: calendar)
+        let predicate = CalendarManager.shared.predicateForReminders(in: calendar)
         showReminderController { (controller) in
             controller.title = calendar.title
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)

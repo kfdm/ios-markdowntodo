@@ -1,0 +1,122 @@
+//
+//  CalendarManager.swift
+//  MarkdownTodo
+//
+//  Created by Paul Traylor on 2019/07/18.
+//  Copyright © 2019 Paul Traylor. All rights reserved.
+//
+
+import Foundation
+import EventKit
+
+import os.log
+
+class CalendarManager {
+    static let shared = CalendarManager()
+
+    var isAuthenticated = false
+
+    let store = EKEventStore.init()
+    private var calendars = [EKSource: [EKCalendar]]()
+    private var sources = [EKSource]()
+    private let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
+
+    func source(for section: Int) -> [EKCalendar] {
+        let source = sources[section]
+        return calendars[source]!
+    }
+
+    func calendar(for indexPath: IndexPath) -> EKCalendar {
+        let source = sources[indexPath.section]
+        return calendars[source]![indexPath.row]
+    }
+
+    func authenticated(completionHandler handler: @escaping () -> Void) {
+        switch EKEventStore.authorizationStatus(for: .reminder) {
+        case .authorized:
+            os_log("Authorized", log: logger, type: .info)
+            isAuthenticated = true
+            handler()
+        case .denied:
+            os_log("Denied", log: logger, type: .error)
+        case .notDetermined:
+            store.requestAccess(to: .reminder) { (granted, _) in
+                if granted {
+                    os_log("Granted", log: self.logger, type: .info)
+                    self.isAuthenticated = true
+                    handler()
+                } else {
+                    os_log("Access Denied", log: self.logger, type: .error)
+                }
+            }
+        case.restricted:
+            os_log("Restricted", log: logger, type: .error)
+        default:
+            os_log("Unknown Case", log: logger, type: .error)
+        }
+    }
+
+    func fetchReminders(matching predicate: NSPredicate, completionHandler: @escaping (_ result: [EKReminder]) -> Void) {
+        store.fetchReminders(matching: predicate) { (fetchedReminders) in
+            if let newReminders = fetchedReminders {
+                completionHandler(newReminders)
+            }
+        }
+    }
+
+    func remindersForToday(completionHandler handler: @escaping (_ result: [EKReminder]) -> Void) {
+        let pred = store.predicateForEvents(withStart: Date(), end: Date(), calendars: nil)
+        fetchReminders(matching: pred, completionHandler: handler)
+    }
+
+    func remindersForCompleted(_ calendar: EKCalendar, completionHandler handler: @escaping (_ result: [EKReminder]) -> Void) {
+        let pred = store.predicateForCompletedReminders(withCompletionDateStarting: nil, ending: nil, calendars: [calendar])
+        fetchReminders(matching: pred, completionHandler: handler)
+    }
+
+    func predicateForReminders(in calendar: EKCalendar) -> NSPredicate {
+        return store.predicateForReminders(in: [calendar])
+    }
+
+    func fetchCalendarList() -> [EKSource: [EKCalendar]] {
+        store.refreshSourcesIfNecessary()
+        var calendars = [EKSource: [EKCalendar]]()
+
+        store.sources.filter({ (source) -> Bool in
+            source.sourceType != .birthdays
+        }).forEach { (source) in
+            calendars[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
+                a.cgColor.hashValue > b.cgColor.hashValue
+            })
+        }
+        return calendars
+    }
+
+    func refreshData() {
+        store.refreshSourcesIfNecessary()
+        sources = store.sources.filter({ (source) -> Bool in
+            source.sourceType != .birthdays
+        })
+
+        sources.forEach { (source) in
+            calendars[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
+                a.cgColor.hashValue > b.cgColor.hashValue
+            })
+        }
+    }
+
+    func save(reminder: EKReminder, commit: Bool) {
+        do {
+            try store.save(reminder, commit: commit)
+        } catch {
+            print("Error creating and saving new reminder : \(error)")
+        }
+    }
+
+    func newReminder(for calendar: EKCalendar) -> EKReminder {
+        let calendar = store.calendar(withIdentifier: calendar.calendarIdentifier)
+        let reminder = EKReminder.init(eventStore: store)
+        reminder.calendar = calendar
+        return reminder
+    }
+}

@@ -50,7 +50,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
 
         alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
             reminder.dueDateComponents = nil
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
 
@@ -58,7 +58,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
             let date = Date()
             let calendar = Calendar.current
             reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
 
@@ -69,7 +69,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
 
             let calendar = Calendar.current
             reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
 
@@ -83,14 +83,14 @@ class ReminderListViewController: UITableViewController, Storyboarded {
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
             reminder.priority = 0
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
 
         for i in 1...9 {
             alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
                 reminder.priority = i
-                CalendarController.shared.save(reminder: reminder, commit: true)
+                CalendarManager.shared.save(reminder: reminder, commit: true)
                 self.fetchReminders()
             }))
         }
@@ -104,7 +104,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            try? CalendarController.shared.store.remove(reminder, commit: true)
+            try? CalendarManager.shared.store.remove(reminder, commit: true)
             self.fetchReminders()
         }))
         present(alert, animated: true, completion: nil)
@@ -130,16 +130,16 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction.init(title: "Save", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendar else { return }
-            let reminder = CalendarController.shared.newReminder(for: selectedCalendar)
+            let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
         alert.addAction(UIAlertAction.init(title: "Save and Edit", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendar else { return }
-            let reminder = CalendarController.shared.newReminder(for: selectedCalendar)
+            let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
-            CalendarController.shared.save(reminder: reminder, commit: true)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
             self.showReminder(reminder, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)

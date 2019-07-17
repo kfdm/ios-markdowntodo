@@ -18,7 +18,7 @@ enum TableRows: Int {
 }
 
 class ReminderEditViewController: UITableViewController, Storyboarded {
-    var container = CalendarController.shared
+    var container = CalendarManager.shared
     var currentReminder: EKReminder? {
         didSet {
             // Update the view.

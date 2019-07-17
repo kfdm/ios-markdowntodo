@@ -21,8 +21,9 @@
 		8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */; };
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
 		87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */; };
+		879201A722DFCC2C001B2AF7 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879201A622DFCC2C001B2AF7 /* CalendarManager.swift */; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
-		87F2221822DC8D9E005B2CB7 /* DequeNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* DequeNib.swift */; };
+		87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
 		87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221E22DC907D005B2CB7 /* StringViewCell.xib */; };
 		87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* TextViewCell.swift */; };
@@ -47,8 +48,9 @@
 		8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEditViewController.swift; sourceTree = "<group>"; };
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReminders.swift; sourceTree = "<group>"; };
+		879201A622DFCC2C001B2AF7 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
-		87F2221722DC8D9E005B2CB7 /* DequeNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DequeNib.swift; sourceTree = "<group>"; };
+		87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RegisterNib.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
 		87F2221E22DC907D005B2CB7 /* StringViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StringViewCell.xib; sourceTree = "<group>"; };
 		87F2222122DC92E5005B2CB7 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
@@ -119,7 +121,8 @@
 				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 				87094FF522DC42BD0047D672 /* Colors.swift */,
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
-				87F2221722DC8D9E005B2CB7 /* DequeNib.swift */,
+				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
+				879201A622DFCC2C001B2AF7 /* CalendarManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */,
 				87094FF622DC42BD0047D672 /* Colors.swift in Sources */,
 				8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */,
+				879201A722DFCC2C001B2AF7 /* CalendarManager.swift in Sources */,
 				87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* CalendarListViewController.swift in Sources */,
@@ -229,7 +233,7 @@
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
-				87F2221822DC8D9E005B2CB7 /* DequeNib.swift in Sources */,
+				87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */,
 				87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
