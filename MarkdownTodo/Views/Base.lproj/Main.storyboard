@@ -186,8 +186,16 @@
                         <viewLayoutGuide key="safeArea" id="Rjd-Yb-S3t"/>
                     </view>
                     <navigationItem key="navigationItem" title="Calendars" id="Zdf-7t-Un8">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="SVw-2q-Ke7"/>
-                        <barButtonItem key="rightBarButtonItem" title="About" id="Ndy-oM-Ev8"/>
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="SVw-2q-Ke7">
+                            <connections>
+                                <action selector="clickSettingsButton:" destination="0wO-p5-WRs" id="fHU-al-7Sf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="About" id="Ndy-oM-Ev8">
+                            <connections>
+                                <action selector="clickAboutButton:" destination="0wO-p5-WRs" id="7ZQ-0W-yF9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="r7i-6Z-zg0" id="nPC-qX-6gW"/>
