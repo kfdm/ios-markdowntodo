@@ -49,7 +49,9 @@ class CalendarListViewController: UIViewController {
         splitViewController?.showDetailViewController(nav, sender: self)
     }
 
-    @IBAction func clickToday(_ sender: Any) {
+    // MARK: - IBAction
+
+    @IBAction func showDueReminders(_ sender: Any) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
@@ -59,7 +61,7 @@ class CalendarListViewController: UIViewController {
             controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
         }
     }
-    @IBAction func clickUpcoming(_ sender: UIButton) {
+    @IBAction func showUpcomingReminders(_ sender: UIButton) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in

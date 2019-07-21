@@ -25,6 +25,7 @@ extension EKReminder {
     var scheduledState: ScheduledOptions {
         get {
             if isCompleted { return .completed}
+            if sortableDate == Date.distantFuture { return .unscheduled }
             return sortableDate > Date() ? .scheduled : .overdue
         }
     }
