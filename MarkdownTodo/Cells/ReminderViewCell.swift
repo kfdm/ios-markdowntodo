@@ -17,10 +17,6 @@ class ReminderViewCell: UITableViewCell {
 
     @IBOutlet weak var colorStrip: UIButton!
 
-    @IBAction func actionClick(_ sender: UIButton) {
-        print("Clicked button \(sender)")
-    }
-
     weak var delegate: ReminderActions?
 
     var reminder: EKReminder? {
@@ -38,6 +34,16 @@ class ReminderViewCell: UITableViewCell {
                 dateSelector.setTitle(dateformat.string(from: newReminder.sortableDate), for: .normal)
             }
 
+            switch newReminder.scheduledState {
+            case .completed:
+                statusButton.setImage(UIImage(named: "statusDone"), for: .normal)
+            case .overdue:
+                statusButton.setImage(UIImage(named: "statusOverdue"), for: .normal)
+            default:
+                statusButton.setImage(UIImage(named: "statusEmpty"), for: .normal)
+            }
+            statusButton.imageView?.contentMode = .scaleAspectFill
+
             dateSelector.setTitleColor(newReminder.scheduledState == .overdue ? UIColor.red : UIColor.black, for: .normal)
 
             colorStrip.backgroundColor = Colors.priority(for: newReminder)
@@ -45,9 +51,12 @@ class ReminderViewCell: UITableViewCell {
     }
 
     @IBAction func priorityClick(_ sender: UIButton) {
-        delegate?.priorityFor(reminder: reminder!)
+        delegate?.showPriorityDialog(reminder: reminder!)
     }
     @IBAction func dateClick(_ sender: UIButton) {
-        delegate?.scheduleFor(reminder: reminder!)
+        delegate?.showScheduleDialog(reminder: reminder!)
+    }
+    @IBAction func actionClick(_ sender: UIButton) {
+        delegate?.showStatusDialog(reminder: reminder!)
     }
 }

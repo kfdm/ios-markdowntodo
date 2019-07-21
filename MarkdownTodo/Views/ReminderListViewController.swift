@@ -139,7 +139,7 @@ extension ReminderListViewController {
 }
 
 extension ReminderListViewController: ReminderActions {
-    func priorityFor(reminder: EKReminder) {
+    func showPriorityDialog(reminder: EKReminder) {
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
@@ -160,7 +160,7 @@ extension ReminderListViewController: ReminderActions {
         present(alert, animated: true, completion: nil)
     }
 
-    func scheduleFor(reminder: EKReminder) {
+    func showScheduleDialog(reminder: EKReminder) {
         let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
@@ -185,5 +185,14 @@ extension ReminderListViewController: ReminderActions {
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    func showStatusDialog(reminder: EKReminder) {
+        if reminder.isCompleted {
+            reminder.completionDate = nil
+        } else {
+            reminder.completionDate = Date()
+        }
+        CalendarManager.shared.save(reminder: reminder, commit: true)
+        self.fetchReminders()
     }
 }

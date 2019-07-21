@@ -9,6 +9,7 @@
 import EventKit
 
 protocol ReminderActions: class {
-    func priorityFor(reminder: EKReminder)
-    func scheduleFor(reminder: EKReminder)
+    func showPriorityDialog(reminder: EKReminder)
+    func showScheduleDialog(reminder: EKReminder)
+    func showStatusDialog(reminder: EKReminder)
 }
