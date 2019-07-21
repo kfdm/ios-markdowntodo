@@ -41,18 +41,6 @@ class GroupedRemindersByDate: GroupedReminders {
         self.sections = self.reminders.keys.sorted()
     }
 
-    static func remindersForPredicate(predicate: NSPredicate, showCompleted: Bool, completionHandler: @escaping (GroupedRemindersByDate) -> Void) {
-        CalendarManager.shared.fetchReminders(matching: predicate) { (reminders) in
-            if showCompleted {
-                completionHandler(GroupedRemindersByDate(reminders: reminders))
-            } else {
-                completionHandler(GroupedRemindersByDate(reminders: reminders.filter({ (r) -> Bool in
-                    !r.isCompleted
-                })))
-            }
-        }
-    }
-
     func numberOfRowsInSection(_ section: Int) -> Int {
         let date = sections[section]
         guard let source = reminders[date] else { return 0}
