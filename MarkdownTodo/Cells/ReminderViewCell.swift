@@ -34,10 +34,8 @@ class ReminderViewCell: UITableViewCell {
             switch newReminder.scheduledState {
             case .unscheduled:
                 dateSelector.setTitle("Unscheduled", for: .normal)
-            case .completed:
-                dateSelector.setTitle(dateformat.string(from: newReminder.completionDate!), for: .normal)
             default:
-                dateSelector.setTitle(dateformat.string(from: (newReminder.dueDateComponents?.date)!), for: .normal)
+                dateSelector.setTitle(dateformat.string(from: newReminder.sortableDate), for: .normal)
             }
 
             dateSelector.setTitleColor(newReminder.scheduledState == .overdue ? UIColor.red : UIColor.black, for: .normal)

@@ -24,7 +24,7 @@ final class ReminderManager {
     static func reminders(_ reminders: [EKReminder], byGrouping: Group, orderedBy: SortableField) -> [ReminderGroup] {
         switch byGrouping {
         case .date:
-            let grouped = Dictionary(grouping: reminders) { (reminder) -> Date in
+            let grouped = Dictionary(grouping: reminders.sorted(by: { $0.sortableDate < $1.sortableDate })) { (reminder) -> Date in
                 reminder.sortableDate
             }
             let mapped = grouped.map { (date, list) -> ReminderGroup in
@@ -35,7 +35,7 @@ final class ReminderManager {
 
                 switch(orderedBy) {
                 case .date:
-                    return ReminderGroup(title: title, events: list.sorted { $0.sortableDate < $1.sortableDate })
+                    return ReminderGroup(title: title, events: list.sorted { $0.sortableDate > $1.sortableDate })
                 case .priority:
                     return ReminderGroup(title: title, events: list.sorted { $0.priority < $1.priority })
                 }

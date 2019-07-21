@@ -8,7 +8,7 @@
 
 import EventKit
 
-enum ReminderState {
+enum ScheduledOptions {
     case completed
     case scheduled
     case overdue
@@ -22,12 +22,10 @@ extension EKReminder {
         return Date.distantFuture
     }
 
-    var scheduledState: ReminderState {
+    var scheduledState: ScheduledOptions {
         get {
             if isCompleted { return .completed}
-            guard let dueDate = dueDateComponents?.date else { return .unscheduled }
-            let today = Date()
-            return dueDate > today ? .scheduled : .overdue
+            return sortableDate > Date() ? .scheduled : .overdue
         }
     }
 }
