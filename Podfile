@@ -8,4 +8,5 @@ target 'MarkdownTodo' do
 
   # Pods for MarkdownTodo
   pod 'FSCalendar'
+  pod 'Down'
 end

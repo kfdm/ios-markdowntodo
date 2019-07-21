@@ -30,7 +30,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         super.viewDidLoad()
         tableView.registerReusableCell(tableViewCell: StringViewCell.self)
         tableView.registerReusableCell(tableViewCell: PriorityViewCell.self)
-        tableView.registerReusableCell(tableViewCell: TextViewCell.self)
+        tableView.registerReusableCell(tableViewCell: MarkdownViewCell.self)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
         configureView()
     }
@@ -73,9 +73,9 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             cell.textField.text = "<date> \(currentReminder?.dueDateComponents)"
             return cell
         case .notes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: TextViewCell.self)
-            cell.labelField.text = NSLocalizedString("Notes", comment: "Reminder Notes")
-            cell.textField.text = currentReminder?.notes
+            let cell = tableView.dequeueReusableCell(withIdentifier: MarkdownViewCell.self)
+            cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
+            cell.value = currentReminder?.notes ?? ""
             return cell
         }
     }

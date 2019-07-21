@@ -27,8 +27,8 @@
 		87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
 		87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221E22DC907D005B2CB7 /* StringViewCell.xib */; };
-		87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* TextViewCell.swift */; };
-		87F2222422DC92E5005B2CB7 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2222222DC92E5005B2CB7 /* TextViewCell.xib */; };
+		87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */; };
+		87F2222422DC92E5005B2CB7 /* MarkdownViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */; };
 		DBCC17F00C5F192B3DCD75A3 /* Pods_MarkdownTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF6952C26FE70ACE74F2E13 /* Pods_MarkdownTodo.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +57,8 @@
 		87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RegisterNib.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
 		87F2221E22DC907D005B2CB7 /* StringViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StringViewCell.xib; sourceTree = "<group>"; };
-		87F2222122DC92E5005B2CB7 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
-		87F2222222DC92E5005B2CB7 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
+		87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewCell.swift; sourceTree = "<group>"; };
+		87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownViewCell.xib; sourceTree = "<group>"; };
 		B64234EDF7AB64021AEF5D35 /* Pods-MarkdownTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarkdownTodo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo.release.xcconfig"; sourceTree = "<group>"; };
 		DBF6952C26FE70ACE74F2E13 /* Pods_MarkdownTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarkdownTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -127,8 +127,8 @@
 				87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */,
 				87F2221D22DC907D005B2CB7 /* StringViewCell.swift */,
 				87F2221E22DC907D005B2CB7 /* StringViewCell.xib */,
-				87F2222122DC92E5005B2CB7 /* TextViewCell.swift */,
-				87F2222222DC92E5005B2CB7 /* TextViewCell.xib */,
+				87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */,
+				87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 				87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */,
 				87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */,
 				8706298222D4AC120084441A /* Main.storyboard in Resources */,
-				87F2222422DC92E5005B2CB7 /* TextViewCell.xib in Resources */,
+				87F2222422DC92E5005B2CB7 /* MarkdownViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,10 +253,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Down.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,7 +305,7 @@
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
 				87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */,
-				87F2222322DC92E5005B2CB7 /* TextViewCell.swift in Sources */,
+				87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

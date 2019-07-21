@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MarkdownViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MarkdownViewCell" rowHeight="256" id="KGk-i7-Jjw" customClass="MarkdownViewCell" customModule="MarkdownTodo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="318" height="256"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="318" height="255.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VEk-JH-Pcj">
+                        <rect key="frame" x="8" y="47" width="302" height="200.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2y-ny-df9">
+                        <rect key="frame" x="8" y="8" width="250" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eEQ-HY-MFX">
+                        <rect key="frame" x="261" y="8" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="wsa-ko-PdP"/>
+                        </constraints>
+                        <connections>
+                            <action selector="togglePreview:" destination="KGk-i7-Jjw" eventType="valueChanged" id="X8C-mW-20u"/>
+                        </connections>
+                    </switch>
+                    <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URx-ff-fev">
+                        <rect key="frame" x="8" y="47" width="302" height="200.5"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                    </wkWebView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="URx-ff-fev" firstAttribute="top" secondItem="VEk-JH-Pcj" secondAttribute="top" id="0O6-gV-CDi"/>
+                    <constraint firstItem="t2y-ny-df9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="22W-4c-ord"/>
+                    <constraint firstAttribute="trailing" secondItem="eEQ-HY-MFX" secondAttribute="trailing" constant="8" id="9rw-fG-GN7"/>
+                    <constraint firstItem="eEQ-HY-MFX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="RxY-Px-lDD"/>
+                    <constraint firstItem="VEk-JH-Pcj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="VC0-7J-ZeL"/>
+                    <constraint firstAttribute="trailing" secondItem="t2y-ny-df9" secondAttribute="trailing" constant="60" id="W5c-Ru-Sjo"/>
+                    <constraint firstItem="VEk-JH-Pcj" firstAttribute="trailing" secondItem="URx-ff-fev" secondAttribute="trailing" id="e7b-HQ-acl"/>
+                    <constraint firstAttribute="bottom" secondItem="VEk-JH-Pcj" secondAttribute="bottom" constant="8" id="nPw-Y7-nXV"/>
+                    <constraint firstItem="VEk-JH-Pcj" firstAttribute="top" secondItem="eEQ-HY-MFX" secondAttribute="bottom" constant="8" id="odF-47-BDQ"/>
+                    <constraint firstItem="URx-ff-fev" firstAttribute="leading" secondItem="VEk-JH-Pcj" secondAttribute="leading" id="rVg-ld-Gyw"/>
+                    <constraint firstAttribute="trailing" secondItem="VEk-JH-Pcj" secondAttribute="trailing" constant="8" id="wNf-Pa-2cN"/>
+                    <constraint firstItem="t2y-ny-df9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wth-bv-x61"/>
+                    <constraint firstItem="VEk-JH-Pcj" firstAttribute="bottom" secondItem="URx-ff-fev" secondAttribute="bottom" id="x9P-Pg-Yb6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="labelField" destination="t2y-ny-df9" id="R4t-fy-gMg"/>
+                <outlet property="previewSwitch" destination="eEQ-HY-MFX" id="CzV-XD-saq"/>
+                <outlet property="textField" destination="VEk-JH-Pcj" id="UYp-dY-GKS"/>
+                <outlet property="webView" destination="URx-ff-fev" id="SCF-m7-EN3"/>
+            </connections>
+            <point key="canvasLocation" x="33.333333333333336" y="128.90625"/>
+        </tableViewCell>
+    </objects>
+</document>
