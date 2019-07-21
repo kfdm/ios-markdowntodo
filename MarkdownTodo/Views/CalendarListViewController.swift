@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKit
+import FSCalendar
 
 class CalendarListViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class CalendarListViewController: UIViewController {
     private var groupedCalendars = GroupedCalendarBySource()
 
     @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak var calendarPicker: FSCalendar!
 
     @objc func fetchCalendar() {
         CalendarManager.shared.authenticated(completionHandler: {
@@ -38,6 +40,7 @@ class CalendarListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCalendar()
+        calendarPicker.reloadData()
     }
 
     func showReminderController(_ completionHandler: (ReminderListViewController) -> Void) {
@@ -112,5 +115,25 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
             controller.selectedPredicate = predicate
             controller.selectedCalendar = calendar
         }
+    }
+}
+
+
+extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let start = Calendar.current.startOfDay(for: date)
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
+        let predicate = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
+        showReminderController { (controller) in
+            controller.title = "Events for \(date)"
+            controller.navigationController?.navigationBar.barTintColor = UIColor.purple
+            controller.selectedPredicate = predicate
+            controller.selectedCalendar = nil
+        }
+
+    }
+
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return 1
     }
 }
