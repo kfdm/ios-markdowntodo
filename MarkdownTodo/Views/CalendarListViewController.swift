@@ -14,19 +14,23 @@ class CalendarListViewController: UIViewController {
 
     var detailViewController: ReminderListViewController?
     private var groupedCalendars = GroupedCalendarBySource()
-    private var eventsForDate = [Date:Int]()
 
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
 
     @objc func fetchCalendar() {
-        eventsForDate = [Date:Int]()
         CalendarManager.shared.authenticated(completionHandler: {
             self.groupedCalendars = GroupedCalendarBySource()
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
             self.calendarPicker.reloadData()
         })
+
+        CalendarManager.shared.recalculateEventCount {
+            DispatchQueue.main.async {
+                self.calendarPicker.reloadData()
+            }
+        }
     }
 
     override func viewDidLoad() {
@@ -137,24 +141,6 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return 0
-        let start = date.midnight
-        if let _ = eventsForDate.index(forKey: start) {
-            return eventsForDate[start]!
-        }
-        let end = start.tomorrow
-        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
-        CalendarManager.shared.fetchReminders(matching: predicate) { (reminders) in
-            self.eventsForDate[start] = reminders.count
-            DispatchQueue.main.async {
-                self.calendarPicker.reloadData()
-            }
-        }
-        return 0
-    }
-
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print(calendar.minimumDate)
-        print(calendar.maximumDate)
+        return CalendarManager.shared.numberOfEventsFor(date)
     }
 }

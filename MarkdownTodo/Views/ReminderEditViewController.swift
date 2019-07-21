@@ -31,6 +31,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         tableView.registerReusableCell(tableViewCell: StringViewCell.self)
         tableView.registerReusableCell(tableViewCell: PriorityViewCell.self)
         tableView.registerReusableCell(tableViewCell: MarkdownViewCell.self)
+        tableView.registerReusableCell(tableViewCell: DateViewCell.self)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
         configureView()
     }
@@ -68,9 +69,9 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             cell.selectorPriority.addTarget(self, action: #selector(updatedPriority(_:)), for: .valueChanged)
             return cell
         case .due:
-            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
-            cell.labelField.text = NSLocalizedString("Due", comment: "Due Date")
-            cell.textField.text = "<date> \(currentReminder?.dueDateComponents)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: DateViewCell.self)
+            cell.label = NSLocalizedString("Due", comment: "Due Date")
+            cell.date = currentReminder?.dueDateComponents
             return cell
         case .notes:
             let cell = tableView.dequeueReusableCell(withIdentifier: MarkdownViewCell.self)
@@ -83,6 +84,8 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch TableRows.init(rawValue: indexPath.row)! {
         case .notes:
+            return 256
+        case .due:
             return 256
         default:
             return 44
