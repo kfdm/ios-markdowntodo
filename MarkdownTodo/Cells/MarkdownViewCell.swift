@@ -8,13 +8,16 @@
 
 import UIKit
 import WebKit
+import EventKit
 import Down
 
-class MarkdownViewCell: UITableViewCell {
+class MarkdownViewCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet private weak var labelField: UILabel!
     @IBOutlet private weak var textField: UITextView!
     @IBOutlet private weak var previewSwitch: UISwitch!
     @IBOutlet private weak var webView: WKWebView!
+
+    var changed : ((String) -> Void)?
 
     var label: String {
         get {
@@ -42,6 +45,10 @@ class MarkdownViewCell: UITableViewCell {
             let down = Down(markdownString: textField.text)
             webView.loadHTMLString(try! down.toHTML(), baseURL: nil)
         }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        changed?(textField.text)
     }
 
 }

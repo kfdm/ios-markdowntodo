@@ -26,6 +26,7 @@
 		8759218B22E45AC600D3A641 /* ReminderDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */; };
 		8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */; };
 		8759218F22E46EA000D3A641 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218E22E46EA000D3A641 /* Observers.swift */; };
+		8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */; };
 		8761EA9E22DC1D7800A8474A /* ReminderEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */; };
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
 		87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */; };
@@ -63,6 +64,7 @@
 		8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDatePickerViewController.swift; sourceTree = "<group>"; };
 		8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponent+Extensions.swift"; sourceTree = "<group>"; };
 		8759218E22E46EA000D3A641 /* Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
+		8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FSCalendar+Extensions.swift"; sourceTree = "<group>"; };
 		8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEditViewController.swift; sourceTree = "<group>"; };
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReminders.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		8706297922D4AC120084441A /* MarkdownTodo */ = {
 			isa = PBXGroup;
 			children = (
+				8759219222E4887B00D3A641 /* Extensions */,
 				8709500022DC72ED0047D672 /* Helpers */,
 				87094FFD22DC57F80047D672 /* Cells */,
 				8761EAA122DC28D500A8474A /* Views */,
@@ -155,14 +158,23 @@
 				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 				87094FF522DC42BD0047D672 /* Colors.swift */,
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
-				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
 				879201A622DFCC2C001B2AF7 /* CalendarManager.swift */,
-				8759217E22E4070A00D3A641 /* Date+Extensions.swift */,
-				8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */,
-				8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */,
 				8759218E22E46EA000D3A641 /* Observers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8759219222E4887B00D3A641 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */,
+				8759217E22E4070A00D3A641 /* Date+Extensions.swift */,
+				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
+				8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */,
+				8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */,
+			);
+			name = Extensions;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8761EAA122DC28D500A8474A /* Views */ = {
@@ -329,6 +341,7 @@
 				8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */,
 				8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */,
 				87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */,
+				8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,

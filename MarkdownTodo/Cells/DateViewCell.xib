@@ -72,7 +72,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="datePicker" destination="2cs-Z5-coK" id="P2h-jW-0lL"/>
                 <outlet property="labelField" destination="eAn-0m-2zS" id="d2F-My-15V"/>
+                <outlet property="segmentField" destination="GKX-Gj-M0f" id="WY2-Lr-wWS"/>
                 <outlet property="valueField" destination="hYk-7W-eUe" id="Vv6-Mh-pSd"/>
             </connections>
             <point key="canvasLocation" x="34.782608695652179" y="102.45535714285714"/>

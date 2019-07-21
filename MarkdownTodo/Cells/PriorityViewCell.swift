@@ -11,19 +11,26 @@ import EventKit
 
 class PriorityViewCell: UITableViewCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
+    var changed : ((Int) -> Void)?
+
+    var priority: Int {
+        get {
+            return selectorPriority.selectedSegmentIndex
+        }
+        set {
+            selectorPriority.selectedSegmentIndex = newValue
+        }
+    }
 
     override func awakeFromNib() {
         selectorPriority.removeAllSegments()
+        selectorPriority.addTarget(self, action: #selector(updatedPriority), for: .valueChanged)
         for i in 0...9 {
             selectorPriority.insertSegment(withTitle: "\(i)", at: i, animated: false)
         }
     }
 
-    static func getPriority(for sender: UISegmentedControl) -> Int {
-        return sender.selectedSegmentIndex
-    }
-
-    func setPriority(for reminder: EKReminder) {
-        selectorPriority.selectedSegmentIndex = reminder.priority
+    @objc func updatedPriority() {
+        changed?(selectorPriority.selectedSegmentIndex)
     }
 }

@@ -13,58 +13,23 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     private var groupedReminders = [ReminderManager.ReminderGroup]()
     private var showCompleted = false
 
-    var selectedPredicate: NSPredicate? {
-        didSet {
-            fetchReminders()
-        }
-    }
-
-    var selectedCalendar: EKCalendar? {
-        didSet {
-            // Update the view.
-            fetchReminders()
-        }
-    }
-
-    @objc func fetchReminders() {
-        guard let pred = selectedPredicate else { return }
-        CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
-            let grouped = ReminderManager.reminders(fetchedReminders.filter({ (r) -> Bool in
-                self.showCompleted ? true : !r.isCompleted
-            }), byGrouping: .date, orderedBy: .priority)
-
-            DispatchQueue.main.async {
-                self.groupedReminders = grouped
-                self.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var selectedPredicate: NSPredicate?
+    var selectedCalendar: EKCalendar?
 
     @IBAction func toggleShowCompleted(_ sender: UISwitch) {
         showCompleted = sender.isOn
         fetchReminders()
     }
 
-    func actionDelete(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders[index.section].events[index.row]
-        let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            CalendarManager.shared.remove(reminder, commit: true)
-            self.fetchReminders()
-        }))
-        present(alert, animated: true, completion: nil)
-    }
-
     // MARK: - Segues
 
     func showReminder(_ reminder: EKReminder, animated: Bool) {
-        let controller = ReminderEditViewController.instantiate()
-        controller.currentReminder = reminder
-        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        controller.navigationItem.leftItemsSupplementBackButton = true
-        navigationController?.pushViewController(controller, animated: animated)
+        let scheduleController = ReminderEditViewController.instantiate()
+        let navigation = UINavigationController(rootViewController: scheduleController)
+        scheduleController.currentReminder = reminder
+        scheduleController.delegate = self
+        navigation.modalPresentationStyle = .formSheet
+        present(navigation, animated: true, completion: nil)
     }
 
     // MARK: - Actions
@@ -111,9 +76,23 @@ extension ReminderListViewController {
 
 // MARK: - UITableViewDataSource
 extension ReminderListViewController {
+    @objc func fetchReminders() {
+        guard let pred = selectedPredicate else { return }
+        CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
+            let grouped = ReminderManager.reminders(fetchedReminders.filter({ (r) -> Bool in
+                self.showCompleted ? true : !r.isCompleted
+            }), byGrouping: .date, orderedBy: .priority)
+
+            DispatchQueue.main.async {
+                self.groupedReminders = grouped
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupedReminders[section].events.count
-
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -138,6 +117,7 @@ extension ReminderListViewController {
     }
 }
 
+// MARK: - ReminderActions
 extension ReminderListViewController: ReminderActions {
     func showPriorityDialog(reminder: EKReminder) {
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)

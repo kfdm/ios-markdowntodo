@@ -18,13 +18,8 @@ enum TableRows: Int {
 }
 
 class ReminderEditViewController: UITableViewController, Storyboarded {
-    var container = CalendarManager.shared
-    var currentReminder: EKReminder? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
-    }
+    var currentReminder: EKReminder?
+    weak var delegate: ReminderActions?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +28,20 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         tableView.registerReusableCell(tableViewCell: MarkdownViewCell.self)
         tableView.registerReusableCell(tableViewCell: DateViewCell.self)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
-        configureView()
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
+        navigationItem.leftItemsSupplementBackButton = true
     }
 
-    func configureView() {
+    @objc func cancelEdit() {
+        dismiss(animated: true, completion: nil)
+    }
 
+    @objc func saveEdit() {
+        print("Saving \(currentReminder)")
+        delegate?.saveReminder(reminder: currentReminder!)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -54,29 +58,33 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         switch TableRows.init(rawValue: indexPath.row)! {
         case .title:
             let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
-            cell.labelField.text = NSLocalizedString("Title", comment: "Reminder Title")
-            cell.textField.text = currentReminder?.title
+            cell.label = NSLocalizedString("Title", comment: "Reminder Title")
+            cell.value = currentReminder?.title
+            cell.changed = { newTitle in self.currentReminder?.title = newTitle }
             return cell
         case .url:
             let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
-            cell.labelField.text = NSLocalizedString("URL", comment: "Reminder URL")
-            cell.textField.text = currentReminder?.url?.absoluteString
-            cell.textField.keyboardType = .URL
+            cell.label = NSLocalizedString("URL", comment: "Reminder URL")
+            cell.value = currentReminder?.url?.absoluteString
+            cell.keyboardType = .URL
+            cell.changed = { newURL in self.currentReminder?.url = URL(string: newURL) }
             return cell
         case .priority:
             let cell = tableView.dequeueReusableCell(withIdentifier: PriorityViewCell.self)
-            cell.setPriority(for: currentReminder!)
-            cell.selectorPriority.addTarget(self, action: #selector(updatedPriority(_:)), for: .valueChanged)
+            cell.priority = currentReminder!.priority
+            cell.changed = { newPriority in self.currentReminder?.priority = newPriority }
             return cell
         case .due:
             let cell = tableView.dequeueReusableCell(withIdentifier: DateViewCell.self)
             cell.label = NSLocalizedString("Due", comment: "Due Date")
             cell.date = currentReminder?.dueDateComponents
+            cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }
             return cell
         case .notes:
             let cell = tableView.dequeueReusableCell(withIdentifier: MarkdownViewCell.self)
             cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.value = currentReminder?.notes ?? ""
+            cell.changed = { newNote in self.currentReminder?.notes = newNote }
             return cell
         }
     }
@@ -90,13 +98,5 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         default:
             return 44
         }
-    }
-
-    // MARK: Selectors
-
-    @objc func updatedPriority(_ sender: UISegmentedControl) {
-        guard let reminder = currentReminder else { return }
-        reminder.priority = PriorityViewCell.getPriority(for: sender)
-        container.save(reminder: reminder, commit: true)
     }
 }
