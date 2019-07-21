@@ -31,7 +31,7 @@ final class ReminderManager {
                 let format = DateFormatter()
                 format.locale = .current
                 format.dateStyle = .full
-                let title = date == Date.distantFuture ? "Unscheduled" : format.string(from: date)
+                let title = date == Date.distantFuture ? Labels.unscheduled : format.string(from: date)
 
                 switch(orderedBy) {
                 case .date:
@@ -60,7 +60,7 @@ final class ReminderManager {
             return format.string(from: comp.date!)
         }
 
-        return "Unscheduled"
+        return Labels.unscheduled
     }
 }
 

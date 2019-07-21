@@ -11,7 +11,7 @@ import EventKit
 
 class PriorityViewCell: UITableViewCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
-    var changed : ((Int) -> Void)?
+    var changed: ((Int) -> Void)?
 
     var priority: Int {
         get {

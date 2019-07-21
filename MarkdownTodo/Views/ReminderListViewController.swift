@@ -65,6 +65,7 @@ extension ReminderListViewController {
         super.viewDidLoad()
         tableView.refreshControl?.addTarget(self, action: #selector(fetchReminders), for: .valueChanged)
         tableView.registerReusableCell(tableViewCell: ReminderViewCell.self)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchReminders), name: .savedReminder, object: nil)
         fetchReminders()
     }
 
@@ -154,11 +155,6 @@ extension ReminderListViewController: ReminderActions {
         } else {
             reminder.completionDate = Date()
         }
-        CalendarManager.shared.save(reminder: reminder, commit: true)
-        self.fetchReminders()
-    }
-
-    func saveReminder(reminder: EKReminder) {
         CalendarManager.shared.save(reminder: reminder, commit: true)
         self.fetchReminders()
     }

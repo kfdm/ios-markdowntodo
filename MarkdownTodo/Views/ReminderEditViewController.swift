@@ -39,8 +39,8 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     }
 
     @objc func saveEdit() {
-        print("Saving \(currentReminder)")
-        delegate?.saveReminder(reminder: currentReminder!)
+        guard let reminder = currentReminder else { return }
+        CalendarManager.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 

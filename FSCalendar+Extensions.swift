@@ -8,7 +8,6 @@
 
 import FSCalendar
 
-
 extension FSCalendar {
     func clearAllSelections() {
         selectedDates.forEach { (date) in

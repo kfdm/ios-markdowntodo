@@ -12,44 +12,46 @@ import FSCalendar
 
 class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegate, FSCalendarDataSource, Storyboarded {
     weak var delegate: ReminderActions?
-
-    var currentReminder: EKReminder? {
-        didSet {
-            print("\(currentReminder?.sortableDate)")
-        }
-    }
-    @IBOutlet weak var calendarPicker: FSCalendar!
+    var currentReminder: EKReminder?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.registerReusableCell(tableViewCell: DateViewCell.self)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
         navigationItem.leftItemsSupplementBackButton = true
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        calendarPicker.select(currentReminder?.dueDateComponents?.date)
     }
 
     @objc func cancelEdit() {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func setToday(_ sender: UIButton) {
-        currentReminder?.dueDateComponents = DateComponents.setToday()
-        delegate?.saveReminder(reminder: currentReminder!)
+    @objc func saveEdit() {
+        guard let reminder = currentReminder else { return }
+        CalendarManager.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func setUnscheduled(_ sender: UIButton) {
-        currentReminder?.dueDateComponents = nil
-        delegate?.saveReminder(reminder: currentReminder!)
-        dismiss(animated: true, completion: nil)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DateViewCell.self)
+        cell.label = NSLocalizedString("Due", comment: "Due Date")
+        cell.date = currentReminder?.dueDateComponents
+        cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 256
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        currentReminder?.dueDateComponents = DateComponents.setDue(to: date)
-        delegate?.saveReminder(reminder: currentReminder!)
+        guard let reminder = currentReminder else { return }
+        reminder.dueDateComponents = DateComponents.setDue(to: date)
+        CalendarManager.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 

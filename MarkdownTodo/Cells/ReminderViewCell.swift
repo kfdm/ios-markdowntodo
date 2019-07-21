@@ -29,18 +29,18 @@ class ReminderViewCell: UITableViewCell {
 
             switch newReminder.scheduledState {
             case .unscheduled:
-                dateSelector.setTitle("Unscheduled", for: .normal)
+                dateSelector.setTitle(Labels.unscheduled, for: .normal)
             default:
                 dateSelector.setTitle(dateformat.string(from: newReminder.sortableDate), for: .normal)
             }
 
             switch newReminder.scheduledState {
             case .completed:
-                statusButton.setImage(UIImage(named: "statusDone"), for: .normal)
+                statusButton.setImage(Images.statusDone, for: .normal)
             case .overdue:
-                statusButton.setImage(UIImage(named: "statusOverdue"), for: .normal)
+                statusButton.setImage(Images.statusOverdue, for: .normal)
             default:
-                statusButton.setImage(UIImage(named: "statusEmpty"), for: .normal)
+                statusButton.setImage(Images.statusEmpty, for: .normal)
             }
             statusButton.imageView?.contentMode = .scaleAspectFill
 

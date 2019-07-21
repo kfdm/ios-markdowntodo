@@ -14,8 +14,8 @@ class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
     @IBOutlet private weak var valueField: UILabel!
     @IBOutlet private weak var segmentField: UISegmentedControl!
     @IBOutlet weak var datePicker: FSCalendar!
-    
-    var changed : ((DateComponents?) -> Void)?
+
+    var changed: ((DateComponents?) -> Void)?
     var date: DateComponents?
 
     var label: String {
@@ -31,22 +31,35 @@ class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
         switch sender.selectedSegmentIndex {
         case 0:
             datePicker.select(Date(), scrollToDate: true)
+            dateSet(Date())
         case 1:
             datePicker.select(Date().tomorrow, scrollToDate: true)
+            dateSet(Date().tomorrow)
         case 2:
             datePicker.clearAllSelections()
-            date = nil
-            changed?(nil)
+            dateSet(nil)
         default:
             print("unknown")
         }
     }
 
+    func dateSet(_ newDate: Date?) {
+        if let checkedDate = newDate {
+            let calendar = Calendar.current
+            let formatter = DateFormatter()
+            formatter.dateStyle = .full
+            date = calendar.dateComponents([.year, .month, .day], from: checkedDate)
+            valueField.text = formatter.string(from: checkedDate)
+            changed?(date)
+        } else {
+            valueField.text = Labels.unscheduled
+            changed?(nil)
+        }
+    }
+
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         segmentField.selectedSegmentIndex = 3
-        let calendar = Calendar.current
-        self.date = calendar.dateComponents([.year, .month, .day], from: date)
-        changed?(self.date)
+        dateSet(date)
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {

@@ -17,7 +17,7 @@ class MarkdownViewCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet private weak var previewSwitch: UISwitch!
     @IBOutlet private weak var webView: WKWebView!
 
-    var changed : ((String) -> Void)?
+    var changed: ((String) -> Void)?
 
     var label: String {
         get {

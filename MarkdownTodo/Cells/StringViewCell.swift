@@ -13,7 +13,7 @@ class StringViewCell: UITableViewCell {
     labelField: UILabel!
     @IBOutlet private weak var textField: UITextField!
 
-    var changed : ((String) -> Void)?
+    var changed: ((String) -> Void)?
 
     var label: String? {
         get {
