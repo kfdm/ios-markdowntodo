@@ -18,25 +18,14 @@ class CalendarListViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
 
-    @objc func fetchCalendar() {
-        CalendarManager.shared.authenticated(completionHandler: {
-            self.groupedCalendars = GroupedCalendarBySource()
-            self.tableView.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
-            self.calendarPicker.reloadData()
-        })
-
-        CalendarManager.shared.recalculateEventCount {
-            DispatchQueue.main.async {
-                self.calendarPicker.reloadData()
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(calendarReloadData), name: .savedReminder, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchCalendar), name: .authenticationGranted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(calendarReloadData), name: .authenticationGranted, object: nil)
 
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -46,8 +35,9 @@ class CalendarListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchCalendar()
-        calendarPicker.reloadData()
+        CalendarManager.shared.authenticated(completionHandler: {
+            print("Authentication Granted")
+        })
     }
 
     func showReminderController(_ completionHandler: (ReminderListViewController) -> Void) {
@@ -123,8 +113,17 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
             controller.selectedCalendar = calendar
         }
     }
+
+    @objc func fetchCalendar() {
+        groupedCalendars = GroupedCalendarBySource()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
+    }
 }
 
+// MARK: - CalendarListViewController
 extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let start = date.midnight
@@ -141,5 +140,13 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         return CalendarManager.shared.numberOfEventsFor(date)
+    }
+
+    @objc func calendarReloadData() {
+        CalendarManager.shared.recalculateEventCount {
+            DispatchQueue.main.async {
+                self.calendarPicker.reloadData()
+            }
+        }
     }
 }

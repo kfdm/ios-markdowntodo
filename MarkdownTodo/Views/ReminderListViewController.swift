@@ -161,30 +161,12 @@ extension ReminderListViewController: ReminderActions {
     }
 
     func showScheduleDialog(reminder: EKReminder) {
-        let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
-            reminder.dueDateComponents = nil
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Today", style: .default, handler: { (_) in
-            let calendar = Calendar.current
-            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: Date().tomorrow)
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Tomorrow", style: .default, handler: { (_) in
-            let calendar = Calendar.current
-            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: Date().tomorrow.tomorrow)
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        let scheduleController = ReminderDatePickerViewController.instantiate()
+        let navigation = UINavigationController(rootViewController: scheduleController)
+        scheduleController.currentReminder = reminder
+        scheduleController.delegate = self
+        navigation.modalPresentationStyle = .formSheet
+        present(navigation, animated: true, completion: nil)
     }
     func showStatusDialog(reminder: EKReminder) {
         if reminder.isCompleted {
@@ -192,6 +174,11 @@ extension ReminderListViewController: ReminderActions {
         } else {
             reminder.completionDate = Date()
         }
+        CalendarManager.shared.save(reminder: reminder, commit: true)
+        self.fetchReminders()
+    }
+
+    func saveReminder(reminder: EKReminder) {
         CalendarManager.shared.save(reminder: reminder, commit: true)
         self.fetchReminders()
     }

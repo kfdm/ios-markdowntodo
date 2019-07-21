@@ -25,7 +25,7 @@ class CalendarManager {
         case .authorized:
             os_log("Authorized", log: logger, type: .info)
             isAuthenticated = true
-            handler()
+            NotificationCenter.default.post(name: .authenticationGranted, object: nil)
         case .denied:
             os_log("Denied", log: logger, type: .error)
         case .notDetermined:
@@ -33,7 +33,7 @@ class CalendarManager {
                 if granted {
                     os_log("Granted", log: self.logger, type: .info)
                     self.isAuthenticated = true
-                    handler()
+                    NotificationCenter.default.post(name: .authenticationGranted, object: nil)
                 } else {
                     os_log("Access Denied", log: self.logger, type: .error)
                 }
@@ -68,8 +68,10 @@ class CalendarManager {
     }
 
     func save(reminder: EKReminder, commit: Bool) {
+        os_log("Saving updates to reminder: %@", log: logger, type: .error, reminder)
         do {
             try store.save(reminder, commit: commit)
+            NotificationCenter.default.post(name: .savedReminder, object: reminder)
         } catch {
             print("Error creating and saving new reminder : \(error)")
         }

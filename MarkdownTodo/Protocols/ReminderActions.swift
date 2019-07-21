@@ -12,4 +12,6 @@ protocol ReminderActions: class {
     func showPriorityDialog(reminder: EKReminder)
     func showScheduleDialog(reminder: EKReminder)
     func showStatusDialog(reminder: EKReminder)
+
+    func saveReminder(reminder: EKReminder)
 }

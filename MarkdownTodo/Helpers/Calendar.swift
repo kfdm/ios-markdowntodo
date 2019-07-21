@@ -40,7 +40,6 @@ final class ReminderManager {
                     return ReminderGroup(title: title, events: list.sorted { $0.priority < $1.priority })
                 }
 
-
             }
             return mapped.sorted { $0.title < $1.title }
         case .priority:

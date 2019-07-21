@@ -28,4 +28,15 @@ extension EKReminder {
             return sortableDate > Date() ? .scheduled : .overdue
         }
     }
+
+    func setDueToday() {
+        let newDate = Date()
+        let calendar = Calendar.current
+        dueDateComponents = calendar.dateComponents([.year, .month, .day], from: newDate)
+    }
+
+    func setDue(to newDate: Date) {
+        let calendar = Calendar.current
+        dueDateComponents = calendar.dateComponents([.year, .month, .day], from: newDate)
+    }
 }
