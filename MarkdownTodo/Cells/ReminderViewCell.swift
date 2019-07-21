@@ -11,7 +11,8 @@ import EventKit
 
 class ReminderViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateSelector: UIButton!
+
     @IBOutlet weak var statusButton: UIButton!
 
     @IBOutlet weak var colorStrip: UIButton!
@@ -20,22 +21,26 @@ class ReminderViewCell: UITableViewCell {
         print("Clicked button \(sender)")
     }
 
-    weak var delegate : ReminderActions?
+    weak var delegate: ReminderActions?
 
-    var reminder : EKReminder? {
+    var reminder: EKReminder? {
         didSet {
             guard let newReminder = reminder else { return }
             titleLabel?.text = newReminder.title
-            titleLabel.textColor = newReminder.isOverdue() ? UIColor.red : UIColor.black
 
-            switch reminder {
-            case _ where reminder!.isCompleted:
-                let dateformat = DateFormatter()
-                dateformat.dateStyle = .full
-                self.dateLabel?.text = dateformat.string(from: newReminder.completionDate!)
+            let dateformat = DateFormatter()
+            dateformat.dateStyle = .short
+
+            switch newReminder.scheduledState {
+            case .unscheduled:
+                dateSelector.setTitle("Unscheduled", for: .normal)
+            case .completed:
+                dateSelector.setTitle(dateformat.string(from: newReminder.completionDate!), for: .normal)
             default:
-                self.dateLabel?.text = ""
+                dateSelector.setTitle(dateformat.string(from: (newReminder.dueDateComponents?.date)!), for: .normal)
             }
+
+            dateSelector.setTitleColor(newReminder.scheduledState == .overdue ? UIColor.red : UIColor.black, for: .normal)
 
             colorStrip.backgroundColor = Colors.priority(for: newReminder)
         }
@@ -44,14 +49,7 @@ class ReminderViewCell: UITableViewCell {
     @IBAction func priorityClick(_ sender: UIButton) {
         delegate?.priorityFor(reminder: reminder!)
     }
-
-}
-
-extension EKReminder {
-    func isOverdue() -> Bool {
-        if isCompleted {return false}
-        guard let dueDate = dueDateComponents?.date else { return false}
-        let date = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        return dueDate < date
+    @IBAction func dateClick(_ sender: UIButton) {
+        delegate?.scheduleFor(reminder: reminder!)
     }
 }

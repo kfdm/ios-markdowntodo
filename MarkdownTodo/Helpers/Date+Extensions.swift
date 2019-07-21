@@ -14,7 +14,7 @@ extension Date {
             return Calendar.current.startOfDay(for: self)
         }
     }
-    var tomorrow : Date {
+    var tomorrow: Date {
         get {
             return Calendar.current.date(byAdding: .day, value: 1, to: self)!
         }

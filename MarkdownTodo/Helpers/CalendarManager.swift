@@ -18,7 +18,7 @@ class CalendarManager {
 
     private let store = EKEventStore.init()
     private let logger = OSLog(subsystem: Bundle.main.bundleIdentifier ?? "CalendarManager", category: "CalendarManager")
-    private var eventCount = [Date:Int]()
+    private var eventCount = [Date: Int]()
 
     func authenticated(completionHandler handler: @escaping () -> Void) {
         switch EKEventStore.authorizationStatus(for: .reminder) {
@@ -105,7 +105,7 @@ class CalendarManager {
         return eventCount[date.midnight] ?? 0
     }
 
-    func recalculateEventCount(_ completionHandler: @escaping () -> Void) -> Void {
+    func recalculateEventCount(_ completionHandler: @escaping () -> Void) {
         let pred = store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
         store.fetchReminders(matching: pred) { (fetchedReminders) in
             guard let reminders = fetchedReminders else { return }

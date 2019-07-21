@@ -24,12 +24,25 @@ final class ReminderManager {
     static func reminders(_ reminders: [EKReminder], byGrouping: Group, orderedBy: SortableField) -> [ReminderGroup] {
         switch byGrouping {
         case .date:
-            let  grouped = Dictionary(grouping: reminders) { (reminder) -> String in
-                return self.titleFromDate(reminder)
+            let grouped = Dictionary(grouping: reminders) { (reminder) -> Date in
+                reminder.sortableDate
             }
-            return grouped.map { (title, list) -> ReminderGroup in
-                return ReminderGroup(title: title, events: list)
+            let mapped = grouped.map { (date, list) -> ReminderGroup in
+                let format = DateFormatter()
+                format.locale = .current
+                format.dateStyle = .full
+                let title = date == Date.distantFuture ? "Unscheduled" : format.string(from: date)
+
+                switch(orderedBy) {
+                case .date:
+                    return ReminderGroup(title: title, events: list.sorted { $0.sortableDate < $1.sortableDate })
+                case .priority:
+                    return ReminderGroup(title: title, events: list.sorted { $0.priority < $1.priority })
+                }
+
+
             }
+            return mapped.sorted { $0.title < $1.title }
         case .priority:
             return [ReminderGroup]()
         }
@@ -75,7 +88,6 @@ class GroupedCalendarBySource {
 
     init() {
         sources = CalendarManager.shared.filteredSources()
-
 
         sources = CalendarManager.shared.filteredSources().sorted(by: { (a, b) -> Bool in
             a.title < b.title

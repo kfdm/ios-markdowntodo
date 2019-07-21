@@ -19,55 +19,59 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg7-yF-bp8">
-                        <rect key="frame" x="24" y="0.0" width="43.5" height="43.5"/>
+                        <rect key="frame" x="24" y="-36" width="32" height="115.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="43.5" id="Apd-T3-LFo"/>
+                            <constraint firstAttribute="width" constant="32" id="g7f-mk-vTr"/>
                         </constraints>
                         <connections>
                             <action selector="actionClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="IM1-Jg-vTg"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2B-lh-AMv">
-                        <rect key="frame" x="71.5" y="4" width="334.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xv-jQ-r2Q">
-                        <rect key="frame" x="71.5" y="28.5" width="334.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crd-Df-cDo">
                         <rect key="frame" x="0.0" y="0.0" width="16" height="43.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="oys-po-yeY"/>
+                            <constraint firstAttribute="width" constant="16" id="6GK-oY-iFu"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
                         <connections>
                             <action selector="priorityClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="ace-We-MX0"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2B-lh-AMv">
+                        <rect key="frame" x="64" y="-36" width="246" height="115.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iG-Cb-dZI">
+                        <rect key="frame" x="310" y="-36" width="96" height="115.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="96" id="a4k-aV-qo6"/>
+                        </constraints>
+                        <state key="normal" title="Date"/>
+                        <connections>
+                            <action selector="dateClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="Sa1-Zd-0UM"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="p2B-lh-AMv" secondAttribute="trailing" constant="8" id="6rB-dL-qSR"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" constant="4" id="CjO-Qo-2EO"/>
-                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="Ftc-I9-u3f"/>
-                    <constraint firstAttribute="bottom" secondItem="crd-Df-cDo" secondAttribute="bottom" id="HQd-59-inx"/>
-                    <constraint firstItem="crd-Df-cDo" firstAttribute="leading" secondItem="goT-Bb-8UR" secondAttribute="leading" id="ItO-Jw-mcC"/>
-                    <constraint firstItem="crd-Df-cDo" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="Osc-57-EbV"/>
-                    <constraint firstItem="eg7-yF-bp8" firstAttribute="leading" secondItem="crd-Df-cDo" secondAttribute="trailing" constant="8" id="d89-Xm-DVm"/>
-                    <constraint firstAttribute="trailing" secondItem="5Xv-jQ-r2Q" secondAttribute="trailing" constant="8" id="fuU-Jk-j1p"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="4" id="lQo-bb-cgn"/>
-                    <constraint firstItem="5Xv-jQ-r2Q" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="4" id="lZI-Uy-ZLt"/>
-                    <constraint firstAttribute="bottom" secondItem="eg7-yF-bp8" secondAttribute="bottom" id="sqO-uP-T7I"/>
-                    <constraint firstItem="5Xv-jQ-r2Q" firstAttribute="top" secondItem="p2B-lh-AMv" secondAttribute="bottom" constant="4" id="vGb-HN-Sux"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="p2B-lh-AMv" secondAttribute="top" id="4It-dF-xbu"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="top" secondItem="2iG-Cb-dZI" secondAttribute="top" id="4Nq-Bv-T8E"/>
+                    <constraint firstItem="crd-Df-cDo" firstAttribute="leading" secondItem="goT-Bb-8UR" secondAttribute="leading" id="87u-gI-gmD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2iG-Cb-dZI" secondAttribute="trailing" constant="-12" id="8IV-ca-QsV"/>
+                    <constraint firstItem="crd-Df-cDo" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="AzT-4K-VeR"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="topMargin" constant="-47" id="BJY-y8-JUy"/>
+                    <constraint firstItem="2iG-Cb-dZI" firstAttribute="leading" secondItem="p2B-lh-AMv" secondAttribute="trailing" id="J4g-5s-HXs"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="bottom" secondItem="2iG-Cb-dZI" secondAttribute="bottom" id="Tv4-uA-fM0"/>
+                    <constraint firstItem="crd-Df-cDo" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="cTA-BD-0ng"/>
+                    <constraint firstItem="crd-Df-cDo" firstAttribute="centerY" secondItem="eg7-yF-bp8" secondAttribute="centerY" id="dgy-WJ-Ufc"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="8" symbolic="YES" id="p0w-XZ-6m8"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="leading" secondItem="crd-Df-cDo" secondAttribute="trailing" constant="8" symbolic="YES" id="pls-P4-T7Q"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="bottom" secondItem="p2B-lh-AMv" secondAttribute="bottom" id="zbo-DC-lJA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="colorStrip" destination="crd-Df-cDo" id="fiq-yn-weA"/>
-                <outlet property="dateLabel" destination="5Xv-jQ-r2Q" id="ukN-xm-yUf"/>
+                <outlet property="dateSelector" destination="2iG-Cb-dZI" id="BeV-83-Jrr"/>
                 <outlet property="statusButton" destination="eg7-yF-bp8" id="JUM-BH-goI"/>
                 <outlet property="titleLabel" destination="p2B-lh-AMv" id="uqU-so-apy"/>
             </connections>

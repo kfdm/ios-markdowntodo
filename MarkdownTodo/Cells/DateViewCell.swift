@@ -13,7 +13,7 @@ class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
     @IBOutlet weak var labelField: UILabel!
     @IBOutlet weak var valueField: UILabel!
 
-    var date : DateComponents? {
+    var date: DateComponents? {
         didSet {
             valueField.text = "\(date)"
         }

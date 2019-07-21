@@ -31,7 +31,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
             let grouped = ReminderManager.reminders(fetchedReminders.filter({ (r) -> Bool in
                 self.showCompleted ? true : !r.isCompleted
-            }), byGrouping: .date, orderedBy: .date)
+            }), byGrouping: .date, orderedBy: .priority)
 
             DispatchQueue.main.async {
                 self.groupedReminders = grouped
@@ -44,39 +44,6 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     @IBAction func toggleShowCompleted(_ sender: UISwitch) {
         showCompleted = sender.isOn
         fetchReminders()
-    }
-
-    func actionSchedule(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders[index.section].events[index.row]
-        let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
-            reminder.dueDateComponents = nil
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Today", style: .default, handler: { (_) in
-            let date = Date()
-            let calendar = Calendar.current
-            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Tomorrow", style: .default, handler: { (_) in
-            var dateComponent = DateComponents()
-            dateComponent.day = 1
-            let date = Calendar.current.date(byAdding: dateComponent, to: Date())!
-
-            let calendar = Calendar.current
-            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
     }
 
     func actionDelete(action: UITableViewRowAction, index: IndexPath) {
@@ -169,16 +136,7 @@ extension ReminderListViewController {
         let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         showReminder(reminder, animated: true)
     }
-
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let schedule = UITableViewRowAction(style: .normal, title: "Schedule", handler: actionSchedule)
-        schedule.backgroundColor=UIColor.blue
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: actionDelete)
-        delete.backgroundColor =  UIColor.red
-        return [delete, schedule]
-    }
 }
-
 
 extension ReminderListViewController: ReminderActions {
     func priorityFor(reminder: EKReminder) {
@@ -197,6 +155,33 @@ extension ReminderListViewController: ReminderActions {
                 self.fetchReminders()
             }))
         }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func scheduleFor(reminder: EKReminder) {
+        let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
+            reminder.dueDateComponents = nil
+            CalendarManager.shared.save(reminder: reminder, commit: true)
+            self.fetchReminders()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Today", style: .default, handler: { (_) in
+            let calendar = Calendar.current
+            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: Date().tomorrow)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
+            self.fetchReminders()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Tomorrow", style: .default, handler: { (_) in
+            let calendar = Calendar.current
+            reminder.dueDateComponents = calendar.dateComponents([.year, .month, .day], from: Date().tomorrow.tomorrow)
+            CalendarManager.shared.save(reminder: reminder, commit: true)
+            self.fetchReminders()
+        }))
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

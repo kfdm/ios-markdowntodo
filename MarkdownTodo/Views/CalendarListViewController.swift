@@ -125,7 +125,6 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-
 extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let start = date.midnight

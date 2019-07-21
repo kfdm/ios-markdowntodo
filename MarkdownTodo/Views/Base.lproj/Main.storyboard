@@ -133,7 +133,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdt-yA-QEs">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="20"/>
-                                        <state key="normal" title="Today"/>
+                                        <state key="normal" title="Due"/>
                                         <connections>
                                             <action selector="clickToday:" destination="0wO-p5-WRs" eventType="primaryActionTriggered" id="pnd-G6-n2q"/>
                                         </connections>
