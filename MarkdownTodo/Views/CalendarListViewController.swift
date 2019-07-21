@@ -14,15 +14,18 @@ class CalendarListViewController: UIViewController {
 
     var detailViewController: ReminderListViewController?
     private var groupedCalendars = GroupedCalendarBySource()
+    private var eventsForDate = [Date:Int]()
 
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
 
     @objc func fetchCalendar() {
+        eventsForDate = [Date:Int]()
         CalendarManager.shared.authenticated(completionHandler: {
             self.groupedCalendars = GroupedCalendarBySource()
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
+            self.calendarPicker.reloadData()
         })
     }
 
@@ -121,8 +124,8 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
 
 extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let start = Calendar.current.startOfDay(for: date)
-        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
+        let start = date.midnight
+        let end = start.tomorrow
         let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Events for \(date)"
@@ -134,6 +137,23 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return 1
+        let start = date.midnight
+        if let _ = eventsForDate.index(forKey: start) {
+            return eventsForDate[start]!
+        }
+        let end = start.tomorrow
+        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
+        CalendarManager.shared.fetchReminders(matching: predicate) { (reminders) in
+            self.eventsForDate[start] = reminders.count
+            DispatchQueue.main.async {
+                self.calendarPicker.reloadData()
+            }
+        }
+        return 0
+    }
+
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print(calendar.minimumDate)
+        print(calendar.maximumDate)
     }
 }

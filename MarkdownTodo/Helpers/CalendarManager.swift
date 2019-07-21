@@ -17,7 +17,7 @@ class CalendarManager {
     var isAuthenticated = false
 
     private let store = EKEventStore.init()
-    private let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
+    private let logger = OSLog(subsystem: Bundle.main.bundleIdentifier ?? "CalendarManager", category: "CalendarManager")
 
     func authenticated(completionHandler handler: @escaping () -> Void) {
         switch EKEventStore.authorizationStatus(for: .reminder) {
@@ -99,4 +99,5 @@ class CalendarManager {
             source.sourceType == .calDAV
         })
     }
+
 }
