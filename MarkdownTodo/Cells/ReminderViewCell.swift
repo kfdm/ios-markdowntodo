@@ -10,30 +10,41 @@ import UIKit
 import EventKit
 
 class ReminderViewCell: UITableViewCell {
-    @IBOutlet weak var colorStrip: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var statusButton: UIButton!
+
+    @IBOutlet weak var colorStrip: UIButton!
 
     @IBAction func actionClick(_ sender: UIButton) {
         print("Clicked button \(sender)")
     }
 
-    func update(_ reminder: EKReminder) {
-        self.titleLabel?.text = reminder.title
-        self.titleLabel.textColor = reminder.isOverdue() ? UIColor.red : UIColor.black
+    weak var delegate : ReminderActions?
 
-        switch reminder {
-        case _ where reminder.isCompleted:
-            let dateformat = DateFormatter()
-            dateformat.dateStyle = .full
-            self.dateLabel?.text = dateformat.string(from: reminder.completionDate!)
-        default:
-            self.dateLabel?.text = ""
+    var reminder : EKReminder? {
+        didSet {
+            guard let newReminder = reminder else { return }
+            titleLabel?.text = newReminder.title
+            titleLabel.textColor = newReminder.isOverdue() ? UIColor.red : UIColor.black
+
+            switch reminder {
+            case _ where reminder!.isCompleted:
+                let dateformat = DateFormatter()
+                dateformat.dateStyle = .full
+                self.dateLabel?.text = dateformat.string(from: newReminder.completionDate!)
+            default:
+                self.dateLabel?.text = ""
+            }
+
+            colorStrip.backgroundColor = Colors.priority(for: newReminder)
         }
-
-        colorStrip.backgroundColor = Colors.priority(for: reminder)
     }
+
+    @IBAction func priorityClick(_ sender: UIButton) {
+        delegate?.priorityFor(reminder: reminder!)
+    }
+
 }
 
 extension EKReminder {

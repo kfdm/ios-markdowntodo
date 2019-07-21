@@ -79,28 +79,6 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         present(alert, animated: true, completion: nil)
     }
 
-    func actionPriority(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders[index.section].events[index.row]
-        let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
-            reminder.priority = 0
-            CalendarManager.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-
-        for i in 1...9 {
-            alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
-                reminder.priority = i
-                CalendarManager.shared.save(reminder: reminder, commit: true)
-                self.fetchReminders()
-            }))
-        }
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-
     func actionDelete(action: UITableViewRowAction, index: IndexPath) {
         let reminder = groupedReminders[index.section].events[index.row]
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
@@ -178,7 +156,8 @@ extension ReminderListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReminderViewCell.self, for: indexPath)
         let reminder = groupedReminders[indexPath.section].events[indexPath.row]
-        cell.update(reminder)
+        cell.reminder = reminder
+        cell.delegate = self
         return cell
     }
 
@@ -194,10 +173,32 @@ extension ReminderListViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let schedule = UITableViewRowAction(style: .normal, title: "Schedule", handler: actionSchedule)
         schedule.backgroundColor=UIColor.blue
-        let priority = UITableViewRowAction(style: .normal, title: "Priority", handler: actionPriority)
-        priority.backgroundColor = UIColor.orange
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: actionDelete)
         delete.backgroundColor =  UIColor.red
-        return [delete, schedule, priority]
+        return [delete, schedule]
+    }
+}
+
+
+extension ReminderListViewController: ReminderActions {
+    func priorityFor(reminder: EKReminder) {
+        let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
+            reminder.priority = 0
+            CalendarManager.shared.save(reminder: reminder, commit: true)
+            self.fetchReminders()
+        }))
+
+        for i in 1...9 {
+            alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
+                reminder.priority = i
+                CalendarManager.shared.save(reminder: reminder, commit: true)
+                self.fetchReminders()
+            }))
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
