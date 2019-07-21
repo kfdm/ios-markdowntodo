@@ -104,7 +104,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            try? CalendarManager.shared.store.remove(reminder, commit: true)
+            try? CalendarManager.shared.remove(reminder, commit: true)
             self.fetchReminders()
         }))
         present(alert, animated: true, completion: nil)

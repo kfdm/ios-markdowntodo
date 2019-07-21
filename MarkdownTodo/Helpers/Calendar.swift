@@ -42,8 +42,7 @@ class GroupedRemindersByDate: GroupedReminders {
     }
 
     static func remindersForPredicate(predicate: NSPredicate, showCompleted: Bool, completionHandler: @escaping (GroupedRemindersByDate) -> Void) {
-        CalendarManager.shared.store.fetchReminders(matching: predicate) { (reminders) in
-            guard let reminders = reminders else { return }
+        CalendarManager.shared.fetchReminders(matching: predicate) { (reminders) in
             if showCompleted {
                 completionHandler(GroupedRemindersByDate(reminders: reminders))
             } else {
@@ -69,7 +68,6 @@ class GroupedRemindersByDate: GroupedReminders {
 class GroupedCalendarBySource {
     private var sources: [EKSource]?
     private var calendars: [EKSource: [EKCalendar]]?
-    private var store = CalendarManager.shared.store
 
     var numberOfSections: Int { get { return sources?.count ?? 0 } }
 
@@ -89,11 +87,10 @@ class GroupedCalendarBySource {
     }
 
     init() {
-        store.refreshSourcesIfNecessary()
+        sources = CalendarManager.shared.filteredSources()
 
-        sources = store.sources.filter({ (source) -> Bool in
-            source.sourceType == .calDAV
-        }).sorted(by: { (a, b) -> Bool in
+
+        sources = CalendarManager.shared.filteredSources().sorted(by: { (a, b) -> Bool in
             a.title < b.title
         })
 

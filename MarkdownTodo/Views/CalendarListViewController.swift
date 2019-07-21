@@ -54,7 +54,7 @@ class CalendarListViewController: UIViewController {
 
     @IBAction func clickToday(_ sender: Any) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let pred = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
+        let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Today"
             controller.selectedCalendar = nil
@@ -64,7 +64,7 @@ class CalendarListViewController: UIViewController {
     }
     @IBAction func clickUpcoming(_ sender: UIButton) {
         let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let pred = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
+        let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Upcoming"
             controller.selectedCalendar = nil
@@ -123,7 +123,7 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let start = Calendar.current.startOfDay(for: date)
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
-        let predicate = CalendarManager.shared.store.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
+        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Events for \(date)"
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple

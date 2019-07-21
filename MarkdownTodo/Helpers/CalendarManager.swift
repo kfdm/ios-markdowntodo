@@ -16,20 +16,8 @@ class CalendarManager {
 
     var isAuthenticated = false
 
-    let store = EKEventStore.init()
-    private var calendars = [EKSource: [EKCalendar]]()
-    private var sources = [EKSource]()
+    private let store = EKEventStore.init()
     private let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
-
-    func source(for section: Int) -> [EKCalendar] {
-        let source = sources[section]
-        return calendars[source]!
-    }
-
-    func calendar(for indexPath: IndexPath) -> EKCalendar {
-        let source = sources[indexPath.section]
-        return calendars[source]![indexPath.row]
-    }
 
     func authenticated(completionHandler handler: @escaping () -> Void) {
         switch EKEventStore.authorizationStatus(for: .reminder) {
@@ -78,33 +66,6 @@ class CalendarManager {
         return store.predicateForReminders(in: [calendar])
     }
 
-    func fetchCalendarList() -> [EKSource: [EKCalendar]] {
-        store.refreshSourcesIfNecessary()
-        var calendars = [EKSource: [EKCalendar]]()
-
-        store.sources.filter({ (source) -> Bool in
-            source.sourceType != .birthdays
-        }).forEach { (source) in
-            calendars[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
-                a.cgColor.hashValue > b.cgColor.hashValue
-            })
-        }
-        return calendars
-    }
-
-    func refreshData() {
-        store.refreshSourcesIfNecessary()
-        sources = store.sources.filter({ (source) -> Bool in
-            source.sourceType != .birthdays
-        })
-
-        sources.forEach { (source) in
-            calendars[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
-                a.cgColor.hashValue > b.cgColor.hashValue
-            })
-        }
-    }
-
     func save(reminder: EKReminder, commit: Bool) {
         do {
             try store.save(reminder, commit: commit)
@@ -118,5 +79,24 @@ class CalendarManager {
         let reminder = EKReminder.init(eventStore: store)
         reminder.calendar = calendar
         return reminder
+    }
+
+    func predicateForIncompleteReminders(withDueDateStarting start: Date, ending: Date, calendars: [EKCalendar]?) -> NSPredicate {
+        return store.predicateForIncompleteReminders(withDueDateStarting: start, ending: ending, calendars: calendars)
+    }
+
+    func remove(_ reminder: EKReminder, commit: Bool) {
+        try? store.remove(reminder, commit: commit)
+    }
+
+    func refreshSourcesIfNecessary() {
+        store.refreshSourcesIfNecessary()
+    }
+
+    func filteredSources() -> [EKSource] {
+        store.refreshSourcesIfNecessary()
+        return store.sources.filter({ (source) -> Bool in
+            source.sourceType == .calDAV
+        })
     }
 }
