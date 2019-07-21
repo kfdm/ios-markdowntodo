@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 
 class ReminderListViewController: UITableViewController, Storyboarded {
-    private var groupedReminders = GroupedRemindersByDate()
+    private var groupedReminders = [ReminderManager.ReminderGroup]()
     private var showCompleted = false
 
     var selectedPredicate: NSPredicate? {
@@ -28,9 +28,13 @@ class ReminderListViewController: UITableViewController, Storyboarded {
 
     @objc func fetchReminders() {
         guard let pred = selectedPredicate else { return }
-        CalendarManager.shared.fetchReminders(matching: pred) { (reminders) in
-            self.groupedReminders = GroupedRemindersByDate.init(reminders: reminders)
+        CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
+            let grouped = ReminderManager.reminders(fetchedReminders.filter({ (r) -> Bool in
+                self.showCompleted ? true : !r.isCompleted
+            }), byGrouping: .date, orderedBy: .date)
+
             DispatchQueue.main.async {
+                self.groupedReminders = grouped
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
@@ -43,7 +47,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     }
 
     func actionSchedule(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders.reminderForRowAt(index)
+        let reminder = groupedReminders[index.section].events[index.row]
         let alert = UIAlertController(title: "Set Due", message: "Set Due of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .default, handler: { (_) in
@@ -76,7 +80,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     }
 
     func actionPriority(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders.reminderForRowAt(index)
+        let reminder = groupedReminders[index.section].events[index.row]
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
@@ -98,11 +102,11 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     }
 
     func actionDelete(action: UITableViewRowAction, index: IndexPath) {
-        let reminder = groupedReminders.reminderForRowAt(index)
+        let reminder = groupedReminders[index.section].events[index.row]
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to delete", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            try? CalendarManager.shared.remove(reminder, commit: true)
+            CalendarManager.shared.remove(reminder, commit: true)
             self.fetchReminders()
         }))
         present(alert, animated: true, completion: nil)
@@ -163,27 +167,27 @@ extension ReminderListViewController {
 // MARK: - UITableViewDataSource
 extension ReminderListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupedReminders.numberOfRowsInSection(section)
+        return groupedReminders[section].events.count
 
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return groupedReminders.numberOfSections
+        return groupedReminders.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReminderViewCell.self, for: indexPath)
-        let reminder = groupedReminders.reminderForRowAt(indexPath)
+        let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         cell.update(reminder)
         return cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groupedReminders.titleForHeader(section)
+        return groupedReminders[section].title
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let reminder = groupedReminders.reminderForRowAt(indexPath)
+        let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         showReminder(reminder, animated: true)
     }
 

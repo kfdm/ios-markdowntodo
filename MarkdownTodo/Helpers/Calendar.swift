@@ -12,44 +12,43 @@ import os.log
 
 let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
 
-class GroupedRemindersByDate: GroupedReminders {
-    private var reminders = [Date: [EKReminder]]()
-    private var sections = [Date]()
+final class ReminderManager {
+    enum Group { case date, priority }
+    enum SortableField { case date, priority }
 
-    var numberOfSections: Int { get { return self.sections.count }}
-
-    init() {
-
+    struct ReminderGroup {
+        let title: String
+        let events: [EKReminder]
     }
 
-    func titleForHeader(_ section: Int) -> String {
-        let date = sections[section]
-        if date == Date.distantFuture { return "Unscheduled" }
+    static func reminders(_ reminders: [EKReminder], byGrouping: Group, orderedBy: SortableField) -> [ReminderGroup] {
+        switch byGrouping {
+        case .date:
+            let  grouped = Dictionary(grouping: reminders) { (reminder) -> String in
+                return self.titleFromDate(reminder)
+            }
+            return grouped.map { (title, list) -> ReminderGroup in
+                return ReminderGroup(title: title, events: list)
+            }
+        case .priority:
+            return [ReminderGroup]()
+        }
+    }
 
+    static func titleFromDate(_ reminder: EKReminder) -> String {
         let format = DateFormatter()
         format.locale = .current
         format.dateStyle = .full
-        return format.string(from: date)
-    }
 
-    init(reminders: [EKReminder]) {
-        self.reminders = Dictionary.init(grouping: reminders) {
-            if let completed = $0.completionDate { return completed }
-            if let due = $0.dueDateComponents?.date { return due}
-            return Date.distantFuture
+        if reminder.isCompleted {
+            return format.string(from: reminder.completionDate!)
         }
-        self.sections = self.reminders.keys.sorted()
-    }
 
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        let date = sections[section]
-        guard let source = reminders[date] else { return 0}
-        return source.count
-    }
+        if let comp = reminder.dueDateComponents {
+            return format.string(from: comp.date!)
+        }
 
-    func reminderForRowAt(_ indexPath: IndexPath) -> EKReminder {
-        let date = self.sections[indexPath.section]
-        return reminders[date]![indexPath.row]
+        return "Unscheduled"
     }
 }
 

@@ -137,6 +137,7 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return 0
         let start = date.midnight
         if let _ = eventsForDate.index(forKey: start) {
             return eventsForDate[start]!
