@@ -105,11 +105,11 @@
 		8706296E22D4AC120084441A = {
 			isa = PBXGroup;
 			children = (
-				87094FF222DC40A50047D672 /* README.md */,
-				8706297922D4AC120084441A /* MarkdownTodo */,
-				8706297822D4AC120084441A /* Products */,
-				086639E2FB4201CC6AE22150 /* Pods */,
 				885383B60B0679D0E22DBAA6 /* Frameworks */,
+				8706297922D4AC120084441A /* MarkdownTodo */,
+				086639E2FB4201CC6AE22150 /* Pods */,
+				8706297822D4AC120084441A /* Products */,
+				87094FF222DC40A50047D672 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,15 +124,15 @@
 		8706297922D4AC120084441A /* MarkdownTodo */ = {
 			isa = PBXGroup;
 			children = (
+				87094FFD22DC57F80047D672 /* Cells */,
 				8759219222E4887B00D3A641 /* Extensions */,
 				8709500022DC72ED0047D672 /* Helpers */,
-				87094FFD22DC57F80047D672 /* Cells */,
+				87876F3E22DF4955002C49E1 /* Protocols */,
 				8761EAA122DC28D500A8474A /* Views */,
 				8706297A22D4AC120084441A /* AppDelegate.swift */,
 				8706298322D4AC140084441A /* Assets.xcassets */,
-				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
 				8706298822D4AC140084441A /* Info.plist */,
-				87876F3E22DF4955002C49E1 /* Protocols */,
+				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -140,16 +140,16 @@
 		87094FFD22DC57F80047D672 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
-				87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */,
-				87094FFB22DC52820047D672 /* PriorityViewCell.swift */,
-				87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */,
-				87F2221D22DC907D005B2CB7 /* StringViewCell.swift */,
-				87F2221E22DC907D005B2CB7 /* StringViewCell.xib */,
-				87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */,
-				87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */,
 				8759218222E42D6900D3A641 /* DateViewCell.swift */,
 				8759218322E42D6900D3A641 /* DateViewCell.xib */,
+				87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */,
+				87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */,
+				87094FFB22DC52820047D672 /* PriorityViewCell.swift */,
+				87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */,
+				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
+				87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */,
+				87F2221D22DC907D005B2CB7 /* StringViewCell.swift */,
+				87F2221E22DC907D005B2CB7 /* StringViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -157,11 +157,11 @@
 		8709500022DC72ED0047D672 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
-				87094FF522DC42BD0047D672 /* Colors.swift */,
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
 				879201A622DFCC2C001B2AF7 /* CalendarManager.swift */,
+				87094FF522DC42BD0047D672 /* Colors.swift */,
 				8759219322E4918600D3A641 /* Shortcuts.swift */,
+				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -169,25 +169,25 @@
 		8759219222E4887B00D3A641 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8759218E22E46EA000D3A641 /* Notification+Constants.swift */,
-				8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */,
 				8759217E22E4070A00D3A641 /* Date+Extensions.swift */,
-				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
 				8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */,
+				8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */,
 				8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */,
+				8759218E22E46EA000D3A641 /* Notification+Constants.swift */,
+				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
 			);
 			name = Extensions;
-			path = ..;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8761EAA122DC28D500A8474A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8706298022D4AC120084441A /* Main.storyboard */,
 				8706297C22D4AC120084441A /* CalendarListViewController.swift */,
-				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
-				8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */,
+				8706298022D4AC120084441A /* Main.storyboard */,
 				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
+				8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */,
+				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 			);
@@ -300,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4254FF8DEDC6D521381172A9 /* [CP] Check Pods Manifest.lock */ = {
@@ -363,6 +363,7 @@
 				8706298122D4AC120084441A /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		8706298522D4AC140084441A /* LaunchScreen.storyboard */ = {
@@ -371,6 +372,7 @@
 				8706298622D4AC140084441A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
