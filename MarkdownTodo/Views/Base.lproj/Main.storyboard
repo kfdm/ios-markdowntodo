@@ -142,6 +142,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Pc5-Sy-2kR"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="0wO-p5-WRs" id="jeG-s6-ckq"/>
                                     <outlet property="delegate" destination="0wO-p5-WRs" id="Hhn-nk-KV3"/>

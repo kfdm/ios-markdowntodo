@@ -29,7 +29,7 @@ class ReminderViewCell: UITableViewCell {
 
             switch newReminder.scheduledState {
             case .unscheduled:
-                dateSelector.setTitle(Labels.unscheduled, for: .normal)
+                dateSelector.setTitle("-", for: .normal)
             default:
                 dateSelector.setTitle(dateformat.string(from: newReminder.sortableDate), for: .normal)
             }

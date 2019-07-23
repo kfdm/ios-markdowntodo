@@ -52,17 +52,17 @@ class CalendarListViewController: UIViewController {
     // MARK: - IBAction
 
     @IBAction func showDueReminders(_ sender: Any) {
-        let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let date = Date().tomorrow
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
-            controller.title = "Today"
+            controller.title = "Due"
             controller.selectedCalendar = nil
             controller.selectedPredicate = pred
             controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
         }
     }
     @IBAction func showUpcomingReminders(_ sender: UIButton) {
-        let date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let date = Date().tomorrow
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Upcoming"
@@ -132,7 +132,9 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
         let end = start.tomorrow
         let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
-            controller.title = "Events for \(date)"
+            let format = DateFormatter()
+            format.dateStyle = .short
+            controller.title = format.string(from: date)
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple
             controller.selectedPredicate = predicate
             controller.selectedCalendar = nil
