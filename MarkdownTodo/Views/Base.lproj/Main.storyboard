@@ -137,18 +137,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQf-5j-1CJ" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="88" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Pc5-Sy-2kR"/>
+                                    <constraint firstAttribute="height" constant="300" id="Pc5-Sy-2kR"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
                                         <real key="value" value="24"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -157,7 +154,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zIx-hi-JPe">
-                                <rect key="frame" x="0.0" y="288" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="388" width="414" height="20"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdt-yA-QEs">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="20"/>
@@ -179,7 +176,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="r7i-6Z-zg0">
-                                <rect key="frame" x="0.0" y="308" width="414" height="588"/>
+                                <rect key="frame" x="0.0" y="408" width="414" height="488"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Arm-wq-HPj" style="IBUITableViewCellStyleDefault" id="WCw-Qf-5nD">
@@ -224,12 +221,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rjd-Yb-S3t"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calendars" id="Zdf-7t-Un8">
+                    <navigationItem key="navigationItem" id="Zdf-7t-Un8">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="SVw-2q-Ke7">
                             <connections>
                                 <action selector="clickSettingsButton:" destination="0wO-p5-WRs" id="fHU-al-7Sf"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gU7-jD-7oC">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Agenda"/>
+                                <segment title="LIst"/>
+                            </segments>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" title="About" id="Ndy-oM-Ev8">
                             <connections>
                                 <action selector="clickAboutButton:" destination="0wO-p5-WRs" id="7ZQ-0W-yF9"/>

@@ -27,6 +27,10 @@ class CalendarListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchCalendar), name: .authenticationGranted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(calendarReloadData), name: .authenticationGranted, object: nil)
 
+//        calendarPicker.scrollDirection = .vertical
+//        calendarPicker.scope = .week
+        calendarPicker.appearance.headerMinimumDissolvedAlpha = 0.0
+
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ReminderListViewController
@@ -52,6 +56,7 @@ class CalendarListViewController: UIViewController {
     // MARK: - IBAction
 
     @IBAction func showDueReminders(_ sender: Any) {
+        calendarPicker.select(Date())
         let date = Date().tomorrow
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
@@ -81,7 +86,7 @@ class CalendarListViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -125,14 +130,14 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-// MARK: - CalendarListViewController
+// MARK: - FSCalendarDelegate, FSCalendarDataSource
 extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let start = date.midnight
         let end = start.tomorrow
         let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
-            controller.title = controller.title = Formats.short(date)
+            controller.title = Formats.short(date)
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple
             controller.selectedPredicate = predicate
             controller.selectedCalendar = nil

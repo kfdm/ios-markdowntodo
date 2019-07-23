@@ -245,6 +245,7 @@
 				TargetAttributes = {
 					8706297622D4AC120084441A = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -291,7 +292,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 			);
@@ -302,7 +303,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4254FF8DEDC6D521381172A9 /* [CP] Check Pods Manifest.lock */ = {
@@ -512,7 +513,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.kungfudiscomonkey.MarkdownTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -532,7 +533,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.kungfudiscomonkey.MarkdownTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
