@@ -18,3 +18,18 @@ class Images {
     static var statusOverdue = UIImage(named: "statusOverdue")
     static var statusEmpty = UIImage(named: "statusEmpty")
 }
+
+class Formats {
+    static func short(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateStyle = .short
+        return formatter.string(from: date)
+    }
+    static func full(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateStyle = .full
+        return formatter.string(from: date)
+    }
+}

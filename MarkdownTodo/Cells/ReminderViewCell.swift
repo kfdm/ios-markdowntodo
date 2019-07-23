@@ -24,14 +24,11 @@ class ReminderViewCell: UITableViewCell {
             guard let newReminder = reminder else { return }
             titleLabel?.text = newReminder.title
 
-            let dateformat = DateFormatter()
-            dateformat.dateStyle = .short
-
             switch newReminder.scheduledState {
             case .unscheduled:
                 dateSelector.setTitle("-", for: .normal)
             default:
-                dateSelector.setTitle(dateformat.string(from: newReminder.sortableDate), for: .normal)
+                dateSelector.setTitle(Formats.short(newReminder.sortableDate), for: .normal)
             }
 
             switch newReminder.scheduledState {

@@ -46,10 +46,8 @@ class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
     func dateSet(_ newDate: Date?) {
         if let checkedDate = newDate {
             let calendar = Calendar.current
-            let formatter = DateFormatter()
-            formatter.dateStyle = .full
             date = calendar.dateComponents([.year, .month, .day], from: checkedDate)
-            valueField.text = formatter.string(from: checkedDate)
+            valueField.text = Formats.full(checkedDate)
             changed?(date)
         } else {
             valueField.text = Labels.unscheduled

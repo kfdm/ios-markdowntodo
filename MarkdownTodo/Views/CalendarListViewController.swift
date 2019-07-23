@@ -132,9 +132,7 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
         let end = start.tomorrow
         let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
-            let format = DateFormatter()
-            format.dateStyle = .short
-            controller.title = format.string(from: date)
+            controller.title = controller.title = Formats.short(date)
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple
             controller.selectedPredicate = predicate
             controller.selectedCalendar = nil

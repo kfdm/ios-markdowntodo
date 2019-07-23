@@ -12,10 +12,7 @@ import EventKit
 struct ReminderGroupDate: ReminderGroup {
     var title: String {
         get {
-            let format = DateFormatter()
-            format.locale = .current
-            format.dateStyle = .full
-            return date == Date.distantFuture ? Labels.unscheduled : format.string(from: date)
+            return date == Date.distantFuture ? Labels.unscheduled : Formats.full(date)
         }
     }
     let date: Date
@@ -69,16 +66,12 @@ final class ReminderManager {
     }
 
     static func titleFromDate(_ reminder: EKReminder) -> String {
-        let format = DateFormatter()
-        format.locale = .current
-        format.dateStyle = .full
-
         if reminder.isCompleted {
-            return format.string(from: reminder.completionDate!)
+            return Formats.full(reminder.completionDate!)
         }
 
         if let comp = reminder.dueDateComponents {
-            return format.string(from: comp.date!)
+            return Formats.full(comp.date!)
         }
 
         return Labels.unscheduled
