@@ -38,6 +38,7 @@
 		87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221E22DC907D005B2CB7 /* StringViewCell.xib */; };
 		87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */; };
 		87F2222422DC92E5005B2CB7 /* MarkdownViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */; };
+		C13068C722E7082400C8BA5A /* ReminderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13068C622E7082400C8BA5A /* ReminderGroup.swift */; };
 		DBCC17F00C5F192B3DCD75A3 /* Pods_MarkdownTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF6952C26FE70ACE74F2E13 /* Pods_MarkdownTodo.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewCell.swift; sourceTree = "<group>"; };
 		87F2222222DC92E5005B2CB7 /* MarkdownViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownViewCell.xib; sourceTree = "<group>"; };
 		B64234EDF7AB64021AEF5D35 /* Pods-MarkdownTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarkdownTodo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo.release.xcconfig"; sourceTree = "<group>"; };
+		C13068C622E7082400C8BA5A /* ReminderGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderGroup.swift; sourceTree = "<group>"; };
 		DBF6952C26FE70ACE74F2E13 /* Pods_MarkdownTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarkdownTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -176,7 +178,6 @@
 				8759218E22E46EA000D3A641 /* Notification+Constants.swift */,
 				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
 			);
-			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -197,6 +198,7 @@
 			children = (
 				87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */,
 				8759218622E43FBB00D3A641 /* ReminderActions.swift */,
+				C13068C622E7082400C8BA5A /* ReminderGroup.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -345,6 +347,7 @@
 				8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */,
 				8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */,
 				87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */,
+				C13068C722E7082400C8BA5A /* ReminderGroup.swift in Sources */,
 				8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,

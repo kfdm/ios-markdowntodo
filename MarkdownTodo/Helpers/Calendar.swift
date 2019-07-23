@@ -8,42 +8,63 @@
 
 import Foundation
 import EventKit
-import os.log
 
-let logger = OSLog(subsystem: "com.myapp.xx", category: "UI")
+struct ReminderGroupDate: ReminderGroup {
+    var title: String {
+        get {
+            let format = DateFormatter()
+            format.locale = .current
+            format.dateStyle = .full
+            return date == Date.distantFuture ? Labels.unscheduled : format.string(from: date)
+        }
+    }
+    let date: Date
+    let events: [EKReminder]
+}
+
+struct ReminderGroupPriority: ReminderGroup {
+    var title : String {
+        get {
+            return "Priority: \(priority)"
+        }
+    }
+    let priority: Int
+    let events: [EKReminder]
+}
 
 final class ReminderManager {
     enum Group { case date, priority }
-    enum SortableField { case date, priority }
-
-    struct ReminderGroup {
-        let title: String
-        let events: [EKReminder]
-    }
+    enum SortableField { case date, priority, creation }
 
     static func reminders(_ reminders: [EKReminder], byGrouping: Group, orderedBy: SortableField) -> [ReminderGroup] {
+
+        var sortable : (EKReminder, EKReminder) -> Bool        
+        switch orderedBy {
+        case .priority:
+            sortable = { $0.priority < $1.priority }
+        case .date:
+            sortable = { $0.sortableDate < $1.sortableDate }
+        case .creation:
+            sortable = { $0.creationDate! < $1.creationDate! }
+        }
+        
         switch byGrouping {
         case .date:
-            let grouped = Dictionary(grouping: reminders.sorted(by: { $0.sortableDate < $1.sortableDate })) { (reminder) -> Date in
+            let grouped = Dictionary(grouping: reminders) { (reminder) -> Date in
                 reminder.sortableDate
             }
-            let mapped = grouped.map { (date, list) -> ReminderGroup in
-                let format = DateFormatter()
-                format.locale = .current
-                format.dateStyle = .full
-                let title = date == Date.distantFuture ? Labels.unscheduled : format.string(from: date)
-
-                switch(orderedBy) {
-                case .date:
-                    return ReminderGroup(title: title, events: list.sorted { $0.sortableDate > $1.sortableDate })
-                case .priority:
-                    return ReminderGroup(title: title, events: list.sorted { $0.priority < $1.priority })
-                }
-
+            let mapped = grouped.map { (date, list) -> ReminderGroupDate in
+                return ReminderGroupDate(date: date, events: list.sorted(by: sortable)  )
             }
-            return mapped.sorted { $0.title < $1.title }
+            return mapped.sorted {$0.date < $1.date }
         case .priority:
-            return [ReminderGroup]()
+            let grouped = Dictionary(grouping: reminders) { (reminder) -> Int in
+                reminder.priority
+            }
+            let mapped = grouped.map { (priority, list) -> ReminderGroupPriority in
+                return ReminderGroupPriority(priority: priority, events: list.sorted(by: sortable))
+            }
+            return mapped.sorted { $0.priority < $1.priority }
         }
     }
 

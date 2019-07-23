@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 
 class ReminderListViewController: UITableViewController, Storyboarded {
-    private var groupedReminders = [ReminderManager.ReminderGroup]()
+    private var groupedReminders = [ReminderGroup]()
     private var showCompleted = false
 
     var selectedPredicate: NSPredicate?
