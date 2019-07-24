@@ -38,14 +38,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6g-cJ-bWU">
-                                    <rect key="frame" x="8" y="11" width="131" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6g-cJ-bWU">
+                                    <rect key="frame" x="8" y="11" width="256" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="256" id="mfP-AP-J4u"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-VF-PUN">
-                                    <rect key="frame" x="357" y="6" width="51" height="31"/>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-VF-PUN">
+                                    <rect key="frame" x="357" y="8" width="51" height="31"/>
                                     <connections>
                                         <action selector="toggleShowCompleted:" destination="Z8C-gi-x1H" eventType="valueChanged" id="jQh-II-3yq"/>
                                     </connections>
@@ -53,8 +56,11 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Jnb-VF-PUN" secondAttribute="trailing" constant="8" id="AfL-uq-7eq"/>
-                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="leading" secondItem="Mtj-eZ-4Kx" secondAttribute="leading" constant="8" id="Rbd-B9-Ggo"/>
+                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="top" secondItem="Mtj-eZ-4Kx" secondAttribute="top" constant="11" id="4VP-vs-IiO"/>
+                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="leading" secondItem="Mtj-eZ-4Kx" secondAttribute="leading" constant="8" id="64H-GH-14G"/>
+                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="centerY" secondItem="Mtj-eZ-4Kx" secondAttribute="centerY" id="EgF-eG-1e3"/>
+                                <constraint firstItem="Jnb-VF-PUN" firstAttribute="leading" secondItem="d6g-cJ-bWU" secondAttribute="trailing" constant="93" id="kFB-04-4fb"/>
+                                <constraint firstItem="Jnb-VF-PUN" firstAttribute="top" secondItem="Mtj-eZ-4Kx" secondAttribute="top" constant="8" id="uyt-jS-dVg"/>
                             </constraints>
                         </view>
                         <connections>
@@ -112,7 +118,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cr9-iu-Tym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553.6231884057975" y="825.66964285714278"/>
+            <point key="canvasLocation" x="2393" y="129"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -228,14 +234,6 @@
                                 <action selector="clickSettingsButton:" destination="0wO-p5-WRs" id="fHU-al-7Sf"/>
                             </connections>
                         </barButtonItem>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gU7-jD-7oC">
-                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Agenda"/>
-                                <segment title="LIst"/>
-                            </segments>
-                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" title="About" id="Ndy-oM-Ev8">
                             <connections>
                                 <action selector="clickAboutButton:" destination="0wO-p5-WRs" id="7ZQ-0W-yF9"/>
