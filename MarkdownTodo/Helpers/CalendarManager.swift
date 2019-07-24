@@ -84,8 +84,12 @@ class CalendarManager {
         return reminder
     }
 
-    func predicateForIncompleteReminders(withDueDateStarting start: Date, ending: Date, calendars: [EKCalendar]?) -> NSPredicate {
+    func predicateForIncompleteReminders(withDueDateStarting start: Date?, ending: Date?, calendars: [EKCalendar]?) -> NSPredicate {
         return store.predicateForIncompleteReminders(withDueDateStarting: start, ending: ending, calendars: calendars)
+    }
+
+    func predicateForCompletedReminders(withDueDateStarting start: Date?, ending: Date?, calendars: [EKCalendar]?) -> NSPredicate {
+        return store.predicateForCompletedReminders(withCompletionDateStarting: start, ending: ending, calendars: calendars)
     }
 
     func remove(_ reminder: EKReminder, commit: Bool) {

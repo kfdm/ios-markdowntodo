@@ -11,15 +11,9 @@ import EventKit
 
 class ReminderListViewController: UITableViewController, Storyboarded {
     private var groupedReminders = [ReminderGroup]()
-    private var showCompleted = false
 
     var selectedPredicate: NSPredicate?
     var selectedCalendar: EKCalendar?
-
-    @IBAction func toggleShowCompleted(_ sender: UISwitch) {
-        showCompleted = sender.isOn
-        fetchReminders()
-    }
 
     // MARK: - Segues
 
@@ -33,6 +27,13 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     }
 
     // MARK: - Actions
+    @IBAction func showCompleted(_ sender: UIButton) {
+        let completedController = ReminderListViewController.instantiate()
+        let selected = selectedCalendar == nil ? nil : [selectedCalendar!]
+        completedController.selectedCalendar = selectedCalendar
+        completedController.selectedPredicate = CalendarManager.shared.predicateForCompletedReminders(withDueDateStarting: nil, ending: nil, calendars: selected)
+        navigationController?.pushViewController(completedController, animated: true)
+    }
 
     @IBAction func actionNewReminder(_ sender: UIBarButtonItem) {
         let alert = UIAlertController.init(title: "New Reminder", message: "Please enter new reminder", preferredStyle: .alert)
@@ -80,9 +81,7 @@ extension ReminderListViewController {
     @objc func fetchReminders() {
         guard let pred = selectedPredicate else { return }
         CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
-            let grouped = ReminderManager.reminders(fetchedReminders.filter({ (r) -> Bool in
-                self.showCompleted ? true : !r.isCompleted
-            }), byGrouping: .date, orderedBy: .priority)
+            let grouped = ReminderManager.reminders(fetchedReminders, byGrouping: .date, orderedBy: .priority)
 
             DispatchQueue.main.async {
                 self.groupedReminders = grouped

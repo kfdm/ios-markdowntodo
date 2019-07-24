@@ -112,7 +112,7 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = groupedCalendars.cellForRowAt(indexPath)
-        let predicate = CalendarManager.shared.predicateForReminders(in: calendar)
+        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
             controller.title = calendar.title
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)

@@ -38,29 +38,20 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6g-cJ-bWU">
-                                    <rect key="frame" x="8" y="11" width="256" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="256" id="mfP-AP-J4u"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-VF-PUN">
-                                    <rect key="frame" x="357" y="8" width="51" height="31"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-7t-oIo">
+                                    <rect key="frame" x="8" y="8" width="398" height="28"/>
+                                    <state key="normal" title="Show Completed"/>
                                     <connections>
-                                        <action selector="toggleShowCompleted:" destination="Z8C-gi-x1H" eventType="valueChanged" id="jQh-II-3yq"/>
+                                        <action selector="showCompleted:" destination="Z8C-gi-x1H" eventType="primaryActionTriggered" id="dvW-A1-AU8"/>
                                     </connections>
-                                </switch>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="top" secondItem="Mtj-eZ-4Kx" secondAttribute="top" constant="11" id="4VP-vs-IiO"/>
-                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="leading" secondItem="Mtj-eZ-4Kx" secondAttribute="leading" constant="8" id="64H-GH-14G"/>
-                                <constraint firstItem="d6g-cJ-bWU" firstAttribute="centerY" secondItem="Mtj-eZ-4Kx" secondAttribute="centerY" id="EgF-eG-1e3"/>
-                                <constraint firstItem="Jnb-VF-PUN" firstAttribute="leading" secondItem="d6g-cJ-bWU" secondAttribute="trailing" constant="93" id="kFB-04-4fb"/>
-                                <constraint firstItem="Jnb-VF-PUN" firstAttribute="top" secondItem="Mtj-eZ-4Kx" secondAttribute="top" constant="8" id="uyt-jS-dVg"/>
+                                <constraint firstItem="N3C-7t-oIo" firstAttribute="top" secondItem="Mtj-eZ-4Kx" secondAttribute="top" constant="8" id="iOs-N8-VZj"/>
+                                <constraint firstAttribute="bottom" secondItem="N3C-7t-oIo" secondAttribute="bottom" constant="8" id="ieM-HW-e8I"/>
+                                <constraint firstItem="N3C-7t-oIo" firstAttribute="leading" secondItem="Mtj-eZ-4Kx" secondAttribute="leading" constant="8" id="kOV-HC-etN"/>
+                                <constraint firstAttribute="trailing" secondItem="N3C-7t-oIo" secondAttribute="trailing" constant="8" id="r09-Ti-kpg"/>
                             </constraints>
                         </view>
                         <connections>
