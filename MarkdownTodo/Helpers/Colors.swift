@@ -23,7 +23,7 @@ class Colors {
         }
         return UIColor.purple
     }
-    
+
     static let dueColor = UIColor(named: "dueHeader")
     static let priorityLow = UIColor(named: "priority9")
     static let priorityMed = UIColor(named: "priority5")

@@ -20,7 +20,7 @@ struct ReminderGroupDate: ReminderGroup {
 }
 
 struct ReminderGroupPriority: ReminderGroup {
-    var title : String {
+    var title: String {
         get {
             return "Priority: \(priority)"
         }
@@ -35,7 +35,7 @@ final class ReminderManager {
 
     static func reminders(_ reminders: [EKReminder], byGrouping: Group, orderedBy: SortableField) -> [ReminderGroup] {
 
-        var sortable : (EKReminder, EKReminder) -> Bool        
+        var sortable: (EKReminder, EKReminder) -> Bool
         switch orderedBy {
         case .priority:
             sortable = { $0.priority < $1.priority }
@@ -44,7 +44,7 @@ final class ReminderManager {
         case .creation:
             sortable = { $0.creationDate! < $1.creationDate! }
         }
-        
+
         switch byGrouping {
         case .date:
             let grouped = Dictionary(grouping: reminders) { (reminder) -> Date in

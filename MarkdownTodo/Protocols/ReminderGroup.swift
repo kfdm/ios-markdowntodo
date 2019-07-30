@@ -9,6 +9,6 @@
 import EventKit
 
 protocol ReminderGroup {
-    var title : String { get }
+    var title: String { get }
     var events: [EKReminder] { get }
 }
