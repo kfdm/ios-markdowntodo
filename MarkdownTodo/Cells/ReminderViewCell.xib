@@ -19,10 +19,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg7-yF-bp8">
-                        <rect key="frame" x="24" y="8" width="32" height="27.5"/>
+                        <rect key="frame" x="24" y="11" width="32" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="g7f-mk-vTr"/>
+                            <constraint firstAttribute="height" constant="22" id="grC-s6-h3q"/>
                         </constraints>
+                        <state key="normal" image="statusEmpty"/>
                         <connections>
                             <action selector="actionClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="IM1-Jg-vTg"/>
                         </connections>
@@ -37,45 +39,61 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2B-lh-AMv">
-                        <rect key="frame" x="64" y="8" width="246" height="27.5"/>
+                        <rect key="frame" x="64" y="11.5" width="198" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iG-Cb-dZI">
-                        <rect key="frame" x="310" y="8" width="96" height="27.5"/>
+                        <rect key="frame" x="310" y="6" width="96" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="96" id="a4k-aV-qo6"/>
+                            <constraint firstAttribute="width" constant="96" id="mkJ-5Z-Eja"/>
                         </constraints>
                         <state key="normal" title="Date"/>
                         <connections>
                             <action selector="dateClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="Sa1-Zd-0UM"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8b-Y3-aCc">
+                        <rect key="frame" x="270" y="6" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="FTs-Vv-Bb0"/>
+                            <constraint firstAttribute="width" constant="32" id="iv6-di-ISl"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="link"/>
+                        <connections>
+                            <action selector="linkClick:" destination="WtE-Ou-wt8" eventType="touchUpInside" id="l0b-Jw-8LB"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="p2B-lh-AMv" secondAttribute="top" id="4It-dF-xbu"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="top" secondItem="2iG-Cb-dZI" secondAttribute="top" id="4Nq-Bv-T8E"/>
                     <constraint firstItem="crd-Df-cDo" firstAttribute="leading" secondItem="goT-Bb-8UR" secondAttribute="leading" id="87u-gI-gmD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="2iG-Cb-dZI" secondAttribute="trailing" constant="-12" id="8IV-ca-QsV"/>
                     <constraint firstItem="crd-Df-cDo" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="AzT-4K-VeR"/>
-                    <constraint firstItem="eg7-yF-bp8" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="topMargin" constant="-47" id="BJY-y8-JUy"/>
-                    <constraint firstItem="2iG-Cb-dZI" firstAttribute="leading" secondItem="p2B-lh-AMv" secondAttribute="trailing" id="J4g-5s-HXs"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="bottom" secondItem="2iG-Cb-dZI" secondAttribute="bottom" id="Tv4-uA-fM0"/>
+                    <constraint firstItem="2iG-Cb-dZI" firstAttribute="leading" secondItem="M8b-Y3-aCc" secondAttribute="trailing" constant="8" symbolic="YES" id="bD7-Yb-ffc"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="cEa-eT-1QR"/>
                     <constraint firstItem="crd-Df-cDo" firstAttribute="top" secondItem="goT-Bb-8UR" secondAttribute="top" id="cTA-BD-0ng"/>
-                    <constraint firstItem="crd-Df-cDo" firstAttribute="centerY" secondItem="eg7-yF-bp8" secondAttribute="centerY" id="dgy-WJ-Ufc"/>
-                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="8" symbolic="YES" id="p0w-XZ-6m8"/>
+                    <constraint firstItem="M8b-Y3-aCc" firstAttribute="leading" secondItem="p2B-lh-AMv" secondAttribute="trailing" constant="8" id="f04-h8-NnB"/>
+                    <constraint firstItem="eg7-yF-bp8" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="gvX-fy-SjF"/>
+                    <constraint firstItem="2iG-Cb-dZI" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="keP-mC-HKo"/>
+                    <constraint firstItem="p2B-lh-AMv" firstAttribute="leading" secondItem="eg7-yF-bp8" secondAttribute="trailing" constant="8" id="mtm-XB-8uW"/>
+                    <constraint firstItem="M8b-Y3-aCc" firstAttribute="top" secondItem="2iG-Cb-dZI" secondAttribute="top" id="o3a-OZ-5B6"/>
                     <constraint firstItem="eg7-yF-bp8" firstAttribute="leading" secondItem="crd-Df-cDo" secondAttribute="trailing" constant="8" symbolic="YES" id="pls-P4-T7Q"/>
-                    <constraint firstItem="eg7-yF-bp8" firstAttribute="bottom" secondItem="p2B-lh-AMv" secondAttribute="bottom" id="zbo-DC-lJA"/>
+                    <constraint firstItem="M8b-Y3-aCc" firstAttribute="centerY" secondItem="goT-Bb-8UR" secondAttribute="centerY" id="rdZ-Vz-l2d"/>
+                    <constraint firstAttribute="trailing" secondItem="2iG-Cb-dZI" secondAttribute="trailing" constant="8" id="xEG-Yw-aPN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="colorStrip" destination="crd-Df-cDo" id="fiq-yn-weA"/>
                 <outlet property="dateSelector" destination="2iG-Cb-dZI" id="BeV-83-Jrr"/>
+                <outlet property="linkButton" destination="M8b-Y3-aCc" id="Vz9-8Q-TKr"/>
                 <outlet property="statusButton" destination="eg7-yF-bp8" id="JUM-BH-goI"/>
                 <outlet property="titleLabel" destination="p2B-lh-AMv" id="uqU-so-apy"/>
             </connections>
             <point key="canvasLocation" x="111.59420289855073" y="59.598214285714285"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="link" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="statusEmpty" width="21.333333969116211" height="21.333333969116211"/>
+    </resources>
 </document>

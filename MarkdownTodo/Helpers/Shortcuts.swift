@@ -17,6 +17,7 @@ class Images {
     static var statusDone = UIImage(named: "statusDone")
     static var statusOverdue = UIImage(named: "statusOverdue")
     static var statusEmpty = UIImage(named: "statusEmpty")
+    static var link = UIImage(named: "link")
 }
 
 class Formats {

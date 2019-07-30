@@ -14,6 +14,7 @@ class ReminderViewCell: UITableViewCell {
     @IBOutlet weak var dateSelector: UIButton!
 
     @IBOutlet weak var statusButton: UIButton!
+    @IBOutlet weak var linkButton: UIButton!
 
     @IBOutlet weak var colorStrip: UIButton!
 
@@ -31,6 +32,8 @@ class ReminderViewCell: UITableViewCell {
                 dateSelector.setTitle(Formats.short(newReminder.sortableDate), for: .normal)
             }
 
+            linkButton.isHidden = newReminder.url == nil
+
             switch newReminder.scheduledState {
             case .completed:
                 statusButton.setImage(Images.statusDone, for: .normal)
@@ -39,7 +42,6 @@ class ReminderViewCell: UITableViewCell {
             default:
                 statusButton.setImage(Images.statusEmpty, for: .normal)
             }
-            statusButton.imageView?.contentMode = .scaleAspectFill
 
             dateSelector.setTitleColor(newReminder.scheduledState == .overdue ? UIColor.red : UIColor.black, for: .normal)
 
@@ -55,5 +57,9 @@ class ReminderViewCell: UITableViewCell {
     }
     @IBAction func actionClick(_ sender: UIButton) {
         delegate?.showStatusDialog(reminder: reminder!)
+    }
+    @IBAction func linkClick(_ sender: UIButton) {
+        guard let url = reminder?.url else { return }
+        UIApplication.shared.open(url)
     }
 }
