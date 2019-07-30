@@ -115,6 +115,16 @@ extension ReminderListViewController {
         let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         showReminder(reminder, animated: true)
     }
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let reminder = groupedReminders[indexPath.section].events[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, success in
+            CalendarManager.shared.remove(reminder, commit: true)
+            success(true)
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
 // MARK: - ReminderActions
