@@ -61,7 +61,7 @@ class CalendarListViewController: UIViewController {
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Due"
-            controller.selectedCalendar = nil
+            controller.selectedCalendars = []
             controller.selectedPredicate = pred
             controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
         }
@@ -71,7 +71,7 @@ class CalendarListViewController: UIViewController {
         let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Upcoming"
-            controller.selectedCalendar = nil
+            controller.selectedCalendars = []
             controller.selectedPredicate = pred
             controller.navigationController?.navigationBar.barTintColor = UIColor.groupTableViewBackground
         }
@@ -117,7 +117,7 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
             controller.title = calendar.title
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)
             controller.selectedPredicate = predicate
-            controller.selectedCalendar = calendar
+            controller.selectedCalendars = [calendar]
         }
     }
 
@@ -140,7 +140,7 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
             controller.title = Formats.short(date)
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple
             controller.selectedPredicate = predicate
-            controller.selectedCalendar = nil
+            controller.selectedCalendars = []
         }
 
     }

@@ -13,7 +13,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     private var groupedReminders = [ReminderGroup]()
 
     var selectedPredicate: NSPredicate?
-    var selectedCalendar: EKCalendar?
+    var selectedCalendars = [EKCalendar]()
 
     // MARK: - Segues
 
@@ -29,9 +29,8 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     // MARK: - Actions
     @IBAction func showCompleted(_ sender: UIButton) {
         let completedController = ReminderListViewController.instantiate()
-        let selected = selectedCalendar == nil ? nil : [selectedCalendar!]
-        completedController.selectedCalendar = selectedCalendar
-        completedController.selectedPredicate = CalendarManager.shared.predicateForCompletedReminders(withDueDateStarting: nil, ending: nil, calendars: selected)
+        completedController.selectedCalendars = selectedCalendars
+        completedController.selectedPredicate = CalendarManager.shared.predicateForCompletedReminders(withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
         navigationController?.pushViewController(completedController, animated: true)
     }
 
@@ -42,14 +41,14 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         }
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction.init(title: "Save", style: .default, handler: { (_) in
-            guard let selectedCalendar = self.selectedCalendar else { return }
+            guard let selectedCalendar = self.selectedCalendars.first else { return }
             let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
             CalendarManager.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
         alert.addAction(UIAlertAction.init(title: "Save and Edit", style: .default, handler: { (_) in
-            guard let selectedCalendar = self.selectedCalendar else { return }
+            guard let selectedCalendar = self.selectedCalendars.first else { return }
             let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
             CalendarManager.shared.save(reminder: reminder, commit: true)
