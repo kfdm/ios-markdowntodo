@@ -78,40 +78,16 @@ final class ReminderManager {
     }
 }
 
-class GroupedCalendarBySource {
-    private var sources: [EKSource]?
-    private var calendars: [EKSource: [EKCalendar]]?
+struct CalendarGroup {
+    let title: String
+    let list: [EKCalendar]
+}
 
-    var numberOfSections: Int { get { return sources?.count ?? 0 } }
-
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        guard let section = sources?[section] else { return 0 }
-        guard let source = calendars?[section] else { return 0 }
-        return source.count
-    }
-
-    func cellForRowAt(_ indexPath: IndexPath) -> EKCalendar {
-        let section = sources![indexPath.section]
-        return calendars![section]![indexPath.row]
-    }
-
-    func titleForHeader(_ section: Int) -> String {
-        return sources![section].title
-    }
-
-    init() {
-        sources = CalendarAPI.shared.filteredSources()
-
-        sources = CalendarAPI.shared.filteredSources().sorted(by: { (a, b) -> Bool in
-            a.title < b.title
-        })
-
-        calendars = [EKSource: [EKCalendar]]()
-
-        sources?.forEach { (source) in
-            calendars?[source] = source.calendars(for: .reminder).sorted(by: { (a, b) -> Bool in
-                a.cgColor.hashValue > b.cgColor.hashValue
-            })
-        }
+extension CalendarGroup {
+    static func fetch() -> [CalendarGroup] {
+        return CalendarAPI.shared.filteredSources().map { (source) -> CalendarGroup in
+            let calendars = source.calendars(for: .reminder).sorted { $0.cgColor.hashValue > $1.cgColor.hashValue }
+            return CalendarGroup(title: source.title, list: calendars)
+            }.sorted { $0.title < $1.title }
     }
 }

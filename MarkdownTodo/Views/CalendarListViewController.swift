@@ -13,7 +13,7 @@ import FSCalendar
 class CalendarListViewController: UIViewController {
 
     var detailViewController: ReminderListViewController?
-    private var groupedCalendars = GroupedCalendarBySource()
+    private var groupedCalendars = [CalendarGroup]()
 
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
@@ -90,16 +90,16 @@ class CalendarListViewController: UIViewController {
 extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groupedCalendars.numberOfSections
+        return groupedCalendars.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupedCalendars.numberOfRowsInSection(section)
+        return groupedCalendars[section].list.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let calendar = groupedCalendars.cellForRowAt(indexPath)
+        let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
 
         cell.textLabel!.text = calendar.title
         cell.textLabel?.textColor = Colors.calendar(for: calendar)
@@ -107,11 +107,11 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groupedCalendars.titleForHeader(section)
+        return groupedCalendars[section].title
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let calendar = groupedCalendars.cellForRowAt(indexPath)
+        let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
         let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
             controller.title = calendar.title
@@ -122,7 +122,7 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     @objc func fetchCalendar() {
-        groupedCalendars = GroupedCalendarBySource()
+        groupedCalendars = CalendarGroup.fetch()
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
