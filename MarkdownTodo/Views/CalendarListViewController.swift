@@ -39,7 +39,7 @@ class CalendarListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CalendarManager.shared.authenticated(completionHandler: {
+        CalendarAPI.shared.authenticated(completionHandler: {
             print("Authentication Granted")
         })
     }
@@ -58,7 +58,7 @@ class CalendarListViewController: UIViewController {
     @IBAction func showDueReminders(_ sender: Any) {
         calendarPicker.select(Date())
         let date = Date().tomorrow
-        let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
+        let pred = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: Date.distantPast, ending: date, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Due"
             controller.selectedCalendars = []
@@ -68,7 +68,7 @@ class CalendarListViewController: UIViewController {
     }
     @IBAction func showUpcomingReminders(_ sender: UIButton) {
         let date = Date().tomorrow
-        let pred = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
+        let pred = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: date, ending: Date.distantFuture, calendars: nil)
         showReminderController { (controller) in
             controller.title = "Upcoming"
             controller.selectedCalendars = []
@@ -112,7 +112,7 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = groupedCalendars.cellForRowAt(indexPath)
-        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
+        let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
             controller.title = calendar.title
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)
@@ -135,7 +135,7 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let start = date.midnight
         let end = start.tomorrow
-        let predicate = CalendarManager.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
+        let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: start, ending: end, calendars: nil)
         showReminderController { (controller) in
             controller.title = Formats.short(date)
             controller.navigationController?.navigationBar.barTintColor = UIColor.purple
@@ -146,11 +146,11 @@ extension CalendarListViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return CalendarManager.shared.numberOfEventsFor(date)
+        return CalendarAPI.shared.numberOfEventsFor(date)
     }
 
     @objc func calendarReloadData() {
-        CalendarManager.shared.recalculateEventCount {
+        CalendarAPI.shared.recalculateEventCount {
             DispatchQueue.main.async {
                 self.calendarPicker.reloadData()
             }

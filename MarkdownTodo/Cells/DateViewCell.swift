@@ -61,6 +61,6 @@ class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return CalendarManager.shared.numberOfEventsFor(date)
+        return CalendarAPI.shared.numberOfEventsFor(date)
     }
 }

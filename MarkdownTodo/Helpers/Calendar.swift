@@ -100,9 +100,9 @@ class GroupedCalendarBySource {
     }
 
     init() {
-        sources = CalendarManager.shared.filteredSources()
+        sources = CalendarAPI.shared.filteredSources()
 
-        sources = CalendarManager.shared.filteredSources().sorted(by: { (a, b) -> Bool in
+        sources = CalendarAPI.shared.filteredSources().sorted(by: { (a, b) -> Bool in
             a.title < b.title
         })
 

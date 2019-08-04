@@ -40,7 +40,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     @objc func saveEdit() {
         guard let reminder = currentReminder else { return }
-        CalendarManager.shared.save(reminder: reminder, commit: true)
+        CalendarAPI.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 

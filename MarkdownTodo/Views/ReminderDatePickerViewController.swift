@@ -28,7 +28,7 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
 
     @objc func saveEdit() {
         guard let reminder = currentReminder else { return }
-        CalendarManager.shared.save(reminder: reminder, commit: true)
+        CalendarAPI.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 
@@ -51,11 +51,11 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         guard let reminder = currentReminder else { return }
         reminder.dueDateComponents = DateComponents.setDue(to: date)
-        CalendarManager.shared.save(reminder: reminder, commit: true)
+        CalendarAPI.shared.save(reminder: reminder, commit: true)
         dismiss(animated: true, completion: nil)
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return CalendarManager.shared.numberOfEventsFor(date)
+        return CalendarAPI.shared.numberOfEventsFor(date)
     }
 }

@@ -11,8 +11,8 @@ import EventKit
 
 import os.log
 
-class CalendarManager {
-    static let shared = CalendarManager()
+class CalendarAPI {
+    static let shared = CalendarAPI()
 
     var isAuthenticated = false
 

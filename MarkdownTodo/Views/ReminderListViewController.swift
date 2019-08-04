@@ -30,7 +30,7 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     @IBAction func showCompleted(_ sender: UIButton) {
         let completedController = ReminderListViewController.instantiate()
         completedController.selectedCalendars = selectedCalendars
-        completedController.selectedPredicate = CalendarManager.shared.predicateForCompletedReminders(withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
+        completedController.selectedPredicate = CalendarAPI.shared.predicateForCompletedReminders(withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
         navigationController?.pushViewController(completedController, animated: true)
     }
 
@@ -42,16 +42,16 @@ class ReminderListViewController: UITableViewController, Storyboarded {
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction.init(title: "Save", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendars.first else { return }
-            let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
+            let reminder = CalendarAPI.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
-            CalendarManager.shared.save(reminder: reminder, commit: true)
+            CalendarAPI.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
         alert.addAction(UIAlertAction.init(title: "Save and Edit", style: .default, handler: { (_) in
             guard let selectedCalendar = self.selectedCalendars.first else { return }
-            let reminder = CalendarManager.shared.newReminder(for: selectedCalendar)
+            let reminder = CalendarAPI.shared.newReminder(for: selectedCalendar)
             reminder.title = alert.textFields?.first?.text
-            CalendarManager.shared.save(reminder: reminder, commit: true)
+            CalendarAPI.shared.save(reminder: reminder, commit: true)
             self.showReminder(reminder, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -79,7 +79,7 @@ extension ReminderListViewController {
 extension ReminderListViewController {
     @objc func fetchReminders() {
         guard let pred = selectedPredicate else { return }
-        CalendarManager.shared.fetchReminders(matching: pred) { (fetchedReminders) in
+        CalendarAPI.shared.fetchReminders(matching: pred) { (fetchedReminders) in
             let grouped = ReminderManager.reminders(fetchedReminders, byGrouping: .date, orderedBy: .priority)
 
             DispatchQueue.main.async {
@@ -118,7 +118,7 @@ extension ReminderListViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, success in
-            CalendarManager.shared.remove(reminder, commit: true)
+            CalendarAPI.shared.remove(reminder, commit: true)
             success(true)
         }
 
@@ -133,14 +133,14 @@ extension ReminderListViewController: ReminderActions {
 
         alert.addAction(UIAlertAction(title: "Unset", style: .destructive, handler: { (_) in
             reminder.priority = 0
-            CalendarManager.shared.save(reminder: reminder, commit: true)
+            CalendarAPI.shared.save(reminder: reminder, commit: true)
             self.fetchReminders()
         }))
 
         for i in 1...9 {
             alert.addAction(UIAlertAction(title: "\(i)", style: .default, handler: { (_) in
                 reminder.priority = i
-                CalendarManager.shared.save(reminder: reminder, commit: true)
+                CalendarAPI.shared.save(reminder: reminder, commit: true)
                 self.fetchReminders()
             }))
         }
@@ -163,7 +163,7 @@ extension ReminderListViewController: ReminderActions {
         } else {
             reminder.completionDate = Date()
         }
-        CalendarManager.shared.save(reminder: reminder, commit: true)
+        CalendarAPI.shared.save(reminder: reminder, commit: true)
         self.fetchReminders()
     }
 }
