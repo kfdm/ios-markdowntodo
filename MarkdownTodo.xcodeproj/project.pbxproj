@@ -18,6 +18,7 @@
 		87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FFB22DC52820047D672 /* PriorityViewCell.swift */; };
 		87191F7D22DDDD2B00E9DB4B /* ReminderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */; };
 		871B3ABA22FAF16100EEB7B0 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */; };
+		871B3ABC22FB018100EEB7B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B3ABB22FB018100EEB7B0 /* SettingsViewController.swift */; };
 		873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AC79C22D8B5570059F70F /* ReminderViewCell.swift */; };
 		8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759217E22E4070A00D3A641 /* Date+Extensions.swift */; };
 		8759218422E42D6900D3A641 /* DateViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218222E42D6900D3A641 /* DateViewCell.swift */; };
@@ -59,6 +60,7 @@
 		87094FFB22DC52820047D672 /* PriorityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewCell.swift; sourceTree = "<group>"; };
 		87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewCell.xib; sourceTree = "<group>"; };
 		871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
+		871B3ABB22FB018100EEB7B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 		8759217E22E4070A00D3A641 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8759218222E42D6900D3A641 /* DateViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewCell.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
 				8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */,
 				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
+				871B3ABB22FB018100EEB7B0 /* SettingsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
+				871B3ABC22FB018100EEB7B0 /* SettingsViewController.swift in Sources */,
 				87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */,
 				87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */,
 			);
