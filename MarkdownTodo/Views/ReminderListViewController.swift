@@ -64,7 +64,7 @@ extension ReminderListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl?.addTarget(self, action: #selector(fetchReminders), for: .valueChanged)
-        tableView.registerReusableCell(tableViewCell: ReminderViewCell.self)
+        tableView.register(ReminderViewCell.self)
         NotificationCenter.default.addObserver(self, selector: #selector(fetchReminders), name: .savedReminder, object: nil)
         fetchReminders()
     }
@@ -99,7 +99,7 @@ extension ReminderListViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReminderViewCell.self, for: indexPath)
+        let cell: ReminderViewCell = tableView.dequeueReusableCell(for: indexPath)
         let reminder = groupedReminders[indexPath.section].events[indexPath.row]
         cell.reminder = reminder
         cell.delegate = self

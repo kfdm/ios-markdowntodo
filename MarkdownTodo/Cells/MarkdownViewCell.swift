@@ -11,7 +11,7 @@ import WebKit
 import EventKit
 import Down
 
-class MarkdownViewCell: UITableViewCell, UITextViewDelegate {
+class MarkdownViewCell: UITableViewCell, UITextViewDelegate, ReusableCell {
     @IBOutlet private weak var labelField: UILabel!
     @IBOutlet private weak var textField: UITextView!
     @IBOutlet private weak var previewSwitch: UISwitch!

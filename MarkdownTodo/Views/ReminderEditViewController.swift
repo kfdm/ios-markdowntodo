@@ -23,10 +23,10 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerReusableCell(tableViewCell: StringViewCell.self)
-        tableView.registerReusableCell(tableViewCell: PriorityViewCell.self)
-        tableView.registerReusableCell(tableViewCell: MarkdownViewCell.self)
-        tableView.registerReusableCell(tableViewCell: DateViewCell.self)
+        tableView.register(StringViewCell.self)
+        tableView.register(PriorityViewCell.self)
+        tableView.register(MarkdownViewCell.self)
+        tableView.register(DateViewCell.self)
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
@@ -57,31 +57,31 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch TableRows.init(rawValue: indexPath.row)! {
         case .title:
-            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
+            let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Title", comment: "Reminder Title")
             cell.value = currentReminder?.title
             cell.changed = { newTitle in self.currentReminder?.title = newTitle }
             return cell
         case .url:
-            let cell = tableView.dequeueReusableCell(withIdentifier: StringViewCell.self)
+            let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("URL", comment: "Reminder URL")
             cell.value = currentReminder?.url?.absoluteString
             cell.keyboardType = .URL
             cell.changed = { newURL in self.currentReminder?.url = URL(string: newURL) }
             return cell
         case .priority:
-            let cell = tableView.dequeueReusableCell(withIdentifier: PriorityViewCell.self)
+            let cell: PriorityViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.priority = currentReminder!.priority
             cell.changed = { newPriority in self.currentReminder?.priority = newPriority }
             return cell
         case .due:
-            let cell = tableView.dequeueReusableCell(withIdentifier: DateViewCell.self)
+            let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Due", comment: "Due Date")
             cell.date = currentReminder?.dueDateComponents
             cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }
             return cell
         case .notes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: MarkdownViewCell.self)
+            let cell: MarkdownViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.value = currentReminder?.notes ?? ""
             cell.changed = { newNote in self.currentReminder?.notes = newNote }

@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class PriorityViewCell: UITableViewCell {
+class PriorityViewCell: UITableViewCell, ReusableCell {
     @IBOutlet weak var selectorPriority: UISegmentedControl!
     var changed: ((Int) -> Void)?
 

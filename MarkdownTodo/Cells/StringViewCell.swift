@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StringViewCell: UITableViewCell {
+class StringViewCell: UITableViewCell, ReusableCell {
     @IBOutlet private weak var
     labelField: UILabel!
     @IBOutlet private weak var textField: UITextField!

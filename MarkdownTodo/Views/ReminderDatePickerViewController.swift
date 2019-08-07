@@ -16,7 +16,7 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerReusableCell(tableViewCell: DateViewCell.self)
+        tableView.register(DateViewCell.self)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
         navigationItem.leftItemsSupplementBackButton = true
@@ -37,7 +37,7 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DateViewCell.self)
+        let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.label = NSLocalizedString("Due", comment: "Due Date")
         cell.date = currentReminder?.dueDateComponents
         cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }

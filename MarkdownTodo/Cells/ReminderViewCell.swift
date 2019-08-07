@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class ReminderViewCell: UITableViewCell {
+class ReminderViewCell: UITableViewCell, ReusableCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateSelector: UIButton!
 

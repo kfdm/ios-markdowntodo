@@ -9,7 +9,7 @@
 import UIKit
 import FSCalendar
 
-class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource {
+class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource, ReusableCell {
     @IBOutlet private weak var labelField: UILabel!
     @IBOutlet private weak var valueField: UILabel!
     @IBOutlet private weak var segmentField: UISegmentedControl!

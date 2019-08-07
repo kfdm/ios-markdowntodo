@@ -33,7 +33,7 @@
 		87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */; };
 		879201A722DFCC2C001B2AF7 /* CalendarApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879201A622DFCC2C001B2AF7 /* CalendarApi.swift */; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
-		87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */; };
+		87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
 		87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221E22DC907D005B2CB7 /* StringViewCell.xib */; };
 		87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */; };
@@ -73,7 +73,7 @@
 		87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReminders.swift; sourceTree = "<group>"; };
 		879201A622DFCC2C001B2AF7 /* CalendarApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarApi.swift; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
-		87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RegisterNib.swift"; sourceTree = "<group>"; };
+		87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
 		87F2221E22DC907D005B2CB7 /* StringViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StringViewCell.xib; sourceTree = "<group>"; };
 		87F2222122DC92E5005B2CB7 /* MarkdownViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewCell.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */,
 				8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */,
 				8759218E22E46EA000D3A641 /* Notification+Constants.swift */,
-				87F2221722DC8D9E005B2CB7 /* UITableView+RegisterNib.swift */,
+				87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -353,7 +353,7 @@
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
-				87F2221822DC8D9E005B2CB7 /* UITableView+RegisterNib.swift in Sources */,
+				87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */,
 				87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
