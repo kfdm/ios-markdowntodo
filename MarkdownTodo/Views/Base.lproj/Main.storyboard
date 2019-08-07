@@ -118,52 +118,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nJw-xZ-OHG">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CmM-LQ-bB3" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="384"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CmM-LQ-bB3" secondAttribute="height" multiplier="69:64" id="AsA-qE-WhK"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="EgX-Dr-XWQ" id="6Tl-L6-CwU"/>
+                                    <outlet property="delegate" destination="EgX-Dr-XWQ" id="lcQ-8t-nlh"/>
+                                </connections>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nJw-xZ-OHG">
+                                <rect key="frame" x="0.0" y="436" width="414" height="32"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CmM-LQ-bB3" customClass="FSCalendar">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="697"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="CmM-LQ-bB3" secondAttribute="height" multiplier="69:64" id="ZoB-nF-BKg"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-aV-sJV">
+                                        <rect key="frame" x="0.0" y="0.0" width="203" height="32"/>
+                                        <state key="normal" title="Due"/>
                                         <connections>
-                                            <outlet property="dataSource" destination="EgX-Dr-XWQ" id="6Tl-L6-CwU"/>
-                                            <outlet property="delegate" destination="EgX-Dr-XWQ" id="lcQ-8t-nlh"/>
+                                            <action selector="clickedDue:" destination="EgX-Dr-XWQ" eventType="primaryActionTriggered" id="iB0-am-cdb"/>
                                         </connections>
-                                    </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ere-rT-vbj">
-                                        <rect key="frame" x="0.0" y="705" width="414" height="64"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-aV-sJV">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="64"/>
-                                                <state key="normal" title="Due"/>
-                                                <connections>
-                                                    <action selector="clickedDue:" destination="EgX-Dr-XWQ" eventType="primaryActionTriggered" id="iB0-am-cdb"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBH-fo-9cl">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="64"/>
-                                                <state key="normal" title="Upcoming"/>
-                                                <connections>
-                                                    <action selector="clickedUpcoming:" destination="EgX-Dr-XWQ" eventType="primaryActionTriggered" id="QqO-Rp-Qqg"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="Ogg-ON-sTg"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="fCU-tz-5jD"/>
-                                        </constraints>
-                                    </stackView>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBH-fo-9cl">
+                                        <rect key="frame" x="211" y="0.0" width="203" height="32"/>
+                                        <state key="normal" title="Upcoming"/>
+                                        <connections>
+                                            <action selector="clickedUpcoming:" destination="EgX-Dr-XWQ" eventType="primaryActionTriggered" id="QqO-Rp-Qqg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="4hS-tU-n8q"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nJw-xZ-OHG" firstAttribute="leading" secondItem="BPF-d7-du1" secondAttribute="leading" id="A31-dt-ddj"/>
-                            <constraint firstItem="nJw-xZ-OHG" firstAttribute="top" secondItem="BPF-d7-du1" secondAttribute="top" id="B90-lz-ieh"/>
-                            <constraint firstItem="BPF-d7-du1" firstAttribute="trailing" secondItem="nJw-xZ-OHG" secondAttribute="trailing" id="Ba3-zq-0X8"/>
-                            <constraint firstItem="BPF-d7-du1" firstAttribute="bottom" secondItem="nJw-xZ-OHG" secondAttribute="bottom" id="alJ-fq-0kl"/>
+                            <constraint firstItem="BPF-d7-du1" firstAttribute="trailing" secondItem="nJw-xZ-OHG" secondAttribute="trailing" id="0D0-n7-43d"/>
+                            <constraint firstItem="nJw-xZ-OHG" firstAttribute="leading" secondItem="BPF-d7-du1" secondAttribute="leading" id="0dh-0S-DWV"/>
+                            <constraint firstItem="nJw-xZ-OHG" firstAttribute="top" secondItem="CmM-LQ-bB3" secondAttribute="bottom" constant="8" id="P19-se-Mq2"/>
+                            <constraint firstItem="CmM-LQ-bB3" firstAttribute="top" secondItem="BPF-d7-du1" secondAttribute="top" id="VSP-Dt-zA6"/>
+                            <constraint firstItem="CmM-LQ-bB3" firstAttribute="trailing" secondItem="BPF-d7-du1" secondAttribute="trailing" id="m2o-Vo-ejJ"/>
+                            <constraint firstItem="CmM-LQ-bB3" firstAttribute="leading" secondItem="BPF-d7-du1" secondAttribute="leading" id="rrU-CG-grs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BPF-d7-du1"/>
                     </view>
@@ -227,6 +223,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iwd-Yw-21W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0mc-1e-O2J">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
