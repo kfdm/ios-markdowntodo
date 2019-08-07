@@ -10,13 +10,10 @@ import UIKit
 import EventKit
 import FSCalendar
 
-class CalendarListViewController: UIViewController {
+class CalendarListViewController: UITableViewController {
 
     var detailViewController: ReminderListViewController?
     private var groupedCalendars = [CalendarGroup]()
-
-    @IBOutlet weak private var tableView: UITableView!
-    @IBOutlet weak var calendarPicker: FSCalendar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +56,17 @@ class CalendarListViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
+extension CalendarListViewController {
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return groupedCalendars.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupedCalendars[section].list.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
 
@@ -78,11 +75,11 @@ extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return groupedCalendars[section].title
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
         let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
