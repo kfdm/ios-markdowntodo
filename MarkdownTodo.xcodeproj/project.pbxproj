@@ -17,6 +17,7 @@
 		87094FF622DC42BD0047D672 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FF522DC42BD0047D672 /* Colors.swift */; };
 		87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87094FFB22DC52820047D672 /* PriorityViewCell.swift */; };
 		87191F7D22DDDD2B00E9DB4B /* ReminderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */; };
+		871B3ABA22FAF16100EEB7B0 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */; };
 		873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AC79C22D8B5570059F70F /* ReminderViewCell.swift */; };
 		8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759217E22E4070A00D3A641 /* Date+Extensions.swift */; };
 		8759218422E42D6900D3A641 /* DateViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218222E42D6900D3A641 /* DateViewCell.swift */; };
@@ -57,6 +58,7 @@
 		87094FF522DC42BD0047D672 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		87094FFB22DC52820047D672 /* PriorityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewCell.swift; sourceTree = "<group>"; };
 		87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewCell.xib; sourceTree = "<group>"; };
+		871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
 		873AC79C22D8B5570059F70F /* ReminderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewCell.swift; sourceTree = "<group>"; };
 		8759217E22E4070A00D3A641 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8759218222E42D6900D3A641 /* DateViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewCell.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		8761EAA122DC28D500A8474A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */,
 				8706297C22D4AC120084441A /* CalendarListViewController.swift */,
 				8706298022D4AC120084441A /* Main.storyboard */,
 				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
@@ -348,6 +351,7 @@
 				8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */,
 				8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */,
 				87094FFC22DC52820047D672 /* PriorityViewCell.swift in Sources */,
+				871B3ABA22FAF16100EEB7B0 /* AgendaViewController.swift in Sources */,
 				C13068C722E7082400C8BA5A /* ReminderGroup.swift in Sources */,
 				8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
