@@ -163,7 +163,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BPF-d7-du1"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" id="LHH-OV-gHg"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="tabCalendar" id="LHH-OV-gHg"/>
                     <connections>
                         <outlet property="calendarPicker" destination="CmM-LQ-bB3" id="Lwk-NK-TII"/>
                     </connections>
@@ -195,7 +195,7 @@
                             <outlet property="delegate" destination="BhJ-bG-1Q8" id="nv1-Nt-ezO"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="List" id="78X-Kv-FwI"/>
+                    <tabBarItem key="tabBarItem" title="List" image="tabList" id="78X-Kv-FwI"/>
                     <navigationItem key="navigationItem" id="bvG-e6-N37"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MnJ-hq-1qf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,11 +336,16 @@
                             <outlet property="delegate" destination="Gah-70-M6p" id="qQq-vW-yla"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" id="qHk-qN-cBC"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="tabSettings" id="qHk-qN-cBC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1Y-0s-8W9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1567" y="-1970"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabCalendar" width="32" height="32"/>
+        <image name="tabList" width="32" height="32"/>
+        <image name="tabSettings" width="32" height="32"/>
+    </resources>
 </document>
