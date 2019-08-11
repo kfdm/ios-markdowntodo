@@ -43,16 +43,6 @@ class CalendarListViewController: UITableViewController {
         controller.navigationItem.leftItemsSupplementBackButton = true
         splitViewController?.showDetailViewController(nav, sender: self)
     }
-
-    // MARK: - IBAction
-
-    @IBAction func clickSettingsButton(_ sender: UIBarButtonItem) {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-    }
-
-    @IBAction func clickAboutButton(_ sender: UIBarButtonItem) {
-        UIApplication.shared.open(URL(string: "https://github.com/kfdm/ios-markdowntodo")!)
-    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
