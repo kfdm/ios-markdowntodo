@@ -15,6 +15,7 @@ class ReminderViewCell: UITableViewCell, ReusableCell {
 
     @IBOutlet weak var statusButton: UIButton!
     @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var listButton: UIButton!
 
     @IBOutlet weak var colorStrip: UIButton!
 
@@ -24,6 +25,9 @@ class ReminderViewCell: UITableViewCell, ReusableCell {
         didSet {
             guard let newReminder = reminder else { return }
             titleLabel?.text = newReminder.title
+
+            listButton.setTitle(newReminder.calendar.title, for: .normal)
+            listButton.setTitleColor(Colors.calendar(for: newReminder.calendar), for: .normal)
 
             switch newReminder.scheduledState {
             case .unscheduled:
