@@ -8,7 +8,6 @@
 
 import UIKit
 import EventKit
-import FSCalendar
 
 class CalendarListViewController: UITableViewController {
 
@@ -86,5 +85,19 @@ extension CalendarListViewController {
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
+    }
+}
+
+struct CalendarGroup {
+    let title: String
+    let list: [EKCalendar]
+}
+
+extension CalendarGroup {
+    static func fetch() -> [CalendarGroup] {
+        let sorted = CalendarAPI.shared.calendars.sorted { $0.cgColor.hashValue > $1.cgColor.hashValue }
+        return Dictionary(grouping: sorted) { $0.source! }
+            .map { CalendarGroup(title: $0.title, list: $1 )}
+            .sorted { $0.title < $1.title }
     }
 }

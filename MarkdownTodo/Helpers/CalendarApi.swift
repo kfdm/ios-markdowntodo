@@ -100,11 +100,9 @@ class CalendarAPI {
         store.refreshSourcesIfNecessary()
     }
 
-    func filteredSources() -> [EKSource] {
+    var calendars: [EKCalendar] {
         store.refreshSourcesIfNecessary()
-        return store.sources.filter({ (source) -> Bool in
-            source.sourceType == .calDAV
-        })
+        return store.calendars(for: .reminder).filter { $0.allowsContentModifications }
     }
 
     func numberOfEventsFor(_ date: Date) -> Int {

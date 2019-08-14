@@ -77,17 +77,3 @@ final class ReminderManager {
         return Labels.unscheduled
     }
 }
-
-struct CalendarGroup {
-    let title: String
-    let list: [EKCalendar]
-}
-
-extension CalendarGroup {
-    static func fetch() -> [CalendarGroup] {
-        return CalendarAPI.shared.filteredSources().map { (source) -> CalendarGroup in
-            let calendars = source.calendars(for: .reminder).sorted { $0.cgColor.hashValue > $1.cgColor.hashValue }
-            return CalendarGroup(title: source.title, list: calendars)
-            }.sorted { $0.title < $1.title }
-    }
-}
