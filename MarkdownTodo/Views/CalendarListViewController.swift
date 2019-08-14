@@ -20,11 +20,6 @@ class CalendarListViewController: UITableViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(fetchCalendar), name: .authenticationGranted, object: nil)
-
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ReminderListViewController
-        }
     }
 
     @IBAction func showAddCalendar(_ sender: UIBarButtonItem) {
