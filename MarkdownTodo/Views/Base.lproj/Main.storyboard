@@ -103,7 +103,7 @@
                     <toolbarItems/>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="relationship" relationship="detailViewController" id="Tll-UG-LXB"/>
-                        <segue destination="2ug-Ay-tsp" kind="relationship" relationship="masterViewController" id="4MR-AK-gRK"/>
+                        <segue destination="iwd-Yw-21W" kind="relationship" relationship="masterViewController" id="V3o-Oh-zlm"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -163,7 +163,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BPF-d7-du1"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" image="tabCalendar" id="LHH-OV-gHg"/>
+                    <navigationItem key="navigationItem" id="1Jd-yI-5u6"/>
                     <connections>
                         <outlet property="calendarPicker" destination="CmM-LQ-bB3" id="Lwk-NK-TII"/>
                     </connections>
@@ -172,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="1567" y="-630"/>
         </scene>
-        <!--List-->
+        <!--Calendar List View Controller-->
         <scene sceneID="pBL-Ls-K0u">
             <objects>
                 <tableViewController id="BhJ-bG-1Q8" customClass="CalendarListViewController" customModule="MarkdownTodo" customModuleProvider="target" sceneMemberID="viewController">
@@ -195,8 +195,14 @@
                             <outlet property="delegate" destination="BhJ-bG-1Q8" id="nv1-Nt-ezO"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="List" image="tabList" id="78X-Kv-FwI"/>
-                    <navigationItem key="navigationItem" id="bvG-e6-N37"/>
+                    <navigationItem key="navigationItem" id="bvG-e6-N37">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="fbs-c0-VLv"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qMk-WK-HKg">
+                            <connections>
+                                <action selector="showAddCalendar:" destination="BhJ-bG-1Q8" id="xeO-y0-wMw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MnJ-hq-1qf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,22 +224,6 @@
             </objects>
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nwC-fQ-KSv">
-            <objects>
-                <navigationController id="2ug-Ay-tsp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EEv-Dh-k2V">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="iwd-Yw-21W" kind="relationship" relationship="rootViewController" id="Qdr-GE-q77"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wVI-ee-3OF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-46" y="-630"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2Ew-2P-ifA">
             <objects>
@@ -246,16 +236,16 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="EgX-Dr-XWQ" kind="relationship" relationship="viewControllers" id="sOC-rX-Efc"/>
-                        <segue destination="BhJ-bG-1Q8" kind="relationship" relationship="viewControllers" id="USd-eq-9c9"/>
-                        <segue destination="Gah-70-M6p" kind="relationship" relationship="viewControllers" id="Yoo-C6-nzi"/>
+                        <segue destination="Psk-VS-GzT" kind="relationship" relationship="viewControllers" id="sOC-rX-Efc"/>
+                        <segue destination="M7B-eS-IEl" kind="relationship" relationship="viewControllers" id="USd-eq-9c9"/>
+                        <segue destination="RmT-ZH-dg4" kind="relationship" relationship="viewControllers" id="Yoo-C6-nzi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhs-BD-ess" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="-630"/>
+            <point key="canvasLocation" x="-46" y="-630"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="Tcn-KY-09W">
             <objects>
                 <tableViewController id="Gah-70-M6p" customClass="SettingsViewController" customModule="MarkdownTodo" customModuleProvider="target" sceneMemberID="viewController">
@@ -352,11 +342,112 @@
                             <outlet property="delegate" destination="Gah-70-M6p" id="qQq-vW-yla"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="tabSettings" id="qHk-qN-cBC"/>
+                    <navigationItem key="navigationItem" id="yCM-Pl-m44"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1Y-0s-8W9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1567" y="-1970"/>
+        </scene>
+        <!--New Calendar View Controller-->
+        <scene sceneID="02P-EC-M6Y">
+            <objects>
+                <tableViewController storyboardIdentifier="NewCalendarViewController" id="9sQ-Kr-HxR" customClass="NewCalendarViewController" customModule="MarkdownTodo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xjh-Ip-Ql5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="qPG-IO-atQ" detailTextLabel="olo-1v-LQH" style="IBUITableViewCellStyleValue1" id="hx8-mg-m1T">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hx8-mg-m1T" id="xNv-pB-XZ5">
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qPG-IO-atQ">
+                                            <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="olo-1v-LQH">
+                                            <rect key="frame" x="332" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9sQ-Kr-HxR" id="bT8-mB-GjF"/>
+                            <outlet property="delegate" destination="9sQ-Kr-HxR" id="Oqh-tR-hkW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zpI-eL-pVG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2393" y="-1970"/>
+        </scene>
+        <!--Calendar-->
+        <scene sceneID="2WR-IT-ymW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Psk-VS-GzT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Calendar" image="tabCalendar" id="LHH-OV-gHg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xQI-iZ-SfH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EgX-Dr-XWQ" kind="relationship" relationship="rootViewController" id="DsF-OO-Iw7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CVM-2g-LLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="-630"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="PBa-lB-z9v">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M7B-eS-IEl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="tabList" id="78X-Kv-FwI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WQD-va-T6a">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BhJ-bG-1Q8" kind="relationship" relationship="rootViewController" id="0PE-y7-JXy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aKu-bw-L0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="-1306"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="HsZ-3K-1ZP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RmT-ZH-dg4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="tabSettings" id="qHk-qN-cBC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h2Q-2B-9Re">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gah-70-M6p" kind="relationship" relationship="rootViewController" id="gA4-Tb-xLd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FGq-tz-jLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="-1970"/>
         </scene>
     </scenes>
     <resources>

@@ -27,6 +27,13 @@ class CalendarListViewController: UITableViewController {
         }
     }
 
+    @IBAction func showAddCalendar(_ sender: UIBarButtonItem) {
+        let vc = NewCalendarViewController.instantiate()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true, completion: nil)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         CalendarAPI.shared.authenticated(completionHandler: {

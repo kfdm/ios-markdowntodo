@@ -84,6 +84,23 @@ class CalendarAPI {
         return reminder
     }
 
+    func newCalendar(for source: EKSource) -> EKCalendar {
+        let calendar = EKCalendar(for: .reminder, eventStore: store)
+        calendar.source = source
+        return calendar
+    }
+
+    func save(calendar: EKCalendar, commit: Bool) {
+        os_log("Saving updates to reminder: %@", log: logger, type: .error, calendar)
+        do {
+            try store.saveCalendar(calendar, commit: commit)
+            NotificationCenter.default.post(name: .savedReminder, object: calendar)
+        } catch {
+            print("Error creating and saving new calendar : \(error)")
+        }
+
+    }
+
     func predicateForIncompleteReminders(withDueDateStarting start: Date?, ending: Date?, calendars: [EKCalendar]?) -> NSPredicate {
         return store.predicateForIncompleteReminders(withDueDateStarting: start, ending: ending, calendars: calendars)
     }
@@ -103,6 +120,11 @@ class CalendarAPI {
     var calendars: [EKCalendar] {
         store.refreshSourcesIfNecessary()
         return store.calendars(for: .reminder).filter { $0.allowsContentModifications }
+    }
+
+    var sources: [EKSource] {
+        store.refreshSourcesIfNecessary()
+        return store.sources.filter { $0.sourceType == .calDAV }
     }
 
     func numberOfEventsFor(_ date: Date) -> Int {

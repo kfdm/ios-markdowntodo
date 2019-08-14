@@ -13,7 +13,7 @@ class StringViewCell: UITableViewCell, ReusableCell {
     labelField: UILabel!
     @IBOutlet private weak var textField: UITextField!
 
-    var changed: ((String) -> Void)?
+    var textChanged: ((String) -> Void)?
 
     var label: String? {
         get {
@@ -48,6 +48,6 @@ class StringViewCell: UITableViewCell, ReusableCell {
     }
 
     @objc func updatedText() {
-        changed?(textField!.text!)
+        textChanged?(textField!.text!)
     }
 }

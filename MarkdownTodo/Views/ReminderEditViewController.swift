@@ -60,14 +60,14 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Title", comment: "Reminder Title")
             cell.value = currentReminder?.title
-            cell.changed = { newTitle in self.currentReminder?.title = newTitle }
+            cell.textChanged = { newTitle in self.currentReminder?.title = newTitle }
             return cell
         case .url:
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("URL", comment: "Reminder URL")
             cell.value = currentReminder?.url?.absoluteString
             cell.keyboardType = .URL
-            cell.changed = { newURL in self.currentReminder?.url = URL(string: newURL) }
+            cell.textChanged = { newURL in self.currentReminder?.url = URL(string: newURL) }
             return cell
         case .priority:
             let cell: PriorityViewCell = tableView.dequeueReusableCell(for: indexPath)
