@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8700DDC323041DE100A7082A /* NewCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8700DDC223041DE100A7082A /* NewCalendarViewController.swift */; };
 		8700DDCB23042C7200A7082A /* SelectSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8700DDCA23042C7200A7082A /* SelectSourceController.swift */; };
+		8700DDCD2304382E00A7082A /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8700DDCC2304382E00A7082A /* SimpleTableViewCell.swift */; };
 		8706297B22D4AC120084441A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297A22D4AC120084441A /* AppDelegate.swift */; };
 		8706297D22D4AC120084441A /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297C22D4AC120084441A /* CalendarListViewController.swift */; };
 		8706297F22D4AC120084441A /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8706297E22D4AC120084441A /* ReminderListViewController.swift */; };
@@ -77,6 +78,7 @@
 		2317172232B44B5B20FBBE38 /* Pods-MarkdownTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarkdownTodo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo.debug.xcconfig"; sourceTree = "<group>"; };
 		8700DDC223041DE100A7082A /* NewCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCalendarViewController.swift; sourceTree = "<group>"; };
 		8700DDCA23042C7200A7082A /* SelectSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourceController.swift; sourceTree = "<group>"; };
+		8700DDCC2304382E00A7082A /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 		8706297722D4AC120084441A /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8706297A22D4AC120084441A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8706297C22D4AC120084441A /* CalendarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */,
 				873AC79C22D8B5570059F70F /* ReminderViewCell.swift */,
 				87191F7C22DDDD2B00E9DB4B /* ReminderViewCell.xib */,
+				8700DDCC2304382E00A7082A /* SimpleTableViewCell.swift */,
 				87F2221D22DC907D005B2CB7 /* StringViewCell.swift */,
 				87F2221E22DC907D005B2CB7 /* StringViewCell.xib */,
 			);
@@ -461,6 +464,7 @@
 				8700DDCB23042C7200A7082A /* SelectSourceController.swift in Sources */,
 				8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */,
 				8706297B22D4AC120084441A /* AppDelegate.swift in Sources */,
+				8700DDCD2304382E00A7082A /* SimpleTableViewCell.swift in Sources */,
 				8706298F22D4AD1D0084441A /* Calendar.swift in Sources */,
 				8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */,
 				871B3ABC22FB018100EEB7B0 /* SettingsViewController.swift in Sources */,

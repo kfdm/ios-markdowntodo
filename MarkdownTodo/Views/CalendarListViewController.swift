@@ -28,7 +28,7 @@ class CalendarListViewController: UITableViewController {
     }
 
     @IBAction func showAddCalendar(_ sender: UIBarButtonItem) {
-        let vc = NewCalendarViewController.instantiate()
+        let vc = NewCalendarViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .formSheet
         present(nav, animated: true, completion: nil)

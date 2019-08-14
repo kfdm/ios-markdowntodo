@@ -9,9 +9,15 @@
 import UIKit
 import EventKit
 
-class NewCalendarViewController: UITableViewController, Storyboarded {
+class NewCalendarViewController: UITableViewController {
     private var name: String?
     private var source: EKSource?
+
+    init() { super.init(style: .grouped) }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +25,8 @@ class NewCalendarViewController: UITableViewController, Storyboarded {
         title = NSLocalizedString("New Calendar", comment: "Edit Reminder Title")
 
         tableView.register(StringViewCell.self)
+        tableView.register(SimpleTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.rowHeight = 44.0
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
@@ -46,7 +54,7 @@ class NewCalendarViewController: UITableViewController, Storyboarded {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,6 +69,11 @@ class NewCalendarViewController: UITableViewController, Storyboarded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel?.text = "Source"
             cell.detailTextLabel?.text = source?.title
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        case [0, 2]:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.text = "Color"
             return cell
         default:
             fatalError("Unknown cell for index \(indexPath)")
