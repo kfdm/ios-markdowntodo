@@ -34,6 +34,9 @@
 		8761EAA022DC283900A8474A /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EA9F22DC283900A8474A /* Storyboarded.swift */; };
 		87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */; };
 		879201A722DFCC2C001B2AF7 /* CalendarApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879201A622DFCC2C001B2AF7 /* CalendarApi.swift */; };
+		879718D522FFDB6100F69BF1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879718D422FFDB6100F69BF1 /* ShareViewController.swift */; };
+		879718D822FFDB6100F69BF1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879718D622FFDB6100F69BF1 /* MainInterface.storyboard */; };
+		879718DC22FFDB6100F69BF1 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 879718D222FFDB6100F69BF1 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
 		87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
@@ -43,6 +46,30 @@
 		C13068C722E7082400C8BA5A /* ReminderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13068C622E7082400C8BA5A /* ReminderGroup.swift */; };
 		DBCC17F00C5F192B3DCD75A3 /* Pods_MarkdownTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF6952C26FE70ACE74F2E13 /* Pods_MarkdownTodo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		879718DA22FFDB6100F69BF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8706296F22D4AC120084441A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 879718D122FFDB6100F69BF1;
+			remoteInfo = Share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		879718E022FFDB6100F69BF1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				879718DC22FFDB6100F69BF1 /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2317172232B44B5B20FBBE38 /* Pods-MarkdownTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarkdownTodo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MarkdownTodo/Pods-MarkdownTodo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +103,12 @@
 		8761EA9F22DC283900A8474A /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		87876F3C22DF48B4002C49E1 /* GroupedReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReminders.swift; sourceTree = "<group>"; };
 		879201A622DFCC2C001B2AF7 /* CalendarApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarApi.swift; sourceTree = "<group>"; };
+		879718D222FFDB6100F69BF1 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		879718D422FFDB6100F69BF1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		879718D722FFDB6100F69BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		879718D922FFDB6100F69BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		879718E122FFDB7C00F69BF1 /* MarkdownTodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownTodo.entitlements; sourceTree = "<group>"; };
+		879718E222FFDB9600F69BF1 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
 		87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
@@ -93,6 +126,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCC17F00C5F192B3DCD75A3 /* Pods_MarkdownTodo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		879718CF22FFDB6100F69BF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +155,7 @@
 				8706297922D4AC120084441A /* MarkdownTodo */,
 				086639E2FB4201CC6AE22150 /* Pods */,
 				8706297822D4AC120084441A /* Products */,
+				879718D322FFDB6100F69BF1 /* Share */,
 				87094FF222DC40A50047D672 /* README.md */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				8706297722D4AC120084441A /* MarkdownTodo.app */,
+				879718D222FFDB6100F69BF1 /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +181,7 @@
 				8706298322D4AC140084441A /* Assets.xcassets */,
 				8706298822D4AC140084441A /* Info.plist */,
 				8706298522D4AC140084441A /* LaunchScreen.storyboard */,
+				879718E122FFDB7C00F69BF1 /* MarkdownTodo.entitlements */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -209,6 +252,17 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		879718D322FFDB6100F69BF1 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				879718D922FFDB6100F69BF1 /* Info.plist */,
+				879718D622FFDB6100F69BF1 /* MainInterface.storyboard */,
+				879718E222FFDB9600F69BF1 /* Share.entitlements */,
+				879718D422FFDB6100F69BF1 /* ShareViewController.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		885383B60B0679D0E22DBAA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,15 +283,34 @@
 				8706297422D4AC120084441A /* Frameworks */,
 				8706297522D4AC120084441A /* Resources */,
 				37FBDA79D4CAA1F5033E010C /* [CP] Embed Pods Frameworks */,
+				879718E022FFDB6100F69BF1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				879718DB22FFDB6100F69BF1 /* PBXTargetDependency */,
 			);
 			name = MarkdownTodo;
 			productName = MarkdownTodo;
 			productReference = 8706297722D4AC120084441A /* MarkdownTodo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		879718D122FFDB6100F69BF1 /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 879718DF22FFDB6100F69BF1 /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				879718CE22FFDB6100F69BF1 /* Sources */,
+				879718CF22FFDB6100F69BF1 /* Frameworks */,
+				879718D022FFDB6100F69BF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			productName = Share;
+			productReference = 879718D222FFDB6100F69BF1 /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -245,13 +318,26 @@
 		8706296F22D4AC120084441A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Paul Traylor";
 				TargetAttributes = {
 					8706297622D4AC120084441A = {
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					879718D122FFDB6100F69BF1 = {
+						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -269,6 +355,7 @@
 			projectRoot = "";
 			targets = (
 				8706297622D4AC120084441A /* MarkdownTodo */,
+				879718D122FFDB6100F69BF1 /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +373,14 @@
 				87F2222022DC907D005B2CB7 /* StringViewCell.xib in Resources */,
 				8706298222D4AC120084441A /* Main.storyboard in Resources */,
 				87F2222422DC92E5005B2CB7 /* MarkdownViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		879718D022FFDB6100F69BF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				879718D822FFDB6100F69BF1 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +461,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		879718CE22FFDB6100F69BF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				879718D522FFDB6100F69BF1 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		879718DB22FFDB6100F69BF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 879718D122FFDB6100F69BF1 /* Share */;
+			targetProxy = 879718DA22FFDB6100F69BF1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8706298022D4AC120084441A /* Main.storyboard */ = {
@@ -384,6 +495,15 @@
 				8706298622D4AC140084441A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		879718D622FFDB6100F69BF1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				879718D722FFDB6100F69BF1 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			path = .;
 			sourceTree = "<group>";
 		};
@@ -510,9 +630,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2317172232B44B5B20FBBE38 /* Pods-MarkdownTodo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				INFOPLIST_FILE = MarkdownTodo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -532,9 +654,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B64234EDF7AB64021AEF5D35 /* Pods-MarkdownTodo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				INFOPLIST_FILE = MarkdownTodo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -547,6 +671,48 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		879718DD22FFDB6100F69BF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QX3B8ZS54S;
+				INFOPLIST_FILE = Share/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.kungfudiscomonkey.MarkdownTodo.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		879718DE22FFDB6100F69BF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QX3B8ZS54S;
+				INFOPLIST_FILE = Share/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.kungfudiscomonkey.MarkdownTodo.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -567,6 +733,15 @@
 			buildConfigurations = (
 				8706298C22D4AC140084441A /* Debug */,
 				8706298D22D4AC140084441A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		879718DF22FFDB6100F69BF1 /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				879718DD22FFDB6100F69BF1 /* Debug */,
+				879718DE22FFDB6100F69BF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
