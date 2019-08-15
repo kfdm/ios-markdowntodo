@@ -41,6 +41,8 @@
 		879718D822FFDB6100F69BF1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879718D622FFDB6100F69BF1 /* MainInterface.storyboard */; };
 		879718DC22FFDB6100F69BF1 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 879718D222FFDB6100F69BF1 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		87C6677E23057B2200A85ED5 /* EditCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */; };
+		87C66782230585DA00A85ED5 /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C66781230585DA00A85ED5 /* SelectCalendarViewController.swift */; };
+		87C66784230589D300A85ED5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C66783230589D300A85ED5 /* Settings.swift */; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
 		87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
@@ -118,6 +120,8 @@
 		879718E122FFDB7C00F69BF1 /* MarkdownTodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownTodo.entitlements; sourceTree = "<group>"; };
 		879718E222FFDB9600F69BF1 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCalendarViewController.swift; sourceTree = "<group>"; };
+		87C66781230585DA00A85ED5 /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
+		87C66783230589D300A85ED5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
 		87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				8706298E22D4AD1D0084441A /* Calendar.swift */,
 				879201A622DFCC2C001B2AF7 /* CalendarApi.swift */,
 				87094FF522DC42BD0047D672 /* Colors.swift */,
+				87C66783230589D300A85ED5 /* Settings.swift */,
 				8759219322E4918600D3A641 /* Shortcuts.swift */,
 				8761EA9F22DC283900A8474A /* Storyboarded.swift */,
 			);
@@ -251,6 +256,7 @@
 				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
 				8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */,
 				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
+				87C66781230585DA00A85ED5 /* SelectCalendarViewController.swift */,
 				8700DDCA23042C7200A7082A /* SelectSourceController.swift */,
 				871B3ABB22FB018100EEB7B0 /* SettingsViewController.swift */,
 			);
@@ -453,11 +459,13 @@
 				8759218F22E46EA000D3A641 /* Notification+Constants.swift in Sources */,
 				8759218B22E45AC600D3A641 /* ReminderDatePickerViewController.swift in Sources */,
 				8759218722E43FBB00D3A641 /* ReminderActions.swift in Sources */,
+				87C66784230589D300A85ED5 /* Settings.swift in Sources */,
 				8759219422E4918600D3A641 /* Shortcuts.swift in Sources */,
 				C14FBB702304CA87003D48BF /* SplitViewController.swift in Sources */,
 				8759218922E44DE900D3A641 /* EKReminder+Extensions.swift in Sources */,
 				8759218422E42D6900D3A641 /* DateViewCell.swift in Sources */,
 				8706297D22D4AC120084441A /* CalendarListViewController.swift in Sources */,
+				87C66782230585DA00A85ED5 /* SelectCalendarViewController.swift in Sources */,
 				87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */,
 				8759217F22E4070A00D3A641 /* Date+Extensions.swift in Sources */,
 				8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */,
