@@ -20,6 +20,7 @@ class CalendarListViewController: UITableViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(fetchCalendar), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(fetchCalendar), name: .authenticationGranted, object: nil)
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
     @IBAction func showAddCalendar(_ sender: UIBarButtonItem) {
@@ -70,14 +71,29 @@ extension CalendarListViewController {
         return groupedCalendars[section].title
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
+    func didOpenCalendarAt(_ calendar: EKCalendar) {
         let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
             controller.title = calendar.title
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)
             controller.selectedPredicate = predicate
             controller.selectedCalendars = [calendar]
+        }
+    }
+
+    func didEditCalendarAt(_ calendar: EKCalendar) {
+        let vc = EditCalendarViewController(for: calendar)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true, completion: nil)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let calendar = groupedCalendars[indexPath.section].list[indexPath.row]
+        if tableView.isEditing {
+            didEditCalendarAt(calendar)
+        } else {
+            didOpenCalendarAt(calendar)
         }
     }
 

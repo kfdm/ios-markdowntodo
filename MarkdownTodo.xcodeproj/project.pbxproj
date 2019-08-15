@@ -40,6 +40,7 @@
 		879718D522FFDB6100F69BF1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879718D422FFDB6100F69BF1 /* ShareViewController.swift */; };
 		879718D822FFDB6100F69BF1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879718D622FFDB6100F69BF1 /* MainInterface.storyboard */; };
 		879718DC22FFDB6100F69BF1 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 879718D222FFDB6100F69BF1 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		87C6677E23057B2200A85ED5 /* EditCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */; };
 		87F2221622DC8AF3005B2CB7 /* PriorityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */; };
 		87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */; };
 		87F2221F22DC907D005B2CB7 /* StringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2221D22DC907D005B2CB7 /* StringViewCell.swift */; };
@@ -116,6 +117,7 @@
 		879718D922FFDB6100F69BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		879718E122FFDB7C00F69BF1 /* MarkdownTodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownTodo.entitlements; sourceTree = "<group>"; };
 		879718E222FFDB9600F69BF1 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
+		87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCalendarViewController.swift; sourceTree = "<group>"; };
 		87F2221522DC8AF3005B2CB7 /* PriorityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriorityViewCell.xib; sourceTree = "<group>"; };
 		87F2221722DC8D9E005B2CB7 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		87F2221D22DC907D005B2CB7 /* StringViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringViewCell.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			children = (
 				871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */,
 				8706297C22D4AC120084441A /* CalendarListViewController.swift */,
+				87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */,
 				8706298022D4AC120084441A /* Main.storyboard */,
 				8700DDC223041DE100A7082A /* NewCalendarViewController.swift */,
 				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
@@ -471,6 +474,7 @@
 				871B3ABC22FB018100EEB7B0 /* SettingsViewController.swift in Sources */,
 				87F2221822DC8D9E005B2CB7 /* UITableView+ReusableCell.swift in Sources */,
 				87F2222322DC92E5005B2CB7 /* MarkdownViewCell.swift in Sources */,
+				87C6677E23057B2200A85ED5 /* EditCalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
