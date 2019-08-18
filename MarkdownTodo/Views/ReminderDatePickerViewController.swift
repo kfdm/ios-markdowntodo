@@ -12,7 +12,7 @@ import FSCalendar
 
 class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegate, FSCalendarDataSource, Storyboarded {
     weak var delegate: ReminderActions?
-    var currentReminder: EKReminder?
+    weak var currentReminder: EKReminder?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,7 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
     }
 
     @objc func cancelEdit() {
+        currentReminder?.rollback()
         dismiss(animated: true, completion: nil)
     }
 
@@ -39,8 +40,8 @@ class ReminderDatePickerViewController: UITableViewController, FSCalendarDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.label = NSLocalizedString("Due", comment: "Due Date")
-        cell.date = currentReminder?.dueDateComponents
-        cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }
+        cell.value = currentReminder?.dueDateComponents
+        cell.changed = { self.currentReminder?.dueDateComponents = $0 }
         return cell
     }
 

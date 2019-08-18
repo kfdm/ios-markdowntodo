@@ -12,51 +12,49 @@ import FSCalendar
 class DateViewCell: UITableViewCell, FSCalendarDelegate, FSCalendarDataSource, ReusableCell {
     @IBOutlet private weak var labelField: UILabel!
     @IBOutlet private weak var valueField: UILabel!
-    @IBOutlet private weak var segmentField: UISegmentedControl!
-    @IBOutlet weak var datePicker: FSCalendar!
+    @IBOutlet private weak var datePicker: FSCalendar!
 
     var changed: ((DateComponents?) -> Void)?
-    var date: DateComponents?
-
-    var label: String {
-        get {
-            return labelField.text ?? ""
-        }
-        set {
-            labelField.text = newValue
+    var value: DateComponents? {
+        didSet {
+            if let date = value?.date {
+                valueField.text = Formats.full(date)
+                datePicker.select(date, scrollToDate: true)
+            } else {
+                valueField.text = Labels.unscheduled
+                datePicker.clearAllSelections()
+            }
         }
     }
 
-    @IBAction func selectionDate(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            datePicker.select(Date(), scrollToDate: true)
-            dateSet(Date())
-        case 1:
-            datePicker.select(Date().tomorrow, scrollToDate: true)
-            dateSet(Date().tomorrow)
-        case 2:
-            datePicker.clearAllSelections()
-            dateSet(nil)
-        default:
-            print("unknown")
+    var label: String? {
+        didSet {
+            labelField.text = label
         }
+    }
+
+    @IBAction func selectToday(_ sender: UIButton) {
+        dateSet(Date())
+    }
+
+    @IBAction func selectTomorrow(_ sender: UIButton) {
+        dateSet(Date().tomorrow)
+    }
+
+    @IBAction func selectUnschedule(_ sender: UIButton) {
+        dateSet(nil)
     }
 
     func dateSet(_ newDate: Date?) {
         if let checkedDate = newDate {
-            let calendar = Calendar.current
-            date = calendar.dateComponents([.year, .month, .day], from: checkedDate)
-            valueField.text = Formats.full(checkedDate)
-            changed?(date)
+            value = Calendar.current.dateComponents([.calendar, .year, .month, .day], from: checkedDate)
         } else {
-            valueField.text = Labels.unscheduled
-            changed?(nil)
+            value = nil
         }
+        changed?(value)
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        segmentField.selectedSegmentIndex = 3
         dateSet(date)
     }
 

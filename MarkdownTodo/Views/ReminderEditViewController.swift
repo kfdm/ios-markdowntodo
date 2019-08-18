@@ -77,7 +77,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         case .due:
             let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Due", comment: "Due Date")
-            cell.date = currentReminder?.dueDateComponents
+            cell.value = currentReminder?.dueDateComponents
             cell.changed = { [unowned self] newDate in self.currentReminder?.dueDateComponents = newDate }
             return cell
         case .notes:

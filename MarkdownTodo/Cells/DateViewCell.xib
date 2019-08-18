@@ -26,46 +26,63 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYk-7W-eUe">
-                        <rect key="frame" x="270" y="8" width="42" height="21"/>
+                        <rect key="frame" x="270" y="8" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cs-Z5-coK" customClass="FSCalendar">
-                        <rect key="frame" x="8" y="73" width="304" height="164.5"/>
+                        <rect key="frame" x="8" y="74.5" width="304" height="163"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
                             <outlet property="dataSource" destination="KGk-i7-Jjw" id="NhV-BJ-eYS"/>
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="pk6-gO-w85"/>
                         </connections>
                     </view>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GKX-Gj-M0f">
-                        <rect key="frame" x="8" y="37" width="304" height="29"/>
-                        <segments>
-                            <segment title="Today"/>
-                            <segment title="Tomorrow"/>
-                            <segment title="Unschedule"/>
-                            <segment title="Custom"/>
-                        </segments>
-                        <connections>
-                            <action selector="selectionDate:" destination="KGk-i7-Jjw" eventType="valueChanged" id="KRf-cM-269"/>
-                        </connections>
-                    </segmentedControl>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5be-mQ-qb5">
+                        <rect key="frame" x="8" y="36.5" width="304" height="30"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtp-R3-lo0">
+                                <rect key="frame" x="0.0" y="0.0" width="76" height="30"/>
+                                <state key="normal" title="Today"/>
+                                <connections>
+                                    <action selector="selectToday:" destination="KGk-i7-Jjw" eventType="primaryActionTriggered" id="Poa-DI-Lap"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WE-cr-sim">
+                                <rect key="frame" x="76" y="0.0" width="76" height="30"/>
+                                <state key="normal" title="Tomorrow"/>
+                                <connections>
+                                    <action selector="selectTomorrow:" destination="KGk-i7-Jjw" eventType="primaryActionTriggered" id="Kd8-b8-HnL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq5-rk-qto">
+                                <rect key="frame" x="152" y="0.0" width="76" height="30"/>
+                                <state key="normal" title="Monday"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jns-dh-Lv0">
+                                <rect key="frame" x="228" y="0.0" width="76" height="30"/>
+                                <state key="normal" title="Unschedule"/>
+                                <connections>
+                                    <action selector="selectUnschedule:" destination="KGk-i7-Jjw" eventType="primaryActionTriggered" id="Lgz-DO-89S"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2cs-Z5-coK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="0X7-xc-EKr"/>
                     <constraint firstItem="2cs-Z5-coK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="2oY-Gx-Dih"/>
-                    <constraint firstAttribute="trailing" secondItem="GKX-Gj-M0f" secondAttribute="trailing" constant="8" id="4m7-z7-4wp"/>
+                    <constraint firstItem="2cs-Z5-coK" firstAttribute="top" secondItem="5be-mQ-qb5" secondAttribute="bottom" constant="8" symbolic="YES" id="If9-QE-jx8"/>
                     <constraint firstItem="eAn-0m-2zS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="RkL-cC-ldk"/>
-                    <constraint firstItem="GKX-Gj-M0f" firstAttribute="top" secondItem="hYk-7W-eUe" secondAttribute="bottom" constant="8" id="VYr-Ey-rnY"/>
                     <constraint firstAttribute="trailing" secondItem="2cs-Z5-coK" secondAttribute="trailing" constant="8" id="WyR-SL-yZm"/>
                     <constraint firstItem="hYk-7W-eUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="YPk-mX-v68"/>
+                    <constraint firstItem="5be-mQ-qb5" firstAttribute="leading" secondItem="eAn-0m-2zS" secondAttribute="leading" id="Yy2-cL-fso"/>
                     <constraint firstItem="eAn-0m-2zS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="aZJ-jm-LXw"/>
-                    <constraint firstItem="GKX-Gj-M0f" firstAttribute="top" secondItem="hYk-7W-eUe" secondAttribute="bottom" constant="8" id="cjk-ld-KMS"/>
+                    <constraint firstItem="5be-mQ-qb5" firstAttribute="top" secondItem="eAn-0m-2zS" secondAttribute="bottom" constant="8" symbolic="YES" id="f4M-IZ-81e"/>
                     <constraint firstAttribute="trailing" secondItem="hYk-7W-eUe" secondAttribute="trailing" constant="8" id="fWj-DM-Kma"/>
-                    <constraint firstItem="GKX-Gj-M0f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="jjN-xE-Knd"/>
+                    <constraint firstItem="5be-mQ-qb5" firstAttribute="trailing" secondItem="hYk-7W-eUe" secondAttribute="trailing" id="iBN-pR-EyI"/>
                     <constraint firstAttribute="bottom" secondItem="2cs-Z5-coK" secondAttribute="bottom" constant="8" id="s52-Ud-KbW"/>
-                    <constraint firstItem="2cs-Z5-coK" firstAttribute="top" secondItem="GKX-Gj-M0f" secondAttribute="bottom" constant="8" id="uCb-lv-ehZ"/>
                     <constraint firstAttribute="bottom" secondItem="2cs-Z5-coK" secondAttribute="bottom" constant="8" id="z3G-WK-eb1"/>
                     <constraint firstAttribute="trailing" secondItem="2cs-Z5-coK" secondAttribute="trailing" constant="8" id="zsI-IU-9RM"/>
                 </constraints>
@@ -74,7 +91,6 @@
             <connections>
                 <outlet property="datePicker" destination="2cs-Z5-coK" id="P2h-jW-0lL"/>
                 <outlet property="labelField" destination="eAn-0m-2zS" id="d2F-My-15V"/>
-                <outlet property="segmentField" destination="GKX-Gj-M0f" id="WY2-Lr-wWS"/>
                 <outlet property="valueField" destination="hYk-7W-eUe" id="Vv6-Mh-pSd"/>
             </connections>
             <point key="canvasLocation" x="34.782608695652179" y="102.45535714285714"/>
