@@ -60,31 +60,31 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Title", comment: "Reminder Title")
             cell.value = currentReminder?.title
-            cell.textChanged = { newTitle in self.currentReminder?.title = newTitle }
+            cell.textChanged = { [unowned self] newTitle in self.currentReminder?.title = newTitle }
             return cell
         case .url:
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("URL", comment: "Reminder URL")
             cell.value = currentReminder?.url?.absoluteString
             cell.keyboardType = .URL
-            cell.textChanged = { newURL in self.currentReminder?.url = URL(string: newURL) }
+            cell.textChanged = { [unowned self] newURL in self.currentReminder?.url = URL(string: newURL) }
             return cell
         case .priority:
             let cell: PriorityViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.priority = currentReminder!.priority
-            cell.changed = { newPriority in self.currentReminder?.priority = newPriority }
+            cell.changed = { [unowned self] newPriority in self.currentReminder?.priority = newPriority }
             return cell
         case .due:
             let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Due", comment: "Due Date")
             cell.date = currentReminder?.dueDateComponents
-            cell.changed = { newDate in self.currentReminder?.dueDateComponents = newDate }
+            cell.changed = { [unowned self] newDate in self.currentReminder?.dueDateComponents = newDate }
             return cell
         case .notes:
             let cell: MarkdownViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.value = currentReminder?.notes ?? ""
-            cell.changed = { newNote in self.currentReminder?.notes = newNote }
+            cell.changed = { [unowned self] newNote in self.currentReminder?.notes = newNote }
             return cell
         }
     }

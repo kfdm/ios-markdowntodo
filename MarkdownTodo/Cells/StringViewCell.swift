@@ -43,8 +43,7 @@ class StringViewCell: UITableViewCell, ReusableCell {
     }
 
     override func awakeFromNib() {
-        textField.addTarget(self, action: #selector(updatedText), for: .valueChanged)
-        textField.addTarget(self, action: #selector(updatedText), for: .editingDidEnd)
+        textField.addTarget(self, action: #selector(updatedText), for: .editingChanged)
     }
 
     @objc func updatedText() {
