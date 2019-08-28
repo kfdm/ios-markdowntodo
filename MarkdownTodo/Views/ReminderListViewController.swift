@@ -35,26 +35,9 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     }
 
     @IBAction func actionNewReminder(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController.init(title: "New Reminder", message: "Please enter new reminder", preferredStyle: .alert)
-        alert.addTextField { (field) in
-            field.placeholder = "New Todo"
-        }
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction.init(title: "Save", style: .default, handler: { (_) in
-            guard let selectedCalendar = self.selectedCalendars.first else { return }
-            let reminder = CalendarAPI.shared.newReminder(for: selectedCalendar)
-            reminder.title = alert.textFields?.first?.text
-            CalendarAPI.shared.save(reminder: reminder, commit: true)
-            self.fetchReminders()
-        }))
-        alert.addAction(UIAlertAction.init(title: "Save and Edit", style: .default, handler: { (_) in
-            guard let selectedCalendar = self.selectedCalendars.first else { return }
-            let reminder = CalendarAPI.shared.newReminder(for: selectedCalendar)
-            reminder.title = alert.textFields?.first?.text
-            CalendarAPI.shared.save(reminder: reminder, commit: true)
-            self.showReminder(reminder, animated: true)
-        }))
-        self.present(alert, animated: true, completion: nil)
+        guard let selectedCalendar = self.selectedCalendars.first else { return }
+        let newReminder = CalendarAPI.shared.newReminder(for: selectedCalendar)
+        self.showReminder(newReminder, animated: true)
     }
 
 }
