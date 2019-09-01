@@ -19,10 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IQg-63-LLB">
-                        <rect key="frame" x="161" y="8" width="233" height="28.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="233" id="MFi-jy-DXa"/>
-                        </constraints>
+                        <rect key="frame" x="159" y="8" width="239" height="29"/>
                         <segments>
                             <segment title="0"/>
                             <segment title="1"/>
@@ -37,19 +34,17 @@
                         </segments>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOY-XC-ZO5">
-                        <rect key="frame" x="8" y="8" width="55" height="27.5"/>
+                        <rect key="frame" x="16" y="11.5" width="55" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aOY-XC-ZO5" secondAttribute="bottom" constant="8" id="2j7-J9-RaU"/>
-                    <constraint firstItem="IQg-63-LLB" firstAttribute="top" secondItem="aOY-XC-ZO5" secondAttribute="top" id="7cW-99-Dgc"/>
-                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="leading" secondItem="WPZ-Mv-Txe" secondAttribute="leading" constant="8" id="VaK-XE-y4a"/>
-                    <constraint firstItem="IQg-63-LLB" firstAttribute="trailing" secondItem="WPZ-Mv-Txe" secondAttribute="trailingMargin" id="aJJ-gP-4OL"/>
-                    <constraint firstItem="IQg-63-LLB" firstAttribute="bottom" secondItem="aOY-XC-ZO5" secondAttribute="bottom" id="eUj-F9-Zvr"/>
-                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="top" secondItem="WPZ-Mv-Txe" secondAttribute="top" constant="8" id="j4v-JL-xo8"/>
+                    <constraint firstAttribute="trailing" secondItem="IQg-63-LLB" secondAttribute="trailing" constant="16" id="9Co-vl-wze"/>
+                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="leading" secondItem="WPZ-Mv-Txe" secondAttribute="leading" constant="16" id="F0c-4L-5M6"/>
+                    <constraint firstItem="IQg-63-LLB" firstAttribute="centerY" secondItem="WPZ-Mv-Txe" secondAttribute="centerY" id="MeJ-hT-7lc"/>
+                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="centerY" secondItem="WPZ-Mv-Txe" secondAttribute="centerY" id="rIY-bY-gKh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

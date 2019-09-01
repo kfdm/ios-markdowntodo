@@ -16,29 +16,20 @@ class StringViewCell: UITableViewCell, ReusableCell {
     var textChanged: ((String) -> Void)?
 
     var label: String? {
-        get {
-            return labelField.text
-        }
-        set {
-            labelField.text = newValue
+        didSet {
+            textField.placeholder = label
         }
     }
 
     var value: String? {
-        get {
-            return textField.text
-        }
-        set {
-            textField.text = newValue
+        didSet {
+            textField.text = value
         }
     }
 
-    var keyboardType: UIKeyboardType {
-        get {
-            return textField.keyboardType
-        }
-        set {
-            textField.keyboardType = newValue
+    var keyboardType: UIKeyboardType? {
+        didSet {
+            textField.keyboardType = keyboardType ?? UIKeyboardType.alphabet
         }
     }
 

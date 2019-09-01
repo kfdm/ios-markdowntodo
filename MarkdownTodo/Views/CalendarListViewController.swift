@@ -10,8 +10,6 @@ import UIKit
 import EventKit
 
 class CalendarListViewController: UITableViewController {
-
-    var detailViewController: ReminderListViewController?
     private var groupedCalendars = [CalendarGroup]()
 
     override func viewDidLoad() {
@@ -40,9 +38,9 @@ class CalendarListViewController: UITableViewController {
     func showReminderController(_ completionHandler: (ReminderListViewController) -> Void) {
         let controller = ReminderListViewController.instantiate()
         let nav = UINavigationController(rootViewController: controller)
-        completionHandler(controller)
         controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller.navigationItem.leftItemsSupplementBackButton = true
+        completionHandler(controller)
         splitViewController?.showDetailViewController(nav, sender: self)
     }
 }
@@ -75,6 +73,7 @@ extension CalendarListViewController {
         let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
         showReminderController { (controller) in
             controller.title = calendar.title
+            controller.navigationController?.navigationBar.isTranslucent = false
             controller.navigationController?.navigationBar.barTintColor = Colors.calendar(for: calendar)
             controller.selectedPredicate = predicate
             controller.selectedCalendars = [calendar]

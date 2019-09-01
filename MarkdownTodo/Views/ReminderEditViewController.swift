@@ -9,16 +9,8 @@
 import UIKit
 import EventKit
 
-enum TableRows: Int {
-    case title = 0
-    case url
-    case priority
-    case due
-    case notes
-}
-
 class ReminderEditViewController: UITableViewController, Storyboarded {
-    var currentReminder: EKReminder?
+    var currentReminder: EKReminder!
     weak var delegate: ReminderActions?
 
     override func viewDidLoad() {
@@ -27,6 +19,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         tableView.register(PriorityViewCell.self)
         tableView.register(MarkdownViewCell.self)
         tableView.register(DateViewCell.self)
+        tableView.register(SimpleTableViewCell.self, forCellReuseIdentifier: "SimpleTableView")
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
@@ -47,56 +40,92 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        switch section {
+        case 0:
+            return 5
+        case 1:
+            return 1
+        default:
+            fatalError("Unknown section \(section)")
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch TableRows.init(rawValue: indexPath.row)! {
-        case .title:
+        switch indexPath {
+        case [0, 0]:
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Title", comment: "Reminder Title")
             cell.value = currentReminder?.title
             cell.textChanged = { [unowned self] newTitle in self.currentReminder?.title = newTitle }
             return cell
-        case .url:
+        case [0, 1]:
             let cell: StringViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("URL", comment: "Reminder URL")
             cell.value = currentReminder?.url?.absoluteString
             cell.keyboardType = .URL
             cell.textChanged = { [unowned self] newURL in self.currentReminder?.url = URL(string: newURL) }
             return cell
-        case .priority:
+        case [0, 2]:
             let cell: PriorityViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.priority = currentReminder!.priority
             cell.changed = { [unowned self] newPriority in self.currentReminder?.priority = newPriority }
             return cell
-        case .due:
-            let cell: DateViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.label = NSLocalizedString("Due", comment: "Due Date")
-            cell.value = currentReminder?.dueDateComponents
-            cell.changed = { [unowned self] newDate in self.currentReminder?.dueDateComponents = newDate }
+        case [0, 3]:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
+            cell.textLabel?.text  = NSLocalizedString("Due", comment: "Due Date")
+            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel?.textColor = UIColor.black
+            if let date = currentReminder?.dueDateComponents?.date {
+                cell.detailTextLabel?.text  = Formats.full(date)
+            } else {
+                cell.detailTextLabel?.text = NSLocalizedString("Unscheduled", comment: "Due Date")
+            }
             return cell
-        case .notes:
+        case [0, 4]:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
+            cell.textLabel?.text = NSLocalizedString("Calendar", comment: "Currently selected calendar")
+            cell.detailTextLabel?.text = currentReminder?.calendar.title
+            cell.detailTextLabel?.textColor = Colors.calendar(for: currentReminder!.calendar)
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        case [1, 0]:
             let cell: MarkdownViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.value = currentReminder?.notes ?? ""
             cell.changed = { [unowned self] newNote in self.currentReminder?.notes = newNote }
             return cell
+        default:
+            fatalError("Invalid indexpath \(indexPath)")
         }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch TableRows.init(rawValue: indexPath.row)! {
-        case .notes:
-            return 256
-        case .due:
+        switch indexPath {
+        case [1, 0]:
             return 256
         default:
             return 44
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0, 3]:
+            print("Select date")
+        case [0, 4]:
+            let vc = SelectCalendarViewController(for: currentReminder?.calendar)
+            vc.didSelect = { calendar in
+                self.currentReminder.calendar = calendar
+                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
+                tableView.reloadData()
+            }
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            print("no select action for \(indexPath)")
         }
     }
 }
