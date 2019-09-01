@@ -19,12 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="Mtj-eZ-4Kx">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="Mtj-eZ-4Kx">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-7t-oIo">
-                                    <rect key="frame" x="8" y="8" width="304" height="28"/>
+                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
                                     <state key="normal" title="Show Completed"/>
                                     <connections>
                                         <action selector="showCompleted:" destination="Z8C-gi-x1H" eventType="primaryActionTriggered" id="dvW-A1-AU8"/>
@@ -80,7 +80,7 @@
         <!--DatePickerController-->
         <scene sceneID="py7-2l-hIn">
             <objects>
-                <tableViewController storyboardIdentifier="ReminderDatePickerViewController" id="Yr8-RN-vOT" userLabel="DatePickerController" customClass="ReminderDatePickerViewController" customModule="MarkdownTodo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DatePickerViewController" id="Yr8-RN-vOT" userLabel="DatePickerController" customClass="DatePickerViewController" customModule="MarkdownTodo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p7u-SI-cD9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

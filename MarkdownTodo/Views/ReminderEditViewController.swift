@@ -115,7 +115,15 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
         case [0, 3]:
-            print("Select date")
+            let vc = DatePickerViewController.instantiate()
+            vc.currentDate = currentReminder.dueDateComponents
+            vc.didSelect = {
+                self.navigationController?.popViewController(animated: true)
+                self.currentReminder.dueDateComponents = $0
+                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
+                tableView.reloadData()
+            }
+            navigationController?.pushViewController(vc, animated: true)
         case [0, 4]:
             let vc = SelectCalendarViewController(for: currentReminder?.calendar)
             vc.didSelect = { calendar in

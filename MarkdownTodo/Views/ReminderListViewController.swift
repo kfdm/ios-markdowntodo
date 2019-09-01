@@ -133,13 +133,23 @@ extension ReminderListViewController: ReminderActions {
     }
 
     func showScheduleDialog(reminder: EKReminder) {
-        let scheduleController = ReminderDatePickerViewController.instantiate()
-        let navigation = UINavigationController(rootViewController: scheduleController)
-        scheduleController.currentReminder = reminder
-        scheduleController.delegate = self
+        let vc = DatePickerViewController.instantiate()
+        let navigation = UINavigationController(rootViewController: vc)
+
+        vc.currentDate = reminder.dueDateComponents
+        vc.didSelect = {
+            reminder.dueDateComponents = $0
+            CalendarAPI.shared.save(reminder: reminder, commit: true)
+            vc.dismiss(animated: true, completion: nil)
+        }
+        vc.didCancel = {
+            vc.dismiss(animated: true, completion: nil)
+        }
+
         navigation.modalPresentationStyle = .formSheet
         present(navigation, animated: true, completion: nil)
     }
+
     func showStatusDialog(reminder: EKReminder) {
         if reminder.isCompleted {
             reminder.completionDate = nil

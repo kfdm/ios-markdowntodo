@@ -28,7 +28,7 @@
 		8759218522E42D6900D3A641 /* DateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8759218322E42D6900D3A641 /* DateViewCell.xib */; };
 		8759218722E43FBB00D3A641 /* ReminderActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218622E43FBB00D3A641 /* ReminderActions.swift */; };
 		8759218922E44DE900D3A641 /* EKReminder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */; };
-		8759218B22E45AC600D3A641 /* ReminderDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */; };
+		8759218B22E45AC600D3A641 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218A22E45AC600D3A641 /* DatePickerViewController.swift */; };
 		8759218D22E4690400D3A641 /* DateComponent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */; };
 		8759218F22E46EA000D3A641 /* Notification+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759218E22E46EA000D3A641 /* Notification+Constants.swift */; };
 		8759219122E4885E00D3A641 /* FSCalendar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */; };
@@ -104,7 +104,7 @@
 		8759218322E42D6900D3A641 /* DateViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateViewCell.xib; sourceTree = "<group>"; };
 		8759218622E43FBB00D3A641 /* ReminderActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderActions.swift; sourceTree = "<group>"; };
 		8759218822E44DE900D3A641 /* EKReminder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKReminder+Extensions.swift"; sourceTree = "<group>"; };
-		8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDatePickerViewController.swift; sourceTree = "<group>"; };
+		8759218A22E45AC600D3A641 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		8759218C22E4690400D3A641 /* DateComponent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponent+Extensions.swift"; sourceTree = "<group>"; };
 		8759218E22E46EA000D3A641 /* Notification+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Constants.swift"; sourceTree = "<group>"; };
 		8759219022E4885E00D3A641 /* FSCalendar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FSCalendar+Extensions.swift"; sourceTree = "<group>"; };
@@ -250,10 +250,10 @@
 			children = (
 				871B3AB922FAF16100EEB7B0 /* AgendaViewController.swift */,
 				8706297C22D4AC120084441A /* CalendarListViewController.swift */,
+				8759218A22E45AC600D3A641 /* DatePickerViewController.swift */,
 				87C6677D23057B2200A85ED5 /* EditCalendarViewController.swift */,
 				8706298022D4AC120084441A /* Main.storyboard */,
 				8700DDC223041DE100A7082A /* NewCalendarViewController.swift */,
-				8759218A22E45AC600D3A641 /* ReminderDatePickerViewController.swift */,
 				8761EA9D22DC1D7800A8474A /* ReminderEditViewController.swift */,
 				8706297E22D4AC120084441A /* ReminderListViewController.swift */,
 				87C66781230585DA00A85ED5 /* SelectCalendarViewController.swift */,
@@ -457,7 +457,7 @@
 				87876F3D22DF48B4002C49E1 /* GroupedReminders.swift in Sources */,
 				873AC79D22D8B5570059F70F /* ReminderViewCell.swift in Sources */,
 				8759218F22E46EA000D3A641 /* Notification+Constants.swift in Sources */,
-				8759218B22E45AC600D3A641 /* ReminderDatePickerViewController.swift in Sources */,
+				8759218B22E45AC600D3A641 /* DatePickerViewController.swift in Sources */,
 				8759218722E43FBB00D3A641 /* ReminderActions.swift in Sources */,
 				87C66784230589D300A85ED5 /* Settings.swift in Sources */,
 				8759219422E4918600D3A641 /* Shortcuts.swift in Sources */,
