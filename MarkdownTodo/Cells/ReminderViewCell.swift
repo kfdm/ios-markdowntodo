@@ -43,6 +43,8 @@ class ReminderViewCell: UITableViewCell, ReusableCell {
                 statusButton.setImage(Images.statusDone, for: .normal)
             case .overdue:
                 statusButton.setImage(Images.statusOverdue, for: .normal)
+            case .repeating:
+                statusButton.setImage(Images.statusRepeating, for: .normal)
             default:
                 statusButton.setImage(Images.statusEmpty, for: .normal)
             }

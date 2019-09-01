@@ -13,6 +13,7 @@ enum ScheduledOptions {
     case scheduled
     case overdue
     case unscheduled
+    case repeating
 }
 
 extension EKReminder {
@@ -25,6 +26,7 @@ extension EKReminder {
     var scheduledState: ScheduledOptions {
         get {
             if isCompleted { return .completed}
+            if hasRecurrenceRules { return .repeating }
             if sortableDate == Date.distantFuture { return .unscheduled }
             return sortableDate > Date() ? .scheduled : .overdue
         }
