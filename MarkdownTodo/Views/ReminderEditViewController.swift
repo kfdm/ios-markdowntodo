@@ -141,7 +141,6 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             let vc = SelectCalendarViewController(for: currentReminder?.calendar)
             vc.didSelect = { calendar in
                 self.currentReminder.calendar = calendar
-                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
                 tableView.reloadData()
             }
             navigationController?.pushViewController(vc, animated: true)
@@ -151,7 +150,6 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             vc.didSelect = {
                 self.navigationController?.popViewController(animated: true)
                 self.currentReminder.startDateComponents = $0
-                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
                 tableView.reloadData()
             }
             navigationController?.pushViewController(vc, animated: true)
@@ -161,7 +159,6 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             vc.didSelect = {
                 self.navigationController?.popViewController(animated: true)
                 self.currentReminder.dueDateComponents = $0
-                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
                 tableView.reloadData()
             }
             navigationController?.pushViewController(vc, animated: true)
