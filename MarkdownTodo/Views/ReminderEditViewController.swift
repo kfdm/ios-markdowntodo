@@ -40,14 +40,16 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 5
+            return 4
         case 1:
+            return 2
+        case 2:
             return 1
         default:
             fatalError("Unknown section \(section)")
@@ -76,6 +78,25 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             return cell
         case [0, 3]:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
+            cell.textLabel?.text = NSLocalizedString("Calendar", comment: "Currently selected calendar")
+            cell.detailTextLabel?.text = currentReminder?.calendar.title
+            cell.detailTextLabel?.textColor = Colors.calendar(for: currentReminder!.calendar)
+            cell.accessoryType = .disclosureIndicator
+            return cell
+
+        case [1, 0]:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
+            cell.textLabel?.text  = NSLocalizedString("Start", comment: "Start Date")
+            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel?.textColor = UIColor.black
+            if let date = currentReminder?.startDateComponents?.date {
+                cell.detailTextLabel?.text  = Formats.full(date)
+            } else {
+                cell.detailTextLabel?.text = NSLocalizedString("Unscheduled", comment: "Due Date")
+            }
+            return cell
+        case [1, 1]:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
             cell.textLabel?.text  = NSLocalizedString("Due", comment: "Due Date")
             cell.accessoryType = .disclosureIndicator
             cell.detailTextLabel?.textColor = UIColor.black
@@ -85,14 +106,8 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
                 cell.detailTextLabel?.text = NSLocalizedString("Unscheduled", comment: "Due Date")
             }
             return cell
-        case [0, 4]:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTableView", for: indexPath)
-            cell.textLabel?.text = NSLocalizedString("Calendar", comment: "Currently selected calendar")
-            cell.detailTextLabel?.text = currentReminder?.calendar.title
-            cell.detailTextLabel?.textColor = Colors.calendar(for: currentReminder!.calendar)
-            cell.accessoryType = .disclosureIndicator
-            return cell
-        case [1, 0]:
+
+        case [2, 0]:
             let cell: MarkdownViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
             cell.value = currentReminder?.notes ?? ""
@@ -105,7 +120,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath {
-        case [1, 0]:
+        case [2, 0]:
             return 256
         default:
             return 44
@@ -115,19 +130,29 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
         case [0, 3]:
+            let vc = SelectCalendarViewController(for: currentReminder?.calendar)
+            vc.didSelect = { calendar in
+                self.currentReminder.calendar = calendar
+                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
+                tableView.reloadData()
+            }
+            navigationController?.pushViewController(vc, animated: true)
+        case [1, 0]:
+            let vc = DatePickerViewController.instantiate()
+            vc.currentDate = currentReminder.startDateComponents
+            vc.didSelect = {
+                self.navigationController?.popViewController(animated: true)
+                self.currentReminder.startDateComponents = $0
+                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
+                tableView.reloadData()
+            }
+            navigationController?.pushViewController(vc, animated: true)
+        case [1, 1]:
             let vc = DatePickerViewController.instantiate()
             vc.currentDate = currentReminder.dueDateComponents
             vc.didSelect = {
                 self.navigationController?.popViewController(animated: true)
                 self.currentReminder.dueDateComponents = $0
-                CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
-                tableView.reloadData()
-            }
-            navigationController?.pushViewController(vc, animated: true)
-        case [0, 4]:
-            let vc = SelectCalendarViewController(for: currentReminder?.calendar)
-            vc.didSelect = { calendar in
-                self.currentReminder.calendar = calendar
                 CalendarAPI.shared.save(reminder: self.currentReminder, commit: true)
                 tableView.reloadData()
             }
