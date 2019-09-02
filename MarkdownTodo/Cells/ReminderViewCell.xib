@@ -38,6 +38,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MI-8J-hDH">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
                                         <state key="normal" title="List"/>
+                                        <connections>
+                                            <action selector="listClick:" destination="WtE-Ou-wt8" eventType="primaryActionTriggered" id="5h0-88-qWg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8b-Y3-aCc">
                                         <rect key="frame" x="142.5" y="0.0" width="16" height="16"/>

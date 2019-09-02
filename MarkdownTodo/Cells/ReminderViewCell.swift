@@ -68,4 +68,7 @@ class ReminderViewCell: UITableViewCell, ReusableCell {
         guard let url = reminder?.url else { return }
         UIApplication.shared.open(url)
     }
+    @IBAction func listClick(_ sender: UIButton) {
+        delegate?.showList(reminder: reminder!)
+    }
 }

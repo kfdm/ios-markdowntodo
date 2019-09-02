@@ -116,6 +116,17 @@ extension ReminderListViewController {
 
 // MARK: - ReminderActions
 extension ReminderListViewController: ReminderActions {
+    func showList(reminder: EKReminder) {
+        // TODO: Fix a better solution
+        guard selectedCalendars.first != reminder.calendar else { return }
+
+        let predicate = CalendarAPI.shared.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [reminder.calendar])
+        let vc = ReminderListViewController.instantiate()
+        vc.selectedCalendars = [reminder.calendar]
+        vc.selectedPredicate = predicate
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     func showPriorityDialog(reminder: EKReminder) {
         let alert = UIAlertController(title: "Set Priority", message: "Set Priority of Reminder", preferredStyle: .alert)
 
