@@ -13,6 +13,18 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
     var currentReminder: EKReminder!
     weak var delegate: ReminderActions?
 
+    var didSelect: ((EKReminder) -> Void)? {
+        didSet {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
+        }
+    }
+
+    var didCancel: (() -> Void)? {
+        didSet {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(StringViewCell.self)
@@ -21,19 +33,15 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
         tableView.register(DateViewCell.self)
         tableView.register(SimpleTableViewCell.self, forCellReuseIdentifier: "SimpleTableView")
         self.title = NSLocalizedString("Edit Reminder", comment: "Edit Reminder Title")
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEdit))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveEdit))
-        navigationItem.leftItemsSupplementBackButton = true
-    }
-
-    @objc func cancelEdit() {
-        dismiss(animated: true, completion: nil)
     }
 
     @objc func saveEdit() {
-        guard let reminder = currentReminder else { return }
-        CalendarAPI.shared.save(reminder: reminder, commit: true)
+        didSelect?(currentReminder)
+        dismiss(animated: true, completion: nil)
+    }
+
+    @objc func cancelEdit() {
+        didCancel?()
         dismiss(animated: true, completion: nil)
     }
 

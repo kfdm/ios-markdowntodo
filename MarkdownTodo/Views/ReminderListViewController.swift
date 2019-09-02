@@ -18,10 +18,15 @@ class ReminderListViewController: UITableViewController, Storyboarded {
     // MARK: - Segues
 
     func showReminder(_ reminder: EKReminder, animated: Bool) {
-        let scheduleController = ReminderEditViewController.instantiate()
-        let navigation = UINavigationController(rootViewController: scheduleController)
-        scheduleController.currentReminder = reminder
-        scheduleController.delegate = self
+        let vc = ReminderEditViewController.instantiate()
+        let navigation = UINavigationController(rootViewController: vc)
+        vc.currentReminder = reminder
+        vc.didSelect = {
+            CalendarAPI.shared.save(reminder: $0, commit: true)
+        }
+        vc.didCancel = {
+            reminder.reset()
+        }
         navigation.modalPresentationStyle = .formSheet
         present(navigation, animated: true, completion: nil)
     }
