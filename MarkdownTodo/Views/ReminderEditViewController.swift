@@ -117,8 +117,7 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
 
         case [2, 0]:
             let cell: MarkdownViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.label = NSLocalizedString("Notes", comment: "Reminder Notes")
-            cell.value = currentReminder?.notes ?? ""
+            cell.value = currentReminder.notes
             cell.changed = { [unowned self] newNote in self.currentReminder?.notes = newNote }
             return cell
         default:
