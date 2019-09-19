@@ -34,7 +34,7 @@
                         </segments>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOY-XC-ZO5">
-                        <rect key="frame" x="16" y="11.5" width="55" height="20.5"/>
+                        <rect key="frame" x="20" y="11.5" width="55" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="IQg-63-LLB" secondAttribute="trailing" constant="16" id="9Co-vl-wze"/>
-                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="leading" secondItem="WPZ-Mv-Txe" secondAttribute="leading" constant="16" id="F0c-4L-5M6"/>
+                    <constraint firstItem="aOY-XC-ZO5" firstAttribute="leading" secondItem="WPZ-Mv-Txe" secondAttribute="leading" constant="20" id="F0c-4L-5M6"/>
                     <constraint firstItem="IQg-63-LLB" firstAttribute="centerY" secondItem="WPZ-Mv-Txe" secondAttribute="centerY" id="MeJ-hT-7lc"/>
                     <constraint firstItem="aOY-XC-ZO5" firstAttribute="centerY" secondItem="WPZ-Mv-Txe" secondAttribute="centerY" id="rIY-bY-gKh"/>
                 </constraints>

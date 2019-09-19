@@ -33,4 +33,9 @@ class PriorityViewCell: UITableViewCell, ReusableCell {
     @objc func updatedPriority() {
         changed?(selectorPriority.selectedSegmentIndex)
     }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        becomeFirstResponder()
+    }
 }

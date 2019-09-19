@@ -20,15 +20,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Kk4-b5-43x">
-                        <rect key="frame" x="16" y="12.5" width="288" height="19"/>
+                        <rect key="frame" x="20" y="12.5" width="280" height="19"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Kk4-b5-43x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Awi-0K-hO1"/>
-                    <constraint firstAttribute="trailing" secondItem="Kk4-b5-43x" secondAttribute="trailing" constant="16" id="Kyl-GB-HNm"/>
+                    <constraint firstItem="Kk4-b5-43x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Awi-0K-hO1"/>
+                    <constraint firstAttribute="trailing" secondItem="Kk4-b5-43x" secondAttribute="trailing" constant="20" id="Kyl-GB-HNm"/>
                     <constraint firstItem="Kk4-b5-43x" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uiO-Xg-gLO"/>
                 </constraints>
             </tableViewCellContentView>

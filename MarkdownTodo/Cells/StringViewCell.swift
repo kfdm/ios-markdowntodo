@@ -40,4 +40,11 @@ class StringViewCell: UITableViewCell, ReusableCell {
     @objc func updatedText() {
         textChanged?(textField!.text!)
     }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            textField.becomeFirstResponder()
+        }
+    }
 }

@@ -163,7 +163,8 @@ class ReminderEditViewController: UITableViewController, Storyboarded {
             }
             navigationController?.pushViewController(vc, animated: true)
         default:
-            print("no select action for \(indexPath)")
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.setSelected(true, animated: true)
         }
     }
 }

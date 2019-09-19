@@ -19,12 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="Mtj-eZ-4Kx">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Mtj-eZ-4Kx">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-7t-oIo">
-                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
+                                    <rect key="frame" x="8" y="8" width="304" height="28"/>
                                     <state key="normal" title="Show Completed"/>
                                     <connections>
                                         <action selector="showCompleted:" destination="Z8C-gi-x1H" eventType="primaryActionTriggered" id="dvW-A1-AU8"/>
