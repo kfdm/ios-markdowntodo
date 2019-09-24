@@ -113,8 +113,9 @@ struct CalendarGroup {
 extension CalendarGroup {
     static func fetch() -> [CalendarGroup] {
         let sorted = CalendarAPI.shared.calendars.sorted { $0.cgColor.hashValue > $1.cgColor.hashValue }
-        return Dictionary(grouping: sorted) { $0.source! }
-            .map { CalendarGroup(title: $0.title, list: $1 )}
+        // TODO Figure out why grouping by EKSource doesn't work anymore
+        return Dictionary(grouping: sorted) { $0.source.title }
+            .map { CalendarGroup(title: $0, list: $1 )}
             .sorted { $0.title < $1.title }
     }
 }
