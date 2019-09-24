@@ -22,7 +22,7 @@ class MarkdownViewCell: UITableViewCell, UITextViewDelegate, ReusableCell {
     var value: String? {
         didSet {
             textField.text = value
-            textField.setContentOffset(CGPoint.zero, animated: false)
+//            textField.setContentOffset(CGPoint.zero, animated: false)
         }
     }
 
