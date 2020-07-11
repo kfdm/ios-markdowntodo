@@ -19,11 +19,17 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            Text("Tab Content 1").tabItem {
+            NavigationView {
+                Text("Tab Content 1")
+                    .navigationBarTitle("Planner")
+            }.tabItem {
                 Image(systemName: "calendar")
                 Text("Planner")
             }.tag(HomeTabs.calendar)
-            Text("Tab Content 2").tabItem {
+            NavigationView {
+                ListView()
+                    .navigationBarTitle("Calendar List")
+            }.tabItem {
                 Image(systemName: "list.bullet")
                 Text("List")
             }.tag(HomeTabs.list)
