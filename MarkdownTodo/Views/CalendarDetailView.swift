@@ -41,7 +41,9 @@ struct CalendarDetailView: View {
     var body: some View {
         List {
             ForEach(reminders, id: \.calendarItemIdentifier) { reminder in
-                ReminderRow(reminder: reminder)
+                NavigationLink(destination: ReminderDetail(reminder: reminder)) {
+                    ReminderRow(reminder: reminder)
+                }
             }
         }
         .onAppear {

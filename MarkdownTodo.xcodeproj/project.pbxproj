@@ -18,6 +18,7 @@
 		87371CBF24B9C9CA005EA9F7 /* CalendarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* CalendarDetailView.swift */; };
 		87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44224B9D67600086541 /* ReminderRow.swift */; };
 		87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44424B9DA8800086541 /* PlannerView.swift */; };
+		87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44624B9DCB400086541 /* ReminderDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		87371CBE24B9C9CA005EA9F7 /* CalendarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailView.swift; sourceTree = "<group>"; };
 		87A9D44224B9D67600086541 /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
 		87A9D44424B9DA8800086541 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
+		87A9D44624B9DCB400086541 /* ReminderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				87371CBE24B9C9CA005EA9F7 /* CalendarDetailView.swift */,
 				87371CB824B9C042005EA9F7 /* CalendarListView.swift */,
 				87A9D44424B9DA8800086541 /* PlannerView.swift */,
+				87A9D44624B9DCB400086541 /* ReminderDetail.swift */,
 				87A9D44224B9D67600086541 /* ReminderRow.swift */,
 			);
 			path = Views;
@@ -183,6 +186,7 @@
 				87371CBF24B9C9CA005EA9F7 /* CalendarDetailView.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,
+				87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */,
 				87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */,
 				87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */,
 			);

@@ -22,7 +22,9 @@ struct PlannerView: View {
         List {
             Section(header: Text("Overdue")) {
                 ForEach(overdue, id: \.calendarItemIdentifier) { reminder in
-                    ReminderRow(reminder: reminder)
+                    NavigationLink(destination: ReminderDetail(reminder: reminder)) {
+                        ReminderRow(reminder: reminder)
+                    }
                 }
             }
             Section(header: Text("Today")) {
