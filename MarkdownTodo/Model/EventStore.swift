@@ -54,6 +54,28 @@ class EventStore: ObservableObject {
         }
         return publisher
     }
+
+    func overdueReminders() -> ReminderQuery {
+        let publisher = PassthroughSubject<[EKReminder], Never>()
+        let predicate = eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: nil, ending: Date(), calendars: nil)
+
+        eventStore.fetchReminders(matching: predicate) { (reminders) in
+            publisher.send(reminders ?? [])
+        }
+        return publisher
+    }
+
+    func todayReminders() -> ReminderQuery {
+        let publisher = PassthroughSubject<[EKReminder], Never>()
+        let predicate = eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: Date(), ending: Date(), calendars: nil)
+
+        eventStore.fetchReminders(matching: predicate) { (reminders) in
+            publisher.send(reminders ?? [])
+        }
+        return publisher
+    }
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>

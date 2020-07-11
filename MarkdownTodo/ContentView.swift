@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection) {
             NavigationView {
-                Text("Tab Content 1")
+                PlannerView()
                     .navigationBarTitle("Planner")
             }.tabItem {
                 Image(systemName: "calendar")
