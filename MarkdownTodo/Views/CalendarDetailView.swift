@@ -21,7 +21,7 @@ struct CalendarDetailView: View {
     var body: some View {
         List {
             ForEach(reminders, id: \.calendarItemIdentifier) { reminder in
-                Text(reminder.title)
+                ReminderRow(reminder: reminder)
             }
         }
         .onAppear {
