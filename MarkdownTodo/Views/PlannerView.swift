@@ -18,32 +18,43 @@ struct PlannerView: View {
     @State private var overdue: [EKReminder] = []
     @State private var today: [EKReminder] = []
 
+    func loadData() {
+        self.eventStore.overdueReminders()
+            .receive(on: DispatchQueue.main)
+            .sink { (result) in
+                self.overdue = result
+            }
+            .store(in: &self.subscriptions)
+
+        self.eventStore.todayReminders()
+            .receive(on: DispatchQueue.main)
+            .sink { (result) in
+                self.today = result
+            }
+            .store(in: &self.subscriptions)
+    }
+
     var body: some View {
         List {
-            Section(header: Text("Overdue")) {
-                ForEach(overdue, id: \.calendarItemIdentifier) { reminder in
-                    NavigationLink(destination: ReminderDetail(reminder: reminder)) {
-                        ReminderRow(reminder: reminder)
-                    }
-                }
-            }
-            Section(header: Text("Today")) {
-                Text("test")
-            }
-        }.onAppear {
-            self.eventStore.overdueReminders()
-                .receive(on: DispatchQueue.main)
-                .sink { (result) in
-                    self.overdue = result
-                }
-                .store(in: &self.subscriptions)
+            ReminderGroup(section: "Overdue", reminders: overdue)
+            ReminderGroup(section: "Today", reminders: today)
+        }
+        .listStyle(GroupedListStyle())
+        .onAppear(perform: loadData)
+    }
+}
 
-            self.eventStore.todayReminders()
-                .receive(on: DispatchQueue.main)
-                .sink { (result) in
-                    self.today = result
+struct ReminderGroup: View {
+    var section: String
+    var reminders: [EKReminder]
+
+    var body: some View {
+        Section(header: Text(section)) {
+            ForEach(reminders, id: \.calendarItemIdentifier) { reminder in
+                NavigationLink(destination: ReminderDetail(reminder: reminder)) {
+                    ReminderRow(reminder: reminder)
                 }
-                .store(in: &self.subscriptions)
+            }
         }
     }
 }
