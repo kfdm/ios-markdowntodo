@@ -23,6 +23,7 @@ struct CalendarListView: View {
                                 NavigationLink(destination: CalendarDetailView(calendar: calendar))
                                 {
                                     Text(calendar.title)
+                                        .foregroundColor(calendar.color)
                                 }
                             }
                         }
