@@ -23,9 +23,14 @@ struct ReminderRow: View {
     var body: some View {
         HStack {
             checkmark
-            VStack {
+            VStack(alignment: .leading) {
                 Text(reminder.title)
-                Text(reminder.dueDateComponents.debugDescription)
+                Text(reminder.calendar.title)
+                    .foregroundColor(reminder.calendar.color)
+            }
+            if reminder.dueDateComponents != nil {
+                Spacer()
+                DateView(date: reminder.dueDateComponents!)
             }
         }
     }
