@@ -6,6 +6,7 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import Combine
 import EventKit
 import Foundation
 
@@ -42,4 +43,14 @@ class EventStore: ObservableObject {
             .filter { source.title == $0.source.title }
             .sorted { $0.title < $1.title }
     }
+
+    func reminders(for calendar: EKCalendar, to publisher: ReminderQuery) {
+        let predicate = eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: nil, ending: nil, calendars: [calendar])
+        eventStore.fetchReminders(matching: predicate) { (reminders) in
+            publisher.send(reminders ?? [])
+        }
+    }
 }
+
+typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>

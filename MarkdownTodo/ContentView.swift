@@ -27,7 +27,7 @@ struct ContentView: View {
                 Text("Planner")
             }.tag(HomeTabs.calendar)
             NavigationView {
-                ListView()
+                CalendarListView()
                     .navigationBarTitle("Calendar List")
             }.tabItem {
                 Image(systemName: "list.bullet")

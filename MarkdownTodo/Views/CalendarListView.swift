@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ListView: View {
+struct CalendarListView: View {
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
@@ -20,7 +20,10 @@ struct ListView: View {
                             ForEach(
                                 self.eventStore.calendars(for: source), id: \.calendarIdentifier
                             ) { (calendar) in
-                                Text(calendar.title)
+                                NavigationLink(destination: CalendarDetailView(calendar: calendar))
+                                {
+                                    Text(calendar.title)
+                                }
                             }
                         }
                     }
@@ -34,6 +37,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        CalendarListView()
     }
 }
