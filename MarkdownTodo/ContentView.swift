@@ -16,7 +16,7 @@ enum HomeTabs {
 
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
-    
+
     var body: some View {
         TabView(selection: $selection) {
             Text("Tab Content 1").tabItem {

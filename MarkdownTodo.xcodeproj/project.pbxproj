@@ -56,13 +56,13 @@
 		87371CA324B9BBB8005EA9F7 /* MarkdownTodo */ = {
 			isa = PBXGroup;
 			children = (
-				87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */,
-				87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */,
-				87371CA824B9BBB8005EA9F7 /* ContentView.swift */,
-				87371CAA24B9BBB8005EA9F7 /* Assets.xcassets */,
-				87371CAF24B9BBB8005EA9F7 /* LaunchScreen.storyboard */,
-				87371CB224B9BBB8005EA9F7 /* Info.plist */,
 				87371CAC24B9BBB8005EA9F7 /* Preview Content */,
+				87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */,
+				87371CAA24B9BBB8005EA9F7 /* Assets.xcassets */,
+				87371CA824B9BBB8005EA9F7 /* ContentView.swift */,
+				87371CB224B9BBB8005EA9F7 /* Info.plist */,
+				87371CAF24B9BBB8005EA9F7 /* LaunchScreen.storyboard */,
+				87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -161,6 +161,7 @@
 				87371CB024B9BBB8005EA9F7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
