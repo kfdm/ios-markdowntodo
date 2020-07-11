@@ -23,23 +23,3 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
     }
 }
-
-struct Link: View {
-    var label: String
-    var destination: URL
-
-    var body: some View {
-        Button(action: openLink) {
-            Text(label)
-        }
-    }
-    func openLink() {
-        UIApplication.shared.open(destination)
-    }
-}
-extension Link {
-    init(_ label: String, destination: URL) {
-        self.label = label
-        self.destination = destination
-    }
-}
