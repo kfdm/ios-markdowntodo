@@ -44,12 +44,15 @@ class EventStore: ObservableObject {
             .sorted { $0.title < $1.title }
     }
 
-    func reminders(for calendar: EKCalendar, to publisher: ReminderQuery) {
+    func reminders(for calendar: EKCalendar) -> ReminderQuery {
+        let publisher = PassthroughSubject<[EKReminder], Never>()
         let predicate = eventStore.predicateForIncompleteReminders(
             withDueDateStarting: nil, ending: nil, calendars: [calendar])
+
         eventStore.fetchReminders(matching: predicate) { (reminders) in
             publisher.send(reminders ?? [])
         }
+        return publisher
     }
 }
 
