@@ -20,6 +20,7 @@
 		87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44424B9DA8800086541 /* PlannerView.swift */; };
 		87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44624B9DCB400086541 /* ReminderDetail.swift */; };
 		87A9D44A24B9E49600086541 /* EKCalendar+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44924B9E49600086541 /* EKCalendar+Color.swift */; };
+		87C6809924B9EC380064F436 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809824B9EC380064F436 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		87A9D44424B9DA8800086541 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		87A9D44624B9DCB400086541 /* ReminderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetail.swift; sourceTree = "<group>"; };
 		87A9D44924B9E49600086541 /* EKCalendar+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar+Color.swift"; sourceTree = "<group>"; };
+		87C6809824B9EC380064F436 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				87A9D44424B9DA8800086541 /* PlannerView.swift */,
 				87A9D44624B9DCB400086541 /* ReminderDetail.swift */,
 				87A9D44224B9D67600086541 /* ReminderRow.swift */,
+				87C6809824B9EC380064F436 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */,
 				87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */,
 				87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */,
+				87C6809924B9EC380064F436 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

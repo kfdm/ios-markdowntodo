@@ -33,7 +33,10 @@ struct ContentView: View {
                 Image(systemName: "list.bullet")
                 Text("List")
             }.tag(HomeTabs.list)
-            Text("Tab Content 3").tabItem {
+            NavigationView {
+                SettingsView()
+                    .navigationBarTitle("Settings")
+            }.tabItem {
                 Image(systemName: "gear")
                 Text("Settings")
             }.tag(HomeTabs.settings)
