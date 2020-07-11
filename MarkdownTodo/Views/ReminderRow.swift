@@ -28,9 +28,12 @@ struct ReminderRow: View {
                 Text(reminder.calendar.title)
                     .foregroundColor(reminder.calendar.color)
             }
+            Spacer()
             if reminder.dueDateComponents != nil {
-                Spacer()
                 DateView(date: reminder.dueDateComponents!)
+            }
+            if reminder.url != nil {
+                Image(systemName: "link")
             }
         }
     }

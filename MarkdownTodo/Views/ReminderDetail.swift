@@ -71,6 +71,9 @@ struct ReminderDetail: View {
             if reminder.dueDateComponents != nil {
                 DateLabel(label: "Due Date", date: reminder.dueDateComponents!)
             }
+            if reminder.url != nil {
+                NameValue(label: "URL", value: reminder.url!.absoluteString)
+            }
         }
     }
 }
