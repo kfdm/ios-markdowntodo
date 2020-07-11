@@ -46,7 +46,7 @@ struct ReminderGroup: View {
 
     var body: some View {
         Section(header: Text(section)) {
-            ForEach(reminders, id: \.calendarItemIdentifier) { reminder in
+            ForEach(reminders) { reminder in
                 NavigationLink(destination: ReminderDetail(reminder: reminder)) {
                     ReminderRow(reminder: reminder)
                 }

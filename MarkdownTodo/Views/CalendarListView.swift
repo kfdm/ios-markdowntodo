@@ -15,7 +15,7 @@ struct CalendarListView: View {
         Group {
             if eventStore.authorized {
                 List {
-                    ForEach(eventStore.sources, id: \.sourceIdentifier) { (source) in
+                    ForEach(eventStore.sources) { (source) in
                         Section(header: Text(source.title)) {
                             ForEach(
                                 self.eventStore.calendars(for: source), id: \.calendarIdentifier
