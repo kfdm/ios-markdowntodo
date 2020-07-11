@@ -10,6 +10,26 @@ import Combine
 import EventKit
 import SwiftUI
 
+// Test out answer from https://stackoverflow.com/a/58427754/622650
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>)
+        -> UIViewController
+    {
+        UIViewController()
+    }
+    func updateUIViewController(
+        _ uiViewController: UIViewController,
+        context: UIViewControllerRepresentableContext<NavigationConfigurator>
+    ) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
+}
+
 struct CalendarDetailView: View {
     @EnvironmentObject var eventStore: EventStore
     var calendar: EKCalendar
@@ -33,6 +53,10 @@ struct CalendarDetailView: View {
                 .store(in: &self.subscriptions)
         }
         .navigationBarTitle(calendar.title)
+        .background(
+            NavigationConfigurator { nc in
+                nc.navigationBar.barTintColor = UIColor(cgColor: self.calendar.cgColor)
+            })
     }
 }
 
