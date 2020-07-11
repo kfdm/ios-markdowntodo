@@ -49,9 +49,7 @@ struct CalendarDetailView: View {
         .onAppear {
             self.eventStore.reminders(for: self.calendar)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveValue: { (result) in
-                    self.reminders = result
-                })
+                .assign(to: \.reminders, on: self)
                 .store(in: &self.subscriptions)
         }
         .navigationBarTitle(calendar.title)

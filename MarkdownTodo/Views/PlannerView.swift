@@ -21,16 +21,12 @@ struct PlannerView: View {
     func loadData() {
         self.eventStore.overdueReminders()
             .receive(on: DispatchQueue.main)
-            .sink { (result) in
-                self.overdue = result
-            }
+            .assign(to: \.overdue, on: self)
             .store(in: &self.subscriptions)
 
         self.eventStore.todayReminders()
             .receive(on: DispatchQueue.main)
-            .sink { (result) in
-                self.today = result
-            }
+            .assign(to: \.today, on: self)
             .store(in: &self.subscriptions)
     }
 
