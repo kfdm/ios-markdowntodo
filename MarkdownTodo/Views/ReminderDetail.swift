@@ -20,7 +20,7 @@ struct ReminderDetail: View {
                 DateLabel(label: "Due Date", date: reminder.dueDateComponents!)
             }
             if reminder.url != nil {
-                NameValue(label: "URL", value: reminder.url!.absoluteString)
+                Link(label: reminder.url!.absoluteString, destination: reminder.url!)
             }
         }
     }
