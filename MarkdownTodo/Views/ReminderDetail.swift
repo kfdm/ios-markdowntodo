@@ -9,18 +9,46 @@
 import EventKit
 import SwiftUI
 
+struct DateSelector: View {
+    var label: String
+    var date: DateComponents?
+
+    var body: some View {
+        HStack {
+            Text(label)
+            Spacer()
+            if date != nil {
+                DateView(date: date!)
+            } else {
+                Text("Unscheduled")
+            }
+        }
+    }
+}
+
 struct ReminderDetail: View {
-    var reminder: EKReminder
+    @State var reminder: EKReminder
 
     var body: some View {
         List {
-            NameValue(label: "Title", value: reminder.title)
-            NameValue(label: "Calendar", value: reminder.calendar.title)
-            if reminder.dueDateComponents != nil {
-                DateLabel(label: "Due Date", date: reminder.dueDateComponents!)
+            Section(header: EmptyView()) {
+                NameValue(label: "Title", value: reminder.title)
+                NameValue(label: "Calendar", value: reminder.calendar.title)
+                Picker("Priority", selection: $reminder.priority) {
+                    ForEach(0..<10) { p in
+                        Text("\(p)").tag(p)
+                    }
+                }.pickerStyle(SegmentedPickerStyle())
             }
-            if reminder.url != nil {
-                Link(label: reminder.url!.absoluteString, destination: reminder.url!)
+            Section(header: Text("Date")) {
+                DateSelector(label: "Start Date", date: reminder.startDateComponents)
+                DateSelector(label: "Due Date", date: reminder.dueDateComponents)
+            }
+            Section(header: Text("Other")) {
+                if reminder.url != nil {
+                    Link(label: reminder.url!.absoluteString, destination: reminder.url!)
+                }
+                MarkdownView(label: "Description", text: $reminder.notes)
             }
         }
     }
