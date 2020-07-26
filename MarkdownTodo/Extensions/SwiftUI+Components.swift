@@ -21,6 +21,20 @@ struct NameValue: View {
     }
 }
 
+struct NameField: View {
+    var label: String
+    @Binding var value: String
+
+    var body: some View {
+        HStack {
+            Text(label)
+            Spacer()
+            TextField(label, text: $value)
+                .multilineTextAlignment(.trailing)
+        }
+    }
+}
+
 struct DateView: View {
     var formatter: DateFormatter {
         let formatter = DateFormatter()

@@ -12,14 +12,19 @@ import SwiftUI
 struct DateSelector: View {
     var label: String
     var date: DateComponents?
+    @State var test = Date()
 
     var body: some View {
         HStack {
-            Text(label)
-            Spacer()
+            
             if date != nil {
-                DateView(date: date!)
+//                DateView(date: date!)
+                DatePicker(selection: $test, displayedComponents: .date) {
+                    Text(label)
+                }
             } else {
+                Text(label)
+                Spacer()
                 Text("Unscheduled")
             }
         }
@@ -27,12 +32,19 @@ struct DateSelector: View {
 }
 
 struct ReminderDetail: View {
+    @EnvironmentObject var store : EventStore
     @State var reminder: EKReminder
+    
+    var saveButton = Button(action: {
+        print("Save")
+    }) {
+        Text("Save")
+    }
 
     var body: some View {
         List {
             Section(header: EmptyView()) {
-                NameValue(label: "Title", value: reminder.title)
+                NameField(label: "Title", value: $reminder.title)
                 NameValue(label: "Calendar", value: reminder.calendar.title)
                 Picker("Priority", selection: $reminder.priority) {
                     ForEach(0..<10) { p in
@@ -51,11 +63,22 @@ struct ReminderDetail: View {
                 MarkdownView(label: "Description", text: $reminder.notes)
             }
         }
+        .navigationBarItems(leading: saveButton, trailing: Button(action: cancelAction, label: {
+            Text("Cancel")
+        }))
+            .navigationBarTitle(reminder.title)
+    }
+    
+    func cancelAction() {
+        reminder.reset()
+        store.eventStore.reset()
     }
 }
 
 struct ReminderDetail_Previews: PreviewProvider {
+    static var store = EventStore()
     static var previews: some View {
         ReminderDetail(reminder: EKReminder())
+            .environmentObject(store)
     }
 }
