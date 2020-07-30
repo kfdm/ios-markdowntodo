@@ -22,24 +22,35 @@ struct ContentView: View {
             NavigationView {
                 PlannerView()
                     .navigationBarTitle("Planner")
-            }.tabItem {
+            }
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .tag(HomeTabs.calendar)
+            .tabItem {
                 Image(systemName: "calendar")
                 Text("Planner")
-            }.tag(HomeTabs.calendar)
+            }
+
             NavigationView {
                 CalendarListView()
                     .navigationBarTitle("Calendar List")
-            }.tabItem {
+            }
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .tag(HomeTabs.list)
+            .tabItem {
                 Image(systemName: "list.bullet")
                 Text("List")
-            }.tag(HomeTabs.list)
+            }
+
             NavigationView {
                 SettingsView()
                     .navigationBarTitle("Settings")
-            }.tabItem {
+            }
+            .tag(HomeTabs.settings)
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .tabItem {
                 Image(systemName: "gear")
                 Text("Settings")
-            }.tag(HomeTabs.settings)
+            }
         }
     }
 }

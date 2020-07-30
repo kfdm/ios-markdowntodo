@@ -43,7 +43,7 @@ struct CalendarDetailView: View {
             ForEach(reminders) { reminder in
                 NavigationLink(destination: ReminderDetail(reminder: reminder)) {
                     ReminderRow(reminder: reminder)
-                }
+                }  //.isDetailLink(false)
             }
         }
         .onAppear {

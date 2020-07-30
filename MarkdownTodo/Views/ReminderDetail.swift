@@ -16,9 +16,9 @@ struct DateSelector: View {
 
     var body: some View {
         HStack {
-            
+
             if date != nil {
-//                DateView(date: date!)
+                //                DateView(date: date!)
                 DatePicker(selection: $test, displayedComponents: .date) {
                     Text(label)
                 }
@@ -32,14 +32,9 @@ struct DateSelector: View {
 }
 
 struct ReminderDetail: View {
-    @EnvironmentObject var store : EventStore
+    @EnvironmentObject var store: EventStore
     @State var reminder: EKReminder
-    
-    var saveButton = Button(action: {
-        print("Save")
-    }) {
-        Text("Save")
-    }
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         List {
@@ -63,15 +58,31 @@ struct ReminderDetail: View {
                 MarkdownView(label: "Description", text: $reminder.notes)
             }
         }
-        .navigationBarItems(leading: saveButton, trailing: Button(action: cancelAction, label: {
-            Text("Cancel")
-        }))
-            .navigationBarTitle(reminder.title)
+        .navigationBarItems(
+            leading: Button(
+                action: cancelAction,
+                label: {
+                    Text("Cancel")
+                }),
+            trailing: Button(
+                action: saveAction,
+                label: {
+                    Text("Save")
+                })
+        )
+        .navigationBarTitle(reminder.title)
+        .navigationBarBackButtonHidden(true)
     }
-    
+
+    func saveAction() {
+        print("Saved?")
+        presentationMode.wrappedValue.dismiss()
+    }
+
     func cancelAction() {
         reminder.reset()
         store.eventStore.reset()
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
