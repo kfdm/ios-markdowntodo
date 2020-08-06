@@ -44,38 +44,30 @@ class EventStore: ObservableObject {
             .sorted { $0.title < $1.title }
     }
 
-    func reminders(for calendar: EKCalendar) -> ReminderQuery {
+    func publisher(for predicate: NSPredicate) -> ReminderQuery {
         let publisher = PassthroughSubject<[EKReminder], Never>()
-        let predicate = eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: nil, ending: nil, calendars: [calendar])
-
         eventStore.fetchReminders(matching: predicate) { (reminders) in
             publisher.send(reminders ?? [])
         }
         return publisher
     }
 
-    func overdueReminders() -> ReminderQuery {
-        let publisher = PassthroughSubject<[EKReminder], Never>()
-        let predicate = eventStore.predicateForIncompleteReminders(
+    func reminders(for calendar: EKCalendar) -> NSPredicate {
+        return eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: nil, ending: nil, calendars: [calendar])
+    }
+
+    func overdueReminders() -> NSPredicate {
+        return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: nil, ending: Date(), calendars: nil)
 
-        eventStore.fetchReminders(matching: predicate) { (reminders) in
-            publisher.send(reminders ?? [])
-        }
-        return publisher
     }
 
-    func todayReminders() -> ReminderQuery {
-        let publisher = PassthroughSubject<[EKReminder], Never>()
-        let predicate = eventStore.predicateForIncompleteReminders(
+    func todayReminders() -> NSPredicate {
+        return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: Date(), ending: Date(), calendars: nil)
-
-        eventStore.fetchReminders(matching: predicate) { (reminders) in
-            publisher.send(reminders ?? [])
-        }
-        return publisher
     }
+
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>

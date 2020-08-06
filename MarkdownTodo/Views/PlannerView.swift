@@ -10,48 +10,33 @@ import Combine
 import EventKit
 import SwiftUI
 
-struct PlannerView: View {
+struct UpcomingView: View {
     @EnvironmentObject var eventStore: EventStore
 
-    // Query
-    @State private var subscriptions = Set<AnyCancellable>()
-    @State private var overdue: [EKReminder] = []
-    @State private var today: [EKReminder] = []
-
-    func loadData() {
-        self.eventStore.overdueReminders()
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.overdue, on: self)
-            .store(in: &self.subscriptions)
-
-        self.eventStore.todayReminders()
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.today, on: self)
-            .store(in: &self.subscriptions)
-    }
-
     var body: some View {
-        List {
-            ReminderGroup(section: "Overdue", reminders: overdue)
-            ReminderGroup(section: "Today", reminders: today)
-        }
-        .listStyle(GroupedListStyle())
-        .onAppear(perform: loadData)
+        PredicateView(predicate: eventStore.todayReminders())
+            .navigationBarTitle("Upcomgin")
     }
 }
 
-struct ReminderGroup: View {
-    var section: String
-    var reminders: [EKReminder]
+struct OverdueView: View {
+    @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        Section(header: Text(section)) {
-            ForEach(reminders) { reminder in
-                NavigationLink(destination: ReminderDetail(reminder: reminder)) {
-                    ReminderRow(reminder: reminder)
-                }
-            }
+        PredicateView(predicate: eventStore.overdueReminders())
+            .navigationBarTitle("Overdue")
+    }
+}
+
+struct PlannerView: View {
+    var body: some View {
+        List {
+            Text("Calendar Placeholder")
+                .frame(height: 256)
+            NavigationLink("Overdue", destination: OverdueView())
+            NavigationLink("Upcoming", destination: UpcomingView())
         }
+        .listStyle(GroupedListStyle())
     }
 }
 

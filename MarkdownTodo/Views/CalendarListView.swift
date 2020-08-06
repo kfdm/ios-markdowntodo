@@ -6,7 +6,19 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import EventKit
 import SwiftUI
+
+struct CalendarDetailView: View {
+    @EnvironmentObject var eventStore: EventStore
+    var calendar: EKCalendar
+
+    var body: some View {
+        PredicateView(predicate: eventStore.reminders(for: calendar))
+            .navigationBarTitle(calendar.title)
+            .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
+    }
+}
 
 struct CalendarListView: View {
     @EnvironmentObject var eventStore: EventStore
