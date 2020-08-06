@@ -17,6 +17,7 @@
 		87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBB24B9C0BC005EA9F7 /* EventStore.swift */; };
 		87371CBF24B9C9CA005EA9F7 /* PredicateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* PredicateView.swift */; };
 		874E646824DC19C800603EAE /* BackgroundColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E646724DC19C800603EAE /* BackgroundColorModifier.swift */; };
+		8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* CalendarView.swift */; };
 		8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773DF1224BB018C00BC255E /* MarkdownView.swift */; };
 		87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44224B9D67600086541 /* ReminderRow.swift */; };
 		87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44424B9DA8800086541 /* PlannerView.swift */; };
@@ -40,6 +41,7 @@
 		87371CBB24B9C0BC005EA9F7 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		87371CBE24B9C9CA005EA9F7 /* PredicateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateView.swift; sourceTree = "<group>"; };
 		874E646724DC19C800603EAE /* BackgroundColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorModifier.swift; sourceTree = "<group>"; };
+		8758210924DCBBC70034EF24 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8773DF1224BB018C00BC255E /* MarkdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownView.swift; sourceTree = "<group>"; };
 		87A9D44224B9D67600086541 /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
 		87A9D44424B9DA8800086541 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		8773DF1124BB017F00BC255E /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				8758210924DCBBC70034EF24 /* CalendarView.swift */,
 				8773DF1224BB018C00BC255E /* MarkdownView.swift */,
 			);
 			path = Component;
@@ -224,6 +227,7 @@
 			files = (
 				874E646824DC19C800603EAE /* BackgroundColorModifier.swift in Sources */,
 				87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */,
+				8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */,
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,
 				87A9D44A24B9E49600086541 /* EventKit+SwiftUI.swift in Sources */,

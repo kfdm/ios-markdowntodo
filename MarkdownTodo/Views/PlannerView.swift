@@ -15,7 +15,7 @@ struct UpcomingView: View {
 
     var body: some View {
         PredicateView(predicate: eventStore.todayReminders())
-            .navigationBarTitle("Upcomgin")
+            .navigationBarTitle("Upcoming")
     }
 }
 
@@ -29,10 +29,20 @@ struct OverdueView: View {
 }
 
 struct PlannerView: View {
+    @Environment(\.calendar) var calendar
+
+    private var month: DateInterval {
+        calendar.dateInterval(of: .month, for: Date())!
+    }
+
     var body: some View {
         List {
-            Text("Calendar Placeholder")
-                .frame(height: 256)
+            CalendarView(interval: month) { date in
+                Text(String(self.calendar.component(.day, from: date)))
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .clipShape(Circle())
+                    .padding(.vertical, 4)
+            }
             NavigationLink("Overdue", destination: OverdueView())
             NavigationLink("Upcoming", destination: UpcomingView())
         }
