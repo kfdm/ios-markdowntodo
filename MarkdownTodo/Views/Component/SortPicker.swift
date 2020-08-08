@@ -11,6 +11,7 @@ import SwiftUI
 enum SortOptions: String, CaseIterable {
     case date
     case priority
+    case title
 }
 
 struct SortButton: View {
@@ -26,7 +27,7 @@ struct SortButton: View {
             NavigationView {
                 List {
                     ForEach(SortOptions.allCases, id: \.rawValue) { sortMethod in
-                        Button(sortMethod.rawValue) {
+                        Button(sortMethod.rawValue.capitalized) {
                             sortBy = sortMethod
                             showSortMenu = false
                         }

@@ -58,6 +58,19 @@ struct RemindersGroupPriority<ReminderView>: View where ReminderView: View {
     }
 }
 
+struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
+    let reminders: [EKReminder]
+    let content: (EKReminder) -> ReminderView
+
+    var body: some View {
+        List {
+            ForEach(reminders.sorted { $0.title > $1.title }) { reminder in
+                content(reminder)
+            }
+        }
+    }
+}
+
 struct PredicateFetcher: View {
     let predicate: NSPredicate
 
@@ -80,6 +93,8 @@ struct PredicateFetcher: View {
                 RemindersGroupDate(reminders: reminders, content: content)
             case .priority:
                 RemindersGroupPriority(reminders: reminders, content: content)
+            case .title:
+                RemindersGroupTitle(reminders: reminders, content: content)
             }
         }
         .onAppear(perform: fetch)
