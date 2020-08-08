@@ -10,15 +10,20 @@ import SwiftUI
 
 struct CalendarDateModifier: ViewModifier {
     @Environment(\.calendar) var calendar
+    @Binding var selectedDate: Date
 
     let date: Date
 
     func body(content: Content) -> some View {
+        if calendar.isDate(date, equalTo: selectedDate, toGranularity: .day) {
+            return content.background(Color.red.opacity(0.2))
+        }
+
         if calendar.isDateInToday(date) {
             return content.background(Color.blue.opacity(0.2))
-        } else {
-            return content.background(Color.gray.opacity(0.1))
         }
+
+        return content.background(Color.gray.opacity(0.1))
     }
 
 }

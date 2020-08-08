@@ -51,14 +51,18 @@ struct PlannerView: View {
         calendar.dateInterval(of: .month, for: Date())!
     }
 
+    @State var selectedDate = Date()
+
     var body: some View {
         List {
             CalendarView(interval: month) { date in
-                NavigationLink(destination: SelectedDateView(date: date)) {
+                NavigationLink(
+                    destination: SelectedDateView(date: date).onAppear { selectedDate = date }
+                ) {
                     Text(String(self.calendar.component(.day, from: date)))
                         .frame(width: 40, height: 40, alignment: .center)
                         .padding(.vertical, 4)
-                        .modifier(CalendarDateModifier(date: date))
+                        .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
                         .clipShape(Circle())
                 }
             }
