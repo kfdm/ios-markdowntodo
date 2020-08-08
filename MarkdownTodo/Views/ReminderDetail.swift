@@ -9,28 +9,6 @@
 import EventKit
 import SwiftUI
 
-struct DateSelector: View {
-    var label: String
-    var date: DateComponents?
-    @State var test = Date()
-
-    var body: some View {
-        HStack {
-
-            if date != nil {
-                //                DateView(date: date!)
-                DatePicker(selection: $test, displayedComponents: .date) {
-                    Text(label)
-                }
-            } else {
-                Text(label)
-                Spacer()
-                Text("Unscheduled")
-            }
-        }
-    }
-}
-
 struct ReminderDetail: View {
     @EnvironmentObject var store: EventStore
     @State var reminder: EKReminder
@@ -48,8 +26,8 @@ struct ReminderDetail: View {
                 }.pickerStyle(SegmentedPickerStyle())
             }
             Section(header: Text("Date")) {
-                DateSelector(label: "Start Date", date: reminder.startDateComponents)
-                DateSelector(label: "Due Date", date: reminder.dueDateComponents)
+                DateTimePicker(label: "Start Date", date: $reminder.startDateComponents)
+                DateTimePicker(label: "Due Date", date: $reminder.dueDateComponents)
             }
             Section(header: Text("Other")) {
                 if reminder.url != nil {
