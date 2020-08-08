@@ -34,7 +34,7 @@ struct BackgroundColorModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content.background(
             NavigationConfigurator { nc in
-                nc.navigationBar.barTintColor = color
+                nc.navigationBar.barTintColor = self.color
             })
     }
 
