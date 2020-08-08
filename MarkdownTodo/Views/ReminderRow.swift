@@ -9,6 +9,29 @@
 import EventKit
 import SwiftUI
 
+struct PriorityStripe: View {
+    let priority: Int
+    var color: Color {
+        switch priority {
+        case 1...2:
+            return Color.red
+        case 3...4:
+            return Color.orange
+        case 5...6:
+            return Color.green
+        case 7...9:
+            return Color.blue
+        default:
+            return Color.gray
+        }
+    }
+    var body: some View {
+        Rectangle()
+            .stroke(color, lineWidth: 4)
+            .frame(width: 4)
+    }
+}
+
 struct ReminderRow: View {
     @EnvironmentObject var eventStore: EventStore
 
@@ -30,6 +53,7 @@ struct ReminderRow: View {
 
     var body: some View {
         HStack {
+            PriorityStripe(priority: reminder.priority)
             checkmark.font(.title)
             VStack(alignment: .leading) {
                 Text(reminder.title)
