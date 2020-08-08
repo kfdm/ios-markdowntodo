@@ -10,14 +10,22 @@ import EventKit
 import SwiftUI
 
 struct ReminderRow: View {
-    var reminder: EKReminder
+    @EnvironmentObject var eventStore: EventStore
+
+    @State var reminder: EKReminder
 
     var checkmark: some View {
-        if reminder.isCompleted {
-            return Image(systemName: "checkmark:square")
-        } else {
-            return Image(systemName: "square")
-        }
+        Group {
+            if reminder.isCompleted {
+                Image(systemName: "checkmark.square")
+            } else {
+                Image(systemName: "square")
+            }
+        }.onTapGesture(perform: actionClickCheckbox)
+    }
+
+    func actionClickCheckbox() {
+        reminder = eventStore.toggleComplete(reminder)
     }
 
     var body: some View {

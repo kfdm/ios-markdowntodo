@@ -61,7 +61,13 @@ class EventStore: ObservableObject {
         let end = Calendar.current.date(byAdding: .day, value: 1, to: Date().midnight)
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: nil, ending: end, calendars: nil)
+    }
 
+    func completeReminders() -> NSPredicate {
+        let start = Date().midnight
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        return eventStore.predicateForCompletedReminders(
+            withCompletionDateStarting: start, ending: end, calendars: nil)
     }
 
     func upcomingReminders(days: Int, start: Date = Date().midnight) -> NSPredicate {
@@ -75,6 +81,17 @@ class EventStore: ObservableObject {
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: start, ending: end, calendars: nil)
+    }
+
+    func toggleComplete(_ reminder: EKReminder) -> EKReminder {
+        print("Toggle reminder \(reminder)")
+        if reminder.isCompleted {
+            reminder.completionDate = nil
+        } else {
+            reminder.completionDate = Date()
+        }
+        try? eventStore.save(reminder, commit: true)
+        return reminder
     }
 
 }
