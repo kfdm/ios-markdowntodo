@@ -26,3 +26,9 @@ extension EKSource: Identifiable {
         return sourceIdentifier
     }
 }
+
+extension EKRecurrenceRule: Identifiable {
+    public var id: String {
+        return calendarIdentifier
+    }
+}

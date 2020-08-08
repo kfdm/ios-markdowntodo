@@ -28,6 +28,9 @@ struct ReminderDetail: View {
             Section(header: Text("Date")) {
                 DateTimePicker(label: "Start Date", date: $reminder.startDateComponents)
                 DateTimePicker(label: "Due Date", date: $reminder.dueDateComponents)
+                ForEach(reminder.recurrenceRules ?? []) { rule in
+                    Text("\(rule)")
+                }
             }
             Section(header: Text("Other")) {
                 if reminder.url != nil {
