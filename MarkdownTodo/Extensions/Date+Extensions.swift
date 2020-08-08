@@ -15,4 +15,7 @@ extension Date {
     var tomorrow: Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
     }
+    var isSentinel: Bool {
+        return Calendar.current.isDate(self, equalTo: .distantFuture, toGranularity: .day)
+    }
 }

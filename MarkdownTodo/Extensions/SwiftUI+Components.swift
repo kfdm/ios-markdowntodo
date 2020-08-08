@@ -43,33 +43,22 @@ struct DateView: View {
         return formatter
     }
     var date: Date
+    var whenUnset = "Unset"
     var body: some View {
-        Text(formatter.string(from: date))
-    }
-}
-
-struct DateLabel: View {
-    var label: String
-    var date: Date
-
-    var body: some View {
-        HStack {
-            Text(label)
-            Spacer()
-            DateView(date: date)
+        if date.isSentinel {
+            Text(whenUnset)
+        } else {
+            Text(formatter.string(from: date))
         }
-    }
-}
-
-extension DateLabel {
-    init(label: String, date: DateComponents) {
-        self.label = label
-        self.date = date.date!
     }
 }
 
 extension DateView {
     init(date from: DateComponents) {
         date = from.date!
+    }
+    init(date from: DateComponents?, whenUnset: String) {
+        date = from?.date ?? Date.distantFuture
+        self.whenUnset = whenUnset
     }
 }

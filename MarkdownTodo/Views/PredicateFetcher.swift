@@ -24,7 +24,7 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
     var body: some View {
         List {
             ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
-                Section(header: DateView(date: date)) {
+                Section(header: DateView(date: date, whenUnset: "No Due Date")) {
                     ForEach(self.groups[date]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
                         content(reminder)
                     }
