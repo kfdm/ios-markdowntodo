@@ -16,4 +16,8 @@ extension EKReminder {
     var hasDueDate: Bool {
         return dueDateComponents != nil
     }
+
+    var dueDate: Date {
+        return dueDateComponents?.date ?? Date.distantFuture
+    }
 }

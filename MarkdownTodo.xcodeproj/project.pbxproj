@@ -10,6 +10,7 @@
 		870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910924DE482200979076 /* CalendarDateModifier.swift */; };
 		870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910B24DE545C00979076 /* EventKit+Extensions.swift */; };
 		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
+		872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4E824DE90B5005384DF /* SortPicker.swift */; };
 		87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */; };
 		87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -18,7 +19,7 @@
 		87371CB124B9BBB8005EA9F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87371CAF24B9BBB8005EA9F7 /* LaunchScreen.storyboard */; };
 		87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CB824B9C042005EA9F7 /* CalendarListView.swift */; };
 		87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBB24B9C0BC005EA9F7 /* EventStore.swift */; };
-		87371CBF24B9C9CA005EA9F7 /* PredicateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* PredicateView.swift */; };
+		87371CBF24B9C9CA005EA9F7 /* PredicateFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* PredicateFetcher.swift */; };
 		874E646824DC19C800603EAE /* BackgroundColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E646724DC19C800603EAE /* BackgroundColorModifier.swift */; };
 		8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* CalendarView.swift */; };
 		8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773DF1224BB018C00BC255E /* MarkdownView.swift */; };
@@ -35,6 +36,7 @@
 		870B910924DE482200979076 /* CalendarDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateModifier.swift; sourceTree = "<group>"; };
 		870B910B24DE545C00979076 /* EventKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extensions.swift"; sourceTree = "<group>"; };
 		870B910D24DE54DC00979076 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		872EF4E824DE90B5005384DF /* SortPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPicker.swift; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +47,7 @@
 		87371CB224B9BBB8005EA9F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87371CB824B9C042005EA9F7 /* CalendarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListView.swift; sourceTree = "<group>"; };
 		87371CBB24B9C0BC005EA9F7 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
-		87371CBE24B9C9CA005EA9F7 /* PredicateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateView.swift; sourceTree = "<group>"; };
+		87371CBE24B9C9CA005EA9F7 /* PredicateFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateFetcher.swift; sourceTree = "<group>"; };
 		874E646724DC19C800603EAE /* BackgroundColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorModifier.swift; sourceTree = "<group>"; };
 		8758210924DCBBC70034EF24 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8773DF1224BB018C00BC255E /* MarkdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownView.swift; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 				8773DF1124BB017F00BC255E /* Component */,
 				87371CB824B9C042005EA9F7 /* CalendarListView.swift */,
 				87A9D44424B9DA8800086541 /* PlannerView.swift */,
-				87371CBE24B9C9CA005EA9F7 /* PredicateView.swift */,
+				87371CBE24B9C9CA005EA9F7 /* PredicateFetcher.swift */,
 				87A9D44624B9DCB400086541 /* ReminderDetail.swift */,
 				87A9D44224B9D67600086541 /* ReminderRow.swift */,
 				87C6809824B9EC380064F436 /* SettingsView.swift */,
@@ -147,6 +149,7 @@
 			children = (
 				8758210924DCBBC70034EF24 /* CalendarView.swift */,
 				8773DF1224BB018C00BC255E /* MarkdownView.swift */,
+				872EF4E824DE90B5005384DF /* SortPicker.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -240,9 +243,10 @@
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,
 				87A9D44A24B9E49600086541 /* EventKit+SwiftUI.swift in Sources */,
-				87371CBF24B9C9CA005EA9F7 /* PredicateView.swift in Sources */,
+				87371CBF24B9C9CA005EA9F7 /* PredicateFetcher.swift in Sources */,
 				870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */,
 				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
+				872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */,
 				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
 				870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,

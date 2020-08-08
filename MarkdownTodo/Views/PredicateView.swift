@@ -10,7 +10,7 @@ import Combine
 import EventKit
 import SwiftUI
 
-struct PredicateView: View {
+struct PredicateFetcher: View {
     let predicate: NSPredicate
 
     // Query
@@ -18,12 +18,23 @@ struct PredicateView: View {
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
 
+    var groups: [Date: [EKReminder]] {
+        Dictionary(
+            grouping: reminders,
+            by: { Calendar.current.startOfDay(for: $0.dueDate) }
+        )
+    }
+
     var body: some View {
         List {
-            ForEach(reminders) { reminder in
-                NavigationLink(destination: ReminderDetail(reminder: reminder)) {
-                    ReminderRow(reminder: reminder)
-                }  //.isDetailLink(false)
+            ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
+                Section(header: DateView(date: date)) {
+                    ForEach(self.groups[date]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
+                        NavigationLink(destination: ReminderDetail(reminder: reminder)) {
+                            ReminderRow(reminder: reminder)
+                        }
+                    }
+                }
             }
         }.onAppear(perform: fetch)
     }

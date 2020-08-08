@@ -14,7 +14,7 @@ struct CalendarDetailView: View {
     var calendar: EKCalendar
 
     var body: some View {
-        PredicateView(predicate: eventStore.reminders(for: calendar))
+        PredicateFetcher(predicate: eventStore.reminders(for: calendar))
             .navigationBarTitle(calendar.title)
             .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
     }

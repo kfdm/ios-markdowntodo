@@ -14,7 +14,7 @@ struct UpcomingView: View {
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        PredicateView(predicate: eventStore.upcomingReminders(days: 7))
+        PredicateFetcher(predicate: eventStore.upcomingReminders(days: 7))
             .navigationBarTitle("Upcoming")
     }
 }
@@ -23,7 +23,7 @@ struct TodayView: View {
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        PredicateView(predicate: eventStore.overdueReminders())
+        PredicateFetcher(predicate: eventStore.overdueReminders())
             .navigationBarTitle("Today")
     }
 }
@@ -32,7 +32,7 @@ struct CompletedView: View {
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        PredicateView(predicate: eventStore.completeReminders())
+        PredicateFetcher(predicate: eventStore.completeReminders())
             .navigationBarTitle("Completed")
     }
 }
@@ -48,7 +48,7 @@ struct SelectedDateView: View {
 
     var date: Date
     var body: some View {
-        PredicateView(predicate: eventStore.reminders(for: date))
+        PredicateFetcher(predicate: eventStore.reminders(for: date))
             .navigationBarTitle(formatter.string(from: date))
     }
 }
