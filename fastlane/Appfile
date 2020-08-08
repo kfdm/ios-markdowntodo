@@ -1,0 +1,8 @@
+app_identifier("net.kungfudiscomonkey.MarkdownTodo") # The bundle identifier of your app
+apple_id("kungfudiscomonkey@gmail.com") # Your Apple email address
+
+itc_team_id("118832016") # App Store Connect Team ID
+team_id("QX3B8ZS54S") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
