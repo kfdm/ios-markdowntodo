@@ -80,9 +80,3 @@ class EventStore: ObservableObject {
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>
-
-extension Date {
-    var midnight: Date {
-        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
-    }
-}

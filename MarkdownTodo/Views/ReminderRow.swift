@@ -22,18 +22,21 @@ struct ReminderRow: View {
 
     var body: some View {
         HStack {
-            checkmark
+            checkmark.font(.title)
             VStack(alignment: .leading) {
                 Text(reminder.title)
                 Text(reminder.calendar.title)
                     .foregroundColor(reminder.calendar.color)
             }
             Spacer()
-            if reminder.dueDateComponents != nil {
-                DateView(date: reminder.dueDateComponents!)
+            if let dueDate = reminder.dueDateComponents {
+                DateView(date: dueDate).modifier(HighlightOverdue(date: dueDate.date!))
             }
-            if reminder.url != nil {
+            if reminder.hasURL {
                 Image(systemName: "link")
+            }
+            if reminder.hasRecurrenceRules {
+                Image(systemName: "clock")
             }
         }
     }

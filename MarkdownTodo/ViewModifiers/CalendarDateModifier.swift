@@ -27,3 +27,14 @@ struct CalendarDateModifier: ViewModifier {
     }
 
 }
+
+struct HighlightOverdue: ViewModifier {
+    let date: Date
+
+    func body(content: Content) -> some View {
+        if date < Date().midnight {
+            return content.foregroundColor(.red)
+        }
+        return content.foregroundColor(nil)
+    }
+}

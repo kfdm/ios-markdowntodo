@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910924DE482200979076 /* CalendarDateModifier.swift */; };
+		870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910B24DE545C00979076 /* EventKit+Extensions.swift */; };
+		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
 		87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */; };
 		87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		870B910924DE482200979076 /* CalendarDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateModifier.swift; sourceTree = "<group>"; };
+		870B910B24DE545C00979076 /* EventKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extensions.swift"; sourceTree = "<group>"; };
+		870B910D24DE54DC00979076 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 		87A9D44824B9E48000086541 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				870B910D24DE54DC00979076 /* Date+Extensions.swift */,
+				870B910B24DE545C00979076 /* EventKit+Extensions.swift */,
 				87A9D44924B9E49600086541 /* EventKit+SwiftUI.swift */,
 				87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */,
 				87C6809C24B9F3A10064F436 /* SwiftUI+Polyfill.swift */,
@@ -235,7 +241,9 @@
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,
 				87A9D44A24B9E49600086541 /* EventKit+SwiftUI.swift in Sources */,
 				87371CBF24B9C9CA005EA9F7 /* PredicateView.swift in Sources */,
+				870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */,
 				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
+				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
 				870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,
