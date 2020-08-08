@@ -58,16 +58,31 @@ class EventStore: ObservableObject {
     }
 
     func overdueReminders() -> NSPredicate {
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: Date().midnight)
         return eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: nil, ending: Date(), calendars: nil)
+            withDueDateStarting: nil, ending: end, calendars: nil)
 
     }
 
-    func todayReminders() -> NSPredicate {
+    func upcomingReminders(days: Int, start: Date = Date().midnight) -> NSPredicate {
+        let end = Calendar.current.date(byAdding: .day, value: days, to: start)
         return eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: Date(), ending: Date(), calendars: nil)
+            withDueDateStarting: start, ending: end, calendars: nil)
+    }
+
+    func reminders(for date: Date) -> NSPredicate {
+        let start = date.midnight
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        return eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: start, ending: end, calendars: nil)
     }
 
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>
+
+extension Date {
+    var midnight: Date {
+        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+}

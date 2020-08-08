@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910924DE482200979076 /* CalendarDateModifier.swift */; };
 		87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */; };
 		87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		870B910924DE482200979076 /* CalendarDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateModifier.swift; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				874E646724DC19C800603EAE /* BackgroundColorModifier.swift */,
+				870B910924DE482200979076 /* CalendarDateModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				87A9D44A24B9E49600086541 /* EventKit+SwiftUI.swift in Sources */,
 				87371CBF24B9C9CA005EA9F7 /* PredicateView.swift in Sources */,
 				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
+				870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,
 				87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */,
