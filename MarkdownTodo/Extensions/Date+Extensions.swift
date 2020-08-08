@@ -19,3 +19,17 @@ extension Date {
         return Calendar.current.isDate(self, equalTo: .distantFuture, toGranularity: .day)
     }
 }
+
+extension DateFormatter {
+    static var dateAndTime: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }
+    static var date: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
+}

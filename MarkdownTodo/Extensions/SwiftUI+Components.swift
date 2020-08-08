@@ -36,14 +36,10 @@ struct NameField: View {
 }
 
 struct DateView: View {
-    var formatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }
     var date: Date
     var whenUnset = "Unset"
+    var formatter = DateFormatter.dateAndTime
+
     var body: some View {
         if date.isSentinel {
             Text(whenUnset)
@@ -54,10 +50,7 @@ struct DateView: View {
 }
 
 extension DateView {
-    init(date from: DateComponents) {
-        date = from.date!
-    }
-    init(date from: DateComponents?, whenUnset: String) {
+    init(date from: DateComponents?, whenUnset: String = "Unset") {
         date = from?.date ?? Date.distantFuture
         self.whenUnset = whenUnset
     }
