@@ -19,12 +19,21 @@ struct UpcomingView: View {
     }
 }
 
-struct OverdueView: View {
+struct TodayView: View {
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
         PredicateView(predicate: eventStore.overdueReminders())
-            .navigationBarTitle("Overdue")
+            .navigationBarTitle("Today")
+    }
+}
+
+struct CompletedView: View {
+    @EnvironmentObject var eventStore: EventStore
+
+    var body: some View {
+        PredicateView(predicate: eventStore.completeReminders())
+            .navigationBarTitle("Completed")
     }
 }
 
@@ -66,8 +75,9 @@ struct PlannerView: View {
                         .clipShape(Circle())
                 }
             }
-            NavigationLink("Overdue", destination: OverdueView())
+            NavigationLink("Today", destination: TodayView())
             NavigationLink("Upcoming", destination: UpcomingView())
+            NavigationLink("Completed", destination: CompletedView())
         }
         .listStyle(GroupedListStyle())
     }
