@@ -11,21 +11,14 @@ import EventKit
 import SwiftUI
 
 struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
-    let reminders: [EKReminder]
+    let reminders: [Date: [EKReminder]]
     let content: (EKReminder) -> ReminderView
-
-    var groups: [Date: [EKReminder]] {
-        Dictionary(
-            grouping: reminders,
-            by: { Calendar.current.startOfDay(for: $0.dueDate) }
-        )
-    }
 
     var body: some View {
         List {
-            ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
+            ForEach(reminders.keys.sorted { $0 > $1 }, id: \.self) { date in
                 Section(header: DateView(date: date, whenUnset: "No Due Date", formatter: .date)) {
-                    ForEach(self.groups[date]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
+                    ForEach(reminders[date]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
                         content(reminder)
                     }
                 }
@@ -35,21 +28,15 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
 }
 
 struct RemindersGroupPriority<ReminderView>: View where ReminderView: View {
-    let reminders: [EKReminder]
+    let reminders: [Int: [EKReminder]]
     let content: (EKReminder) -> ReminderView
-
-    var groups: [Int: [EKReminder]] {
-        Dictionary(
-            grouping: reminders,
-            by: { $0.priority }
-        )
-    }
 
     var body: some View {
         List {
-            ForEach(groups.keys.sorted { $0 < $1 }, id: \.self) { priority in
+            ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { priority in
                 Section(header: Text("Priority \(priority)")) {
-                    ForEach(self.groups[priority]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
+                    ForEach(self.reminders[priority]!.sorted { $0.dueDate > $1.dueDate }) {
+                        reminder in
                         content(reminder)
                     }
                 }
@@ -78,7 +65,7 @@ struct PredicateFetcher: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
-    @State private var sortBy = SortOptions.date
+    @State private var sortBy = SortOptions.dueDate
 
     func content(for reminder: EKReminder) -> some View {
         return NavigationLink(destination: ReminderDetail(reminder: reminder)) {
@@ -89,10 +76,12 @@ struct PredicateFetcher: View {
     var body: some View {
         Group {
             switch sortBy {
-            case .date:
-                RemindersGroupDate(reminders: reminders, content: content)
+            case .dueDate:
+                RemindersGroupDate(reminders: reminders.byDueDate(), content: content)
+            case .createdDate:
+                RemindersGroupDate(reminders: reminders.byCreateDate(), content: content)
             case .priority:
-                RemindersGroupPriority(reminders: reminders, content: content)
+                RemindersGroupPriority(reminders: reminders.byPriority(), content: content)
             case .title:
                 RemindersGroupTitle(reminders: reminders, content: content)
             }

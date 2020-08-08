@@ -21,3 +21,24 @@ extension EKReminder {
         return dueDateComponents?.date ?? Date.distantFuture
     }
 }
+
+extension Array where Element == EKReminder {
+    func byDueDate() -> [Date: [EKReminder]] {
+        return Dictionary(
+            grouping: self,
+            by: { Calendar.current.startOfDay(for: $0.dueDate) }
+        )
+    }
+    func byCreateDate() -> [Date: [EKReminder]] {
+        return Dictionary(
+            grouping: self,
+            by: { Calendar.current.startOfDay(for: $0.creationDate ?? Date.distantFuture) }
+        )
+    }
+    func byPriority() -> [Int: [EKReminder]] {
+        return Dictionary(
+            grouping: self,
+            by: { $0.priority }
+        )
+    }
+}

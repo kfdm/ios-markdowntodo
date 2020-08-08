@@ -9,7 +9,8 @@
 import SwiftUI
 
 enum SortOptions: String, CaseIterable {
-    case date
+    case dueDate = "Due Date"
+    case createdDate = "Created Date"
     case priority
     case title
 }
