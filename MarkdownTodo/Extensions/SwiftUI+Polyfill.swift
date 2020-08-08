@@ -13,9 +13,7 @@ struct Link: View {
     var destination: URL
 
     var body: some View {
-        Button(action: openLink) {
-            Text(label)
-        }
+        Button(label, action: openLink)
     }
     func openLink() {
         UIApplication.shared.open(destination)

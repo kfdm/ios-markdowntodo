@@ -59,16 +59,8 @@ struct ReminderDetail: View {
             }
         }
         .navigationBarItems(
-            leading: Button(
-                action: cancelAction,
-                label: {
-                    Text("Cancel")
-                }),
-            trailing: Button(
-                action: saveAction,
-                label: {
-                    Text("Save")
-                })
+            leading: Button("Cancel", action: cancelAction),
+            trailing: Button("Save", action: saveAction)
         )
         .navigationBarTitle(reminder.title)
         .navigationBarBackButtonHidden(true)
