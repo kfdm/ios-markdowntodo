@@ -25,7 +25,7 @@ struct ReminderRow: View {
     }
 
     func actionClickCheckbox() {
-        reminder = eventStore.toggleComplete(reminder)
+        try? eventStore.toggleComplete(reminder)
     }
 
     var body: some View {

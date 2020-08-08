@@ -83,17 +83,21 @@ class EventStore: ObservableObject {
             withDueDateStarting: start, ending: end, calendars: nil)
     }
 
-    func toggleComplete(_ reminder: EKReminder) -> EKReminder {
+    func toggleComplete(_ reminder: EKReminder) throws {
         print("Toggle reminder \(reminder)")
         if reminder.isCompleted {
             reminder.completionDate = nil
         } else {
             reminder.completionDate = Date()
         }
-        try? eventStore.save(reminder, commit: true)
-        return reminder
+        try save(reminder)
     }
 
+    func save(_ reminder: EKReminder) throws {
+        print("Saving \(reminder)")
+        try eventStore.save(reminder, commit: true)
+        objectWillChange.send()
+    }
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>

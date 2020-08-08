@@ -67,13 +67,12 @@ struct ReminderDetail: View {
     }
 
     func saveAction() {
-        print("Saved?")
+        try? store.save(reminder)
         presentationMode.wrappedValue.dismiss()
     }
 
     func cancelAction() {
         reminder.reset()
-        store.eventStore.reset()
         presentationMode.wrappedValue.dismiss()
     }
 }
