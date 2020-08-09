@@ -9,6 +9,23 @@
 import EventKit
 import SwiftUI
 
+struct PriorityPicker: View {
+    var label: String
+    @Binding var priority: Int
+
+    var body: some View {
+        HStack {
+            Text(label)
+            Spacer()
+            Picker("", selection: $priority) {
+                ForEach(0..<10) { p in
+                    Text("\(p)").tag(p)
+                }
+            }.pickerStyle(SegmentedPickerStyle())
+        }
+    }
+}
+
 struct ReminderDetail: View {
     @EnvironmentObject var store: EventStore
     @State var reminder: EKReminder
@@ -19,11 +36,7 @@ struct ReminderDetail: View {
             Section(header: EmptyView()) {
                 NameField(label: "Title", value: $reminder.title)
                 NameValue(label: "Calendar", value: reminder.calendar.title)
-                Picker("Priority", selection: $reminder.priority) {
-                    ForEach(0..<10) { p in
-                        Text("\(p)").tag(p)
-                    }
-                }.pickerStyle(SegmentedPickerStyle())
+                PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
                 DateTimePicker(label: "Start Date", dateComponent: $reminder.startDateComponents)
