@@ -31,6 +31,7 @@
 		87C6809924B9EC380064F436 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809824B9EC380064F436 /* SettingsView.swift */; };
 		87C6809D24B9F3A10064F436 /* SwiftUI+Polyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809C24B9F3A10064F436 /* SwiftUI+Polyfill.swift */; };
 		87C6809F24B9F4530064F436 /* SwiftUI+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */; };
+		87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		87C6809824B9EC380064F436 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		87C6809C24B9F3A10064F436 /* SwiftUI+Polyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Polyfill.swift"; sourceTree = "<group>"; };
 		87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Components.swift"; sourceTree = "<group>"; };
+		87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				874E646724DC19C800603EAE /* BackgroundColorModifier.swift */,
 				870B910924DE482200979076 /* CalendarDateModifier.swift */,
+				87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
 				872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */,
 				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
+				87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */,
 				870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,

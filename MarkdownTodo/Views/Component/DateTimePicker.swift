@@ -47,6 +47,7 @@ struct DateTimePicker: View {
                         DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
                             Text("Select Time")
                         }
+                        Button("Clear", action: clickClear).buttonStyle(DestructiveButtonStyle())
                     }
                     .navigationBarTitle("Date Picker", displayMode: .inline)
                     .navigationBarItems(

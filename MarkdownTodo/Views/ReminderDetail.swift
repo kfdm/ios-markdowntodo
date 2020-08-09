@@ -38,6 +38,10 @@ struct ReminderDetail: View {
                 }
                 MarkdownView(label: "Description", text: $reminder.notes)
             }
+            Section() {
+                Button("Delete", action: { print("Delete Stub") }).buttonStyle(
+                    DestructiveButtonStyle())
+            }
         }
         .navigationBarItems(
             leading: Button("Cancel", action: cancelAction),
