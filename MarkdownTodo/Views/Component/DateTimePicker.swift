@@ -31,6 +31,11 @@ struct DateTimePicker: View {
         showDatePicker = false
     }
 
+    func clickClear() {
+        dateComponent = nil
+        showDatePicker = false
+    }
+
     var body: some View {
         HStack {
             Text(label)
@@ -40,12 +45,17 @@ struct DateTimePicker: View {
             }
             .sheet(isPresented: $showDatePicker) {
                 NavigationView {
-                    HStack {
-                        DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                            Text("Select Date")
-                        }
-                        DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
-                            Text("Select Time")
+                    VStack {
+                        HStack {
+                            Text("Date")
+                            DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                                Text("Select Date")
+                            }
+                            DatePicker(
+                                selection: $selectedDate, displayedComponents: .hourAndMinute
+                            ) {
+                                Text("Select Time")
+                            }
                         }
                         Button("Clear", action: clickClear).buttonStyle(DestructiveButtonStyle())
                     }
