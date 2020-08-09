@@ -10,31 +10,51 @@ import SwiftUI
 
 struct DateTimePicker: View {
     var label: String
-    @Binding var date: DateComponents?
-    @State private var showDatePicker = false
-    @State private var startDate = Date()
+    @Binding var dateComponent: DateComponents?
 
-    func actionShow() {
+    @State private var showDatePicker = false
+    @State private var selectedDate = Date()
+    @Environment(\.calendar) var calendar
+
+    func showSheet() {
         showDatePicker = true
-        startDate = date?.date ?? Date()
+        selectedDate = dateComponent?.date ?? Date()
+    }
+
+    func clickCancel() {
+        showDatePicker = false
+    }
+
+    func clickSave() {
+        dateComponent = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute], from: selectedDate)
+        showDatePicker = false
     }
 
     var body: some View {
         HStack {
             Text(label)
             Spacer()
-            Button(action: { showDatePicker = true }) {
-                DateView(date: date, whenUnset: "Unscheduled")
+            Button(action: showSheet) {
+                DateView(date: dateComponent, whenUnset: "Unscheduled")
             }
             .sheet(isPresented: $showDatePicker) {
-                Text("Date")
-                    .font(.largeTitle)
-                DatePicker(selection: $startDate, displayedComponents: .date) {
-                    Text("Select Date")
+                NavigationView {
+                    HStack {
+                        DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                            Text("Select Date")
+                        }
+                        DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
+                            Text("Select Time")
+                        }
+                    }
+                    .navigationBarTitle("Date Picker", displayMode: .inline)
+                    .navigationBarItems(
+                        leading: Button("Cancel", action: clickCancel),
+                        trailing: Button("Save", action: clickSave)
+                    )
                 }
-                DatePicker(selection: $startDate, displayedComponents: .hourAndMinute) {
-                    Text("Select Time")
-                }
+                .navigationViewStyle(StackNavigationViewStyle())
             }
         }
     }
@@ -42,6 +62,6 @@ struct DateTimePicker: View {
 
 struct DateTimePicker_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimePicker(label: "Preview", date: .constant(DateComponents()))
+        DateTimePicker(label: "Preview", dateComponent: .constant(DateComponents()))
     }
 }

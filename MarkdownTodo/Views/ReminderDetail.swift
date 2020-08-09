@@ -26,8 +26,8 @@ struct ReminderDetail: View {
                 }.pickerStyle(SegmentedPickerStyle())
             }
             Section(header: Text("Date")) {
-                DateTimePicker(label: "Start Date", date: $reminder.startDateComponents)
-                DateTimePicker(label: "Due Date", date: $reminder.dueDateComponents)
+                DateTimePicker(label: "Start Date", dateComponent: $reminder.startDateComponents)
+                DateTimePicker(label: "Due Date", dateComponent: $reminder.dueDateComponents)
                 ForEach(reminder.recurrenceRules ?? []) { rule in
                     Text("\(rule)")
                 }
