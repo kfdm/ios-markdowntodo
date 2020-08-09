@@ -22,7 +22,20 @@ struct MarkdownView: View {
     }
 }
 
-struct MarkdownSub: UIViewRepresentable {
+fileprivate struct MarkdownSub: UIViewRepresentable {
+
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: MarkdownSub
+
+        init(_ parent: MarkdownSub) {
+            self.parent = parent
+        }
+
+        func textViewDidEndEditing(_ textView: UITextView) {
+            self.parent.text = textView.text
+        }
+    }
+
     @Binding var text: String?
 
     func makeUIView(context: Context) -> UITextView {
@@ -31,7 +44,14 @@ struct MarkdownSub: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
+        uiView.delegate = context.coordinator
+        uiView.font = .monospacedSystemFont(ofSize: 16, weight: .regular)
     }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+
 }
 
 struct MarkdownView_Previews: PreviewProvider {
