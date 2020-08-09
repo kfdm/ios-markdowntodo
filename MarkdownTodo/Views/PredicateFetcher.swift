@@ -16,9 +16,10 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
 
     var body: some View {
         List {
-            ForEach(reminders.keys.sorted { $0 > $1 }, id: \.self) { date in
+            // Show dates oldest to newest
+            ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { date in
                 Section(header: DateView(date: date, whenUnset: "No Due Date", formatter: .date)) {
-                    ForEach(reminders[date]!.sorted { $0.dueDate > $1.dueDate }) { reminder in
+                    ForEach(reminders[date]!.sorted { $0.dueDate < $1.dueDate }) { reminder in
                         content(reminder)
                     }
                 }
@@ -35,7 +36,7 @@ struct RemindersGroupPriority<ReminderView>: View where ReminderView: View {
         List {
             ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { priority in
                 Section(header: Text("Priority \(priority)")) {
-                    ForEach(self.reminders[priority]!.sorted { $0.dueDate > $1.dueDate }) {
+                    ForEach(self.reminders[priority]!.sorted { $0.dueDate < $1.dueDate }) {
                         reminder in
                         content(reminder)
                     }
