@@ -61,12 +61,12 @@ struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
 
 struct PredicateFetcher: View {
     let predicate: NSPredicate
+    @Binding var sortBy: SortOptions
 
     // Query
     @EnvironmentObject var eventStore: EventStore
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
-    @State private var sortBy = SortOptions.dueDate
 
     func content(for reminder: EKReminder) -> some View {
         return NavigationLink(destination: ReminderDetail(reminder: reminder)) {
@@ -88,10 +88,10 @@ struct PredicateFetcher: View {
             }
         }
         .onAppear(perform: fetch)
+        // Default sort button if not overridden in the parent view
         .navigationBarItems(
-            trailing: HStack {
-                SortButton(sortBy: $sortBy)
-            })
+            trailing: SortButton(sortBy: $sortBy)
+        )
     }
 
     func fetch() {

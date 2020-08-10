@@ -37,7 +37,7 @@ struct HighlightOverdue: ViewModifier {
         }
         return content.foregroundColor(nil)
     }
-    
+
     init(date: DateComponents?) {
         self.date = date?.date ?? Date()
     }

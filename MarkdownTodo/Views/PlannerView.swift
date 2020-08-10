@@ -12,44 +12,42 @@ import SwiftUI
 
 struct UpcomingView: View {
     @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.upcomingReminders(days: 7))
+        PredicateFetcher(predicate: eventStore.upcomingReminders(days: 7), sortBy: $sortBy)
             .navigationBarTitle("Upcoming")
     }
 }
 
 struct TodayView: View {
     @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.overdueReminders())
+        PredicateFetcher(predicate: eventStore.overdueReminders(), sortBy: $sortBy)
             .navigationBarTitle("Today")
     }
 }
 
 struct CompletedView: View {
     @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.completeReminders())
+        PredicateFetcher(predicate: eventStore.completeReminders(), sortBy: $sortBy)
             .navigationBarTitle("Completed")
     }
 }
 
 struct SelectedDateView: View {
     @EnvironmentObject var eventStore: EventStore
-
-    var formatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        return formatter
-    }
+    @State private var sortBy = SortOptions.dueDate
 
     var date: Date
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: date))
-            .navigationBarTitle(formatter.string(from: date))
+        PredicateFetcher(predicate: eventStore.reminders(for: date), sortBy: $sortBy)
+            .navigationBarTitle(DateFormatter.date.string(from: date))
     }
 }
 

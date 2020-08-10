@@ -11,10 +11,12 @@ import SwiftUI
 
 struct CalendarDetailView: View {
     @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.dueDate
+
     var calendar: EKCalendar
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: calendar))
+        PredicateFetcher(predicate: eventStore.reminders(for: calendar), sortBy: $sortBy)
             .navigationBarTitle(calendar.title)
             .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
     }
