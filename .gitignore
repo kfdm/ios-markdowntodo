@@ -5,3 +5,7 @@
 
 ## User settings
 xcuserdata/
+
+## fastlane
+fastlane/README.md
+fastlane/report.xml
