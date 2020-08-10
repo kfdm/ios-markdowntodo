@@ -98,6 +98,13 @@ class EventStore: ObservableObject {
         try eventStore.save(reminder, commit: true)
         objectWillChange.send()
     }
+
+    func new(for calendar: EKCalendar) -> EKReminder {
+        let reminder = EKReminder(eventStore: eventStore)
+        reminder.title = ""
+        reminder.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
+        return reminder
+    }
 }
 
 typealias ReminderQuery = PassthroughSubject<[EKReminder], Never>

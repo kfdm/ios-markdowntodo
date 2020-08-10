@@ -25,6 +25,7 @@
 		8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* CalendarView.swift */; };
 		8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773DF1224BB018C00BC255E /* MarkdownView.swift */; };
 		879C69F624E0ED6E0062503C /* QuickDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F524E0ED6E0062503C /* QuickDateModifier.swift */; };
+		879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F724E1060E0062503C /* AddTaskButton.swift */; };
 		87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44224B9D67600086541 /* ReminderRow.swift */; };
 		87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44424B9DA8800086541 /* PlannerView.swift */; };
 		87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44624B9DCB400086541 /* ReminderDetail.swift */; };
@@ -56,6 +57,7 @@
 		8758210924DCBBC70034EF24 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8773DF1224BB018C00BC255E /* MarkdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownView.swift; sourceTree = "<group>"; };
 		879C69F524E0ED6E0062503C /* QuickDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDateModifier.swift; sourceTree = "<group>"; };
+		879C69F724E1060E0062503C /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 		87A9D44224B9D67600086541 /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
 		87A9D44424B9DA8800086541 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		87A9D44624B9DCB400086541 /* ReminderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetail.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		8773DF1124BB017F00BC255E /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				879C69F724E1060E0062503C /* AddTaskButton.swift */,
 				8758210924DCBBC70034EF24 /* CalendarView.swift */,
 				872EF4EA24DEB078005384DF /* DateTimePicker.swift */,
 				8773DF1224BB018C00BC255E /* MarkdownView.swift */,
@@ -260,6 +263,7 @@
 				872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */,
 				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
 				87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */,
+				879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */,
 				870B910A24DE482200979076 /* CalendarDateModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,

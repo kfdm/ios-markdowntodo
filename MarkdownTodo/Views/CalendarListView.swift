@@ -19,6 +19,10 @@ struct CalendarDetailView: View {
         PredicateFetcher(predicate: eventStore.reminders(for: calendar), sortBy: $sortBy)
             .navigationBarTitle(calendar.title)
             .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
+            .navigationBarItems(
+                leading: AddTaskButton(calendar: calendar),
+                trailing: SortButton(sortBy: $sortBy)
+            )
     }
 }
 
@@ -27,25 +31,18 @@ struct CalendarListView: View {
 
     var body: some View {
         Group {
-            if eventStore.authorized {
-                List {
-                    ForEach(eventStore.sources) { (source) in
-                        Section(header: Text(source.title)) {
-                            ForEach(
-                                self.eventStore.calendars(for: source), id: \.calendarIdentifier
-                            ) { (calendar) in
-                                NavigationLink(destination: CalendarDetailView(calendar: calendar))
-                                {
-                                    Text(calendar.title)
-                                        .foregroundColor(calendar.color)
-                                }
+            List {
+                ForEach(eventStore.sources) { (source) in
+                    Section(header: Text(source.title)) {
+                        ForEach(eventStore.calendars(for: source)) { (calendar) in
+                            NavigationLink(destination: CalendarDetailView(calendar: calendar)) {
+                                Text(calendar.title)
+                                    .foregroundColor(calendar.color)
                             }
                         }
                     }
-                }.listStyle(GroupedListStyle())
-            } else {
-                Text("Not authed")
-            }
+                }
+            }.listStyle(GroupedListStyle())
         }
     }
 }

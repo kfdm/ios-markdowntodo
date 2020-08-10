@@ -32,3 +32,9 @@ extension EKRecurrenceRule: Identifiable {
         return calendarIdentifier
     }
 }
+
+extension EKCalendar: Identifiable {
+    public var id: String {
+        return calendarIdentifier
+    }
+}
