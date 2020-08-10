@@ -41,6 +41,11 @@ struct ReminderDetail: View {
             Section(header: Text("Date")) {
                 DateTimePicker(label: "Start Date", dateComponent: $reminder.startDateComponents)
                 DateTimePicker(label: "Due Date", dateComponent: $reminder.dueDateComponents)
+                HStack {
+                    Text("Created")
+                    Spacer()
+                    DateView(date: reminder.creationDate!)
+                }
                 ForEach(reminder.recurrenceRules ?? []) { rule in
                     Text("\(rule)")
                 }

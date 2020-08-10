@@ -47,7 +47,7 @@ struct SelectedDateView: View {
     var date: Date
     var body: some View {
         PredicateFetcher(predicate: eventStore.reminders(for: date), sortBy: $sortBy)
-            .navigationBarTitle(DateFormatter.date.string(from: date))
+            .navigationBarTitle(DateFormatter.shortDate.string(from: date))
     }
 }
 
