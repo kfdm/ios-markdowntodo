@@ -61,9 +61,9 @@ struct ReminderRow: View {
                     .foregroundColor(reminder.calendar.color)
             }
             Spacer()
-            if let dueDate = reminder.dueDateComponents {
-                DateView(date: dueDate).modifier(HighlightOverdue(date: dueDate.date!))
-            }
+            DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
+                .modifier(HighlightOverdue(date: reminder.dueDateComponents))
+                .modifier(QuickDateModifier(date: $reminder.dueDateComponents, reminder: $reminder))
             if reminder.hasURL {
                 Image(systemName: "link")
             }

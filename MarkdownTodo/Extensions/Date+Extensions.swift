@@ -18,6 +18,12 @@ extension Date {
     var isSentinel: Bool {
         return Calendar.current.isDate(self, equalTo: .distantFuture, toGranularity: .day)
     }
+
+    func nextDate(dayOfTheWeek: Int) -> Date? {
+        let calendar = Calendar.current
+        let weekday = DateComponents(calendar: Calendar.current, weekday: dayOfTheWeek)
+        return calendar.nextDate(after: self, matching: weekday, matchingPolicy: .nextTime)
+    }
 }
 
 extension DateFormatter {
