@@ -16,6 +16,7 @@ enum HomeTabs {
 
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
+    @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
         TabView(selection: $selection) {
@@ -51,7 +52,12 @@ struct ContentView: View {
                 Image(systemName: "gear")
                 Text("Settings")
             }
-        }
+        }.onAppear(perform: checkAccess)
+    }
+    
+    func checkAccess() {
+        // Temporary check to trigger authorized check
+        print(eventStore.authorized)
     }
 }
 
