@@ -88,6 +88,7 @@ struct PredicateFetcher: View {
             }
         }
         .onAppear(perform: fetch)
+        .onReceive(eventStore.objectWillChange, perform: fetch)
         // Default sort button if not overridden in the parent view
         .navigationBarItems(
             trailing: SortButton(sortBy: $sortBy)
