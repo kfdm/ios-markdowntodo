@@ -70,6 +70,10 @@ class EventStore: ObservableObject {
         return eventStore.predicateForCompletedReminders(
             withCompletionDateStarting: start, ending: end, calendars: nil)
     }
+    
+    func reminders(for interval: DateInterval) -> NSPredicate {
+        return eventStore.predicateForIncompleteReminders(withDueDateStarting: interval.start, ending: interval.end, calendars: nil)
+    }
 
     func upcomingReminders(days: Int, start: Date = Date().midnight) -> NSPredicate {
         let end = Calendar.current.date(byAdding: .day, value: days, to: start)

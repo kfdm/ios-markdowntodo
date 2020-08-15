@@ -6,8 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Combine
-import EventKit
 import SwiftUI
 
 struct UpcomingView: View {
@@ -52,27 +50,9 @@ struct SelectedDateView: View {
 }
 
 struct PlannerView: View {
-    @Environment(\.calendar) var calendar
-
-    private var month: DateInterval {
-        calendar.dateInterval(of: .month, for: Date())!
-    }
-
-    @State var selectedDate = Date()
-
     var body: some View {
         List {
-            CalendarView(interval: month) { date in
-                NavigationLink(
-                    destination: SelectedDateView(date: date).onAppear { selectedDate = date }
-                ) {
-                    Text(String(self.calendar.component(.day, from: date)))
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .padding(.vertical, 4)
-                        .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
-                        .clipShape(Circle())
-                }
-            }
+            CalendarOverview()
             NavigationLink("Today", destination: TodayView())
             NavigationLink("Upcoming", destination: UpcomingView())
             NavigationLink("Completed", destination: CompletedView())
