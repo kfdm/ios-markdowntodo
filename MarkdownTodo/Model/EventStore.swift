@@ -33,8 +33,9 @@ class EventStore: ObservableObject {
 
     var sources: [EKSource] {
         eventStore.refreshSourcesIfNecessary()
-        return eventStore.sources.filter { $0.sourceType == .calDAV }
+        return eventStore.sources //.filter { $0.sourceType == .calDAV }
             .sorted { $0.title < $1.title }
+            
     }
 
     func calendars(for source: EKSource) -> [EKCalendar] {
