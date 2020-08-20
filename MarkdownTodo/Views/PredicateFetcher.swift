@@ -100,7 +100,6 @@ struct PredicateSorted: View {
     }
 }
 
-
 struct PredicateFetcher: View {
     let predicate: NSPredicate
     @Binding var sortBy: SortOptions

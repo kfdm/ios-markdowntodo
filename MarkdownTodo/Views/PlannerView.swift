@@ -8,13 +8,22 @@
 
 import SwiftUI
 
-struct UpcomingView: View {
+extension View {
+    func wrapNavigation(icon: String, label: String) -> some View {
+        return NavigationLink(destination: self.navigationBarTitle(label)) {
+            Image(systemName: icon)
+            Text(label)
+        }
+    }
+}
+
+struct ScheduledView: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.upcomingReminders(days: 7), sortBy: $sortBy)
-            .navigationBarTitle("Upcoming")
+        PredicateFetcher(predicate: eventStore.scheduledReminders(), sortBy: $sortBy)
+            .wrapNavigation(icon: "clock", label: "Scheduled")
     }
 }
 
@@ -24,7 +33,7 @@ struct TodayView: View {
 
     var body: some View {
         PredicateFetcher(predicate: eventStore.overdueReminders(), sortBy: $sortBy)
-            .navigationBarTitle("Today")
+            .wrapNavigation(icon: "calendar", label: "Today")
     }
 }
 
@@ -34,7 +43,7 @@ struct CompletedView: View {
 
     var body: some View {
         PredicateFetcher(predicate: eventStore.completeReminders(), sortBy: $sortBy)
-            .navigationBarTitle("Completed")
+            .wrapNavigation(icon: "checkmark.seal", label: "Completed")
     }
 }
 
@@ -52,10 +61,10 @@ struct SelectedDateView: View {
 struct PlannerView: View {
     var body: some View {
         List {
-            NavigationLink("Today", destination: TodayView())
-            NavigationLink("Upcoming", destination: UpcomingView())
+            TodayView()
+            ScheduledView()
             CalendarOverview()
-            NavigationLink("Completed", destination: CompletedView())
+            CompletedView()
         }
         .listStyle(GroupedListStyle())
     }
