@@ -18,7 +18,9 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
         List {
             // Show dates oldest to newest
             ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { date in
-                Section(header: DateView(date: date, whenUnset: "No Due Date", formatter: .fullDate)) {
+                Section(
+                    header: DateView(date: date, whenUnset: "No Due Date", formatter: .fullDate)
+                ) {
                     ForEach(reminders[date]!.sorted { $0.dueDate < $1.dueDate }) { reminder in
                         content(reminder)
                     }

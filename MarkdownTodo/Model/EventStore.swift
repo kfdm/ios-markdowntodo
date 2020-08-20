@@ -33,9 +33,9 @@ class EventStore: ObservableObject {
 
     var sources: [EKSource] {
         eventStore.refreshSourcesIfNecessary()
-        return eventStore.sources //.filter { $0.sourceType == .calDAV }
+        return eventStore.sources  //.filter { $0.sourceType == .calDAV }
             .sorted { $0.title < $1.title }
-            
+
     }
 
     func calendars(for source: EKSource) -> [EKCalendar] {
@@ -70,9 +70,10 @@ class EventStore: ObservableObject {
         return eventStore.predicateForCompletedReminders(
             withCompletionDateStarting: start, ending: end, calendars: nil)
     }
-    
+
     func reminders(for interval: DateInterval) -> NSPredicate {
-        return eventStore.predicateForIncompleteReminders(withDueDateStarting: interval.start, ending: interval.end, calendars: nil)
+        return eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: interval.start, ending: interval.end, calendars: nil)
     }
 
     func upcomingReminders(days: Int, start: Date = Date().midnight) -> NSPredicate {

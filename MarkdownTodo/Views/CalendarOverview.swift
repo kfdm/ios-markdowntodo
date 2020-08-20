@@ -11,7 +11,7 @@ import EventKit
 import SwiftUI
 
 struct DateIndicator: View {
-    var reminders : [EKReminder]
+    var reminders: [EKReminder]
     var body: some View {
         Group {
             switch reminders.count {
@@ -31,15 +31,15 @@ struct CalendarOverview: View {
     private var month: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
-    
+
     @Environment(\.calendar) var calendar
     @State var selectedDate = Date()
-    
+
     // Query
     @EnvironmentObject var eventStore: EventStore
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [Date: [EKReminder]] = [:]
-    
+
     var body: some View {
         CalendarView(interval: month) { date in
             NavigationLink(
@@ -55,7 +55,7 @@ struct CalendarOverview: View {
             }
         }.onAppear(perform: fetch)
     }
-    
+
     func fetch() {
         self.eventStore.publisher(for: eventStore.reminders(for: month))
             .receive(on: DispatchQueue.main)

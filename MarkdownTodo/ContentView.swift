@@ -54,7 +54,7 @@ struct ContentView: View {
             }
         }.onAppear(perform: checkAccess)
     }
-    
+
     func checkAccess() {
         // Temporary check to trigger authorized check
         print(eventStore.authorized)
