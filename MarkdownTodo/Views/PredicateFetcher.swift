@@ -14,6 +14,11 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
     let reminders: [Date: [EKReminder]]
     let content: (EKReminder) -> ReminderView
 
+    init(reminders: [EKReminder], @ViewBuilder content: @escaping (EKReminder) -> ReminderView) {
+        self.reminders = reminders.byDueDate()
+        self.content = content
+    }
+
     var body: some View {
         List {
             // Show dates oldest to newest
@@ -33,6 +38,11 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
 struct RemindersGroupPriority<ReminderView>: View where ReminderView: View {
     let reminders: [Int: [EKReminder]]
     let content: (EKReminder) -> ReminderView
+
+    init(reminders: [EKReminder], @ViewBuilder content: @escaping (EKReminder) -> ReminderView) {
+        self.reminders = reminders.byPriority()
+        self.content = content
+    }
 
     var body: some View {
         List {
@@ -61,14 +71,9 @@ struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
     }
 }
 
-struct PredicateFetcher: View {
-    let predicate: NSPredicate
+struct PredicateSorted: View {
     @Binding var sortBy: SortOptions
-
-    // Query
-    @EnvironmentObject var eventStore: EventStore
-    @State private var subscriptions = Set<AnyCancellable>()
-    @State private var reminders: [EKReminder] = []
+    @Binding var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
         return NavigationLink(destination: ReminderDetail(reminder: reminder)) {
@@ -80,21 +85,35 @@ struct PredicateFetcher: View {
         Group {
             switch sortBy {
             case .dueDate:
-                RemindersGroupDate(reminders: reminders.byDueDate(), content: content)
+                RemindersGroupDate(reminders: reminders, content: content)
             case .createdDate:
-                RemindersGroupDate(reminders: reminders.byCreateDate(), content: content)
+                RemindersGroupDate(reminders: reminders, content: content)
             case .priority:
-                RemindersGroupPriority(reminders: reminders.byPriority(), content: content)
+                RemindersGroupPriority(reminders: reminders, content: content)
             case .title:
                 RemindersGroupTitle(reminders: reminders, content: content)
             }
         }
-        .onAppear(perform: fetch)
-        .onReceive(eventStore.objectWillChange, perform: fetch)
         // Default sort button if not overridden in the parent view
         .navigationBarItems(
-            trailing: SortButton(sortBy: $sortBy)
-        )
+            trailing: SortButton(sortBy: $sortBy))
+    }
+}
+
+
+struct PredicateFetcher: View {
+    let predicate: NSPredicate
+    @Binding var sortBy: SortOptions
+
+    // Query
+    @EnvironmentObject var eventStore: EventStore
+    @State private var subscriptions = Set<AnyCancellable>()
+    @State private var reminders: [EKReminder] = []
+
+    var body: some View {
+        PredicateSorted(sortBy: $sortBy, reminders: $reminders)
+            .onAppear(perform: fetch)
+            .onReceive(eventStore.objectWillChange, perform: fetch)
     }
 
     func fetch() {
