@@ -52,9 +52,9 @@ struct SelectedDateView: View {
 struct PlannerView: View {
     var body: some View {
         List {
-            CalendarOverview()
             NavigationLink("Today", destination: TodayView())
             NavigationLink("Upcoming", destination: UpcomingView())
+            CalendarOverview()
             NavigationLink("Completed", destination: CompletedView())
         }
         .listStyle(GroupedListStyle())
