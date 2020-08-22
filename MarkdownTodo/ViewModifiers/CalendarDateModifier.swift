@@ -30,9 +30,10 @@ struct CalendarDateModifier: ViewModifier {
 
 struct HighlightOverdue: ViewModifier {
     let date: Date
+    let today = Date()
 
     func body(content: Content) -> some View {
-        if date < Date().midnight {
+        if date.endOfDay < today.endOfDay {
             return content.foregroundColor(.red)
         }
         return content.foregroundColor(nil)

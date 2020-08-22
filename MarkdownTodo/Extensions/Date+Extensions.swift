@@ -9,11 +9,16 @@
 import Foundation
 
 extension Date {
-    var midnight: Date {
+    var startOfDay: Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
     }
+
+    var endOfDay: Date {
+        return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+
     var tomorrow: Date {
-        return Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
+        return Calendar.current.date(byAdding: .day, value: 1, to: self.startOfDay)!
     }
     var isSentinel: Bool {
         return Calendar.current.isDate(self, equalTo: .distantFuture, toGranularity: .day)
@@ -23,6 +28,12 @@ extension Date {
         let calendar = Calendar.current
         let weekday = DateComponents(calendar: Calendar.current, weekday: dayOfTheWeek)
         return calendar.nextDate(after: self, matching: weekday, matchingPolicy: .nextTime)
+    }
+}
+
+extension Calendar {
+    func endOfDay(for date: Date) -> Date {
+        return self.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
     }
 }
 

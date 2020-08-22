@@ -92,7 +92,7 @@ extension EventStore {
     }
 
     func reminders(for date: Date) -> NSPredicate {
-        let start = date.midnight
+        let start = date.startOfDay
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: start, ending: end, calendars: nil)
@@ -102,7 +102,7 @@ extension EventStore {
 // MARK:- Some useful preselected queries
 extension EventStore {
     func completeReminders(for date: Date = Date()) -> NSPredicate {
-        let start = date.midnight
+        let start = date.startOfDay
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
         return eventStore.predicateForCompletedReminders(
             withCompletionDateStarting: start, ending: end, calendars: nil)
@@ -113,15 +113,14 @@ extension EventStore {
             withDueDateStarting: .distantPast, ending: .distantFuture, calendars: nil)
     }
 
-    func upcomingReminders(days: Int, start: Date = Date().midnight) -> NSPredicate {
+    func upcomingReminders(days: Int, start: Date = Date().startOfDay) -> NSPredicate {
         let end = Calendar.current.date(byAdding: .day, value: days, to: start)
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: start, ending: end, calendars: nil)
     }
 
     func overdueReminders() -> NSPredicate {
-        let end = Calendar.current.date(byAdding: .day, value: 1, to: Date().midnight)
         return eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: nil, ending: end, calendars: nil)
+            withDueDateStarting: nil, ending: Date().endOfDay, calendars: nil)
     }
 }

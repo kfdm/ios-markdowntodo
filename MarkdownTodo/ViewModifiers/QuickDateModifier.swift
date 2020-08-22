@@ -26,14 +26,21 @@ struct QuickDateModifier: ViewModifier {
                 NavigationView {
                     List {
                         Section(header: Text("Quick Select")) {
-                            Button("Today", action: { updateAndSave(date: Date()) })
-                            Button("Tomorrow", action: { updateAndSave(date: Date().tomorrow) })
+                            let today = calendar.startOfDay(for: Date())
+                            Button(
+                                "Today",
+                                action: { updateAndSave(date: calendar.endOfDay(for: today)) })
+                            Button(
+                                "Tomorrow",
+                                action: {
+                                    updateAndSave(date: calendar.endOfDay(for: today.tomorrow))
+                                })
                             Button(
                                 "Next Weekend",
-                                action: { updateAndSave(date: Date().nextDate(dayOfTheWeek: 7)) })
+                                action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 7)) })
                             Button(
                                 "Next Week",
-                                action: { updateAndSave(date: Date().nextDate(dayOfTheWeek: 2)) })
+                                action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 2)) })
                             Button("Unset", action: { updateAndSave(date: nil) })
                         }
                         DatePicker("Date", selection: $selectedDate)
