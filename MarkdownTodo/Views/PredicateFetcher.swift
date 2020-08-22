@@ -83,15 +83,21 @@ struct PredicateSorted: View {
 
     var body: some View {
         Group {
-            switch sortBy {
-            case .dueDate:
-                RemindersGroupDate(reminders: reminders, content: content)
-            case .createdDate:
-                RemindersGroupDate(reminders: reminders, content: content)
-            case .priority:
-                RemindersGroupPriority(reminders: reminders, content: content)
-            case .title:
-                RemindersGroupTitle(reminders: reminders, content: content)
+            if reminders.count == 0 {
+                List {
+                    Text("No Reminders")
+                }
+            } else {
+                switch sortBy {
+                case .dueDate:
+                    RemindersGroupDate(reminders: reminders, content: content)
+                case .createdDate:
+                    RemindersGroupDate(reminders: reminders, content: content)
+                case .priority:
+                    RemindersGroupPriority(reminders: reminders, content: content)
+                case .title:
+                    RemindersGroupTitle(reminders: reminders, content: content)
+                }
             }
         }
         // Default sort button if not overridden in the parent view
