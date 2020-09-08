@@ -29,6 +29,7 @@ struct CalendarPicker: View {
 }
 
 struct QuickDateModifier: ViewModifier {
+    var navigationBarTitle: String
     @Binding public var date: DateComponents?
     @Binding public var reminder: EKReminder
 
@@ -70,7 +71,7 @@ struct QuickDateModifier: ViewModifier {
             .sheet(isPresented: $showPicker) {
                 NavigationView {
                     sheet
-                        .navigationBarTitle("Date Picker", displayMode: .inline)
+                        .navigationBarTitle(Text(navigationBarTitle), displayMode: .inline)
                         .navigationBarItems(
                             leading: Button("Cancel", action: actionCancel),
                             trailing: Button("Save", action: { updateAndSave(date: selectedDate) })

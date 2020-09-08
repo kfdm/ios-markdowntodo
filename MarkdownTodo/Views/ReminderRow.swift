@@ -63,7 +63,10 @@ struct ReminderRow: View {
             Spacer()
             DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
                 .modifier(HighlightOverdue(date: reminder.dueDateComponents))
-                .modifier(QuickDateModifier(date: $reminder.dueDateComponents, reminder: $reminder))
+                .modifier(
+                    QuickDateModifier(
+                        navigationBarTitle: "Select Due Date", date: $reminder.dueDateComponents,
+                        reminder: $reminder))
             if reminder.hasURL {
                 Image(systemName: "link")
             }

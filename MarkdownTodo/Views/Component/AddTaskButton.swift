@@ -25,12 +25,18 @@ struct AddTask: View {
                 DateView(date: reminder.startDateComponents, whenUnset: "No Start Date")
                     .modifier(LabelModifier(label: "Start Date"))
                     .modifier(
-                        QuickDateModifier(date: $reminder.startDateComponents, reminder: $reminder))
+                        QuickDateModifier(
+                            navigationBarTitle: "Select Start Date",
+                            date: $reminder.startDateComponents,
+                            reminder: $reminder))
 
                 DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
                     .modifier(LabelModifier(label: "Due Date"))
                     .modifier(
-                        QuickDateModifier(date: $reminder.dueDateComponents, reminder: $reminder))
+                        QuickDateModifier(
+                            navigationBarTitle: "Select Due Date",
+                            date: $reminder.dueDateComponents,
+                            reminder: $reminder))
             }
             Section(header: Text("Other")) {
                 MarkdownView(label: "Description", text: $reminder.notes)
