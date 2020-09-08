@@ -6,7 +6,37 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import EventKit
 import SwiftUI
+
+struct DateIndicator: View {
+    var reminders: [EKReminder]
+    var body: some View {
+        Group {
+            switch reminders.count {
+            case 0:
+                Text(" ")
+            case 1...3:
+                Text(String(repeating: ".", count: reminders.count))
+            default:
+                Text("....")
+            }
+        }
+        .font(.caption)
+    }
+}
+
+struct CalendarDateAttachments: ViewModifier {
+    @Binding var reminders: [Date: [EKReminder]]
+    var date: Date
+
+    func body(content: Content) -> some View {
+        return VStack {
+            content
+            DateIndicator(reminders: reminders[date] ?? [])
+        }.padding(.vertical, 4)
+    }
+}
 
 struct CalendarDateModifier: ViewModifier {
     @Environment(\.calendar) var calendar

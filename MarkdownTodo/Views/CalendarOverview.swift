@@ -10,23 +10,6 @@ import Combine
 import EventKit
 import SwiftUI
 
-struct DateIndicator: View {
-    var reminders: [EKReminder]
-    var body: some View {
-        Group {
-            switch reminders.count {
-            case 0:
-                Text(" ")
-            case 1...3:
-                Text(String(repeating: ".", count: reminders.count))
-            default:
-                Text("....")
-            }
-        }
-        .font(.caption)
-    }
-}
-
 struct CalendarOverview: View {
     private var month: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
@@ -45,13 +28,11 @@ struct CalendarOverview: View {
             NavigationLink(
                 destination: SelectedDateView(date: date).onAppear { selectedDate = date }
             ) {
-                VStack {
-                    Text(String(self.calendar.component(.day, from: date)))
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
-                        .clipShape(Circle())
-                    DateIndicator(reminders: reminders[date] ?? [])
-                }.padding(.vertical, 4)
+                Text(String(self.calendar.component(.day, from: date)))
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
+                    .clipShape(Circle())
+                    .modifier(CalendarDateAttachments(reminders: $reminders, date: date))
             }
         }.onAppear(perform: fetch)
     }
