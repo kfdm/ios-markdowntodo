@@ -9,6 +9,25 @@
 import EventKit
 import SwiftUI
 
+struct CalendarPicker: View {
+    private var month: DateInterval {
+        calendar.dateInterval(of: .month, for: Date())!
+    }
+
+    @Environment(\.calendar) var calendar
+    @Binding var selectedDate: Date
+    var action: (Date) -> Void
+
+    var body: some View {
+        CalendarView(interval: month) { date in
+            Button(String(self.calendar.component(.day, from: date))) {
+                action(date)
+            }
+            .frame(width: 40, height: 40, alignment: .center)
+        }
+    }
+}
+
 struct QuickDateModifier: ViewModifier {
     @Binding public var date: DateComponents?
     @Binding public var reminder: EKReminder
@@ -38,7 +57,9 @@ struct QuickDateModifier: ViewModifier {
                     action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 2)) })
                 Button("Unset", action: { updateAndSave(date: nil) })
             }
-            DatePicker("Date", selection: $selectedDate)
+            CalendarPicker(selectedDate: $selectedDate) { date in
+                updateAndSave(date: date)
+            }
         }.listStyle(GroupedListStyle())
     }
 
