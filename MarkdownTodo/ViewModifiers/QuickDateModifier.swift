@@ -18,39 +18,42 @@ struct QuickDateModifier: ViewModifier {
     @Environment(\.calendar) var calendar
     @EnvironmentObject var eventStore: EventStore
 
+    var sheet: some View {
+        List {
+            Section(header: Text("Quick Select")) {
+                let today = calendar.startOfDay(for: Date())
+                Button(
+                    "Today",
+                    action: { updateAndSave(date: calendar.endOfDay(for: today)) })
+                Button(
+                    "Tomorrow",
+                    action: {
+                        updateAndSave(date: calendar.endOfDay(for: today.tomorrow))
+                    })
+                Button(
+                    "Next Weekend",
+                    action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 7)) })
+                Button(
+                    "Next Week",
+                    action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 2)) })
+                Button("Unset", action: { updateAndSave(date: nil) })
+            }
+            DatePicker("Date", selection: $selectedDate)
+        }.listStyle(GroupedListStyle())
+    }
+
     func body(content: Content) -> some View {
         return
             content
             .onTapGesture(perform: performTapGesture)
             .sheet(isPresented: $showPicker) {
                 NavigationView {
-                    List {
-                        Section(header: Text("Quick Select")) {
-                            let today = calendar.startOfDay(for: Date())
-                            Button(
-                                "Today",
-                                action: { updateAndSave(date: calendar.endOfDay(for: today)) })
-                            Button(
-                                "Tomorrow",
-                                action: {
-                                    updateAndSave(date: calendar.endOfDay(for: today.tomorrow))
-                                })
-                            Button(
-                                "Next Weekend",
-                                action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 7)) })
-                            Button(
-                                "Next Week",
-                                action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 2)) })
-                            Button("Unset", action: { updateAndSave(date: nil) })
-                        }
-                        DatePicker("Date", selection: $selectedDate)
-                    }
-                    .listStyle(GroupedListStyle())
-                    .navigationBarTitle("Date Picker", displayMode: .inline)
-                    .navigationBarItems(
-                        leading: Button("Cancel", action: actionCancel),
-                        trailing: Button("Save", action: { updateAndSave(date: selectedDate) })
-                    )
+                    sheet
+                        .navigationBarTitle("Date Picker", displayMode: .inline)
+                        .navigationBarItems(
+                            leading: Button("Cancel", action: actionCancel),
+                            trailing: Button("Save", action: { updateAndSave(date: selectedDate) })
+                        )
                 }.navigationViewStyle(StackNavigationViewStyle())
             }
     }
