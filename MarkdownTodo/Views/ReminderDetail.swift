@@ -39,13 +39,20 @@ struct ReminderDetail: View {
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
-                DateTimePicker(label: "Start Date", dateComponent: $reminder.startDateComponents)
-                DateTimePicker(label: "Due Date", dateComponent: $reminder.dueDateComponents)
-                HStack {
-                    Text("Created")
-                    Spacer()
-                    DateView(date: reminder.creationDate!)
-                }
+                DateView(date: reminder.startDateComponents, whenUnset: "No Start Date")
+                    .modifier(LabelModifier(label: "Start Date"))
+                    .modifier(
+                        QuickDateModifier(date: $reminder.startDateComponents, reminder: $reminder))
+
+                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
+                    .modifier(LabelModifier(label: "Due Date"))
+                    .modifier(
+                        QuickDateModifier(date: $reminder.dueDateComponents, reminder: $reminder))
+
+                DateView(date: reminder.creationDate!)
+                    .modifier(LabelModifier(label: "Created"))
+                    .disabled(true)
+
                 ForEach(reminder.recurrenceRules ?? []) { rule in
                     Text("\(rule)")
                 }

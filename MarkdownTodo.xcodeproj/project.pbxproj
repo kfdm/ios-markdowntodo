@@ -11,7 +11,6 @@
 		870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910B24DE545C00979076 /* EventKit+Extensions.swift */; };
 		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
 		872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4E824DE90B5005384DF /* SortPicker.swift */; };
-		872EF4EB24DEB078005384DF /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4EA24DEB078005384DF /* DateTimePicker.swift */; };
 		87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */; };
 		87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -42,7 +41,6 @@
 		870B910B24DE545C00979076 /* EventKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extensions.swift"; sourceTree = "<group>"; };
 		870B910D24DE54DC00979076 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		872EF4E824DE90B5005384DF /* SortPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPicker.swift; sourceTree = "<group>"; };
-		872EF4EA24DEB078005384DF /* DateTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 			children = (
 				879C69F724E1060E0062503C /* AddTaskButton.swift */,
 				8758210924DCBBC70034EF24 /* CalendarView.swift */,
-				872EF4EA24DEB078005384DF /* DateTimePicker.swift */,
 				8773DF1224BB018C00BC255E /* MarkdownView.swift */,
 				872EF4E824DE90B5005384DF /* SortPicker.swift */,
 			);
@@ -257,7 +254,6 @@
 				87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */,
 				879C69F624E0ED6E0062503C /* QuickDateModifier.swift in Sources */,
 				8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */,
-				872EF4EB24DEB078005384DF /* DateTimePicker.swift in Sources */,
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,
 				87A9D44A24B9E49600086541 /* EventKit+SwiftUI.swift in Sources */,

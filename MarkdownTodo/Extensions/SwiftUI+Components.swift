@@ -35,6 +35,18 @@ struct NameField: View {
     }
 }
 
+struct LabelModifier: ViewModifier {
+    var label: String
+
+    func body(content: Content) -> some View {
+        return HStack {
+            Text(label)
+            Spacer()
+            content
+        }
+    }
+}
+
 struct DateView: View {
     var date: Date
     var whenUnset = "Unset"

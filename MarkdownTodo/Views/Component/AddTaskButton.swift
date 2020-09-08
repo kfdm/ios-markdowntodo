@@ -22,8 +22,15 @@ struct AddTask: View {
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
-                DateTimePicker(label: "Start Date", dateComponent: $reminder.startDateComponents)
-                DateTimePicker(label: "Due Date", dateComponent: $reminder.dueDateComponents)
+                DateView(date: reminder.startDateComponents, whenUnset: "No Start Date")
+                    .modifier(LabelModifier(label: "Start Date"))
+                    .modifier(
+                        QuickDateModifier(date: $reminder.startDateComponents, reminder: $reminder))
+
+                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
+                    .modifier(LabelModifier(label: "Due Date"))
+                    .modifier(
+                        QuickDateModifier(date: $reminder.dueDateComponents, reminder: $reminder))
             }
             Section(header: Text("Other")) {
                 MarkdownView(label: "Description", text: $reminder.notes)
