@@ -32,7 +32,7 @@ struct SortButton: View {
                         Button(sortMethod.rawValue.capitalized) {
                             sortBy = sortMethod
                             showSortMenu = false
-                        }
+                        }.foregroundColor(sortBy == sortMethod ? .accentColor : .primary)
                     }
                 }
                 .navigationBarTitle("Sort By", displayMode: .inline)
