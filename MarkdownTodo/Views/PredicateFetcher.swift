@@ -14,9 +14,15 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
     let reminders: [Date: [EKReminder]]
     let content: (EKReminder) -> ReminderView
 
-    init(reminders: [EKReminder], @ViewBuilder content: @escaping (EKReminder) -> ReminderView) {
-        self.reminders = reminders.byDueDate()
-        self.content = content
+    func section(date: Date) -> some View {
+        switch date {
+        case .distantFuture:
+            return AnyView(Text("No Due Date"))
+        case .distantPast:
+            return AnyView(Text("Overdue"))
+        default:
+            return AnyView(DateView(date: date, formatter: .fullDate))
+        }
     }
 
     var body: some View {
@@ -24,7 +30,7 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
             // Show dates oldest to newest
             ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { date in
                 Section(
-                    header: DateView(date: date, whenUnset: "No Due Date", formatter: .fullDate)
+                    header: section(date: date)
                 ) {
                     ForEach(reminders[date]!.sorted { $0.dueDate < $1.dueDate }) { reminder in
                         content(reminder)
@@ -32,6 +38,24 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
                 }
             }
         }
+    }
+}
+
+struct RemindersGroupDueDate<ReminderView>: View where ReminderView: View {
+    let reminders: [EKReminder]
+    let content: (EKReminder) -> ReminderView
+
+    var body: some View {
+        RemindersGroupDate(reminders: reminders.byDueDate(), content: content)
+    }
+}
+
+struct RemindersGroupCreatedDate<ReminderView>: View where ReminderView: View {
+    let reminders: [EKReminder]
+    let content: (EKReminder) -> ReminderView
+
+    var body: some View {
+        RemindersGroupDate(reminders: reminders.byCreateDate(), content: content)
     }
 }
 
@@ -71,6 +95,15 @@ struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
     }
 }
 
+struct RemindersGroupAgenda<ReminderView>: View where ReminderView: View {
+    let reminders: [EKReminder]
+    let content: (EKReminder) -> ReminderView
+
+    var body: some View {
+        RemindersGroupDate(reminders: reminders.byAgenda(), content: content)
+    }
+}
+
 struct PredicateSorted: View {
     @Binding var sortBy: SortOptions
     @Binding var reminders: [EKReminder]
@@ -90,13 +123,15 @@ struct PredicateSorted: View {
             } else {
                 switch sortBy {
                 case .dueDate:
-                    RemindersGroupDate(reminders: reminders, content: content)
+                    RemindersGroupDueDate(reminders: reminders, content: content)
                 case .createdDate:
-                    RemindersGroupDate(reminders: reminders, content: content)
+                    RemindersGroupCreatedDate(reminders: reminders, content: content)
                 case .priority:
                     RemindersGroupPriority(reminders: reminders, content: content)
                 case .title:
                     RemindersGroupTitle(reminders: reminders, content: content)
+                case .agenda:
+                    RemindersGroupAgenda(reminders: reminders, content: content)
                 }
             }
         }

@@ -29,7 +29,7 @@ struct ScheduledView: View {
 
 struct TodayView: View {
     @EnvironmentObject var eventStore: EventStore
-    @State private var sortBy = SortOptions.dueDate
+    @State private var sortBy = SortOptions.agenda
 
     var body: some View {
         PredicateFetcher(predicate: eventStore.overdueReminders(), sortBy: $sortBy)

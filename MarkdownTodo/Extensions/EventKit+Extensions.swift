@@ -41,4 +41,21 @@ extension Array where Element == EKReminder {
             by: { $0.priority }
         )
     }
+    func byAgenda() -> [Date: [EKReminder]] {
+        let today = Calendar.current.startOfDay(for: Date())
+
+        return Dictionary(
+            grouping: self,
+            by: {
+                if Calendar.current.startOfDay(for: $0.dueDate) == today {
+                    return today
+                }
+
+                if $0.dueDate < today {
+                    return Date.distantPast
+                }
+                return Date.distantFuture
+            }
+        )
+    }
 }

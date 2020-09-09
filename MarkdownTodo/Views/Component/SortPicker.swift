@@ -13,6 +13,7 @@ enum SortOptions: String, CaseIterable {
     case createdDate = "Created Date"
     case priority
     case title
+    case agenda
 }
 
 struct SortButton: View {
