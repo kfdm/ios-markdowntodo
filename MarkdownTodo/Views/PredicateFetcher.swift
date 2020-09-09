@@ -39,24 +39,31 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
             }
         }
     }
-}
 
-struct RemindersGroupDueDate<ReminderView>: View where ReminderView: View {
-    let reminders: [EKReminder]
-    let content: (EKReminder) -> ReminderView
-
-    var body: some View {
-        RemindersGroupDate(reminders: reminders.byDueDate(), content: content)
+    init(
+        byDueDate reminders: [EKReminder],
+        @ViewBuilder content: @escaping (EKReminder) -> ReminderView
+    ) {
+        self.reminders = reminders.byDueDate()
+        self.content = content
     }
-}
 
-struct RemindersGroupCreatedDate<ReminderView>: View where ReminderView: View {
-    let reminders: [EKReminder]
-    let content: (EKReminder) -> ReminderView
-
-    var body: some View {
-        RemindersGroupDate(reminders: reminders.byCreateDate(), content: content)
+    init(
+        byCreateDate reminders: [EKReminder],
+        @ViewBuilder content: @escaping (EKReminder) -> ReminderView
+    ) {
+        self.reminders = reminders.byCreateDate()
+        self.content = content
     }
+
+    init(
+        byAgenda reminders: [EKReminder],
+        @ViewBuilder content: @escaping (EKReminder) -> ReminderView
+    ) {
+        self.reminders = reminders.byAgenda()
+        self.content = content
+    }
+
 }
 
 struct RemindersGroupPriority<ReminderView>: View where ReminderView: View {
@@ -95,15 +102,6 @@ struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
     }
 }
 
-struct RemindersGroupAgenda<ReminderView>: View where ReminderView: View {
-    let reminders: [EKReminder]
-    let content: (EKReminder) -> ReminderView
-
-    var body: some View {
-        RemindersGroupDate(reminders: reminders.byAgenda(), content: content)
-    }
-}
-
 struct PredicateSorted: View {
     @Binding var sortBy: SortOptions
     @Binding var reminders: [EKReminder]
@@ -123,15 +121,15 @@ struct PredicateSorted: View {
             } else {
                 switch sortBy {
                 case .dueDate:
-                    RemindersGroupDueDate(reminders: reminders, content: content)
+                    RemindersGroupDate(byDueDate: reminders, content: content)
                 case .createdDate:
-                    RemindersGroupCreatedDate(reminders: reminders, content: content)
+                    RemindersGroupDate(byCreateDate: reminders, content: content)
                 case .priority:
                     RemindersGroupPriority(reminders: reminders, content: content)
                 case .title:
                     RemindersGroupTitle(reminders: reminders, content: content)
                 case .agenda:
-                    RemindersGroupAgenda(reminders: reminders, content: content)
+                    RemindersGroupDate(byAgenda: reminders, content: content)
                 }
             }
         }
