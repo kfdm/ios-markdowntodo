@@ -57,7 +57,13 @@ struct ReminderDetail: View {
 
                 DateView(date: reminder.creationDate!)
                     .modifier(LabelModifier(label: "Created"))
-                    .disabled(true)
+                    .foregroundColor(.secondary)
+
+                if reminder.isCompleted {
+                    DateView(date: reminder.completionDate!, whenUnset: "Not completed")
+                        .modifier(LabelModifier(label: "Completed"))
+                        .foregroundColor(.secondary)
+                }
 
                 ForEach(reminder.recurrenceRules ?? []) { rule in
                     Text("\(rule)")
