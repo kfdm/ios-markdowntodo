@@ -24,7 +24,7 @@ struct CalendarPicker: View {
                 action(date)
             }
             .frame(width: 40, height: 40, alignment: .center)
-            .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
+            .modifier(DateHighlightModifier(selectedDate: $selectedDate, date: date))
             .clipShape(Circle())
         }
     }

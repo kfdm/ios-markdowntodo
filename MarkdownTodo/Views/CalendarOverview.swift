@@ -33,9 +33,8 @@ struct CalendarOverview: View {
                         minWidth: 30, idealWidth: 40, maxWidth: 40,
                         minHeight: 30, idealHeight: 40, maxHeight: 40
                     )
-                    .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
-                    .clipShape(Circle())
-                    .modifier(CalendarDateAttachments(reminders: $reminders, date: date))
+                    .modifier(DateHighlightModifier(selectedDate: $selectedDate, date: date))
+                    .modifier(DateBorderModifier(reminders: $reminders, date: date))
             }
         }.onAppear(perform: fetch)
     }
