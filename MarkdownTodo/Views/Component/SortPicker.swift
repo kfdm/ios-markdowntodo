@@ -14,6 +14,7 @@ enum SortOptions: String, CaseIterable {
     case priority
     case title
     case agenda
+    case calendar
 }
 
 struct SortButton: View {

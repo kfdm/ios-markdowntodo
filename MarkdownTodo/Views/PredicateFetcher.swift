@@ -102,6 +102,29 @@ struct RemindersGroupTitle<ReminderView>: View where ReminderView: View {
     }
 }
 
+struct RemindersGroupCalendar<ReminderView>: View where ReminderView: View {
+    let reminders: [EKCalendar: [EKReminder]]
+    let content: (EKReminder) -> ReminderView
+
+    init(reminders: [EKReminder], @ViewBuilder content: @escaping (EKReminder) -> ReminderView) {
+        self.reminders = reminders.byCalendar()
+        self.content = content
+    }
+
+    var body: some View {
+        List {
+            ForEach(reminders.keys.sorted { $0.title < $1.title }, id: \.self) { calendar in
+                Section(header: Text(calendar.title)) {
+                    ForEach(self.reminders[calendar]!.sorted { $0.dueDate < $1.dueDate }) {
+                        reminder in
+                        content(reminder)
+                    }
+                }
+            }
+        }
+    }
+}
+
 struct PredicateSorted: View {
     @Binding var sortBy: SortOptions
     @Binding var reminders: [EKReminder]
@@ -130,6 +153,8 @@ struct PredicateSorted: View {
                     RemindersGroupTitle(reminders: reminders, content: content)
                 case .agenda:
                     RemindersGroupDate(byAgenda: reminders, content: content)
+                case .calendar:
+                    RemindersGroupCalendar(reminders: reminders, content: content)
                 }
             }
         }
