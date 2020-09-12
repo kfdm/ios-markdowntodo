@@ -29,7 +29,10 @@ struct CalendarOverview: View {
                 destination: SelectedDateView(date: date).onAppear { selectedDate = date }
             ) {
                 Text(String(self.calendar.component(.day, from: date)))
-                    .frame(width: 40, height: 40, alignment: .center)
+                    .frame(
+                        minWidth: 30, idealWidth: 40, maxWidth: 40,
+                        minHeight: 30, idealHeight: 40, maxHeight: 40
+                    )
                     .modifier(CalendarDateModifier(selectedDate: $selectedDate, date: date))
                     .clipShape(Circle())
                     .modifier(CalendarDateAttachments(reminders: $reminders, date: date))

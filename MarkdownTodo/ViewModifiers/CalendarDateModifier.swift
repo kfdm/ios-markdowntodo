@@ -34,7 +34,7 @@ struct CalendarDateAttachments: ViewModifier {
         return VStack {
             content
             DateIndicator(reminders: reminders[date] ?? [])
-        }.padding(.vertical, 4)
+        }
     }
 }
 
