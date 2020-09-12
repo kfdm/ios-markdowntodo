@@ -32,12 +32,11 @@ struct PriorityStripe: View {
     }
 }
 
-struct ReminderRow: View {
+struct CompletedCheckbox: View {
     @EnvironmentObject var eventStore: EventStore
+    @Binding var reminder: EKReminder
 
-    @State var reminder: EKReminder
-
-    var checkmark: some View {
+    var body: some View {
         Group {
             if reminder.isCompleted {
                 Image(systemName: "checkmark.square")
@@ -50,11 +49,16 @@ struct ReminderRow: View {
     func actionClickCheckbox() {
         try? eventStore.toggleComplete(reminder)
     }
+}
+
+struct ReminderRow: View {
+    @State var reminder: EKReminder
 
     var body: some View {
         HStack {
             PriorityStripe(priority: reminder.priority)
-            checkmark.font(.title)
+            CompletedCheckbox(reminder: $reminder)
+                .font(.title)
             VStack(alignment: .leading) {
                 Text(reminder.title)
                 Text(reminder.calendar.title)
