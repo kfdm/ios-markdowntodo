@@ -58,4 +58,8 @@ extension Array where Element == EKReminder {
             }
         )
     }
+    
+    func filter(date: Date) -> [EKReminder] {
+        return self.filter { $0.dueDate.startOfDay == date.startOfDay }
+    }
 }

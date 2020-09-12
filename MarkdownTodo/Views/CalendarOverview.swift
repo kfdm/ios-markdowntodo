@@ -21,7 +21,7 @@ struct CalendarOverview: View {
     // Query
     @EnvironmentObject var eventStore: EventStore
     @State private var subscriptions = Set<AnyCancellable>()
-    @State private var reminders: [Date: [EKReminder]] = [:]
+    @State private var reminders: [EKReminder] = []
 
     var body: some View {
         CalendarView(interval: month) { date in
@@ -43,7 +43,6 @@ struct CalendarOverview: View {
     func fetch() {
         self.eventStore.publisher(for: eventStore.reminders(for: month))
             .receive(on: DispatchQueue.main)
-            .map { $0.byDueDate() }
             .assign(to: \.reminders, on: self)
             .store(in: &self.subscriptions)
     }

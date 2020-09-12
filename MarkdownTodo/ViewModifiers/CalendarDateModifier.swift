@@ -27,13 +27,13 @@ struct DateIndicator: View {
 }
 
 struct CalendarDateAttachments: ViewModifier {
-    @Binding var reminders: [Date: [EKReminder]]
+    @Binding var reminders: [EKReminder]
     var date: Date
-
+    
     func body(content: Content) -> some View {
         return VStack {
             content
-            DateIndicator(reminders: reminders[date] ?? [])
+            DateIndicator(reminders: reminders.filter(date: date))
         }
     }
 }
