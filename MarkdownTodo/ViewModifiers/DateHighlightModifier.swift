@@ -12,21 +12,22 @@ import SwiftUI
 struct DateBorderModifier: ViewModifier {
     @Binding var reminders: [EKReminder]
     var date: Date
-    
+
     var count: Int {
         return reminders.filter(date: date).count
     }
-    
-    var width : CGFloat {
+
+    var width: CGFloat {
         CGFloat(min(4, count))
     }
-    
+
     func body(content: Content) -> some View {
-        return content
+        return
+            content
             .overlay(
-                    Circle()
-                        .stroke(Color.accentColor, lineWidth: width)
-                )
+                Circle()
+                    .stroke(Color.accentColor, lineWidth: width)
+            )
     }
 }
 

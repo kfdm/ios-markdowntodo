@@ -61,12 +61,18 @@ struct ReminderRow: View {
                     .foregroundColor(reminder.calendar.color)
             }
             Spacer()
-            DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
-                .modifier(HighlightOverdue(date: reminder.dueDateComponents))
-                .modifier(
-                    QuickDateModifier(
-                        navigationBarTitle: "Select Due Date", date: $reminder.dueDateComponents,
-                        reminder: $reminder))
+            if let completionDate = reminder.completionDate {
+                DateView(date: completionDate)
+                    .foregroundColor(.gray)
+            } else {
+                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
+                    .modifier(HighlightOverdue(date: reminder.dueDateComponents))
+                    .modifier(
+                        QuickDateModifier(
+                            navigationBarTitle: "Select Due Date",
+                            date: $reminder.dueDateComponents,
+                            reminder: $reminder))
+            }
             if reminder.hasURL {
                 Image(systemName: "link")
             }
