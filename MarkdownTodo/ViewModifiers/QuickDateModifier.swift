@@ -23,7 +23,10 @@ struct CalendarPicker: View {
             Button(String(self.calendar.component(.day, from: date))) {
                 action(date)
             }
-            .frame(width: 40, height: 40, alignment: .center)
+            .frame(
+                minWidth: 30, idealWidth: 40, maxWidth: 40,
+                minHeight: 30, idealHeight: 40, maxHeight: 40
+            )
             .modifier(DateHighlightModifier(selectedDate: $selectedDate, date: date))
             .clipShape(Circle())
         }
