@@ -73,7 +73,7 @@ struct ReminderDetail: View {
                 if reminder.url != nil {
                     Link(label: reminder.url!.absoluteString, destination: reminder.url!)
                 }
-                MarkdownView(label: "Description", text: $reminder.notes)
+                MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
             Section() {
                 Button("Delete", action: { print("Delete Stub") }).buttonStyle(
