@@ -54,6 +54,19 @@ struct PriorityView: View {
     }
 }
 
+struct ExternalView: View {
+    @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.priority
+
+    var body: some View {
+        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+            SortedRemindersView(
+                sortBy: $sortBy, reminders: reminders.filter { $0.hasURL })
+        }
+        .wrapNavigation(icon: "link", label: "External")
+    }
+}
+
 struct CompletedView: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var sortBy = SortOptions.calendar
@@ -85,6 +98,7 @@ struct PlannerView: View {
             TodayView()
             ScheduledView()
             PriorityView()
+            ExternalView()
             CalendarOverview()
             CompletedView()
         }
