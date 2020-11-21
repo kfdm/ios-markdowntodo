@@ -26,9 +26,7 @@ struct PriorityStripe: View {
         }
     }
     var body: some View {
-        Rectangle()
-            .stroke(color, lineWidth: 4)
-            .frame(width: 4)
+        color.frame(width: 8)
     }
 }
 
