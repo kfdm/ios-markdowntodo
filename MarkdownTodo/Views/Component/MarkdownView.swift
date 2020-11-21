@@ -22,7 +22,6 @@ struct MarkdownView: View {
     }
 }
 
-
 struct MarkdownView_Previews: PreviewProvider {
     static var previews: some View {
         MarkdownView(label: "Test", text: .constant("Some description"))

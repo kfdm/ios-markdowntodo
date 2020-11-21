@@ -75,7 +75,7 @@ struct ReminderDetail: View {
                 }
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
-            Section() {
+            Section {
                 Button("Delete", action: { print("Delete Stub") }).buttonStyle(
                     DestructiveButtonStyle())
             }

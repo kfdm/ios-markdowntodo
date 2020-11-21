@@ -20,7 +20,7 @@ extension EKReminder {
     var dueDate: Date {
         return dueDateComponents?.date ?? Date.distantFuture
     }
-    
+
     var unwrappedNotes: String {
         get { return notes ?? "" }
         set { notes = newValue }

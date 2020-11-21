@@ -41,7 +41,7 @@ struct AddTask: View {
             Section(header: Text("Other")) {
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
-            Section() {
+            Section {
                 Button("Save", action: actionSave)
             }
         }
