@@ -85,7 +85,7 @@ struct SelectedDateView: View {
 
     var date: Date
     var body: some View {
-        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+        PredicateFetcher(predicate: eventStore.reminders(for: date)) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
         .navigationBarTitle(DateFormatter.shortDate.string(from: date))

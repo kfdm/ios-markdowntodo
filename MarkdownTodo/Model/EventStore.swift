@@ -98,7 +98,7 @@ extension EventStore {
 
     func reminders(for date: Date) -> NSPredicate {
         let start = date.startOfDay
-        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        let end = date.endOfDay
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: start, ending: end, calendars: nil)
     }
