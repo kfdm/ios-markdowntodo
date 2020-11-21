@@ -22,8 +22,10 @@ struct ScheduledView: View {
     @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.scheduledReminders(), sortBy: $sortBy)
-            .wrapNavigation(icon: "clock", label: "Scheduled")
+        PredicateFetcher(predicate: eventStore.scheduledReminders()) { reminders in
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        }
+        .wrapNavigation(icon: "clock", label: "Scheduled")
     }
 }
 
@@ -32,8 +34,23 @@ struct TodayView: View {
     @State private var sortBy = SortOptions.agenda
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.overdueReminders(), sortBy: $sortBy)
-            .wrapNavigation(icon: "calendar", label: "Today")
+        PredicateFetcher(predicate: eventStore.overdueReminders()) { reminders in
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        }
+        .wrapNavigation(icon: "calendar", label: "Today")
+    }
+}
+
+struct PriorityView: View {
+    @EnvironmentObject var eventStore: EventStore
+    @State private var sortBy = SortOptions.priority
+
+    var body: some View {
+        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+            SortedRemindersView(
+                sortBy: $sortBy, reminders: reminders.filter { $0.priority > 0 })
+        }
+        .wrapNavigation(icon: "exclamationmark.triangle", label: "Priority")
     }
 }
 
@@ -42,8 +59,10 @@ struct CompletedView: View {
     @State private var sortBy = SortOptions.calendar
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.completeReminders(), sortBy: $sortBy)
-            .wrapNavigation(icon: "checkmark.seal", label: "Completed")
+        PredicateFetcher(predicate: eventStore.completeReminders()) { reminders in
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        }
+        .wrapNavigation(icon: "checkmark.seal", label: "Completed")
     }
 }
 
@@ -53,8 +72,10 @@ struct SelectedDateView: View {
 
     var date: Date
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: date), sortBy: $sortBy)
-            .navigationBarTitle(DateFormatter.shortDate.string(from: date))
+        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        }
+        .navigationBarTitle(DateFormatter.shortDate.string(from: date))
     }
 }
 
@@ -63,6 +84,7 @@ struct PlannerView: View {
         List {
             TodayView()
             ScheduledView()
+            PriorityView()
             CalendarOverview()
             CompletedView()
         }

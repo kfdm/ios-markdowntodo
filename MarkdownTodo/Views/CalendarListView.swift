@@ -16,13 +16,15 @@ struct CalendarDetailView: View {
     var calendar: EKCalendar
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: calendar), sortBy: $sortBy)
-            .navigationBarTitle(calendar.title)
-            .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
-            .navigationBarItems(
-                leading: AddTaskButton(calendar: calendar),
-                trailing: SortButton(sortBy: $sortBy)
-            )
+        PredicateFetcher(predicate: eventStore.reminders(for: calendar)) { reminders in
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        }
+        .navigationBarTitle(calendar.title)
+        .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
+        .navigationBarItems(
+            leading: AddTaskButton(calendar: calendar),
+            trailing: SortButton(sortBy: $sortBy)
+        )
     }
 }
 

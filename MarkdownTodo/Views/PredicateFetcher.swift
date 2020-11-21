@@ -125,9 +125,9 @@ struct RemindersGroupCalendar<ReminderView>: View where ReminderView: View {
     }
 }
 
-struct PredicateSorted: View {
+struct SortedRemindersView: View {
     @Binding var sortBy: SortOptions
-    @Binding var reminders: [EKReminder]
+    var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
         return NavigationLink(destination: ReminderDetail(reminder: reminder)) {
@@ -164,9 +164,9 @@ struct PredicateSorted: View {
     }
 }
 
-struct PredicateFetcher: View {
+struct PredicateFetcher<ContentView>: View where ContentView: View {
     let predicate: NSPredicate
-    @Binding var sortBy: SortOptions
+    let content: ([EKReminder]) -> ContentView
 
     // Query
     @EnvironmentObject var eventStore: EventStore
@@ -174,7 +174,7 @@ struct PredicateFetcher: View {
     @State private var reminders: [EKReminder] = []
 
     var body: some View {
-        PredicateSorted(sortBy: $sortBy, reminders: $reminders)
+        self.content(reminders)
             .onAppear(perform: fetch)
             .onReceive(eventStore.objectWillChange, perform: fetch)
     }

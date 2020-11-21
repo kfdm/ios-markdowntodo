@@ -86,6 +86,11 @@ extension EventStore {
             withDueDateStarting: interval.start, ending: interval.end, calendars: nil)
     }
 
+    func incompleteReminders() -> NSPredicate {
+        return eventStore.predicateForIncompleteReminders(
+            withDueDateStarting: nil, ending: nil, calendars: nil)
+    }
+
     func reminders(for calendar: EKCalendar) -> NSPredicate {
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: nil, ending: nil, calendars: [calendar])
