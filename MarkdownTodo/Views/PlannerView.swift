@@ -29,12 +29,12 @@ struct ScheduledView: View {
     }
 }
 
-struct TodayView: View {
+struct AgendaView: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var sortBy = SortOptions.agenda
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.overdueReminders()) { reminders in
+        PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
         .wrapNavigation(icon: "calendar", label: "Today")
@@ -95,7 +95,7 @@ struct SelectedDateView: View {
 struct PlannerView: View {
     var body: some View {
         List {
-            TodayView()
+            AgendaView()
             ScheduledView()
             PriorityView()
             ExternalView()

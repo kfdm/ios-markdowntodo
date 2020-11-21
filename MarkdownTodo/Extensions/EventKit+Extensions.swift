@@ -58,14 +58,10 @@ extension Array where Element == EKReminder {
         return Dictionary(
             grouping: self,
             by: {
-                if Calendar.current.startOfDay(for: $0.dueDate) == today {
-                    return today
-                }
-
                 if $0.dueDate < today {
                     return Date.distantPast
                 }
-                return Date.distantFuture
+                return Calendar.current.startOfDay(for: $0.dueDate)
             }
         )
     }

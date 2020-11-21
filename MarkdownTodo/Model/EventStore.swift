@@ -124,8 +124,9 @@ extension EventStore {
             withDueDateStarting: start, ending: end, calendars: nil)
     }
 
-    func overdueReminders() -> NSPredicate {
+    func agendaReminders() -> NSPredicate {
+        let ending = Calendar.current.date(byAdding: .day, value: 3, to: Date())
         return eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: nil, ending: Date().endOfDay, calendars: nil)
+            withDueDateStarting: nil, ending: ending, calendars: nil)
     }
 }

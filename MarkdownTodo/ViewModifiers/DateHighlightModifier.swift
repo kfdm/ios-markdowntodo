@@ -61,10 +61,13 @@ struct HighlightOverdue: ViewModifier {
         if date.endOfDay < today.endOfDay {
             return content.foregroundColor(.red)
         }
+        if date.endOfDay == today.endOfDay {
+            return content.foregroundColor(.accentColor)
+        }
         return content.foregroundColor(nil)
     }
 
     init(date: DateComponents?) {
-        self.date = date?.date ?? Date()
+        self.date = date?.date ?? Date.distantFuture
     }
 }
