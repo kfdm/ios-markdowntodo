@@ -52,12 +52,7 @@ struct ContentView: View {
                 Image(systemName: "gear")
                 Text("Settings")
             }
-        }.onAppear(perform: checkAccess)
-    }
-
-    func checkAccess() {
-        // Temporary check to trigger authorized check
-        print(eventStore.authorized)
+        }.onAppear(perform: eventStore.checkAccess)
     }
 }
 

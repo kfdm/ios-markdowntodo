@@ -9,6 +9,7 @@
 import Combine
 import EventKit
 import Foundation
+import os.log
 
 class EventStore: ObservableObject {
     let eventStore = EKEventStore()
@@ -21,7 +22,8 @@ class EventStore: ObservableObject {
             return false
         case .notDetermined:
             eventStore.requestAccess(to: .reminder) { (granted, error) in
-                print(granted)
+                os_log(.debug, log: .event, "Granted access %s", granted.description)
+                self.objectWillChange.send()
             }
             return false
         case .restricted:
@@ -29,6 +31,10 @@ class EventStore: ObservableObject {
         @unknown default:
             return false
         }
+    }
+
+    func checkAccess() {
+        os_log(.debug, log: .event, "Checking access: %s", authorized.description)
     }
 
     var sources: [EKSource] {
@@ -46,7 +52,7 @@ class EventStore: ObservableObject {
     }
 
     func toggleComplete(_ reminder: EKReminder) throws {
-        print("Toggle reminder \(reminder)")
+        os_log(.debug, log: .event, "Toggle Reminder %s", reminder)
         if reminder.isCompleted {
             reminder.completionDate = nil
         } else {
@@ -56,9 +62,10 @@ class EventStore: ObservableObject {
     }
 
     func save(_ reminder: EKReminder) throws {
-        print("Saving \(reminder)")
+        os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
         try eventStore.save(reminder, commit: true)
         objectWillChange.send()
+        eventStore.refreshSourcesIfNecessary()
     }
 
     func new(for calendar: EKCalendar) -> EKReminder {
@@ -76,7 +83,9 @@ extension EventStore {
     func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
         let publisher = PassthroughSubject<[EKReminder], Never>()
         eventStore.fetchReminders(matching: predicate) { (reminders) in
+            os_log(.debug, log: .event, "Fetched reminders: %d", reminders.debugDescription)
             publisher.send(reminders ?? [])
+            publisher.send(completion: .finished)
         }
         return publisher
     }

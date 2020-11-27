@@ -37,7 +37,7 @@ struct AgendaView: View {
         PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
-        .wrapNavigation(icon: "calendar", label: "Today")
+        .wrapNavigation(icon: "calendar", label: "Agenda")
     }
 }
 
