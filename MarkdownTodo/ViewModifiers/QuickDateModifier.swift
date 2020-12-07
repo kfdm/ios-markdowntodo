@@ -77,10 +77,14 @@ struct QuickDateModifier: ViewModifier {
                 NavigationView {
                     sheet
                         .navigationBarTitle(Text(navigationBarTitle), displayMode: .inline)
-                        .navigationBarItems(
-                            leading: Button("Cancel", action: actionCancel),
-                            trailing: Button("Save", action: { updateAndSave(date: selectedDate) })
-                        )
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel", action: actionCancel)
+                            }
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Save", action: { updateAndSave(date: selectedDate) })
+                            }
+                        }
                 }.navigationViewStyle(StackNavigationViewStyle())
             }
     }

@@ -47,10 +47,14 @@ struct AddTask: View {
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Adding to \(reminder.calendar.title)", displayMode: .inline)
-        .navigationBarItems(
-            leading: Button("Cancel", action: actionCancel),
-            trailing: Button("Add", action: actionSave)
-        )
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", action: actionCancel)
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Add", action: actionSave)
+            }
+        }
     }
 
     func actionCancel() {

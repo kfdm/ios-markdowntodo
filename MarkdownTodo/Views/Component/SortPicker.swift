@@ -37,9 +37,11 @@ struct SortButton: View {
                     }
                 }
                 .navigationBarTitle("Sort By", displayMode: .inline)
-                .navigationBarItems(
-                    trailing: Button("Cancel", action: { showSortMenu = false })
-                )
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel", action: { showSortMenu = false })
+                    }
+                }
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }

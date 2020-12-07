@@ -160,8 +160,12 @@ struct SortedRemindersView: View {
             }
         }
         // Default sort button if not overridden in the parent view
-        .navigationBarItems(
-            trailing: SortButton(sortBy: $sortBy))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                SortButton(sortBy: $sortBy)
+            }
+        }
+
     }
 }
 

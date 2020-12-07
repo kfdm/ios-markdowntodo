@@ -80,10 +80,15 @@ struct ReminderDetail: View {
                     DestructiveButtonStyle())
             }
         }
-        .navigationBarItems(
-            leading: Button("Cancel", action: cancelAction),
-            trailing: Button("Save", action: saveAction)
-        )
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", action: cancelAction)
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save", action: saveAction)
+            }
+        }
+
         .navigationBarTitle(reminder.title)
         .navigationBarBackButtonHidden(true)
     }
