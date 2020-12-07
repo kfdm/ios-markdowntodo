@@ -182,6 +182,14 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
         self.content(reminders)
             .onAppear(perform: fetch)
             .onReceive(eventStore.objectWillChange, perform: fetch)
+            .toolbar {
+                // TODO: Fix actual default calendar
+                ToolbarItem(placement: .primaryAction) {
+                    if let defaultCalendar = eventStore.calendar(named: "Inbox") {
+                        AddTaskButton(calendar: defaultCalendar)
+                    }
+                }
+            }
     }
 
     func fetch() {

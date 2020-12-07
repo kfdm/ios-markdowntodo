@@ -22,7 +22,7 @@ struct CalendarDetailView: View {
         .navigationBarTitle(calendar.title)
         .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
         .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
+            ToolbarItem(placement: .primaryAction) {
                 AddTaskButton(calendar: calendar)
             }
         }

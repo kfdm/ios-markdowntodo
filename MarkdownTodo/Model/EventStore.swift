@@ -51,6 +51,10 @@ class EventStore: ObservableObject {
             .sorted { $0.title < $1.title }
     }
 
+    func calendar(named: String) -> EKCalendar? {
+        return eventStore.calendars(for: .reminder).filter { $0.title == named }.first
+    }
+
     func toggleComplete(_ reminder: EKReminder) throws {
         os_log(.debug, log: .event, "Toggle Reminder %s", reminder)
         if reminder.isCompleted {
