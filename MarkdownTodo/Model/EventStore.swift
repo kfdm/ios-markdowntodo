@@ -38,14 +38,12 @@ class EventStore: ObservableObject {
     }
 
     var sources: [EKSource] {
-        eventStore.refreshSourcesIfNecessary()
         return eventStore.sources  //.filter { $0.sourceType == .calDAV }
             .sorted { $0.title < $1.title }
 
     }
 
     func calendars(for source: EKSource) -> [EKCalendar] {
-        eventStore.refreshSourcesIfNecessary()
         return eventStore.calendars(for: .reminder)
             .filter { source.title == $0.source.title }
             .sorted { $0.title < $1.title }
@@ -68,8 +66,7 @@ class EventStore: ObservableObject {
     func save(_ reminder: EKReminder) throws {
         os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
         try eventStore.save(reminder, commit: true)
-        objectWillChange.send()
-        eventStore.refreshSourcesIfNecessary()
+        //        objectWillChange.send()
     }
 
     func new(for calendar: EKCalendar) -> EKReminder {

@@ -41,9 +41,6 @@ struct AddTask: View {
             Section(header: Text("Other")) {
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
-            Section {
-                Button("Save", action: actionSave)
-            }
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Adding to \(reminder.calendar.title)", displayMode: .inline)
@@ -71,17 +68,18 @@ struct AddTaskButton: View {
     @EnvironmentObject var eventStore: EventStore
     var calendar: EKCalendar
 
-    @State private var showAddPopup = false
+    @State private var isPresenting = false
 
     var body: some View {
-        Button(action: { showAddPopup = true }) {
+        Button(action: { isPresenting.toggle() }) {
             Image(systemName: "plus")
-        }.sheet(isPresented: $showAddPopup) {
+        }.sheet(isPresented: $isPresenting) {
             NavigationView {
                 AddTask(reminder: .constant(eventStore.new(for: calendar)))
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .environmentObject(eventStore)
+
             }
-            .navigationViewStyle(StackNavigationViewStyle())
 
         }
     }

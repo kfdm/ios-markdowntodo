@@ -76,7 +76,7 @@ struct ReminderDetail: View {
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
             Section {
-                Button("Delete", action: { print("Delete Stub") }).buttonStyle(
+                Button("Delete", action: deleteAction).buttonStyle(
                     DestructiveButtonStyle())
             }
         }
@@ -100,6 +100,11 @@ struct ReminderDetail: View {
 
     func cancelAction() {
         reminder.reset()
+        presentationMode.wrappedValue.dismiss()
+    }
+
+    func deleteAction() {
+        print("Delete Stub")
         presentationMode.wrappedValue.dismiss()
     }
 }
