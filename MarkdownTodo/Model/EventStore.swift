@@ -69,6 +69,12 @@ class EventStore: ObservableObject {
         //        objectWillChange.send()
     }
 
+    func remove(_ reminder: EKReminder) throws {
+        os_log(.debug, log: .event, "Removing Reminder %s", reminder.debugDescription)
+        try eventStore.remove(reminder, commit: true)
+        objectWillChange.send()
+    }
+
     func new(for calendar: EKCalendar) -> EKReminder {
         let reminder = EKReminder(eventStore: eventStore)
         reminder.title = ""

@@ -104,7 +104,7 @@ struct ReminderDetail: View {
     }
 
     func deleteAction() {
-        print("Delete Stub")
+        try? store.remove(reminder)
         presentationMode.wrappedValue.dismiss()
     }
 }
