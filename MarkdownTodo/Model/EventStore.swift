@@ -49,8 +49,13 @@ class EventStore: ObservableObject {
             .sorted { $0.title < $1.title }
     }
 
-    func calendar(named: String) -> EKCalendar? {
+    private func calendar(named: String) -> EKCalendar? {
         return eventStore.calendars(for: .reminder).filter { $0.title == named }.first
+    }
+
+    var defaultCalendar: EKCalendar? {
+        // TODO: Fix actual default calendar
+        return calendar(named: "Inbox")
     }
 
     func toggleComplete(_ reminder: EKReminder) throws {
