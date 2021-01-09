@@ -9,10 +9,9 @@
 import SwiftUI
 
 extension View {
-    func wrapNavigation(icon: String, label: String) -> some View {
+    func wrapNavigation(label: String, systemImage: String) -> some View {
         return NavigationLink(destination: self.navigationBarTitle(label)) {
-            Image(systemName: icon)
-            Text(label)
+            Label(label, systemImage: systemImage)
         }
     }
 }
@@ -25,7 +24,7 @@ struct ScheduledView: View {
         PredicateFetcher(predicate: eventStore.scheduledReminders()) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
-        .wrapNavigation(icon: "clock", label: "Scheduled")
+        .wrapNavigation(label: "Scheduled", systemImage: "clock")
     }
 }
 
@@ -37,7 +36,7 @@ struct AgendaView: View {
         PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
-        .wrapNavigation(icon: "calendar", label: "Agenda")
+        .wrapNavigation(label: "Agenda", systemImage: "calendar")
     }
 }
 
@@ -50,7 +49,7 @@ struct PriorityView: View {
             SortedRemindersView(
                 sortBy: $sortBy, reminders: reminders.filter { $0.priority > 0 })
         }
-        .wrapNavigation(icon: "exclamationmark.triangle", label: "Priority")
+        .wrapNavigation(label: "Priority", systemImage: "exclamationmark.triangle")
     }
 }
 
@@ -63,7 +62,7 @@ struct ExternalView: View {
             SortedRemindersView(
                 sortBy: $sortBy, reminders: reminders.filter { $0.hasURL })
         }
-        .wrapNavigation(icon: "link", label: "External")
+        .wrapNavigation(label: "External", systemImage: "link")
     }
 }
 
@@ -75,7 +74,7 @@ struct CompletedView: View {
         PredicateFetcher(predicate: eventStore.completeReminders()) { reminders in
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
         }
-        .wrapNavigation(icon: "checkmark.seal", label: "Completed")
+        .wrapNavigation(label: "Completed", systemImage: "checkmark.seal")
     }
 }
 
