@@ -128,6 +128,9 @@ struct RemindersGroupCalendar<ReminderView>: View where ReminderView: View {
 
 struct SortedRemindersView: View {
     @Binding var sortBy: SortOptions
+    // Putting our EnvironmentObject store here seems to fix the bug with "quick date"
+    // but the correct fix is to likely correctly propogate State/Binding values
+    @EnvironmentObject var eventStore: EventStore
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
