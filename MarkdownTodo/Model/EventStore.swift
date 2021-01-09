@@ -59,7 +59,7 @@ class EventStore: ObservableObject {
     }
 
     func toggleComplete(_ reminder: EKReminder) throws {
-        os_log(.debug, log: .event, "Toggle Reminder %s", reminder)
+        os_log(.debug, log: .event, "Toggle Reminder %s", reminder.debugDescription)
         if reminder.isCompleted {
             reminder.completionDate = nil
         } else {
@@ -71,7 +71,7 @@ class EventStore: ObservableObject {
     func save(_ reminder: EKReminder) throws {
         os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
         try eventStore.save(reminder, commit: true)
-        //        objectWillChange.send()
+        objectWillChange.send()
     }
 
     func remove(_ reminder: EKReminder) throws {
@@ -92,12 +92,14 @@ class EventStore: ObservableObject {
 extension EventStore {
     typealias EKReminderPublisher = PassthroughSubject<[EKReminder], Never>
 
-    func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
+    func publisher(for predicate: NSPredicate, qos: DispatchQoS.QoSClass = .userInitiated) -> EKReminderPublisher {
         let publisher = PassthroughSubject<[EKReminder], Never>()
-        eventStore.fetchReminders(matching: predicate) { (reminders) in
-            os_log(.debug, log: .event, "Fetched reminders: %d", reminders.debugDescription)
-            publisher.send(reminders ?? [])
-            publisher.send(completion: .finished)
+        DispatchQueue.global(qos: qos).async {
+            self.eventStore.fetchReminders(matching: predicate) { (reminders) in
+                os_log(.debug, log: .event, "Fetched reminders: %d", reminders.debugDescription)
+                publisher.send(reminders ?? [])
+                publisher.send(completion: .finished)
+            }
         }
         return publisher
     }
