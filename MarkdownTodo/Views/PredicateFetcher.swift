@@ -192,7 +192,6 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
     }
 
     func fetch() {
-        os_log(.debug, log: .predicate, "Fetching predicate %s", predicate.description)
         self.eventStore.publisher(for: predicate)
             .receive(on: DispatchQueue.main)
             .assign(to: \.reminders, on: self)

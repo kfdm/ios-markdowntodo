@@ -106,14 +106,14 @@ extension EventStore {
 extension EventStore {
     typealias EKReminderPublisher = PassthroughSubject<[EKReminder], Never>
 
-    func publisher(for predicate: NSPredicate, qos: DispatchQoS.QoSClass = .userInitiated)
-        -> EKReminderPublisher
-    {
-        let publisher = PassthroughSubject<[EKReminder], Never>()
-        DispatchQueue.global(qos: qos).async {
-            self.eventStore.fetchReminders(matching: predicate) { (reminders) in
-                os_log(.debug, log: .event, "Fetched reminders: %d", reminders.debugDescription)
-                publisher.send(reminders ?? [])
+    func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
+        let publisher = EKReminderPublisher()
+        DispatchQueue.global(qos: .userInitiated).async {
+            os_log(.debug, log: .predicate, "Fetching predicate %s", predicate.description)
+            self.eventStore.fetchReminders(matching: predicate) { fetchedReminders in
+                let reminders = fetchedReminders ?? []
+                os_log(.debug, log: .predicate, "%d reminders for %s", reminders.count, predicate.description)
+                publisher.send(reminders)
                 publisher.send(completion: .finished)
             }
         }
