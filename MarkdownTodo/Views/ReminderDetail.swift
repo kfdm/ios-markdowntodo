@@ -35,7 +35,8 @@ struct ReminderDetail: View {
         List {
             Section(header: EmptyView()) {
                 NameField(label: "Title", value: $reminder.title)
-                NameValue(label: "Calendar", value: reminder.calendar.title)
+                CalendarPicker(calendar: $reminder.calendar)
+                    .modifier(LabelModifier(label: "Calendar"))
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
@@ -94,7 +95,7 @@ struct ReminderDetail: View {
     }
 
     func saveAction() {
-        try? store.save(reminder)
+        store.save(reminder)
         presentationMode.wrappedValue.dismiss()
     }
 
@@ -104,7 +105,7 @@ struct ReminderDetail: View {
     }
 
     func deleteAction() {
-        try? store.remove(reminder)
+        store.remove(reminder)
         presentationMode.wrappedValue.dismiss()
     }
 }

@@ -9,7 +9,7 @@
 import EventKit
 import SwiftUI
 
-struct CalendarPicker: View {
+struct SelectDatePicker: View {
     private var month: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
@@ -63,7 +63,7 @@ struct QuickDateModifier: ViewModifier {
                     action: { updateAndSave(date: today.nextDate(dayOfTheWeek: 2)) })
                 Button("Unset", action: { updateAndSave(date: nil) })
             }
-            CalendarPicker(selectedDate: $selectedDate) { date in
+            SelectDatePicker(selectedDate: $selectedDate) { date in
                 updateAndSave(date: date)
             }
         }.listStyle(GroupedListStyle())
