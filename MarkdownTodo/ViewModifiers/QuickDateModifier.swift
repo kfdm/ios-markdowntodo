@@ -81,9 +81,6 @@ struct QuickDateModifier: ViewModifier {
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel", action: actionCancel)
                             }
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Save", action: { updateAndSave(date: selectedDate) })
-                            }
                         }
                 }.navigationViewStyle(StackNavigationViewStyle())
             }
@@ -101,7 +98,7 @@ struct QuickDateModifier: ViewModifier {
 
     func updateAndSave(date newDate: Date?) {
         date = calendar.dateComponents(from: newDate)
-        try? eventStore.save(reminder)
+        eventStore.save(reminder)
         showPicker = false
     }
 }

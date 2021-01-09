@@ -45,7 +45,7 @@ struct CompletedCheckbox: View {
     }
 
     func actionClickCheckbox() {
-        try? eventStore.toggleComplete(reminder)
+        eventStore.toggleComplete(reminder)
     }
 }
 

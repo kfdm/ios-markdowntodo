@@ -58,26 +58,14 @@ class EventStore: ObservableObject {
         return calendar(named: "Inbox")
     }
 
-    func toggleComplete(_ reminder: EKReminder) throws {
+    func toggleComplete(_ reminder: EKReminder) {
         os_log(.debug, log: .event, "Toggle Reminder %s", reminder.debugDescription)
         if reminder.isCompleted {
             reminder.completionDate = nil
         } else {
             reminder.completionDate = Date()
         }
-        try save(reminder)
-    }
-
-    func save(_ reminder: EKReminder) throws {
-        os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
-        try eventStore.save(reminder, commit: true)
-        objectWillChange.send()
-    }
-
-    func remove(_ reminder: EKReminder) throws {
-        os_log(.debug, log: .event, "Removing Reminder %s", reminder.debugDescription)
-        try eventStore.remove(reminder, commit: true)
-        objectWillChange.send()
+        save(reminder)
     }
 
     func new(for calendar: EKCalendar) -> EKReminder {
@@ -88,11 +76,39 @@ class EventStore: ObservableObject {
     }
 }
 
+// MARK:- Some lower level queries where we need to worry about Queues
+extension EventStore {
+    func save(_ reminder: EKReminder) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
+            try? self.eventStore.save(reminder, commit: true)
+            self.notifyRefresh()
+        }
+    }
+
+    func remove(_ reminder: EKReminder) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            os_log(.debug, log: .event, "Removing Reminder %s", reminder.debugDescription)
+            try? self.eventStore.remove(reminder, commit: true)
+            self.notifyRefresh()
+        }
+    }
+
+    private func notifyRefresh() {
+        DispatchQueue.main.async {
+            os_log(.debug, log: .event, "Calling refresh")
+            self.objectWillChange.send()
+        }
+    }
+}
+
 // MARK:- Some lower level queries to convert NSPredicate to Publisher
 extension EventStore {
     typealias EKReminderPublisher = PassthroughSubject<[EKReminder], Never>
 
-    func publisher(for predicate: NSPredicate, qos: DispatchQoS.QoSClass = .userInitiated) -> EKReminderPublisher {
+    func publisher(for predicate: NSPredicate, qos: DispatchQoS.QoSClass = .userInitiated)
+        -> EKReminderPublisher
+    {
         let publisher = PassthroughSubject<[EKReminder], Never>()
         DispatchQueue.global(qos: qos).async {
             self.eventStore.fetchReminders(matching: predicate) { (reminders) in

@@ -59,7 +59,7 @@ struct AddTask: View {
     }
 
     func actionSave() {
-        try? eventStore.save(reminder)
+        eventStore.save(reminder)
         presentationMode.wrappedValue.dismiss()
     }
 }
