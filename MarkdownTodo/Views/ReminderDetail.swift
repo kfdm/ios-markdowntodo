@@ -35,8 +35,7 @@ struct ReminderDetail: View {
         List {
             Section(header: EmptyView()) {
                 NameField(label: "Title", value: $reminder.title)
-                CalendarPicker(calendar: $reminder.calendar)
-                    .modifier(LabelModifier(label: "Calendar"))
+                EKCalendarPicker(calendar: $reminder.calendar)
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
