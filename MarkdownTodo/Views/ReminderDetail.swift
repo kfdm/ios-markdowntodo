@@ -88,7 +88,7 @@ struct ReminderDetail: View {
                 Button("Save", action: saveAction)
             }
         }
-
+        .listStyle(GroupedListStyle())
         .navigationBarTitle(reminder.title)
         .navigationBarBackButtonHidden(true)
     }

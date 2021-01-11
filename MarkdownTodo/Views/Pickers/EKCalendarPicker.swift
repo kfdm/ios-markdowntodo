@@ -6,21 +6,24 @@
 //  Copyright © 2021 Paul Traylor. All rights reserved.
 //
 
-import SwiftUI
 import EventKit
+import SwiftUI
 
-fileprivate struct CalendarPickerSheet: View {
+private struct CalendarPickerSheet: View {
     @EnvironmentObject var store: EventStore
-    @Binding var calendar: EKCalendar
-    var actionSelected: (EKCalendar) -> Void
-    
+    @Binding var current: EKCalendar
+    var action: (EKCalendar) -> Void
+
     var body: some View {
         List {
             ForEach(store.sources) { (source) in
                 Section(header: Text(source.title)) {
-                    ForEach(store.calendars(for: source)) { (calendar) in
-                        Button(calendar.title, action: { actionSelected(calendar) })
+                    ForEach(store.calendars(for: source)) { calendar in
+                        Button(calendar.title, action: { action(calendar) })
                             .foregroundColor(calendar.color)
+                            .listRowBackground(
+                                current.calendarIdentifier == calendar.calendarIdentifier
+                                    ? Color.accentColor.opacity(0.2) : Color.clear)
                     }
                 }
             }
@@ -31,14 +34,14 @@ fileprivate struct CalendarPickerSheet: View {
 struct EKCalendarPicker: View {
     @Binding var calendar: EKCalendar
     @State private var isPresented = false
-    
+
     var body: some View {
-        Button(calendar.title, action:actionToggleSheet)
+        Button(calendar.title, action: actionToggleSheet)
             .foregroundColor(calendar.color)
             .modifier(LabelModifier(label: "Calendar"))
-            .sheet(isPresented: $isPresented, content: {
+            .sheet(isPresented: $isPresented) {
                 NavigationView {
-                    CalendarPickerSheet(calendar: $calendar, actionSelected: actionSelected)
+                    CalendarPickerSheet(current: $calendar, action: actionSelected)
                 }
                 .navigationTitle("Select Calendar")
                 .toolbar {
@@ -46,7 +49,7 @@ struct EKCalendarPicker: View {
                         Button("Cancel", action: actionToggleSheet)
                     }
                 }
-            })
+            }
     }
 
     private func actionToggleSheet() {
