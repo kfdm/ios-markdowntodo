@@ -70,9 +70,8 @@ struct ReminderDetail: View {
                 }
             }
             Section(header: Text("Other")) {
-                if let url = reminder.url {
-                    Link(url.absoluteString, destination: url)
-                }
+                LinkField(url: $reminder.url)
+                    .modifier(LabelModifier(label: "URL"))
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
             }
             Section {
