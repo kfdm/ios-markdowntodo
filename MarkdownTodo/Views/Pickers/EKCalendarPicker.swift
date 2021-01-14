@@ -42,12 +42,12 @@ struct EKCalendarPicker: View {
             .sheet(isPresented: $isPresented) {
                 NavigationView {
                     CalendarPickerSheet(current: $calendar, action: actionSelected)
-                }
-                .navigationTitle("Select Calendar")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Cancel", action: actionToggleSheet)
-                    }
+                        .navigationBarTitle("Select Calendar")
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel", action: actionToggleSheet)
+                            }
+                        }
                 }
             }
     }
