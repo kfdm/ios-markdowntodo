@@ -11,10 +11,18 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         List {
-            Link("Settings", destination: URL(string: UIApplication.openSettingsURLString)!)
-            Link("Github", destination: URL(string: "https://github.com")!)
-        }.listStyle(GroupedListStyle())
-            .navigationBarTitle("Settings")
+            Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+                Label("System Settings", systemImage: "gear")
+            }
+            Link(destination: URL(string: "https://github.com/kfdm/ios-markdowntodo")!) {
+                Label("Homepage", systemImage: "house")
+            }
+            Link(destination: URL(string: "https://github.com/kfdm/ios-markdowntodo/issues")!) {
+                Label("Issues", systemImage: "ant")
+            }
+        }
+        .listStyle(GroupedListStyle())
+        .navigationBarTitle("Settings")
     }
 }
 
