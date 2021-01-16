@@ -185,7 +185,7 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
             .onAppear(perform: fetch)
             .onReceive(eventStore.objectWillChange, perform: fetch)
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     if let defaultCalendar = eventStore.defaultCalendar {
                         AddTaskButton(calendar: defaultCalendar)
                     }

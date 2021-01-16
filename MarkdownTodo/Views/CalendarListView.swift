@@ -22,11 +22,10 @@ struct CalendarDetailView: View {
         .navigationBarTitle(calendar.title)
         .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 AddTaskButton(calendar: calendar)
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
                 EditCalendarButton(calendar: calendar)
+                SortButton(sortBy: $sortBy)
             }
         }
     }
