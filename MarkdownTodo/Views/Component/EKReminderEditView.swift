@@ -19,21 +19,10 @@ struct EKReminderEditView: View {
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
             }
             Section(header: Text("Date")) {
-                DateView(date: reminder.startDateComponents, whenUnset: "No Start Date")
+                QuickDatePicker(label: "Start Date", date: $reminder.startDateComponents)
                     .modifier(LabelModifier(label: "Start Date"))
-                    .modifier(
-                        QuickDateModifier(
-                            navigationBarTitle: "Select Start Date",
-                            date: $reminder.startDateComponents,
-                            reminder: $reminder))
-
-                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
+                QuickDatePicker(label: "Due Date", date: $reminder.dueDateComponents)
                     .modifier(LabelModifier(label: "Due Date"))
-                    .modifier(
-                        QuickDateModifier(
-                            navigationBarTitle: "Select Due Date",
-                            date: $reminder.dueDateComponents,
-                            reminder: $reminder))
 
                 if let created = reminder.creationDate {
                     DateView(date: created)

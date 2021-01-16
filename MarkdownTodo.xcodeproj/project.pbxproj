@@ -29,6 +29,7 @@
 		8785078025B2A7D500EE44D9 /* EKCalendarEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */; };
 		8785078725B2B78000EE44D9 /* EKReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078625B2B78000EE44D9 /* EKReminderEditView.swift */; };
 		8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078925B2B7E100EE44D9 /* PriorityPicker.swift */; };
+		8785078D25B2C4B400EE44D9 /* QuickDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */; };
 		879C69F624E0ED6E0062503C /* QuickDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F524E0ED6E0062503C /* QuickDateModifier.swift */; };
 		879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F724E1060E0062503C /* AddTaskButton.swift */; };
 		87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44224B9D67600086541 /* ReminderRow.swift */; };
@@ -66,6 +67,7 @@
 		8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKCalendarEditView.swift; sourceTree = "<group>"; };
 		8785078625B2B78000EE44D9 /* EKReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKReminderEditView.swift; sourceTree = "<group>"; };
 		8785078925B2B7E100EE44D9 /* PriorityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityPicker.swift; sourceTree = "<group>"; };
+		8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDatePicker.swift; sourceTree = "<group>"; };
 		879C69F524E0ED6E0062503C /* QuickDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDateModifier.swift; sourceTree = "<group>"; };
 		879C69F724E1060E0062503C /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 		87A9D44224B9D67600086541 /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */,
 				876EAE8D25B04DB40017A767 /* LinkField.swift */,
+				8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				8785078025B2A7D500EE44D9 /* EKCalendarEditView.swift in Sources */,
 				876EAE8E25B04DB40017A767 /* LinkField.swift in Sources */,
 				870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */,
+				8785078D25B2C4B400EE44D9 /* QuickDatePicker.swift in Sources */,
 				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
 				870B93CF25A9DFE300E7934E /* EKCalendarPicker.swift in Sources */,
 				872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */,

@@ -34,6 +34,7 @@ private struct CalendarPickerSheet: View {
 struct EKCalendarPicker: View {
     @Binding var calendar: EKCalendar
     @State private var isPresented = false
+    @EnvironmentObject var store: EventStore
 
     var body: some View {
         Button(calendar.title, action: actionToggleSheet)
@@ -59,6 +60,7 @@ struct EKCalendarPicker: View {
     private func actionSelected(_ selectedCalendar: EKCalendar) {
         isPresented.toggle()
         calendar = selectedCalendar
+        store.objectWillChange.send()
     }
 }
 

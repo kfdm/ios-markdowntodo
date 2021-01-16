@@ -51,6 +51,7 @@ struct CompletedCheckbox: View {
 
 struct ReminderRow: View {
     @State var reminder: EKReminder
+    @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
         HStack {
@@ -67,13 +68,9 @@ struct ReminderRow: View {
                 DateView(date: completionDate)
                     .foregroundColor(.gray)
             } else {
-                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
-                    .modifier(HighlightOverdue(date: reminder.dueDateComponents))
-                    .modifier(
-                        QuickDateModifier(
-                            navigationBarTitle: "Select Due Date",
-                            date: $reminder.dueDateComponents,
-                            reminder: $reminder))
+                QuickDatePicker(label: "Due Date", date: $reminder.dueDateComponents) {
+                    eventStore.save(reminder)
+                }
             }
             if reminder.hasURL {
                 Image(systemName: "link")
