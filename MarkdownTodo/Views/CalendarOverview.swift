@@ -23,11 +23,14 @@ struct CalendarOverview: View {
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
 
+    private func destination(for date: Date) -> some View {
+        selectedDate = date
+        return SelectedDateView(date: date)
+    }
+
     var body: some View {
         CalendarView(interval: month) { date in
-            NavigationLink(
-                destination: SelectedDateView(date: date).onAppear { selectedDate = date }
-            ) {
+            NavigationLink(destination: destination(for: date)) {
                 Text(String(self.calendar.component(.day, from: date)))
                     .frame(
                         minWidth: 30, idealWidth: 40, maxWidth: 40,
