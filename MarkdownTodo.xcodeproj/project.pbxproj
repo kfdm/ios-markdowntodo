@@ -30,7 +30,7 @@
 		8785078725B2B78000EE44D9 /* EKReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078625B2B78000EE44D9 /* EKReminderEditView.swift */; };
 		8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078925B2B7E100EE44D9 /* PriorityPicker.swift */; };
 		8785078D25B2C4B400EE44D9 /* QuickDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */; };
-		879C69F624E0ED6E0062503C /* QuickDateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F524E0ED6E0062503C /* QuickDateModifier.swift */; };
+		8785079025B2CD3A00EE44D9 /* CalendarDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078F25B2CD3A00EE44D9 /* CalendarDatePicker.swift */; };
 		879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C69F724E1060E0062503C /* AddTaskButton.swift */; };
 		87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44224B9D67600086541 /* ReminderRow.swift */; };
 		87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9D44424B9DA8800086541 /* PlannerView.swift */; };
@@ -68,7 +68,7 @@
 		8785078625B2B78000EE44D9 /* EKReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKReminderEditView.swift; sourceTree = "<group>"; };
 		8785078925B2B7E100EE44D9 /* PriorityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityPicker.swift; sourceTree = "<group>"; };
 		8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDatePicker.swift; sourceTree = "<group>"; };
-		879C69F524E0ED6E0062503C /* QuickDateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDateModifier.swift; sourceTree = "<group>"; };
+		8785078F25B2CD3A00EE44D9 /* CalendarDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDatePicker.swift; sourceTree = "<group>"; };
 		879C69F724E1060E0062503C /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 		87A9D44224B9D67600086541 /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
 		87A9D44424B9DA8800086541 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 				874E646724DC19C800603EAE /* BackgroundColorModifier.swift */,
 				870B910924DE482200979076 /* DateHighlightModifier.swift */,
 				87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */,
-				879C69F524E0ED6E0062503C /* QuickDateModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -174,6 +173,7 @@
 				870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */,
 				876EAE8D25B04DB40017A767 /* LinkField.swift */,
 				8785078C25B2C4B400EE44D9 /* QuickDatePicker.swift */,
+				8785078F25B2CD3A00EE44D9 /* CalendarDatePicker.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -280,7 +280,6 @@
 				8785078725B2B78000EE44D9 /* EKReminderEditView.swift in Sources */,
 				87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */,
 				8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */,
-				879C69F624E0ED6E0062503C /* QuickDateModifier.swift in Sources */,
 				87E0B6E1257113EC00E85790 /* Log+Extensions.swift in Sources */,
 				8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */,
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
@@ -301,6 +300,7 @@
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
 				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,
 				87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */,
+				8785079025B2CD3A00EE44D9 /* CalendarDatePicker.swift in Sources */,
 				87C6809F24B9F4530064F436 /* SwiftUI+Components.swift in Sources */,
 				87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */,
 				87A9D44524B9DA8800086541 /* PlannerView.swift in Sources */,

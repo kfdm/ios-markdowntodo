@@ -1,12 +1,11 @@
 //
-//  QuickDateModifier.swift
+//  CalendarDatePicker.swift
 //  MarkdownTodo
 //
-//  Created by Paul Traylor on 2020/08/10.
-//  Copyright © 2020 Paul Traylor. All rights reserved.
+//  Created by Paul Traylor on 2021/01/16.
+//  Copyright © 2021 Paul Traylor. All rights reserved.
 //
 
-import EventKit
 import SwiftUI
 
 struct CalendarDatePicker: View {
@@ -33,11 +32,10 @@ struct CalendarDatePicker: View {
     }
 }
 
-extension Calendar {
-    func dateComponents(from date: Date?) -> DateComponents? {
-        if let date = date {
-            return dateComponents([.year, .month, .day, .hour, .minute], from: date)
+struct CalendarDatePicker_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarDatePicker(selectedDate: .constant(Date())) { date in
+            print(date.debugDescription)
         }
-        return nil
     }
 }

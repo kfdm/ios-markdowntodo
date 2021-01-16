@@ -35,6 +35,13 @@ extension Calendar {
     func endOfDay(for date: Date) -> Date {
         return self.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
     }
+
+    func dateComponents(from date: Date?) -> DateComponents? {
+        if let date = date {
+            return dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        }
+        return nil
+    }
 }
 
 extension DateFormatter {
