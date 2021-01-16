@@ -9,49 +9,22 @@
 import EventKit
 import SwiftUI
 
-struct AddTask: View {
-    @Binding var reminder: EKReminder
+private struct AddTaskSheet: View {
+    @State var reminder: EKReminder
     @EnvironmentObject var eventStore: EventStore
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        List {
-            Section {
-                NameField(label: "Title", value: $reminder.title)
-                NameValue(label: "Calendar", value: reminder.calendar.title)
-                PriorityPicker(label: "Priority", priority: $reminder.priority)
+        EKReminderEditView(reminder: $reminder)
+            .navigationBarTitle("Adding to \(reminder.calendar.title)", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", action: actionCancel)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Add", action: actionSave)
+                }
             }
-            Section(header: Text("Date")) {
-                DateView(date: reminder.startDateComponents, whenUnset: "No Start Date")
-                    .modifier(LabelModifier(label: "Start Date"))
-                    .modifier(
-                        QuickDateModifier(
-                            navigationBarTitle: "Select Start Date",
-                            date: $reminder.startDateComponents,
-                            reminder: $reminder))
-
-                DateView(date: reminder.dueDateComponents, whenUnset: "No Due Date")
-                    .modifier(LabelModifier(label: "Due Date"))
-                    .modifier(
-                        QuickDateModifier(
-                            navigationBarTitle: "Select Due Date",
-                            date: $reminder.dueDateComponents,
-                            reminder: $reminder))
-            }
-            Section(header: Text("Other")) {
-                MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
-            }
-        }
-        .listStyle(GroupedListStyle())
-        .navigationBarTitle("Adding to \(reminder.calendar.title)", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel", action: actionCancel)
-            }
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Add", action: actionSave)
-            }
-        }
     }
 
     func actionCancel() {
@@ -75,12 +48,9 @@ struct AddTaskButton: View {
             Image(systemName: "plus")
         }.sheet(isPresented: $isPresenting) {
             NavigationView {
-                AddTask(reminder: .constant(eventStore.new(for: calendar)))
+                AddTaskSheet(reminder: eventStore.new(for: calendar))
                     .navigationViewStyle(StackNavigationViewStyle())
-                    .environmentObject(eventStore)
-
             }
-
         }
     }
 }
