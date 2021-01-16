@@ -86,6 +86,14 @@ extension EventStore {
         }
     }
 
+    func save(_ calendar: EKCalendar) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            os_log(.debug, log: .event, "Saving Calendar %s", calendar.debugDescription)
+            try? self.eventStore.saveCalendar(calendar, commit: true)
+            self.notifyRefresh()
+        }
+    }
+
     func remove(_ reminder: EKReminder) {
         DispatchQueue.global(qos: .userInitiated).async {
             os_log(.debug, log: .event, "Removing Reminder %s", reminder.debugDescription)

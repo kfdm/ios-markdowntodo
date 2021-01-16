@@ -25,6 +25,9 @@ struct CalendarDetailView: View {
             ToolbarItem(placement: .primaryAction) {
                 AddTaskButton(calendar: calendar)
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditCalendarButton(calendar: calendar)
+            }
         }
     }
 }
