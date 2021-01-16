@@ -66,7 +66,12 @@ extension Array where Element == EKReminder {
         )
     }
 
+    /// Filter tasks due on this date
+    /// - Parameter date: Will check startOfDay and endOfDay for this date
+    /// - Returns: All EKReminders due on this date
     func filter(date: Date) -> [EKReminder] {
-        return self.filter { $0.dueDate.startOfDay == date.startOfDay }
+        return self.filter {
+            return $0.dueDate > date.startOfDay && $0.dueDate < date.endOfDay
+        }
     }
 }

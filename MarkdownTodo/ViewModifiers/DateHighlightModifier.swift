@@ -13,11 +13,11 @@ struct DateBorderModifier: ViewModifier {
     @Binding var reminders: [EKReminder]
     var date: Date
 
-    var count: Int {
+    private var count: Int {
         return reminders.filter(date: date).count
     }
 
-    var width: CGFloat {
+    private var lineWidth: CGFloat {
         CGFloat(min(4, count))
     }
 
@@ -26,7 +26,7 @@ struct DateBorderModifier: ViewModifier {
             content
             .overlay(
                 Circle()
-                    .stroke(Color.accentColor, lineWidth: width)
+                    .stroke(Color.accentColor, lineWidth: lineWidth)
             )
     }
 }
