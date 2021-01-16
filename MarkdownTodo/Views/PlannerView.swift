@@ -8,9 +8,13 @@
 
 import SwiftUI
 
-extension View {
-    func wrapNavigation(label: String, systemImage: String) -> some View {
-        return NavigationLink(destination: self.navigationBarTitle(label)) {
+struct NavigationLabel<Destination: View>: View {
+    var label: String
+    var systemImage: String
+    var destination: () -> Destination
+
+    var body: some View {
+        NavigationLink(destination: destination().navigationTitle(label)) {
             Label(label, systemImage: systemImage)
         }
     }
@@ -21,10 +25,11 @@ struct ScheduledView: View {
     @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.scheduledReminders()) { reminders in
-            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        NavigationLabel(label: "Scheduled", systemImage: "clock") {
+            PredicateFetcher(predicate: eventStore.scheduledReminders()) { reminders in
+                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            }
         }
-        .wrapNavigation(label: "Scheduled", systemImage: "clock")
     }
 }
 
@@ -33,10 +38,11 @@ struct AgendaView: View {
     @State private var sortBy = SortOptions.agenda
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
-            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        NavigationLabel(label: "Agenda", systemImage: "calendar") {
+            PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
+                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            }
         }
-        .wrapNavigation(label: "Agenda", systemImage: "calendar")
     }
 }
 
@@ -45,11 +51,12 @@ struct PriorityView: View {
     @State private var sortBy = SortOptions.priority
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
-            SortedRemindersView(
-                sortBy: $sortBy, reminders: reminders.filter { $0.priority > 0 })
+        NavigationLabel(label: "Priority", systemImage: "exclamationmark.triangle") {
+            PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+                SortedRemindersView(
+                    sortBy: $sortBy, reminders: reminders.filter { $0.priority > 0 })
+            }
         }
-        .wrapNavigation(label: "Priority", systemImage: "exclamationmark.triangle")
     }
 }
 
@@ -58,11 +65,12 @@ struct ExternalView: View {
     @State private var sortBy = SortOptions.priority
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
-            SortedRemindersView(
-                sortBy: $sortBy, reminders: reminders.filter { $0.hasURL })
+        NavigationLabel(label: "External", systemImage: "link") {
+            PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
+                SortedRemindersView(
+                    sortBy: $sortBy, reminders: reminders.filter { $0.hasURL })
+            }
         }
-        .wrapNavigation(label: "External", systemImage: "link")
     }
 }
 
@@ -71,10 +79,11 @@ struct CompletedView: View {
     @State private var sortBy = SortOptions.calendar
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.completeReminders()) { reminders in
-            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        NavigationLabel(label: "Completed", systemImage: "checkmark.seal") {
+            PredicateFetcher(predicate: eventStore.completeReminders()) { reminders in
+                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            }
         }
-        .wrapNavigation(label: "Completed", systemImage: "checkmark.seal")
     }
 }
 
