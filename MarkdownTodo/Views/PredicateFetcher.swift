@@ -168,7 +168,6 @@ struct SortedRemindersView: View {
                 SortButton(sortBy: $sortBy)
             }
         }
-
     }
 }
 

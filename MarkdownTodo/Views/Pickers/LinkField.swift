@@ -24,7 +24,7 @@ struct LinkField: View {
         url = URL(string: text)
     }
 
-    init (url: Binding<URL?>) {
+    init(url: Binding<URL?>) {
         self._url = url
         self._text = .init(wrappedValue: url.wrappedValue?.absoluteString ?? "")
     }
