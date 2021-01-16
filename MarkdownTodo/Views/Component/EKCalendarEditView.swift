@@ -16,6 +16,7 @@ struct EKCalendarEditView: View {
             TextField("Title", text: $calendar.title)
             ColorPicker("Color", selection: $calendar.cgColor)
         }
+        .navigationBarTitle("Editing Calendar \(calendar.title)")
     }
 }
 

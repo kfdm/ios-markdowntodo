@@ -13,7 +13,7 @@ struct EKReminderEditView: View {
     @Binding var reminder: EKReminder
     var body: some View {
         List {
-            Section(header: EmptyView()) {
+            Section {
                 NameField(label: "Title", value: $reminder.title)
                 EKCalendarPicker(calendar: $reminder.calendar)
                 PriorityPicker(label: "Priority", priority: $reminder.priority)

@@ -24,7 +24,7 @@ struct ReminderDetail: View {
                     Button("Save", action: saveAction)
                 }
                 ToolbarItem(placement: .destructiveAction) {
-                    Text("Delete")
+                    Button("Delete", action: deleteAction)
                 }
             }
             .listStyle(GroupedListStyle())
