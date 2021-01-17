@@ -9,7 +9,7 @@
 import EventKit
 import SwiftUI
 
-struct CalendarDetailView: View {
+private struct CalendarDetailView: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var showCompleted = false
@@ -42,23 +42,30 @@ struct CalendarDetailView: View {
     }
 }
 
-struct CalendarListView: View {
+struct EKCalendarList<ContentView: View>: View {
+    let content: (EKCalendar) -> ContentView
     @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        Group {
-            List {
-                ForEach(eventStore.sources) { (source) in
-                    Section(header: Text(source.title)) {
-                        ForEach(eventStore.calendars(for: source)) { (calendar) in
-                            NavigationLink(destination: CalendarDetailView(calendar: calendar)) {
-                                Text(calendar.title)
-                                    .foregroundColor(calendar.color)
-                            }
-                        }
+        List {
+            ForEach(eventStore.sources) { (source) in
+                Section(header: Text(source.title)) {
+                    ForEach(eventStore.calendars(for: source)) { (calendar) in
+                        content(calendar)
                     }
                 }
-            }.listStyle(GroupedListStyle())
+            }
+        }.listStyle(GroupedListStyle())
+    }
+}
+
+struct CalendarListView: View {
+    var body: some View {
+        EKCalendarList { calendar in
+            NavigationLink(destination: CalendarDetailView(calendar: calendar)) {
+                Text(calendar.title)
+                    .foregroundColor(calendar.color)
+            }
         }
     }
 }
