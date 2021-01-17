@@ -12,20 +12,31 @@ import SwiftUI
 struct CalendarDetailView: View {
     @EnvironmentObject var eventStore: EventStore
     @State private var sortBy = SortOptions.dueDate
+    @State private var showCompleted = false
 
     var calendar: EKCalendar
 
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: calendar)) { reminders in
-            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        Group {
+            if showCompleted {
+                PredicateFetcher(predicate: eventStore.completed(for: calendar)) { reminders in
+                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                }
+            } else {
+                PredicateFetcher(predicate: eventStore.reminders(for: calendar)) { reminders in
+                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                }
+            }
         }
-        .navigationBarTitle(calendar.title)
         .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 AddTaskButton(calendar: calendar)
                 EditCalendarButton(calendar: calendar)
                 SortButton(sortBy: $sortBy)
+            }
+            ToolbarItem(placement: .bottomBar) {
+                Toggle("Show Completed", isOn: $showCompleted)
             }
         }
     }

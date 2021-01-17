@@ -143,6 +143,10 @@ extension EventStore {
             withDueDateStarting: nil, ending: nil, calendars: [calendar])
     }
 
+    func completed(for calendar: EKCalendar) -> NSPredicate {
+        return eventStore.predicateForCompletedReminders(withCompletionDateStarting: nil, ending: nil, calendars: [calendar])
+    }
+
     func reminders(for date: Date) -> NSPredicate {
         let start = date.startOfDay
         let end = date.endOfDay
