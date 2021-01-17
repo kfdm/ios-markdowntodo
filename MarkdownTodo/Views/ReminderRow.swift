@@ -71,6 +71,7 @@ struct ReminderRow: View {
                 QuickDatePicker(label: "Due Date", date: $reminder.dueDateComponents) {
                     eventStore.save(reminder)
                 }
+                .modifier(HighlightOverdue(date: reminder.dueDateComponents))
             }
             if reminder.hasURL {
                 Image(systemName: "link")

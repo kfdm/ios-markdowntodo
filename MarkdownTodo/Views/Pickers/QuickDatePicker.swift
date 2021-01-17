@@ -77,6 +77,9 @@ struct QuickDatePicker: View {
                     }
                     .navigationTitle("Select \(label)")
             }
+            // Need to reset our forgroundColor in case we highlighted
+            // our parent button elsewhere
+            .foregroundColor(.none)
         }
     }
 
