@@ -11,7 +11,7 @@ import SwiftUI
 
 extension EKCalendar {
     var color: Color {
-        Color(UIColor(cgColor: self.cgColor))
+        Color(self.cgColor)
     }
 }
 
