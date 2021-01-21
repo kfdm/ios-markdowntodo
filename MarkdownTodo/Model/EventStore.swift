@@ -117,6 +117,7 @@ extension EventStore {
     func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
         let publisher = EKReminderPublisher()
         DispatchQueue.global(qos: .userInitiated).async {
+            self.eventStore.refreshSourcesIfNecessary()
             os_log(.debug, log: .predicate, "Fetching predicate %s", predicate.description)
             self.eventStore.fetchReminders(matching: predicate) { fetchedReminders in
                 let reminders = fetchedReminders ?? []
