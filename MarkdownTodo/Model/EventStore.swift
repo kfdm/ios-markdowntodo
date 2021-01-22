@@ -44,8 +44,8 @@ class EventStore: ObservableObject {
     }
 
     func calendars(for source: EKSource) -> [EKCalendar] {
-        return eventStore.calendars(for: .reminder)
-            .filter { source.title == $0.source.title }
+        return source.calendars(for: .reminder)
+            .filter { source.sourceIdentifier == $0.source.sourceIdentifier }
             .sorted { $0.title < $1.title }
     }
 

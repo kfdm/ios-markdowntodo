@@ -14,7 +14,7 @@ struct DateBorderModifier: ViewModifier {
     var date: Date
 
     private var count: Int {
-        return reminders.filter(date: date).count
+        return reminders.dueOn(date: date).count
     }
 
     private var lineWidth: CGFloat {
