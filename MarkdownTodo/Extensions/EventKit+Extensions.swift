@@ -8,6 +8,25 @@
 
 import EventKit
 
+extension EKEventStore {
+    func remove(_ reminders: [EKReminder], commit: Bool) throws {
+        try reminders.forEach { reminder in
+            try remove(reminder, commit: false)
+        }
+        if commit {
+            try self.commit()
+        }
+    }
+    func save(_ reminders: [EKReminder], commit: Bool) throws {
+        try reminders.forEach { reminder in
+            try save(reminder, commit: false)
+        }
+        if commit {
+            try self.commit()
+        }
+    }
+}
+
 extension EKReminder {
     var hasURL: Bool {
         return url != nil

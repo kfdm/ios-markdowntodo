@@ -35,8 +35,9 @@ private struct CalendarDetailView: View {
                 EditCalendarButton(calendar: calendar)
                 SortButton(sortBy: $sortBy)
             }
-            ToolbarItem(placement: .bottomBar) {
+            ToolbarItemGroup(placement: .bottomBar) {
                 Toggle("Show Completed", isOn: $showCompleted)
+                PruneCompletedButton(calendar: calendar)
             }
         }
     }

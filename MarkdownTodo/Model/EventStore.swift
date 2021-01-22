@@ -79,9 +79,13 @@ class EventStore: ObservableObject {
 // MARK:- Some lower level queries where we need to worry about Queues
 extension EventStore {
     func save(_ reminder: EKReminder) {
+        save([reminder])
+    }
+
+    func save(_ reminders: [EKReminder]) {
         DispatchQueue.global(qos: .userInitiated).async {
-            os_log(.debug, log: .event, "Saving Reminder %s", reminder.debugDescription)
-            try? self.eventStore.save(reminder, commit: true)
+            os_log(.debug, log: .event, "Saving Reminders %s", reminders.debugDescription)
+            try? self.eventStore.save(reminders, commit: true)
             self.notifyRefresh()
         }
     }
@@ -95,9 +99,12 @@ extension EventStore {
     }
 
     func remove(_ reminder: EKReminder) {
+        remove([reminder])
+    }
+
+    func remove(_ reminders: [EKReminder]) {
         DispatchQueue.global(qos: .userInitiated).async {
-            os_log(.debug, log: .event, "Removing Reminder %s", reminder.debugDescription)
-            try? self.eventStore.remove(reminder, commit: true)
+            try? self.eventStore.remove(reminders, commit: true)
             self.notifyRefresh()
         }
     }
@@ -128,7 +135,10 @@ extension EventStore {
         }
         return publisher
     }
+}
 
+// MARK:- Some useful preselected queries
+extension EventStore {
     func reminders(for interval: DateInterval) -> NSPredicate {
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: interval.start, ending: interval.end, calendars: nil)
@@ -154,10 +164,7 @@ extension EventStore {
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: start, ending: end, calendars: nil)
     }
-}
 
-// MARK:- Some useful preselected queries
-extension EventStore {
     func completeReminders(for date: Date = Date()) -> NSPredicate {
         let start = date.startOfDay
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
