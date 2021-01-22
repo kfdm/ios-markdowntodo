@@ -41,7 +41,6 @@
 		87C6809924B9EC380064F436 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809824B9EC380064F436 /* SettingsView.swift */; };
 		87C6809F24B9F4530064F436 /* SwiftUI+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */; };
 		87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */; };
-		87E0B6E1257113EC00E85790 /* Log+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E0B6E0257113EC00E85790 /* Log+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +79,6 @@
 		87C6809824B9EC380064F436 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Components.swift"; sourceTree = "<group>"; };
 		87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButtonStyle.swift; sourceTree = "<group>"; };
-		87E0B6E0257113EC00E85790 /* Log+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +202,6 @@
 				870B910B24DE545C00979076 /* EventKit+Extensions.swift */,
 				87A9D44924B9E49600086541 /* EventKit+SwiftUI.swift */,
 				87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */,
-				87E0B6E0257113EC00E85790 /* Log+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -292,7 +289,6 @@
 				87930DCD25BAE891003F8426 /* PruneCompletedView.swift in Sources */,
 				87371CBC24B9C0BC005EA9F7 /* EventStore.swift in Sources */,
 				8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */,
-				87E0B6E1257113EC00E85790 /* Log+Extensions.swift in Sources */,
 				8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */,
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,

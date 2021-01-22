@@ -164,7 +164,10 @@ struct SortedRemindersView: View {
         }
         // Default sort button if not overridden in the parent view
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                if let defaultCalendar = eventStore.defaultCalendar {
+                    AddTaskButton(calendar: defaultCalendar)
+                }
                 SortButton(sortBy: $sortBy)
             }
         }
@@ -184,13 +187,6 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
         self.content(reminders)
             .onAppear(perform: fetch)
             .onReceive(eventStore.objectWillChange, perform: fetch)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if let defaultCalendar = eventStore.defaultCalendar {
-                        AddTaskButton(calendar: defaultCalendar)
-                    }
-                }
-            }
     }
 
     func fetch() {

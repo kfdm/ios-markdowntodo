@@ -28,12 +28,13 @@ private struct CalendarDetailView: View {
                 }
             }
         }
+        .navigationTitle(calendar.title)
         .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 AddTaskButton(calendar: calendar)
-                EditCalendarButton(calendar: calendar)
                 SortButton(sortBy: $sortBy)
+                EditCalendarButton(calendar: calendar)
             }
             ToolbarItemGroup(placement: .bottomBar) {
                 Toggle("Show Completed", isOn: $showCompleted)

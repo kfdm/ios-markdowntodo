@@ -39,7 +39,7 @@ struct AgendaView: View {
 
     var body: some View {
         NavigationLabel(label: "Agenda", systemImage: "calendar") {
-            PredicateFetcher(predicate: eventStore.agendaReminders()) { reminders in
+            PredicateFetcher(predicate: eventStore.upcomingReminders()) { reminders in
                 SortedRemindersView(sortBy: $sortBy, reminders: reminders)
             }
         }

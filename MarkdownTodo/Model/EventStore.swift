@@ -49,13 +49,8 @@ class EventStore: ObservableObject {
             .sorted { $0.title < $1.title }
     }
 
-    private func calendar(named: String) -> EKCalendar? {
-        return eventStore.calendars(for: .reminder).filter { $0.title == named }.first
-    }
-
     var defaultCalendar: EKCalendar? {
-        // TODO: Fix actual default calendar
-        return calendar(named: "Inbox")
+        return eventStore.defaultCalendarForNewReminders()
     }
 
     func toggleComplete(_ reminder: EKReminder) {
@@ -78,22 +73,32 @@ class EventStore: ObservableObject {
 
 // MARK:- Some lower level queries where we need to worry about Queues
 extension EventStore {
+    private func wrapAsync(queue: DispatchQueue, completion: @escaping () throws -> Void) {
+        queue.async {
+            do {
+                try completion()
+            } catch let error {
+                os_log(.debug, log: .event, "%s", error.localizedDescription)
+            }
+        }
+    }
+
     func save(_ reminder: EKReminder) {
         save([reminder])
     }
 
     func save(_ reminders: [EKReminder]) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        wrapAsync(queue: .global(qos: .userInitiated)) {
             os_log(.debug, log: .event, "Saving Reminders %s", reminders.debugDescription)
-            try? self.eventStore.save(reminders, commit: true)
+            try self.eventStore.save(reminders, commit: true)
             self.notifyRefresh()
         }
     }
 
     func save(_ calendar: EKCalendar) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        wrapAsync(queue: .global(qos: .userInitiated)) {
             os_log(.debug, log: .event, "Saving Calendar %s", calendar.debugDescription)
-            try? self.eventStore.saveCalendar(calendar, commit: true)
+            try self.eventStore.saveCalendar(calendar, commit: true)
             self.notifyRefresh()
         }
     }
@@ -103,8 +108,8 @@ extension EventStore {
     }
 
     func remove(_ reminders: [EKReminder]) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            try? self.eventStore.remove(reminders, commit: true)
+        wrapAsync(queue: .global(qos: .userInitiated)) {
+            try self.eventStore.remove(reminders, commit: true)
             self.notifyRefresh()
         }
     }
@@ -112,6 +117,7 @@ extension EventStore {
     private func notifyRefresh() {
         DispatchQueue.main.async {
             os_log(.debug, log: .event, "Calling refresh")
+            self.eventStore.refreshSourcesIfNecessary()
             self.objectWillChange.send()
         }
     }
@@ -124,7 +130,6 @@ extension EventStore {
     func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
         let publisher = EKReminderPublisher()
         DispatchQueue.global(qos: .userInitiated).async {
-            self.eventStore.refreshSourcesIfNecessary()
             os_log(.debug, log: .predicate, "Fetching predicate %s", predicate.description)
             self.eventStore.fetchReminders(matching: predicate) { fetchedReminders in
                 let reminders = fetchedReminders ?? []
@@ -167,7 +172,7 @@ extension EventStore {
 
     func completeReminders(for date: Date = Date()) -> NSPredicate {
         let start = date.startOfDay
-        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        let end = date.endOfDay
         return eventStore.predicateForCompletedReminders(
             withCompletionDateStarting: start, ending: end, calendars: nil)
     }
@@ -177,15 +182,15 @@ extension EventStore {
             withDueDateStarting: .distantPast, ending: .distantFuture, calendars: nil)
     }
 
-    func upcomingReminders(days: Int, start: Date = Date().startOfDay) -> NSPredicate {
-        let end = Calendar.current.date(byAdding: .day, value: days, to: start)
-        return eventStore.predicateForIncompleteReminders(
-            withDueDateStarting: start, ending: end, calendars: nil)
-    }
-
-    func agendaReminders() -> NSPredicate {
-        let ending = Calendar.current.date(byAdding: .day, value: 3, to: Date())
+    func upcomingReminders(days: Int = 3) -> NSPredicate {
+        let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: nil, ending: ending, calendars: nil)
     }
+}
+
+extension OSLog {
+    fileprivate static var predicate = OSLog.init(
+        subsystem: Bundle.main.bundleIdentifier!, category: "Predicate")
+    fileprivate static var event = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "EventStore")
 }
