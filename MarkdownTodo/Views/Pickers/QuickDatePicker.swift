@@ -18,6 +18,7 @@ struct DatePickerSheet: View {
     var body: some View {
         List {
             Section(header: Text("Quick Select")) {
+                Button("Unscheduled", action: selectUnscheduled)
                 Button("Today", action: selectToday)
                 Button("Tomorrow", action: selectTomorrow)
                 Button("Next Weekend", action: selectWeekend)
@@ -26,6 +27,10 @@ struct DatePickerSheet: View {
             CalendarDatePicker(selectedDate: $selectedDate, action: action)
         }
         .listStyle(GroupedListStyle())
+    }
+
+    func selectUnscheduled() {
+        action(nil)
     }
 
     func selectToday() {
