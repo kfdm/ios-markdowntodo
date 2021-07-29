@@ -57,12 +57,37 @@ struct TodayWidgetEntryView: View {
         VStack(spacing: 0) {
             ForEach(entry.reminders) { reminder in
                 HStack(alignment: .center) {
-                    PriorityStripe(priority: reminder.priority)
-                    Text(reminder.title)
-                    Spacer()
-                    DateView(date: reminder.dueDate, formatter: .shortDate)
-                        .foregroundColor(.gray)
+                    PriorityStripe(priority: reminder.priority, width: 12)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(reminder.title)
+
+                            Spacer()
+                            DateView(date: reminder.dueDate, formatter: .shortDate)
+                                .foregroundColor(.gray)
+                        }
+                        .font(.title)
+                        HStack {
+                            Text(reminder.calendar.title)
+                                .foregroundColor(reminder.calendar.color)
+
+                            Spacer()
+                            if reminder.hasURL {
+                                Image(systemName: "link")
+                                    .frame(width: 8, height: 8)
+                                    .scaledToFit()
+                            }
+                            if reminder.hasRecurrenceRules {
+                                Image(systemName: "clock")
+                                    .frame(width: 8, height: 8)
+                                    .scaledToFit()
+                            }
+                        }
+                        .font(.caption)
+                    }
                 }
+                .padding(.trailing, 10)
+                .minimumScaleFactor(0.01)
                 Color.black.frame(width: .infinity, height: 1)
             }
         }

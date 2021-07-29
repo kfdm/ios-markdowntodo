@@ -11,7 +11,13 @@ import SwiftUI
 
 struct PriorityStripe: View {
     let priority: Int
-    let width = 8.0
+    let width: Double
+
+    init(priority: Int, width: Double = 8) {
+        self.priority = priority
+        self.width = width
+    }
+
     var color: Color {
         switch priority {
         case 1...2:
