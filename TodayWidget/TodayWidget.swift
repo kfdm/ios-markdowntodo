@@ -6,38 +6,42 @@
 //  Copyright © 2021 Paul Traylor. All rights reserved.
 //
 
-import WidgetKit
-import SwiftUI
-import EventKit
 import Combine
+import EventKit
+import SwiftUI
+import WidgetKit
+
+private var subscriptions = Set<AnyCancellable>()
 
 struct Provider: TimelineProvider {
-    @State private var subscriptions = Set<AnyCancellable>()
-        let eventStore = EventStore()
-
+    let eventStore = EventStore()
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), reminders: [])
+        print("placeholder \(eventStore.authorized)")
+        return SimpleEntry(date: Date(), reminders: [])
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), reminders: [])
-        completion(entry)
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
+        print("getSnapshot \(eventStore.authorized)")
+        let predicate = eventStore.upcomingReminders()
+        eventStore.publisher(for: predicate)
+            .map { SimpleEntry(date: Date(), reminders: $0) }
+            .print()
+            .sink(receiveValue: completion)
+            .store(in: &subscriptions)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, reminders: [])
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+        print("getTimeline \(eventStore.authorized)")
+        let now = Date()
+        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 1, to: now)!
+        let predicate = eventStore.upcomingReminders()
+        eventStore.publisher(for: predicate)
+            .map { SimpleEntry(date: now, reminders: $0.sorted { $0.dueDate < $1.dueDate }) }
+            .map { Timeline(entries: [$0], policy: .after(nextUpdateDate)) }
+            .print()
+            .sink(receiveValue: completion)
+            .store(in: &subscriptions)
     }
 }
 
@@ -46,17 +50,20 @@ struct SimpleEntry: TimelineEntry {
     let reminders: [EKReminder]
 }
 
-struct TodayWidgetEntryView : View {
+struct TodayWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ForEach(entry.reminders) { reminder in
-                HStack {
+                HStack(alignment: .center) {
+                    PriorityStripe(priority: reminder.priority)
                     Text(reminder.title)
-                    Text("\(reminder.dueDate)")
+                    Spacer()
+                    DateView(date: reminder.dueDate, formatter: .shortDate)
+                        .foregroundColor(.gray)
                 }
-
+                Color.black.frame(width: .infinity, height: 1)
             }
         }
     }
@@ -83,14 +90,13 @@ struct TodayWidget_Previews: PreviewProvider {
     }
 }
 
-
 extension TodayWidget_Previews {
     static func previewEntries() -> [EKReminder] {
         var entries = [EKReminder]()
         let currentDate = Date()
         let eventStore = EKEventStore()
         let calendar = EKCalendar(for: .reminder, eventStore: eventStore)
-        for hourOffset in 0 ..< 5 {
+        for hourOffset in 0..<5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
             let r = EKReminder(eventStore: eventStore)
             r.calendar = calendar

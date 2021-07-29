@@ -9,27 +9,6 @@
 import EventKit
 import SwiftUI
 
-struct PriorityStripe: View {
-    let priority: Int
-    var color: Color {
-        switch priority {
-        case 1...2:
-            return Color.red
-        case 3...4:
-            return Color.orange
-        case 5...6:
-            return Color.green
-        case 7...9:
-            return Color.blue
-        default:
-            return Color.gray
-        }
-    }
-    var body: some View {
-        color.frame(width: 8)
-    }
-}
-
 struct CompletedCheckbox: View {
     @EnvironmentObject var eventStore: EventStore
     @Binding var reminder: EKReminder

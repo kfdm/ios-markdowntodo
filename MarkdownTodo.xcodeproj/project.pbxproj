@@ -41,6 +41,9 @@
 		87C6809924B9EC380064F436 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809824B9EC380064F436 /* SettingsView.swift */; };
 		87C6809F24B9F4530064F436 /* SwiftUI+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */; };
 		87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */; };
+		87D342F826B2BAB90032C41D /* SwiftUI+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */; };
+		87D342FA26B2BAE80032C41D /* PriorityStripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D342F926B2BAE80032C41D /* PriorityStripe.swift */; };
+		87D342FB26B2BAFE0032C41D /* PriorityStripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D342F926B2BAE80032C41D /* PriorityStripe.swift */; };
 		87EA66DC26B2A7EF00922E9C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87EA66DB26B2A7EF00922E9C /* WidgetKit.framework */; };
 		87EA66DE26B2A7EF00922E9C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87EA66DD26B2A7EF00922E9C /* SwiftUI.framework */; };
 		87EA66E126B2A7EF00922E9C /* TodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA66E026B2A7EF00922E9C /* TodayWidget.swift */; };
@@ -112,6 +115,7 @@
 		87C6809824B9EC380064F436 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		87C6809E24B9F4530064F436 /* SwiftUI+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Components.swift"; sourceTree = "<group>"; };
 		87D0DB7B24DFDDD5004F8C0C /* DestructiveButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButtonStyle.swift; sourceTree = "<group>"; };
+		87D342F926B2BAE80032C41D /* PriorityStripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityStripe.swift; sourceTree = "<group>"; };
 		87EA66D926B2A7EF00922E9C /* TodayWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		87EA66DB26B2A7EF00922E9C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		87EA66DD26B2A7EF00922E9C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -242,6 +246,7 @@
 				8785078625B2B78000EE44D9 /* EKReminderEditView.swift */,
 				8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */,
 				8785078925B2B7E100EE44D9 /* PriorityPicker.swift */,
+				87D342F926B2BAE80032C41D /* PriorityStripe.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 				872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */,
 				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
 				87D0DB7C24DFDDD5004F8C0C /* DestructiveButtonStyle.swift in Sources */,
+				87D342FA26B2BAE80032C41D /* PriorityStripe.swift in Sources */,
 				879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */,
 				870B910A24DE482200979076 /* DateHighlightModifier.swift in Sources */,
 				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
@@ -421,8 +427,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87D342F826B2BAB90032C41D /* SwiftUI+Components.swift in Sources */,
 				87EA66EC26B2A8FD00922E9C /* EventStore.swift in Sources */,
 				87EA66EE26B2A90F00922E9C /* EventKit+SwiftUI.swift in Sources */,
+				87D342FB26B2BAFE0032C41D /* PriorityStripe.swift in Sources */,
 				87EA66ED26B2A90B00922E9C /* EventKit+Extensions.swift in Sources */,
 				87EA66EF26B2A92500922E9C /* Date+Extensions.swift in Sources */,
 				87EA66E126B2A7EF00922E9C /* TodayWidget.swift in Sources */,
