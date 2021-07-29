@@ -50,7 +50,15 @@ struct TodayWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            ForEach(entry.reminders) { reminder in
+                HStack {
+                    Text(reminder.title)
+                    Text("\(reminder.dueDate)")
+                }
+
+            }
+        }
     }
 }
 
@@ -69,9 +77,28 @@ struct TodayWidget: Widget {
 }
 
 struct TodayWidget_Previews: PreviewProvider {
-    static var entry = SimpleEntry(date: Date(), reminders: [])
     static var previews: some View {
-        TodayWidgetEntryView(entry: entry)
+        TodayWidgetEntryView(entry: SimpleEntry(date: Date(), reminders: previewEntries()))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
+    }
+}
+
+
+extension TodayWidget_Previews {
+    static func previewEntries() -> [EKReminder] {
+        var entries = [EKReminder]()
+        let currentDate = Date()
+        let eventStore = EKEventStore()
+        let calendar = EKCalendar(for: .reminder, eventStore: eventStore)
+        for hourOffset in 0 ..< 5 {
+            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let r = EKReminder(eventStore: eventStore)
+            r.calendar = calendar
+            r.title = "Task \(hourOffset)"
+            r.dueDateComponents = Calendar.current.dateComponents(from: entryDate)
+            entries.append(r)
+        }
+
+        return entries
     }
 }
