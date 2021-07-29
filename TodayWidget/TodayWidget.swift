@@ -8,14 +8,20 @@
 
 import WidgetKit
 import SwiftUI
+import EventKit
+import Combine
 
 struct Provider: TimelineProvider {
+    @State private var subscriptions = Set<AnyCancellable>()
+        let eventStore = EventStore()
+
+
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), reminders: [])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+        let entry = SimpleEntry(date: Date(), reminders: [])
         completion(entry)
     }
 
@@ -26,7 +32,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
+            let entry = SimpleEntry(date: entryDate, reminders: [])
             entries.append(entry)
         }
 
@@ -37,6 +43,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let reminders: [EKReminder]
 }
 
 struct TodayWidgetEntryView : View {
@@ -55,14 +62,16 @@ struct TodayWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             TodayWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .supportedFamilies([.systemMedium])
+        .configurationDisplayName("Today View")
+        .description("Tasks due today.")
     }
 }
 
 struct TodayWidget_Previews: PreviewProvider {
+    static var entry = SimpleEntry(date: Date(), reminders: [])
     static var previews: some View {
-        TodayWidgetEntryView(entry: SimpleEntry(date: Date()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        TodayWidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
