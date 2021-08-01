@@ -50,46 +50,58 @@ struct SimpleEntry: TimelineEntry {
     let reminders: [EKReminder]
 }
 
+struct TodayRowEntry: View {
+    let reminder: EKReminder
+    var body: some View {
+        GeometryReader { reader in
+            HStack {
+                PriorityStripe(priority: reminder.priority, width: 12)
+                VStack {
+                    HStack {
+                        Text(reminder.title)
+                        Spacer()
+                        DateView(date: reminder.dueDate, formatter: .shortDate)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxHeight: reader.size.height * 0.7)
+
+                    HStack {
+                        Text(reminder.calendar.title)
+                            .foregroundColor(reminder.calendar.color)
+                            .font(.system(size: reader.size.height * 0.3))
+
+                        Spacer()
+                        if reminder.hasURL {
+                            Image(systemName: "link")
+                                .frame(maxHeight: reader.size.height * 0.3)
+                                .scaledToFit()
+                        }
+                        if reminder.hasRecurrenceRules {
+                            Image(systemName: "clock")
+                                .frame(maxHeight: reader.size.height * 0.3)
+                                .scaledToFit()
+                        }
+                    }
+                    .frame(maxHeight: reader.size.height * 0.3)
+
+                }
+            }
+        }
+    }
+}
+
 struct TodayWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             ForEach(entry.reminders) { reminder in
-                HStack(alignment: .center) {
-                    PriorityStripe(priority: reminder.priority, width: 12)
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(reminder.title)
-
-                            Spacer()
-                            DateView(date: reminder.dueDate, formatter: .shortDate)
-                                .foregroundColor(.gray)
-                        }
-                        .font(.title)
-                        HStack {
-                            Text(reminder.calendar.title)
-                                .foregroundColor(reminder.calendar.color)
-
-                            Spacer()
-                            if reminder.hasURL {
-                                Image(systemName: "link")
-                                    .frame(width: 8, height: 8)
-                                    .scaledToFit()
-                            }
-                            if reminder.hasRecurrenceRules {
-                                Image(systemName: "clock")
-                                    .frame(width: 8, height: 8)
-                                    .scaledToFit()
-                            }
-                        }
-                        .font(.caption)
-                    }
-                }
-                .padding(.trailing, 10)
-                .minimumScaleFactor(0.01)
-                Color.black.frame(width: .infinity, height: 1)
+                TodayRowEntry(reminder: reminder)
+                    .frame(idealWidth: .infinity, maxHeight: 30)
+                    .padding(.trailing, 10)
+                Divider()
             }
+            Spacer()
         }
     }
 }
