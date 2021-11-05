@@ -73,13 +73,14 @@ struct TodayRowEntry: View {
                         Spacer()
                         if reminder.hasURL {
                             Image(systemName: "link")
-                                .frame(maxHeight: reader.size.height * 0.3)
-                                .scaledToFit()
+                                .resizable()
+                                .frame(width: reader.size.height * 0.3,height: reader.size.height * 0.3)
                         }
                         if reminder.hasRecurrenceRules {
                             Image(systemName: "clock")
-                                .frame(maxHeight: reader.size.height * 0.3)
-                                .scaledToFit()
+                                .resizable()
+                                .frame(width: reader.size.height * 0.3,height: reader.size.height * 0.3)
+
                         }
                     }
                     .frame(maxHeight: reader.size.height * 0.3)

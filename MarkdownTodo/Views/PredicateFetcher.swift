@@ -30,9 +30,7 @@ struct RemindersGroupDate<ReminderView>: View where ReminderView: View {
         List {
             // Show dates oldest to newest
             ForEach(reminders.keys.sorted { $0 < $1 }, id: \.self) { date in
-                Section(
-                    header: section(date: date)
-                ) {
+                Section(header: section(date: date)) {
                     ForEach(reminders[date]!.sorted { $0.dueDate < $1.dueDate }) { reminder in
                         content(reminder)
                     }
@@ -134,8 +132,20 @@ struct SortedRemindersView: View {
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
-        return NavigationLink(destination: ReminderDetail(reminder: reminder)) {
+        NavigationLink(destination: ReminderDetail(reminder: reminder)) {
             ReminderRow(reminder: reminder)
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            Button("Complete") {}
+            .tint(.green)
+            Button("Reschedule") {}
+            .tint(.cyan)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button("Delete", role: .destructive) { }
+            .tint(.red)
+            Button("Move") {}
+            .tint(.blue)
         }
     }
 
