@@ -14,7 +14,7 @@
 # update_fastlane
 
 default_platform(:ios)
-xcode_select("/Applications/Xcode-13.0.0-Beta.4.app")
+# xcode_select("/Applications/Xcode-13.0.0-Beta.5.app")
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
