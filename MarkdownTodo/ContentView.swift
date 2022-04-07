@@ -17,6 +17,7 @@ enum HomeTabs {
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
     @EnvironmentObject var eventStore: EventStore
+    @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
         TabView(selection: $selection) {
@@ -52,7 +53,16 @@ struct ContentView: View {
                 Image(systemName: "gear")
                 Text("Settings")
             }
-        }.onAppear(perform: eventStore.checkAccess)
+        }
+        .onAppear(perform: eventStore.checkAccess)
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .active:
+                eventStore.refreshSourcesIfNecessary()
+            default:
+                break
+            }
+        }
     }
 }
 

@@ -37,6 +37,11 @@ class EventStore: ObservableObject {
         os_log(.debug, log: .event, "Checking access: %s", authorized.description)
     }
 
+    func refreshSourcesIfNecessary() {
+        eventStore.refreshSourcesIfNecessary()
+        objectWillChange.send()
+    }
+
     var sources: [EKSource] {
         return eventStore.sources  //.filter { $0.sourceType == .calDAV }
             .sorted { $0.title < $1.title }

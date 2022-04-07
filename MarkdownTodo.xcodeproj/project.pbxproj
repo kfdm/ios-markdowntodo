@@ -12,8 +12,7 @@
 		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
 		870B93CF25A9DFE300E7934E /* EKCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */; };
 		872EF4E924DE90B5005384DF /* SortPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4E824DE90B5005384DF /* SortPicker.swift */; };
-		87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */; };
-		87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */; };
+		87371CA724B9BBB8005EA9F7 /* MarkdownTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
 		87371CAB24B9BBB8005EA9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87371CAA24B9BBB8005EA9F7 /* Assets.xcassets */; };
 		87371CAE24B9BBB8005EA9F7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87371CAD24B9BBB8005EA9F7 /* Preview Assets.xcassets */; };
@@ -86,8 +85,7 @@
 		870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKCalendarPicker.swift; sourceTree = "<group>"; };
 		872EF4E824DE90B5005384DF /* SortPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPicker.swift; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTodoApp.swift; sourceTree = "<group>"; };
 		87371CA824B9BBB8005EA9F7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		87371CAA24B9BBB8005EA9F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87371CAD24B9BBB8005EA9F7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -172,12 +170,11 @@
 				87371CAC24B9BBB8005EA9F7 /* Preview Content */,
 				874E646624DC19B800603EAE /* ViewModifiers */,
 				87371CBD24B9C9B8005EA9F7 /* Views */,
-				87371CA424B9BBB8005EA9F7 /* AppDelegate.swift */,
 				87371CAA24B9BBB8005EA9F7 /* Assets.xcassets */,
 				87371CA824B9BBB8005EA9F7 /* ContentView.swift */,
 				87371CB224B9BBB8005EA9F7 /* Info.plist */,
 				87371CAF24B9BBB8005EA9F7 /* LaunchScreen.storyboard */,
-				87371CA624B9BBB8005EA9F7 /* SceneDelegate.swift */,
+				87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */,
 			);
 			path = MarkdownTodo;
 			sourceTree = "<group>";
@@ -412,8 +409,7 @@
 				87D342FA26B2BAE80032C41D /* PriorityStripe.swift in Sources */,
 				879C69F824E1060E0062503C /* AddTaskButton.swift in Sources */,
 				870B910A24DE482200979076 /* DateHighlightModifier.swift in Sources */,
-				87371CA524B9BBB8005EA9F7 /* AppDelegate.swift in Sources */,
-				87371CA724B9BBB8005EA9F7 /* SceneDelegate.swift in Sources */,
+				87371CA724B9BBB8005EA9F7 /* MarkdownTodoApp.swift in Sources */,
 				87A9D44724B9DCB500086541 /* ReminderDetail.swift in Sources */,
 				8785079025B2CD3A00EE44D9 /* CalendarDatePicker.swift in Sources */,
 				87C6809F24B9F4530064F436 /* SwiftUI+Components.swift in Sources */,
