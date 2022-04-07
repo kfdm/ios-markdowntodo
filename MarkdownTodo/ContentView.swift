@@ -14,6 +14,16 @@ enum HomeTabs {
     case settings
 }
 
+fileprivate extension View {
+    func tagLabel(_ label: String, systemImage: String, tab: HomeTabs) -> some View {
+        self
+            .tag(tab)
+            .tabItem {
+                Label(label, systemImage: systemImage)
+            }
+    }
+}
+
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
     @EnvironmentObject var eventStore: EventStore
@@ -24,40 +34,30 @@ struct ContentView: View {
             NavigationView {
                 PlannerView()
                     .navigationBarTitle("Planner")
+
             }
+            .tagLabel("Planner", systemImage: "calendar", tab: .calendar)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .tag(HomeTabs.calendar)
-            .tabItem {
-                Image(systemName: "calendar")
-                Text("Planner")
-            }
 
             NavigationView {
                 CalendarListView()
                     .navigationBarTitle("Calendar List")
             }
+            .tagLabel("List", systemImage: "list.bullet", tab: .list)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .tag(HomeTabs.list)
-            .tabItem {
-                Image(systemName: "list.bullet")
-                Text("List")
-            }
 
             NavigationView {
                 SettingsView()
                     .navigationBarTitle("Settings")
             }
-            .tag(HomeTabs.settings)
+            .tagLabel("Settings", systemImage: "gear", tab: .settings)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .tabItem {
-                Image(systemName: "gear")
-                Text("Settings")
-            }
         }
-        .onAppear(perform: eventStore.checkAccess)
+
         .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
+                eventStore.checkAccess()
                 eventStore.refreshSourcesIfNecessary()
             default:
                 break
