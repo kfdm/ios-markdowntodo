@@ -12,7 +12,8 @@ import Foundation
 import os.log
 
 class EventStore: ObservableObject {
-    let eventStore = EKEventStore()
+    private let eventStore = EKEventStore()
+    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "CalendarStore")
 
     var authorized: Bool {
         switch EKEventStore.authorizationStatus(for: .reminder) {
@@ -34,7 +35,7 @@ class EventStore: ObservableObject {
     }
 
     func checkAccess() {
-        os_log(.debug, log: .event, "Checking access: %s", authorized.description)
+        logger.debug("Checking access: \(self.authorized.description)")
     }
 
     func refreshSourcesIfNecessary() {
