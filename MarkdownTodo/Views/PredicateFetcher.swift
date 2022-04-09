@@ -189,7 +189,8 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
     let content: ([EKReminder]) -> ContentView
 
     // Query
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject private var eventStore: EventStore
+    @Environment(\.scenePhase) private var scenePhase
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
 
@@ -197,9 +198,22 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
         self.content(reminders)
             .onAppear(perform: fetch)
             .onReceive(eventStore.objectWillChange, perform: fetch)
+            .refreshable {
+                eventStore.refreshSourcesIfNecessary()
+                fetch()
+            }
+            .onChange(of: scenePhase) { phase in
+                switch phase {
+                case .active:
+                    eventStore.refreshSourcesIfNecessary()
+                    fetch()
+                default:
+                    break
+                }
+            }
     }
 
-    func fetch() {
+    private func fetch() {
         self.eventStore.publisher(for: predicate)
             .receive(on: DispatchQueue.main)
             .assign(to: \.reminders, on: self)
