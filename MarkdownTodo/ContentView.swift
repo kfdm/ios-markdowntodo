@@ -52,7 +52,12 @@ struct ContentView: View {
             }
             .tagLabel("Settings", systemImage: "gear", tab: .settings)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .onAppear {
+                print(eventStore.authorized)
+            }
+
         }
+
 
         .onChange(of: scenePhase) { phase in
             switch phase {
