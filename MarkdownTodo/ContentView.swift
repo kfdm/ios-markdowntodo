@@ -26,7 +26,7 @@ fileprivate extension View {
 
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @Environment(\.scenePhase) var scenePhase
 
     var body: some View {

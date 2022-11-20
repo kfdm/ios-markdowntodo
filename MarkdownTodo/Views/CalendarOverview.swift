@@ -19,7 +19,7 @@ struct CalendarOverview: View {
     @State var selectedDate = Date()
 
     // Query
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []
 

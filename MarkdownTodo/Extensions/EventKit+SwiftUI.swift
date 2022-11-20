@@ -15,26 +15,3 @@ extension EKCalendar {
     }
 }
 
-extension EKReminder: Identifiable {
-    public var id: String {
-        return calendarItemIdentifier
-    }
-}
-
-extension EKSource: Identifiable {
-    public var id: String {
-        return sourceIdentifier
-    }
-}
-
-extension EKRecurrenceRule: Identifiable {
-    public var id: String {
-        return calendarIdentifier
-    }
-}
-
-extension EKCalendar: Identifiable {
-    public var id: String {
-        return calendarIdentifier
-    }
-}

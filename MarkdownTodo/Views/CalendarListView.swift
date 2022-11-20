@@ -10,7 +10,7 @@ import EventKit
 import SwiftUI
 
 private struct CalendarDetailView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var showCompleted = false
 
@@ -46,7 +46,7 @@ private struct CalendarDetailView: View {
 
 struct EKCalendarList<ContentView: View>: View {
     let content: (EKCalendar) -> ContentView
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
 
     var body: some View {
         List {

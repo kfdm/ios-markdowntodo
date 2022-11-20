@@ -10,8 +10,13 @@ import Combine
 import EventKit
 import Foundation
 import os.log
+import EventKitExtensions
 
-class EventStore: ObservableObject {
+class MarkdownEventStore: CalendarStore {
+    
+}
+
+class LegacyEventStore: ObservableObject {
     private let eventStore = EKEventStore()
     private var logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "CalendarStore")
 
@@ -78,7 +83,7 @@ class EventStore: ObservableObject {
 }
 
 // MARK:- Some lower level queries where we need to worry about Queues
-extension EventStore {
+extension LegacyEventStore {
     private func wrapAsync(queue: DispatchQueue, completion: @escaping () throws -> Void) {
         queue.async {
             do {
@@ -130,7 +135,7 @@ extension EventStore {
 }
 
 // MARK:- Some lower level queries to convert NSPredicate to Publisher
-extension EventStore {
+extension LegacyEventStore {
     typealias EKReminderPublisher = PassthroughSubject<[EKReminder], Never>
 
     func publisher(for predicate: NSPredicate) -> EKReminderPublisher {
@@ -149,7 +154,7 @@ extension EventStore {
 }
 
 // MARK:- Some useful preselected queries
-extension EventStore {
+extension LegacyEventStore {
     func reminders(for interval: DateInterval) -> NSPredicate {
         return eventStore.predicateForIncompleteReminders(
             withDueDateStarting: interval.start, ending: interval.end, calendars: nil)

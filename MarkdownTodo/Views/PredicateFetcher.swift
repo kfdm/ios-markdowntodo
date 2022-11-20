@@ -128,7 +128,7 @@ struct SortedRemindersView: View {
     @Binding var sortBy: SortOptions
     // Putting our EnvironmentObject store here seems to fix the bug with "quick date"
     // but the correct fix is to likely correctly propogate State/Binding values
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
@@ -189,7 +189,7 @@ struct PredicateFetcher<ContentView>: View where ContentView: View {
     let content: ([EKReminder]) -> ContentView
 
     // Query
-    @EnvironmentObject private var eventStore: EventStore
+    @EnvironmentObject private var eventStore: LegacyEventStore
     @Environment(\.scenePhase) private var scenePhase
     @State private var subscriptions = Set<AnyCancellable>()
     @State private var reminders: [EKReminder] = []

@@ -61,7 +61,7 @@ struct QuickDatePicker: View {
 
     @State private var isPresented = false
     @Environment(\.calendar) var calendar
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
 
     var body: some View {
         Button(action: actionShow) {

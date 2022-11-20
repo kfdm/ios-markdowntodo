@@ -14,7 +14,7 @@ import WidgetKit
 private var subscriptions = Set<AnyCancellable>()
 
 struct Provider: TimelineProvider {
-    let eventStore = EventStore()
+    let eventStore = LegacyEventStore()
 
     func placeholder(in context: Context) -> SimpleEntry {
         print("placeholder \(eventStore.authorized)")

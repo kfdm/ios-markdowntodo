@@ -21,7 +21,7 @@ struct NavigationLabel<Destination: View>: View {
 }
 
 struct ScheduledView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.dueDate
 
     var body: some View {
@@ -34,7 +34,7 @@ struct ScheduledView: View {
 }
 
 struct AgendaView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.agenda
 
     var body: some View {
@@ -47,7 +47,7 @@ struct AgendaView: View {
 }
 
 struct PriorityView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.priority
 
     var body: some View {
@@ -61,7 +61,7 @@ struct PriorityView: View {
 }
 
 struct ExternalView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.priority
 
     var body: some View {
@@ -75,7 +75,7 @@ struct ExternalView: View {
 }
 
 struct CompletedView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.calendar
 
     var body: some View {
@@ -88,7 +88,7 @@ struct CompletedView: View {
 }
 
 struct SelectedDateView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: LegacyEventStore
     @State private var sortBy = SortOptions.dueDate
 
     var date: Date

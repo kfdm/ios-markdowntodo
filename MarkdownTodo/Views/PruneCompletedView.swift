@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PruneListView: View {
     var reminders: [EKReminder]
-    @EnvironmentObject var store: EventStore
+    @EnvironmentObject var store: LegacyEventStore
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -49,7 +49,7 @@ struct PruneListView: View {
 struct PruneCompletedButton: View {
     var calendar: EKCalendar
     @State private var isPresented = false
-    @EnvironmentObject var store: EventStore
+    @EnvironmentObject var store: LegacyEventStore
 
     var body: some View {
         Button("Prune Completed", action: actionToggleSheet)
