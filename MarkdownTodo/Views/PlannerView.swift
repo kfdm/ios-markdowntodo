@@ -7,12 +7,14 @@
 //
 
 import SwiftUI
+import EventKit
+import EventKitExtensions
 
 struct NavigationLabel<Destination: View>: View {
     var label: String
     var systemImage: String
     var destination: () -> Destination
-
+    
     var body: some View {
         NavigationLink(destination: destination().navigationTitle(label)) {
             Label(label, systemImage: systemImage)
@@ -21,82 +23,104 @@ struct NavigationLabel<Destination: View>: View {
 }
 
 struct ScheduledView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
-
+    @State private var reminders = [EKReminder]()
+    
     var body: some View {
         NavigationLabel(label: "Scheduled", systemImage: "clock") {
-            PredicateFetcher(predicate: eventStore.scheduledReminders()) { reminders in
-                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-            }
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                .task {
+                    reminders = await store.scheduledReminders()
+                }
+                .refreshable {
+                    reminders = await store.scheduledReminders()
+                }
         }
+        
     }
 }
 
 struct AgendaView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.agenda
-
+    @State private var reminders = [EKReminder]()
+    
     var body: some View {
         NavigationLabel(label: "Agenda", systemImage: "calendar") {
-            PredicateFetcher(predicate: eventStore.upcomingReminders()) { reminders in
-                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-            }
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                .task {
+                    reminders = await store.upcomingReminders()
+                }
         }
     }
 }
 
 struct PriorityView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.priority
-
+    @State private var reminders = [EKReminder]()
+    
     var body: some View {
         NavigationLabel(label: "Priority", systemImage: "exclamationmark.triangle") {
-            PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
-                SortedRemindersView(
-                    sortBy: $sortBy, reminders: reminders.filter { $0.priority > 0 })
-            }
+            SortedRemindersView(sortBy: $sortBy,reminders: reminders)
+                .task {
+                    reminders = await store.incomplete().filter { $0.priority > 0 }
+                }
+                .refreshable {
+                    reminders = await store.incomplete().filter { $0.priority > 0 }
+                }
         }
+        
     }
 }
 
 struct ExternalView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.priority
-
+    @State private var reminders = [EKReminder]()
+    
     var body: some View {
         NavigationLabel(label: "External", systemImage: "link") {
-            PredicateFetcher(predicate: eventStore.incompleteReminders()) { reminders in
-                SortedRemindersView(
-                    sortBy: $sortBy, reminders: reminders.filter { $0.hasURL })
-            }
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                .task {
+                    reminders = await store.incomplete().filter { $0.hasURL }
+                }
+                .refreshable {
+                    reminders = await store.incomplete().filter { $0.hasURL }
+                }
         }
+        
     }
 }
 
 struct CompletedView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.calendar
-
+    @State private var reminders = [EKReminder]()
+    
     var body: some View {
         NavigationLabel(label: "Completed", systemImage: "checkmark.seal") {
-            PredicateFetcher(predicate: eventStore.completeReminders()) { reminders in
-                SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-            }
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                .task {
+                    reminders = await store.completed()
+                }
         }
     }
 }
 
 struct SelectedDateView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
-
+    @State private var reminders = [EKReminder]()
+    
     var date: Date
     var body: some View {
-        PredicateFetcher(predicate: eventStore.reminders(for: date)) { reminders in
-            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-        }
-        .navigationBarTitle(DateFormatter.shortDate.string(from: date))
+        SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            .navigationBarTitle(DateFormatter.shortDate.string(from: date))
+            .task {
+                reminders = await store.incomplete(for: date)
+            }
     }
 }
 

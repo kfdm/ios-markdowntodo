@@ -183,3 +183,13 @@ extension OSLog {
         subsystem: Bundle.main.bundleIdentifier!, category: "Predicate")
     fileprivate static var event = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "EventStore")
 }
+
+extension CalendarStore {
+    func scheduledReminders() async -> [EKReminder] {
+        return await incomplete(from: .distantPast, to: .distantFuture)
+    }
+    func upcomingReminders(days: Int = 3) async -> [EKReminder] {
+        let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
+        return await incomplete(from: nil, to: ending)
+    }
+}
