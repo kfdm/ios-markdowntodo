@@ -15,6 +15,7 @@ struct MarkdownTodoApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(eventStore)
+                .environmentObject(MarkdownEventStore.shared)
         }
     }
 }

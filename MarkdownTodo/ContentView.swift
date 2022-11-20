@@ -26,8 +26,8 @@ fileprivate extension View {
 
 struct ContentView: View {
     @State var selection = HomeTabs.calendar
-    @EnvironmentObject var eventStore: LegacyEventStore
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var store: MarkdownEventStore
 
     var body: some View {
         TabView(selection: $selection) {
@@ -52,18 +52,13 @@ struct ContentView: View {
             }
             .tagLabel("Settings", systemImage: "gear", tab: .settings)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .onAppear {
-                print(eventStore.authorized)
-            }
-
         }
 
-
         .onChange(of: scenePhase) { phase in
+            print("Checking phase \(scenePhase) \(store.authorized)")
             switch phase {
             case .active:
-                eventStore.checkAccess()
-                eventStore.refreshSourcesIfNecessary()
+                store.refreshSourcesIfNecessary()
             default:
                 break
             }

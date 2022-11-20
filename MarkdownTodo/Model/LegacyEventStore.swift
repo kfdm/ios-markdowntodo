@@ -13,35 +13,19 @@ import os.log
 import EventKitExtensions
 
 class MarkdownEventStore: CalendarStore {
-    
+    static var shared = MarkdownEventStore()
+
+    init() {
+        super.init(
+            store: .init(),
+            logger: .init(subsystem: Bundle.main.bundleIdentifier!, category: "CalendarStore")
+        )
+    }
 }
 
 class LegacyEventStore: ObservableObject {
     private let eventStore = EKEventStore()
-    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "CalendarStore")
-
-    var authorized: Bool {
-        switch EKEventStore.authorizationStatus(for: .reminder) {
-        case .authorized:
-            return true
-        case .denied:
-            return false
-        case .notDetermined:
-            eventStore.requestAccess(to: .reminder) { (granted, error) in
-                os_log(.debug, log: .event, "Granted access %s", granted.description)
-                self.objectWillChange.send()
-            }
-            return false
-        case .restricted:
-            return false
-        @unknown default:
-            return false
-        }
-    }
-
-    func checkAccess() {
-        logger.debug("Checking access: \(self.authorized.description)")
-    }
+    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "LegacyEventStore")
 
     func refreshSourcesIfNecessary() {
         eventStore.refreshSourcesIfNecessary()
@@ -51,7 +35,6 @@ class LegacyEventStore: ObservableObject {
     var sources: [EKSource] {
         return eventStore.sources  //.filter { $0.sourceType == .calDAV }
             .sorted { $0.title < $1.title }
-
     }
 
     func calendars(for source: EKSource) -> [EKCalendar] {
