@@ -8,13 +8,17 @@
 
 import EventKit
 import SwiftUI
+import EventKitExtensions
 
 private struct CalendarPickerSheet: View {
     @Binding var current: EKCalendar
     var action: (EKCalendar) -> Void
 
+    @EnvironmentObject private var store : MarkdownEventStore
+    @State private var calendars = [EKCalendar]()
+
     var body: some View {
-        EKCalendarList { calendar in
+        SourceGroupedCalendarView(groups: calendars) { calendar in
             Button(calendar.title, action: { action(calendar) })
                 .foregroundColor(calendar.color)
                 .listRowBackground(

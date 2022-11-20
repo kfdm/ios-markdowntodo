@@ -32,11 +32,6 @@ class LegacyEventStore: ObservableObject {
         objectWillChange.send()
     }
 
-    var sources: [EKSource] {
-        return eventStore.sources  //.filter { $0.sourceType == .calDAV }
-            .sorted { $0.title < $1.title }
-    }
-
     func calendars(for source: EKSource) -> [EKCalendar] {
         return source.calendars(for: .reminder)
             .filter { source.sourceIdentifier == $0.source.sourceIdentifier }

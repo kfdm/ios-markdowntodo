@@ -8,6 +8,7 @@
 
 import EventKit
 import SwiftUI
+import EventKitExtensions
 
 private struct CalendarDetailView: View {
     @EnvironmentObject var eventStore: LegacyEventStore
@@ -44,30 +45,23 @@ private struct CalendarDetailView: View {
     }
 }
 
-struct EKCalendarList<ContentView: View>: View {
-    let content: (EKCalendar) -> ContentView
-    @EnvironmentObject var eventStore: LegacyEventStore
-
-    var body: some View {
-        List {
-            ForEach(eventStore.sources) { (source) in
-                Section(header: Text(source.title)) {
-                    ForEach(eventStore.calendars(for: source)) { (calendar) in
-                        content(calendar)
-                    }
-                }
-            }
-        }.listStyle(GroupedListStyle())
-    }
-}
-
 struct CalendarListView: View {
+    @EnvironmentObject var store : MarkdownEventStore
+    @State var calendars = [EKCalendar]()
+
     var body: some View {
-        EKCalendarList { calendar in
+        SourceGroupedCalendarView(groups: calendars) { calendar in
             NavigationLink(destination: CalendarDetailView(calendar: calendar)) {
                 Text(calendar.title)
                     .foregroundColor(calendar.color)
             }
+        }
+        .refreshable {
+            store.refreshSourcesIfNecessary()
+            calendars = await store.calendars()
+        }
+        .task {
+            calendars = await store.calendars()
         }
     }
 }
