@@ -6,6 +6,7 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import SwiftUI
 import EventKit
 import EventKitExtensions
 import Foundation
@@ -45,7 +46,6 @@ extension MarkdownEventStore {
         } catch {
             print(error.localizedDescription)
         }
-        self.objectWillChange.send()
     }
 
     func reminders(for interval: DateInterval) async -> [EKReminder] {
@@ -58,7 +58,6 @@ extension MarkdownEventStore {
         } catch {
             print(error.localizedDescription)
         }
-        self.objectWillChange.send()
     }
 
     func remove(_ reminder: EKReminder) {
@@ -72,5 +71,33 @@ extension MarkdownEventStore {
             reminder.completionDate = Date()
         }
         save(reminder)
+    }
+}
+
+extension View {
+    func onReceive(
+        _ name: Notification.Name,
+        center: NotificationCenter = .default,
+        object: AnyObject? = nil,
+        perform action: @escaping (Notification) async -> Void
+    ) -> some View {
+        self.onReceive(center.publisher(for: name)) { output in
+            Task { await action(output) }
+        }
+    }
+
+    func refreshableTask(action: @escaping () async -> Void) -> some View {
+        self
+            .task {
+                await action()
+            }
+            .refreshable {
+                await action()
+            }
+            .onReceive(.EKEventStoreChanged) { notification in
+                print("Received \(notification.debugDescription)")
+                await action()
+            }
+
     }
 }

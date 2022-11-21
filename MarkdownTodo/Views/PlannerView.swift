@@ -36,6 +36,9 @@ struct ScheduledView: View {
                 .refreshable {
                     reminders = await store.scheduledReminders()
                 }
+                .onReceive(.EKEventStoreChanged) { notifcation in
+                    reminders = await store.scheduledReminders()
+                }
         }
 
     }
@@ -51,6 +54,12 @@ struct AgendaView: View {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
                 .task {
                     reminders = await store.upcomingReminders()
+                }
+                .refreshable {
+                    reminders = await store.scheduledReminders()
+                }
+                .onReceive(.EKEventStoreChanged) { notifcation in
+                    reminders = await store.scheduledReminders()
                 }
         }
     }
@@ -68,6 +77,9 @@ struct PriorityView: View {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
                 .refreshable {
+                    reminders = await store.incomplete().filter { $0.priority > 0 }
+                }
+                .onReceive(.EKEventStoreChanged) { notifcation in
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
         }
@@ -89,6 +101,9 @@ struct ExternalView: View {
                 .refreshable {
                     reminders = await store.incomplete().filter { $0.hasURL }
                 }
+                .onReceive(.EKEventStoreChanged) { notifcation in
+                    reminders = await store.incomplete().filter { $0.hasURL }
+                }
         }
 
     }
@@ -103,6 +118,12 @@ struct CompletedView: View {
         NavigationLabel(label: "Completed", systemImage: "checkmark.seal") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
                 .task {
+                    reminders = await store.completed()
+                }
+                .refreshable {
+                    reminders = await store.completed()
+                }
+                .onReceive(.EKEventStoreChanged) { notifcation in
                     reminders = await store.completed()
                 }
         }

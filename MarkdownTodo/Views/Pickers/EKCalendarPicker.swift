@@ -25,6 +25,9 @@ private struct CalendarPickerSheet: View {
                     current.calendarIdentifier == calendar.calendarIdentifier
                         ? Color.accentColor.opacity(0.2) : Color.clear)
         }
+        .task {
+            calendars = await store.calendars()
+        }
     }
 }
 
@@ -57,7 +60,6 @@ struct EKCalendarPicker: View {
     private func actionSelected(_ selectedCalendar: EKCalendar) {
         isPresented.toggle()
         calendar = selectedCalendar
-        store.objectWillChange.send()
     }
 }
 
