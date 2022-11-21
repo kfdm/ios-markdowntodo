@@ -94,9 +94,6 @@
 		87D342F926B2BAE80032C41D /* PriorityStripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityStripe.swift; sourceTree = "<group>"; };
 		87EA66DB26B2A7EF00922E9C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		87EA66DD26B2A7EF00922E9C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		87EA66E026B2A7EF00922E9C /* TodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWidget.swift; sourceTree = "<group>"; };
-		87EA66E226B2A7F000922E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87EA66E426B2A7F000922E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +114,6 @@
 			children = (
 				87B2E0722929F64F002C8DA9 /* EventKitExtensions */,
 				87371CA324B9BBB8005EA9F7 /* MarkdownTodo */,
-				87EA66DF26B2A7EF00922E9C /* TodayWidget */,
 				87EA66DA26B2A7EF00922E9C /* Frameworks */,
 				87371CA224B9BBB8005EA9F7 /* Products */,
 			);
@@ -234,16 +230,6 @@
 				87EA66DD26B2A7EF00922E9C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		87EA66DF26B2A7EF00922E9C /* TodayWidget */ = {
-			isa = PBXGroup;
-			children = (
-				87EA66E026B2A7EF00922E9C /* TodayWidget.swift */,
-				87EA66E226B2A7F000922E9C /* Assets.xcassets */,
-				87EA66E426B2A7F000922E9C /* Info.plist */,
-			);
-			path = TodayWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
