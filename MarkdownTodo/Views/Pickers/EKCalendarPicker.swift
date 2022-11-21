@@ -31,7 +31,7 @@ private struct CalendarPickerSheet: View {
 struct EKCalendarPicker: View {
     @Binding var calendar: EKCalendar
     @State private var isPresented = false
-    @EnvironmentObject var store: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
 
     var body: some View {
         Button(calendar.title, action: actionToggleSheet)

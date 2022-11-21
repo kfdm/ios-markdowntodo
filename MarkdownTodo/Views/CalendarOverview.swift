@@ -14,20 +14,19 @@ struct CalendarOverview: View {
     private var month: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
-
+    
     @Environment(\.calendar) var calendar
     @State var selectedDate = Date()
-
+    
     // Query
-    @EnvironmentObject var eventStore: LegacyEventStore
-    @State private var subscriptions = Set<AnyCancellable>()
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var reminders: [EKReminder] = []
-
+    
     private func destination(for date: Date) -> some View {
         selectedDate = date
         return SelectedDateView(date: date)
     }
-
+    
     var body: some View {
         CalendarView(interval: month) { date in
             NavigationLink(destination: destination(for: date)) {
@@ -39,13 +38,9 @@ struct CalendarOverview: View {
                     .modifier(DateHighlightModifier(selectedDate: $selectedDate, date: date))
                     .modifier(DateBorderModifier(reminders: $reminders, date: date))
             }
-        }.onAppear(perform: fetch)
-    }
-
-    func fetch() {
-        self.eventStore.publisher(for: eventStore.reminders(for: month))
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.reminders, on: self)
-            .store(in: &self.subscriptions)
+        }
+        .task {
+            reminders = await store.reminders(for: month)
+        }
     }
 }

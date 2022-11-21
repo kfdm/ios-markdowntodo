@@ -192,12 +192,21 @@ extension OSLog {
     fileprivate static var event = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "EventStore")
 }
 
-extension CalendarStore {
+extension MarkdownEventStore {
     func scheduledReminders() async -> [EKReminder] {
         return await incomplete(from: .distantPast, to: .distantFuture)
     }
     func upcomingReminders(days: Int = 3) async -> [EKReminder] {
         let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
         return await incomplete(from: nil, to: ending)
+    }
+
+    func save(_ calendar: EKCalendar) {
+        try? self.store.saveCalendar(calendar, commit: true)
+        self.objectWillChange.send()
+    }
+
+    func reminders(for interval: DateInterval) async -> [EKReminder] {
+        return await incomplete(from: interval.start, to: interval.end)
     }
 }
