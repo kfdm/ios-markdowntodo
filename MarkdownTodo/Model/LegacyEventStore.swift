@@ -14,12 +14,20 @@ import EventKitExtensions
 
 class MarkdownEventStore: CalendarStore {
     static var shared = MarkdownEventStore()
+    private let store : EKEventStore
+    private let logger : Logger
 
     init() {
+        self.store = .init()
+        self.logger = .init(subsystem: Bundle.main.bundleIdentifier!, category: "MarkdownEventStore")
         super.init(
-            store: .init(),
-            logger: .init(subsystem: Bundle.main.bundleIdentifier!, category: "CalendarStore")
+            store: self.store,
+            logger: self.logger
         )
+    }
+
+    var defaultCalendar: EKCalendar? {
+        return store.defaultCalendarForNewReminders()
     }
 }
 

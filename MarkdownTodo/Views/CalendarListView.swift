@@ -11,37 +11,37 @@ import SwiftUI
 import EventKitExtensions
 
 private struct CalendarDetailView: View {
-    @EnvironmentObject var eventStore: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var showCompleted = false
+    @State private var incomplete = [EKReminder]()
+    @State private var completed = [EKReminder]()
 
     var calendar: EKCalendar
 
+    private var reminders : [EKReminder]  {
+        showCompleted ? completed : incomplete
+    }
+
     var body: some View {
-        Group {
-            if showCompleted {
-                PredicateFetcher(predicate: eventStore.completed(for: calendar)) { reminders in
-                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+        SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            .navigationTitle(calendar.title)
+            .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    AddTaskButton(calendar: calendar)
+                    SortButton(sortBy: $sortBy)
+                    EditCalendarButton(calendar: calendar)
                 }
-            } else {
-                PredicateFetcher(predicate: eventStore.reminders(for: calendar)) { reminders in
-                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Toggle("Show Completed", isOn: $showCompleted)
+                    PruneCompletedButton(calendar: calendar)
                 }
             }
-        }
-        .navigationTitle(calendar.title)
-        .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                AddTaskButton(calendar: calendar)
-                SortButton(sortBy: $sortBy)
-                EditCalendarButton(calendar: calendar)
+            .task {
+                completed = await store.completed(for: calendar)
+                incomplete = await store.incomplete(for: calendar)
             }
-            ToolbarItemGroup(placement: .bottomBar) {
-                Toggle("Show Completed", isOn: $showCompleted)
-                PruneCompletedButton(calendar: calendar)
-            }
-        }
     }
 }
 
