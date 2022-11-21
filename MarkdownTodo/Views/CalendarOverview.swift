@@ -6,7 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Combine
 import EventKit
 import SwiftUI
 
@@ -14,19 +13,19 @@ struct CalendarOverview: View {
     private var month: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
-    
+
     @Environment(\.calendar) var calendar
     @State var selectedDate = Date()
-    
+
     // Query
     @EnvironmentObject var store: MarkdownEventStore
     @State private var reminders: [EKReminder] = []
-    
+
     private func destination(for date: Date) -> some View {
         selectedDate = date
         return SelectedDateView(date: date)
     }
-    
+
     var body: some View {
         CalendarView(interval: month) { date in
             NavigationLink(destination: destination(for: date)) {
