@@ -11,9 +11,9 @@ import SwiftUI
 
 struct PruneListView: View {
     var reminders: [EKReminder]
-    @EnvironmentObject var store: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         List {
             ForEach(reminders) { reminder in
@@ -27,7 +27,7 @@ struct PruneListView: View {
             }
         }
     }
-    
+
     init(reminders: [EKReminder]) {
         let cuttoff = Calendar.current.date(byAdding: .month, value: -1, to: .init())
         self.reminders =
@@ -38,7 +38,7 @@ struct PruneListView: View {
         // Sort Descending
             .sorted { $0.completionDate! > $1.completionDate! }
     }
-    
+
     func actionPrune() {
         print("Prunning \(reminders)")
         store.remove(reminders)
@@ -51,7 +51,7 @@ struct PruneCompletedButton: View {
     @State private var isPresented = false
     @EnvironmentObject var store: MarkdownEventStore
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         Button("Prune Completed", action: actionToggleSheet)
             .sheet(isPresented: $isPresented) {
@@ -68,7 +68,7 @@ struct PruneCompletedButton: View {
                 reminders = await store.completed(for: calendar)
             }
     }
-    
+
     func actionToggleSheet() {
         isPresented.toggle()
     }

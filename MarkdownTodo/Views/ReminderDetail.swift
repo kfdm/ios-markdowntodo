@@ -10,7 +10,7 @@ import EventKit
 import SwiftUI
 
 struct ReminderDetail: View {
-    @EnvironmentObject var store: LegacyEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State var reminder: EKReminder
     @Environment(\.presentationMode) var presentationMode
 
