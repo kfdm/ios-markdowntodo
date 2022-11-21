@@ -136,15 +136,15 @@ struct SortedRemindersView: View {
         }
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") {}
-            .tint(.green)
+                .tint(.green)
             Button("Reschedule") {}
-            .tint(.cyan)
+                .tint(.cyan)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button("Delete", role: .destructive) { }
-            .tint(.red)
+            Button("Delete", role: .destructive) {}
+                .tint(.red)
             Button("Move") {}
-            .tint(.blue)
+                .tint(.blue)
         }
     }
 

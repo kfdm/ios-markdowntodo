@@ -6,15 +6,15 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import SwiftUI
 import EventKit
 import EventKitExtensions
+import SwiftUI
 
 struct NavigationLabel<Destination: View>: View {
     var label: String
     var systemImage: String
     var destination: () -> Destination
-    
+
     var body: some View {
         NavigationLink(destination: destination().navigationTitle(label)) {
             Label(label, systemImage: systemImage)
@@ -26,7 +26,7 @@ struct ScheduledView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         NavigationLabel(label: "Scheduled", systemImage: "clock") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
@@ -37,7 +37,7 @@ struct ScheduledView: View {
                     reminders = await store.scheduledReminders()
                 }
         }
-        
+
     }
 }
 
@@ -45,7 +45,7 @@ struct AgendaView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.agenda
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         NavigationLabel(label: "Agenda", systemImage: "calendar") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
@@ -60,10 +60,10 @@ struct PriorityView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.priority
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         NavigationLabel(label: "Priority", systemImage: "exclamationmark.triangle") {
-            SortedRemindersView(sortBy: $sortBy,reminders: reminders)
+            SortedRemindersView(sortBy: $sortBy, reminders: reminders)
                 .task {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
@@ -71,7 +71,7 @@ struct PriorityView: View {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
         }
-        
+
     }
 }
 
@@ -79,7 +79,7 @@ struct ExternalView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.priority
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         NavigationLabel(label: "External", systemImage: "link") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
@@ -90,7 +90,7 @@ struct ExternalView: View {
                     reminders = await store.incomplete().filter { $0.hasURL }
                 }
         }
-        
+
     }
 }
 
@@ -98,7 +98,7 @@ struct CompletedView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.calendar
     @State private var reminders = [EKReminder]()
-    
+
     var body: some View {
         NavigationLabel(label: "Completed", systemImage: "checkmark.seal") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
@@ -113,7 +113,7 @@ struct SelectedDateView: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var reminders = [EKReminder]()
-    
+
     var date: Date
     var body: some View {
         SortedRemindersView(sortBy: $sortBy, reminders: reminders)

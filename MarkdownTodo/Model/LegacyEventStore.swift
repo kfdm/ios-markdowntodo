@@ -7,14 +7,14 @@
 //
 
 import EventKit
+import EventKitExtensions
 import Foundation
 import os.log
-import EventKitExtensions
 
 class MarkdownEventStore: CalendarStore {
     static var shared = MarkdownEventStore()
-    private let store : EKEventStore
-    private let logger : Logger
+    private let store: EKEventStore
+    private let logger: Logger
 
     init() {
         self.store = .init()

@@ -7,8 +7,8 @@
 //
 
 import EventKit
-import SwiftUI
 import EventKitExtensions
+import SwiftUI
 
 private struct CalendarDetailView: View {
     @EnvironmentObject var store: MarkdownEventStore
@@ -19,7 +19,7 @@ private struct CalendarDetailView: View {
 
     var calendar: EKCalendar
 
-    private var reminders : [EKReminder]  {
+    private var reminders: [EKReminder] {
         showCompleted ? completed : incomplete
     }
 
@@ -46,7 +46,7 @@ private struct CalendarDetailView: View {
 }
 
 struct CalendarListView: View {
-    @EnvironmentObject var store : MarkdownEventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State var calendars = [EKCalendar]()
 
     var body: some View {

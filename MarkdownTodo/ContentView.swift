@@ -14,8 +14,8 @@ enum HomeTabs {
     case settings
 }
 
-fileprivate extension View {
-    func tagLabel(_ label: String, systemImage: String, tab: HomeTabs) -> some View {
+extension View {
+    fileprivate func tagLabel(_ label: String, systemImage: String, tab: HomeTabs) -> some View {
         self
             .tag(tab)
             .tabItem {

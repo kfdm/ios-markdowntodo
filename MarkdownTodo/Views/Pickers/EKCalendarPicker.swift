@@ -7,14 +7,14 @@
 //
 
 import EventKit
-import SwiftUI
 import EventKitExtensions
+import SwiftUI
 
 private struct CalendarPickerSheet: View {
     @Binding var current: EKCalendar
     var action: (EKCalendar) -> Void
 
-    @EnvironmentObject private var store : MarkdownEventStore
+    @EnvironmentObject private var store: MarkdownEventStore
     @State private var calendars = [EKCalendar]()
 
     var body: some View {

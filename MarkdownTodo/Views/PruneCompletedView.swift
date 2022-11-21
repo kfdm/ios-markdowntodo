@@ -31,11 +31,11 @@ struct PruneListView: View {
     init(reminders: [EKReminder]) {
         let cuttoff = Calendar.current.date(byAdding: .month, value: -1, to: .init())
         self.reminders =
-        reminders
+            reminders
             .filter { $0.isCompleted }
-        // Show only completions more than cuttoff ago
+            // Show only completions more than cuttoff ago
             .filter { $0.completionDate! < cuttoff! }
-        // Sort Descending
+            // Sort Descending
             .sorted { $0.completionDate! > $1.completionDate! }
     }
 
