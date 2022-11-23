@@ -46,7 +46,7 @@ private struct CalendarDetailView: View {
                 completed = await store.completed(for: calendar)
                 incomplete = await store.incomplete(for: calendar)
             }
-            .onReceive(.EKEventStoreChanged) { notifcation in
+            .onEventStoreChanged {
                 completed = await store.completed(for: calendar)
                 incomplete = await store.incomplete(for: calendar)
             }

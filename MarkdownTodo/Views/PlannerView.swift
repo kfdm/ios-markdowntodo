@@ -36,7 +36,7 @@ struct ScheduledView: View {
                 .refreshable {
                     reminders = await store.scheduledReminders()
                 }
-                .onReceive(.EKEventStoreChanged) { notifcation in
+                .onEventStoreChanged {
                     reminders = await store.scheduledReminders()
                 }
         }
@@ -58,7 +58,7 @@ struct AgendaView: View {
                 .refreshable {
                     reminders = await store.scheduledReminders()
                 }
-                .onReceive(.EKEventStoreChanged) { notifcation in
+                .onEventStoreChanged {
                     reminders = await store.scheduledReminders()
                 }
         }
@@ -79,7 +79,7 @@ struct PriorityView: View {
                 .refreshable {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
-                .onReceive(.EKEventStoreChanged) { notifcation in
+                .onEventStoreChanged {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
         }
@@ -101,7 +101,7 @@ struct ExternalView: View {
                 .refreshable {
                     reminders = await store.incomplete().filter { $0.hasURL }
                 }
-                .onReceive(.EKEventStoreChanged) { notifcation in
+                .onEventStoreChanged {
                     reminders = await store.incomplete().filter { $0.hasURL }
                 }
         }
@@ -123,7 +123,7 @@ struct CompletedView: View {
                 .refreshable {
                     reminders = await store.completed()
                 }
-                .onReceive(.EKEventStoreChanged) { notifcation in
+                .onEventStoreChanged {
                     reminders = await store.completed()
                 }
         }

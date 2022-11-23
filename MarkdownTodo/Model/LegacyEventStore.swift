@@ -6,10 +6,10 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import SwiftUI
 import EventKit
 import EventKitExtensions
 import Foundation
+import SwiftUI
 import os.log
 
 class MarkdownEventStore: CalendarStore {
@@ -62,6 +62,7 @@ extension MarkdownEventStore {
 
     func remove(_ reminder: EKReminder) {
         remove(reminders: [reminder])
+        self.objectWillChange.send()
     }
 
     func toggleComplete(_ reminder: EKReminder) {
@@ -86,18 +87,30 @@ extension View {
         }
     }
 
-    func refreshableTask(action: @escaping () async -> Void) -> some View {
+    func onEventStoreChanged(action: @escaping () async -> Void) -> some View {
         self
-            .task {
-                await action()
-            }
-            .refreshable {
-                await action()
-            }
             .onReceive(.EKEventStoreChanged) { notification in
                 print("Received \(notification.debugDescription)")
                 await action()
             }
 
+    }
+}
+
+
+extension MarkdownEventStore {
+    func quickComplete(_ reminder: EKReminder) {
+        print("Would have completed \(reminder)")
+    }
+    func quickSetDate(_ reminder: EKReminder, date: Date) {
+        reminder.dueDateComponents = Calendar.current.dateComponents(from: date)
+        save(reminder)
+    }
+    func quickUnsetDate(_ reminder: EKReminder) {
+        reminder.dueDateComponents = nil
+        save(reminder)
+    }
+    func quickDelete(_ reminder: EKReminder) {
+        print("Would have deleted \(reminder)")
     }
 }
