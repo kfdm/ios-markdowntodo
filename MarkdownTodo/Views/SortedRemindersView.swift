@@ -1,5 +1,5 @@
 //
-//  PredicateView.swift
+//  SortedRemindersView.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/07/11.
@@ -155,7 +155,6 @@ struct SortedRemindersView: View {
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") { store.quickComplete(reminder) }
                 .tint(.green)
-                .tint(.cyan)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button("Delete", role: .destructive) { store.quickDelete(reminder) }

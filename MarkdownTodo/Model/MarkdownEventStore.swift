@@ -1,5 +1,5 @@
 //
-//  EventStore.swift
+//  MarkdownEventStore.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/07/11.
@@ -37,7 +37,7 @@ extension MarkdownEventStore {
     }
     func upcomingReminders(days: Int = 3) async -> [EKReminder] {
         let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
-        return await incomplete(from: nil, to: ending)
+        return await incomplete(from: .distantPast, to: ending)
     }
 
     func save(_ calendar: EKCalendar) {
@@ -72,28 +72,6 @@ extension MarkdownEventStore {
             reminder.completionDate = Date()
         }
         save(reminder)
-    }
-}
-
-extension View {
-    func onReceive(
-        _ name: Notification.Name,
-        center: NotificationCenter = .default,
-        object: AnyObject? = nil,
-        perform action: @escaping (Notification) async -> Void
-    ) -> some View {
-        self.onReceive(center.publisher(for: name)) { output in
-            Task { await action(output) }
-        }
-    }
-
-    func onEventStoreChanged(action: @escaping () async -> Void) -> some View {
-        self
-            .onReceive(.EKEventStoreChanged) { notification in
-                print("Received \(notification.debugDescription)")
-                await action()
-            }
-
     }
 }
 

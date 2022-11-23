@@ -56,10 +56,10 @@ struct AgendaView: View {
                     reminders = await store.upcomingReminders()
                 }
                 .refreshable {
-                    reminders = await store.scheduledReminders()
+                    reminders = await store.upcomingReminders()
                 }
                 .onEventStoreChanged {
-                    reminders = await store.scheduledReminders()
+                    reminders = await store.upcomingReminders()
                 }
         }
     }
