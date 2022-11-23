@@ -97,7 +97,6 @@ extension View {
     }
 }
 
-
 extension MarkdownEventStore {
     func quickComplete(_ reminder: EKReminder) {
         print("Would have completed \(reminder)")

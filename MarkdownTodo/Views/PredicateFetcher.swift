@@ -155,10 +155,10 @@ struct SortedRemindersView: View {
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") { store.quickComplete(reminder) }
                 .tint(.green)
-            .tint(.cyan)
+                .tint(.cyan)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button("Delete", role: .destructive) { store.quickDelete(reminder)}
+            Button("Delete", role: .destructive) { store.quickDelete(reminder) }
                 .tint(.red)
             Button("Move") {}
                 .tint(.blue)

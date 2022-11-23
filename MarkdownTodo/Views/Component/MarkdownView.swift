@@ -34,7 +34,7 @@ struct MarkdownView: View {
             HStack {
                 Text(label)
                 Spacer()
-                        
+
             }
             if showPreview {
                 MarkdownPreviewView(text: $text)
