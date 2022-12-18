@@ -7,67 +7,61 @@
 //
 
 import EventKit
+import EventKitExtensions
 import SwiftUI
 
 private struct CalendarDetailView: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var sortBy = SortOptions.dueDate
     @State private var showCompleted = false
+    @State private var incomplete = [EKReminder]()
+    @State private var completed = [EKReminder]()
 
     var calendar: EKCalendar
 
-    var body: some View {
-        Group {
-            if showCompleted {
-                PredicateFetcher(predicate: eventStore.completed(for: calendar)) { reminders in
-                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-                }
-            } else {
-                PredicateFetcher(predicate: eventStore.reminders(for: calendar)) { reminders in
-                    SortedRemindersView(sortBy: $sortBy, reminders: reminders)
-                }
-            }
-        }
-        .navigationTitle(calendar.title)
-        .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                AddTaskButton(calendar: calendar)
-                SortButton(sortBy: $sortBy)
-                EditCalendarButton(calendar: calendar)
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                Toggle("Show Completed", isOn: $showCompleted)
-                PruneCompletedButton(calendar: calendar)
-            }
-        }
+    private var reminders: [EKReminder] {
+        showCompleted ? completed : incomplete
     }
-}
-
-struct EKCalendarList<ContentView: View>: View {
-    let content: (EKCalendar) -> ContentView
-    @EnvironmentObject var eventStore: EventStore
 
     var body: some View {
-        List {
-            ForEach(eventStore.sources) { (source) in
-                Section(header: Text(source.title)) {
-                    ForEach(eventStore.calendars(for: source)) { (calendar) in
-                        content(calendar)
-                    }
+        SortedRemindersView(sortBy: $sortBy, reminders: reminders)
+            .navigationTitle(calendar.title)
+            .modifier(BackgroundColorModifier(color: self.calendar.cgColor))
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    AddTaskButton(calendar: calendar)
+                    SortButton(sortBy: $sortBy)
+                    EditCalendarButton(calendar: calendar)
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Toggle("Show Completed", isOn: $showCompleted)
+                    PruneCompletedButton(calendar: calendar)
                 }
             }
-        }.listStyle(GroupedListStyle())
+            .task {
+                completed = await store.completed(for: calendar)
+                incomplete = await store.incomplete(for: calendar)
+            }
     }
 }
 
 struct CalendarListView: View {
+    @EnvironmentObject var store: MarkdownEventStore
+    @State var calendars = [EKCalendar]()
+
     var body: some View {
-        EKCalendarList { calendar in
+        SourceGroupedCalendarView(groups: calendars) { calendar in
             NavigationLink(destination: CalendarDetailView(calendar: calendar)) {
                 Text(calendar.title)
                     .foregroundColor(calendar.color)
             }
+        }
+        .refreshable {
+            store.refreshSourcesIfNecessary()
+            calendars = await store.calendars()
+        }
+        .task {
+            calendars = await store.calendars()
         }
     }
 }

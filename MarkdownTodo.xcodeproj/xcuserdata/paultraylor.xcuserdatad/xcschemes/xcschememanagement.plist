@@ -9,10 +9,18 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>TodayWidgetExtension.xcscheme_^#shared#^_</key>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>87371CA024B9BBB8005EA9F7</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>87EA66D826B2A7EF00922E9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

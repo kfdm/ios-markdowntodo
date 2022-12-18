@@ -11,7 +11,7 @@ import SwiftUI
 
 private struct AddTaskSheet: View {
     @State var reminder: EKReminder
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: MarkdownEventStore
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -38,7 +38,7 @@ private struct AddTaskSheet: View {
 }
 
 struct AddTaskButton: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: MarkdownEventStore
     var calendar: EKCalendar
 
     @State private var isPresenting = false

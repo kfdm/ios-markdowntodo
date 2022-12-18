@@ -6,7 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Combine
 import EventKit
 import SwiftUI
 
@@ -19,8 +18,7 @@ struct CalendarOverview: View {
     @State var selectedDate = Date()
 
     // Query
-    @EnvironmentObject var eventStore: EventStore
-    @State private var subscriptions = Set<AnyCancellable>()
+    @EnvironmentObject var store: MarkdownEventStore
     @State private var reminders: [EKReminder] = []
 
     private func destination(for date: Date) -> some View {
@@ -39,13 +37,9 @@ struct CalendarOverview: View {
                     .modifier(DateHighlightModifier(selectedDate: $selectedDate, date: date))
                     .modifier(DateBorderModifier(reminders: $reminders, date: date))
             }
-        }.onAppear(perform: fetch)
-    }
-
-    func fetch() {
-        self.eventStore.publisher(for: eventStore.reminders(for: month))
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.reminders, on: self)
-            .store(in: &self.subscriptions)
+        }
+        .task {
+            reminders = await store.reminders(for: month)
+        }
     }
 }

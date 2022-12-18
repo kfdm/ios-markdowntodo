@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PruneListView: View {
     var reminders: [EKReminder]
-    @EnvironmentObject var store: EventStore
+    @EnvironmentObject var store: MarkdownEventStore
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -49,21 +49,23 @@ struct PruneListView: View {
 struct PruneCompletedButton: View {
     var calendar: EKCalendar
     @State private var isPresented = false
-    @EnvironmentObject var store: EventStore
+    @EnvironmentObject var store: MarkdownEventStore
+    @State private var reminders = [EKReminder]()
 
     var body: some View {
         Button("Prune Completed", action: actionToggleSheet)
             .sheet(isPresented: $isPresented) {
                 NavigationView {
-                    PredicateFetcher(predicate: store.completed(for: calendar)) { reminders in
-                        PruneListView(reminders: reminders)
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel", action: actionToggleSheet)
+                    PruneListView(reminders: reminders)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel", action: actionToggleSheet)
+                            }
                         }
-                    }
                 }
+            }
+            .task {
+                reminders = await store.completed(for: calendar)
             }
     }
 

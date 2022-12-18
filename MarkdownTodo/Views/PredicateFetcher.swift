@@ -6,7 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Combine
 import EventKit
 import SwiftUI
 import os.log
@@ -128,7 +127,7 @@ struct SortedRemindersView: View {
     @Binding var sortBy: SortOptions
     // Putting our EnvironmentObject store here seems to fix the bug with "quick date"
     // but the correct fix is to likely correctly propogate State/Binding values
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var store: MarkdownEventStore
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
@@ -137,15 +136,15 @@ struct SortedRemindersView: View {
         }
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") {}
-            .tint(.green)
+                .tint(.green)
             Button("Reschedule") {}
-            .tint(.cyan)
+                .tint(.cyan)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button("Delete", role: .destructive) { }
-            .tint(.red)
+            Button("Delete", role: .destructive) {}
+                .tint(.red)
             Button("Move") {}
-            .tint(.blue)
+                .tint(.blue)
         }
     }
 
@@ -175,48 +174,11 @@ struct SortedRemindersView: View {
         // Default sort button if not overridden in the parent view
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if let defaultCalendar = eventStore.defaultCalendar {
+                if let defaultCalendar = store.defaultCalendar {
                     AddTaskButton(calendar: defaultCalendar)
                 }
                 SortButton(sortBy: $sortBy)
             }
         }
-    }
-}
-
-struct PredicateFetcher<ContentView>: View where ContentView: View {
-    let predicate: NSPredicate
-    let content: ([EKReminder]) -> ContentView
-
-    // Query
-    @EnvironmentObject private var eventStore: EventStore
-    @Environment(\.scenePhase) private var scenePhase
-    @State private var subscriptions = Set<AnyCancellable>()
-    @State private var reminders: [EKReminder] = []
-
-    var body: some View {
-        self.content(reminders)
-            .onAppear(perform: fetch)
-            .onReceive(eventStore.objectWillChange, perform: fetch)
-            .refreshable {
-                eventStore.refreshSourcesIfNecessary()
-                fetch()
-            }
-            .onChange(of: scenePhase) { phase in
-                switch phase {
-                case .active:
-                    eventStore.refreshSourcesIfNecessary()
-                    fetch()
-                default:
-                    break
-                }
-            }
-    }
-
-    private func fetch() {
-        self.eventStore.publisher(for: predicate)
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.reminders, on: self)
-            .store(in: &self.subscriptions)
     }
 }

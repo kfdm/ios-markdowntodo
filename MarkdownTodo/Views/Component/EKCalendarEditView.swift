@@ -24,7 +24,7 @@ struct EditCalendarButton: View {
     @State var calendar: EKCalendar
 
     @State private var isPresenting = false
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: MarkdownEventStore
 
     var body: some View {
         Button("Edit", action: actionShowEdit)

@@ -61,7 +61,7 @@ struct QuickDatePicker: View {
 
     @State private var isPresented = false
     @Environment(\.calendar) var calendar
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var store: MarkdownEventStore
 
     var body: some View {
         Button(action: actionShow) {
@@ -95,7 +95,7 @@ struct QuickDatePicker: View {
     private func selectDate(date: Date?) {
         isPresented.toggle()
         self.date = calendar.dateComponents(from: date)
-        eventStore.objectWillChange.send()
+        store.objectWillChange.send()
         hook()
     }
 }

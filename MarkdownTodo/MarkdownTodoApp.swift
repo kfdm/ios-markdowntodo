@@ -10,11 +10,10 @@ import SwiftUI
 
 @main
 struct MarkdownTodoApp: App {
-    let eventStore = EventStore()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(eventStore)
+                .environmentObject(MarkdownEventStore.shared)
         }
     }
 }

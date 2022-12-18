@@ -10,7 +10,7 @@ import EventKit
 import SwiftUI
 
 struct CompletedCheckbox: View {
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: MarkdownEventStore
     @Binding var reminder: EKReminder
 
     var body: some View {
@@ -30,7 +30,7 @@ struct CompletedCheckbox: View {
 
 struct ReminderRow: View {
     @State var reminder: EKReminder
-    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var eventStore: MarkdownEventStore
 
     var body: some View {
         HStack {
