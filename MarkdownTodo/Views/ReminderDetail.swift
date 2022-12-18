@@ -13,6 +13,7 @@ struct ReminderDetail: View {
     @EnvironmentObject var store: MarkdownEventStore
     @State var reminder: EKReminder
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.refresh) var refreshAction: RefreshAction?
 
     var body: some View {
         EKReminderEditView(reminder: $reminder)
@@ -44,6 +45,11 @@ struct ReminderDetail: View {
 
     func deleteAction() {
         store.remove(reminder)
+        if let action = refreshAction {
+            Task {
+                await action()
+            }
+        }
         presentationMode.wrappedValue.dismiss()
     }
 }

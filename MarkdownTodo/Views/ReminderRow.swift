@@ -24,7 +24,11 @@ struct CompletedCheckbox: View {
     }
 
     func actionClickCheckbox() {
-        eventStore.toggleComplete(reminder)
+        if reminder.isCompleted {
+            eventStore.undo(reminder: reminder)
+        } else {
+            eventStore.complete(reminder: reminder)
+        }
     }
 }
 

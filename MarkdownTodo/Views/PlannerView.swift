@@ -40,7 +40,6 @@ struct ScheduledView: View {
                     reminders = await store.scheduledReminders()
                 }
         }
-
     }
 }
 

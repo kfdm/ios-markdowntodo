@@ -36,7 +36,7 @@ extension MarkdownEventStore {
         return await incomplete(from: .distantPast, to: .distantFuture)
     }
     func upcomingReminders(days: Int = 3) async -> [EKReminder] {
-        let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
+        let ending = Calendar.current.date(byAdding: .day, value: days, to: .now.startOfDay)
         return await incomplete(from: .distantPast, to: ending)
     }
 
@@ -63,15 +63,6 @@ extension MarkdownEventStore {
     func remove(_ reminder: EKReminder) {
         remove(reminders: [reminder])
         self.objectWillChange.send()
-    }
-
-    func toggleComplete(_ reminder: EKReminder) {
-        if reminder.isCompleted {
-            reminder.completionDate = nil
-        } else {
-            reminder.completionDate = Date()
-        }
-        save(reminder)
     }
 }
 
