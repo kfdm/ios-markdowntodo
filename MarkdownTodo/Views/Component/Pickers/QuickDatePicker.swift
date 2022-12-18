@@ -95,7 +95,6 @@ struct QuickDatePicker: View {
     private func selectDate(date: Date?) {
         isPresented.toggle()
         self.date = calendar.dateComponents(from: date)
-        store.objectWillChange.send()
         hook()
     }
 }

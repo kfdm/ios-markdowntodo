@@ -42,6 +42,14 @@ private struct CalendarDetailView: View {
                 completed = await store.completed(for: calendar)
                 incomplete = await store.incomplete(for: calendar)
             }
+            .refreshable {
+                completed = await store.completed(for: calendar)
+                incomplete = await store.incomplete(for: calendar)
+            }
+            .onEventStoreChanged {
+                completed = await store.completed(for: calendar)
+                incomplete = await store.incomplete(for: calendar)
+            }
     }
 }
 

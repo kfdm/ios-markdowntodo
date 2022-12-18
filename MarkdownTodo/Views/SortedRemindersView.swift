@@ -1,5 +1,5 @@
 //
-//  PredicateView.swift
+//  SortedRemindersView.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/07/11.
@@ -128,23 +128,42 @@ struct SortedRemindersView: View {
     // Putting our EnvironmentObject store here seems to fix the bug with "quick date"
     // but the correct fix is to likely correctly propogate State/Binding values
     @EnvironmentObject var store: MarkdownEventStore
+    @Environment(\.calendar) var calendar
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
         NavigationLink(destination: ReminderDetail(reminder: reminder)) {
             ReminderRow(reminder: reminder)
+                .contextMenu {
+                    Menu("Due Date") {
+                        Button("Unset") {
+                            store.quickUnsetDate(reminder)
+                        }
+                        Button("Today") {
+                            store.quickSetDate(reminder, date: .now)
+                        }
+                        Button("Tomorrow") {
+                            store.quickSetDate(reminder, date: .now.tomorrow)
+                        }
+                    }
+                    Divider()
+                    Button("Delete", role: .destructive) {
+                        store.quickDelete(reminder)
+                    }
+                }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
-            Button("Complete") {}
+            Button("Complete") { store.quickComplete(reminder) }
                 .tint(.green)
-            Button("Reschedule") {}
-                .tint(.cyan)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button("Delete", role: .destructive) {}
+            Button("Delete", role: .destructive) { store.quickDelete(reminder) }
                 .tint(.red)
             Button("Move") {}
                 .tint(.blue)
+        }
+        .onEventStoreChanged {
+            self.sortBy = sortBy
         }
     }
 

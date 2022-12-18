@@ -22,7 +22,7 @@ private struct AddTaskSheet: View {
                     Button("Cancel", action: actionCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add", action: actionSave)
+                    Button("Save", action: actionSave)
                 }
             }
     }
@@ -45,7 +45,7 @@ struct AddTaskButton: View {
 
     var body: some View {
         Button(action: { isPresenting.toggle() }) {
-            Image(systemName: "plus")
+            Image(systemName: "square.and.pencil")
         }.sheet(isPresented: $isPresenting) {
             NavigationView {
                 AddTaskSheet(reminder: eventStore.new(for: calendar))

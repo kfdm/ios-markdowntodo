@@ -36,6 +36,9 @@ struct ScheduledView: View {
                 .refreshable {
                     reminders = await store.scheduledReminders()
                 }
+                .onEventStoreChanged {
+                    reminders = await store.scheduledReminders()
+                }
         }
 
     }
@@ -50,6 +53,12 @@ struct AgendaView: View {
         NavigationLabel(label: "Agenda", systemImage: "calendar") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
                 .task {
+                    reminders = await store.upcomingReminders()
+                }
+                .refreshable {
+                    reminders = await store.upcomingReminders()
+                }
+                .onEventStoreChanged {
                     reminders = await store.upcomingReminders()
                 }
         }
@@ -68,6 +77,9 @@ struct PriorityView: View {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
                 .refreshable {
+                    reminders = await store.incomplete().filter { $0.priority > 0 }
+                }
+                .onEventStoreChanged {
                     reminders = await store.incomplete().filter { $0.priority > 0 }
                 }
         }
@@ -89,6 +101,9 @@ struct ExternalView: View {
                 .refreshable {
                     reminders = await store.incomplete().filter { $0.hasURL }
                 }
+                .onEventStoreChanged {
+                    reminders = await store.incomplete().filter { $0.hasURL }
+                }
         }
 
     }
@@ -103,6 +118,12 @@ struct CompletedView: View {
         NavigationLabel(label: "Completed", systemImage: "checkmark.seal") {
             SortedRemindersView(sortBy: $sortBy, reminders: reminders)
                 .task {
+                    reminders = await store.completed()
+                }
+                .refreshable {
+                    reminders = await store.completed()
+                }
+                .onEventStoreChanged {
                     reminders = await store.completed()
                 }
         }

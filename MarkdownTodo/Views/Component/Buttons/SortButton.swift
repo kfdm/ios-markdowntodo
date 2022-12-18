@@ -1,5 +1,5 @@
 //
-//  SortPicker.swift
+//  SortButton.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/08/08.

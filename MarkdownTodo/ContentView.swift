@@ -34,7 +34,6 @@ struct ContentView: View {
             NavigationView {
                 PlannerView()
                     .navigationBarTitle("Planner")
-
             }
             .tagLabel("Planner", systemImage: "calendar", tab: .calendar)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
@@ -52,6 +51,7 @@ struct ContentView: View {
             }
             .tagLabel("Settings", systemImage: "gear", tab: .settings)
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
+
         }
 
         .onChange(of: scenePhase) { phase in

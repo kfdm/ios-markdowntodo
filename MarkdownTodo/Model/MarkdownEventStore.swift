@@ -1,5 +1,5 @@
 //
-//  EventStore.swift
+//  MarkdownEventStore.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/07/11.
@@ -9,6 +9,7 @@
 import EventKit
 import EventKitExtensions
 import Foundation
+import SwiftUI
 import os.log
 
 class MarkdownEventStore: CalendarStore {
@@ -36,7 +37,7 @@ extension MarkdownEventStore {
     }
     func upcomingReminders(days: Int = 3) async -> [EKReminder] {
         let ending = Calendar.current.date(byAdding: .day, value: days, to: Date())
-        return await incomplete(from: nil, to: ending)
+        return await incomplete(from: .distantPast, to: ending)
     }
 
     func save(_ calendar: EKCalendar) {
@@ -45,7 +46,6 @@ extension MarkdownEventStore {
         } catch {
             print(error.localizedDescription)
         }
-        self.objectWillChange.send()
     }
 
     func reminders(for interval: DateInterval) async -> [EKReminder] {
@@ -58,11 +58,11 @@ extension MarkdownEventStore {
         } catch {
             print(error.localizedDescription)
         }
-        self.objectWillChange.send()
     }
 
     func remove(_ reminder: EKReminder) {
         remove(reminders: [reminder])
+        self.objectWillChange.send()
     }
 
     func toggleComplete(_ reminder: EKReminder) {
@@ -72,5 +72,22 @@ extension MarkdownEventStore {
             reminder.completionDate = Date()
         }
         save(reminder)
+    }
+}
+
+extension MarkdownEventStore {
+    func quickComplete(_ reminder: EKReminder) {
+        print("Would have completed \(reminder)")
+    }
+    func quickSetDate(_ reminder: EKReminder, date: Date) {
+        reminder.dueDateComponents = Calendar.current.dateComponents(from: date)
+        save(reminder)
+    }
+    func quickUnsetDate(_ reminder: EKReminder) {
+        reminder.dueDateComponents = nil
+        save(reminder)
+    }
+    func quickDelete(_ reminder: EKReminder) {
+        print("Would have deleted \(reminder)")
     }
 }

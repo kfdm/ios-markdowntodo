@@ -11,14 +11,40 @@ import SwiftUI
 
 struct EKReminderEditView: View {
     @Binding var reminder: EKReminder
+    @State var showFull = false
+    var body: some View {
+        if showFull {
+            EKReminderEditViewFull(reminder: $reminder, showFull: $showFull)
+        } else {
+            EKReminderEditViewSimple(reminder: $reminder, showFull: $showFull)
+        }
+    }
+}
+
+struct EKReminderEditViewSimple: View {
+    @Binding var reminder: EKReminder
+    @Binding var showFull: Bool
+    var body: some View {
+        List {
+            Toggle("Show Full", isOn: $showFull)
+            TextField("Title", text: $reminder.title)
+            MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+        }
+    }
+}
+
+struct EKReminderEditViewFull: View {
+    @Binding var reminder: EKReminder
+    @Binding var showFull: Bool
     var body: some View {
         List {
             Section {
-                NameField(label: "Title", value: $reminder.title)
+                Toggle("Show Full", isOn: $showFull)
+                TextField("Title", text: $reminder.title)
+            }
+            Section(header: Text("Detail")) {
                 EKCalendarPicker(calendar: $reminder.calendar)
                 PriorityPicker(label: "Priority", priority: $reminder.priority)
-            }
-            Section(header: Text("Date")) {
                 QuickDatePicker(label: "Start Date", date: $reminder.startDateComponents)
                     .modifier(LabelModifier(label: "Start Date"))
                 QuickDatePicker(label: "Due Date", date: $reminder.dueDateComponents)
