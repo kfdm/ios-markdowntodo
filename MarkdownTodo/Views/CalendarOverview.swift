@@ -27,7 +27,7 @@ struct CalendarOverview: View {
     }
 
     var body: some View {
-                MecidCalendarView(interval: month) { date in
+        MecidCalendarView(interval: month) { date in
             NavigationLink(destination: destination(for: date)) {
                 Text(String(self.calendar.component(.day, from: date)))
                     .frame(

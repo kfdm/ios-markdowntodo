@@ -152,7 +152,7 @@ struct SortedRemindersView: View {
                         store.quickDelete(reminder)
                     }
                 }
-                .onDrag { NSItemProvider(object: reminder)  }
+                .onDrag { NSItemProvider(object: reminder) }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") { store.quickComplete(reminder) }
