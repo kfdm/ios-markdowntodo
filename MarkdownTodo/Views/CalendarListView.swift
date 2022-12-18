@@ -63,6 +63,7 @@ struct CalendarListView: View {
                 Text(calendar.title)
                     .foregroundColor(calendar.color)
             }
+            .onDrop(of: [.reminder], delegate: CalendarDropDelegate(store: store, calendar: calendar))
         }
         .refreshable {
             store.refreshSourcesIfNecessary()

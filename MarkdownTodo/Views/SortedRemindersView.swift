@@ -129,6 +129,7 @@ struct SortedRemindersView: View {
     // but the correct fix is to likely correctly propogate State/Binding values
     @EnvironmentObject var store: MarkdownEventStore
     @Environment(\.calendar) var calendar
+
     var reminders: [EKReminder]
 
     func content(for reminder: EKReminder) -> some View {
@@ -151,6 +152,7 @@ struct SortedRemindersView: View {
                         store.quickDelete(reminder)
                     }
                 }
+                .onDrag { NSItemProvider(object: reminder)  }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button("Complete") { store.quickComplete(reminder) }
