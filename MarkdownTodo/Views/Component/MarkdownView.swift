@@ -6,7 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Ink
 import MarkdownUI
 import SwiftUI
 import UIKit
