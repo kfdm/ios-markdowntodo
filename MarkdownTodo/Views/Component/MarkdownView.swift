@@ -7,61 +7,52 @@
 //
 
 import Ink
+import MarkdownUI
 import SwiftUI
 import UIKit
 import WebKit
 
-struct MarkdownPreviewView: UIViewRepresentable {
-    var html: String
-
-    init(html: String) {
-        self.html = html
-    }
-
-    func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        return webView
-    }
-
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        uiView.loadHTMLString(html, baseURL: nil)
-    }
-}
-
 struct MarkdownView: View {
     var label: String
-    @Binding var text: String
+    @Binding var text
+    @State private var buffer = ""
     @State private var showPreview = true
 
-    var html: String {
-        let parser = MarkdownParser()
-        return parser.html(from: $text.wrappedValue)
+    enum ViewMode {
+        case both
+        case edit
+        case preview
     }
+
+    @State private var mode = ViewMode.both
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text(label)
-                Spacer()
-                Toggle("Preview", isOn: $showPreview)
+            Picker(label, selection: $mode) {
+                Text("Edit").tag(ViewMode.edit)
+                Text("Both").tag(ViewMode.both)
+                Text("Preview").tag(ViewMode.preview)
             }
-            HStack {
-                TextEditor(text: $text)
-                if showPreview {
-                    MarkdownPreviewView(html: html)
+            .pickerStyle(.segmented)
+            HStack(alignment: .top) {
+                if mode == .both || mode == .edit {
+                    TextEditor(text: $buffer)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .border(.red)
+                }
+                if mode == .both || mode == .preview {
+                    Markdown(buffer)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .border(.green)
                 }
             }
         }
-        .frame(minHeight: 256, maxHeight: .infinity, alignment: .topLeading)
-    }
-}
-
-extension String {
-    func markdownToAttributed() -> AttributedString {
-        do {
-            return try AttributedString(markdown: self)
-        } catch {
-            return AttributedString("Error parsing")
+        // MARK: - Fixes for binding/state and markdown live preview
+        .task {
+            buffer = text
+        }
+        .onChange(of: buffer) { newValue in
+            text = newValue
         }
     }
 }

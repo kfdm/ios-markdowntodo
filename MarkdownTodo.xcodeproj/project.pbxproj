@@ -11,6 +11,7 @@
 		870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910B24DE545C00979076 /* EventKit+Extensions.swift */; };
 		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
 		870B93CF25A9DFE300E7934E /* EKCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */; };
+		871477EF29864DFF00EF8CEC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 871477EE29864DFF00EF8CEC /* MarkdownUI */; };
 		872EF4E924DE90B5005384DF /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4E824DE90B5005384DF /* SortButton.swift */; };
 		87371CA724B9BBB8005EA9F7 /* MarkdownTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -20,7 +21,6 @@
 		87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CB824B9C042005EA9F7 /* CalendarListView.swift */; };
 		87371CBC24B9C0BC005EA9F7 /* MarkdownEventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBB24B9C0BC005EA9F7 /* MarkdownEventStore.swift */; };
 		87371CBF24B9C9CA005EA9F7 /* SortedRemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* SortedRemindersView.swift */; };
-		8739B16425B999D300DC5256 /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 8739B16325B999D300DC5256 /* Ink */; };
 		874E646824DC19C800603EAE /* BackgroundColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E646724DC19C800603EAE /* BackgroundColorModifier.swift */; };
 		8758210A24DCBBC70034EF24 /* MecidCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* MecidCalendarView.swift */; };
 		875B541C24E7E6F800D7F10C /* CalendarOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B541B24E7E6F800D7F10C /* CalendarOverview.swift */; };
@@ -102,8 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871477EF29864DFF00EF8CEC /* MarkdownUI in Frameworks */,
 				87B2E0712929F646002C8DA9 /* EventKitExtensions in Frameworks */,
-				8739B16425B999D300DC5256 /* Ink in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,8 +268,8 @@
 			);
 			name = MarkdownTodo;
 			packageProductDependencies = (
-				8739B16325B999D300DC5256 /* Ink */,
 				87B2E0702929F646002C8DA9 /* EventKitExtensions */,
+				871477EE29864DFF00EF8CEC /* MarkdownUI */,
 			);
 			productName = MarkdownTodo;
 			productReference = 87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */;
@@ -300,8 +300,8 @@
 			);
 			mainGroup = 87371C9824B9BBB8005EA9F7;
 			packageReferences = (
-				8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */,
 				87B2E06F2929F646002C8DA9 /* XCRemoteSwiftPackageReference "EventKitExtensions" */,
+				871477ED29864DFF00EF8CEC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = 87371CA224B9BBB8005EA9F7 /* Products */;
 			projectDirPath = "";
@@ -411,7 +411,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 72;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -474,7 +474,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 72;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -504,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_ASSET_PATHS = "\"MarkdownTodo/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +532,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_ASSET_PATHS = "\"MarkdownTodo/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				ENABLE_PREVIEWS = YES;
@@ -577,12 +577,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */ = {
+		871477ED29864DFF00EF8CEC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JohnSundell/Ink";
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		87B2E06F2929F646002C8DA9 /* XCRemoteSwiftPackageReference "EventKitExtensions" */ = {
@@ -596,10 +596,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8739B16325B999D300DC5256 /* Ink */ = {
+		871477EE29864DFF00EF8CEC /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */;
-			productName = Ink;
+			package = 871477ED29864DFF00EF8CEC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 		87B2E0702929F646002C8DA9 /* EventKitExtensions */ = {
 			isa = XCSwiftPackageProductDependency;

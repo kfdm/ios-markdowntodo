@@ -29,7 +29,9 @@ struct EKReminderEditViewSimple: View {
             Toggle("Show Full", isOn: $showFull)
             TextField("Title", text: $reminder.title)
             MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+                .frame(maxWidth: .infinity, minHeight: 512, maxHeight: .infinity, alignment: .top)
         }
+
     }
 }
 
@@ -70,6 +72,7 @@ struct EKReminderEditViewFull: View {
                 LinkField(url: $reminder.url)
                     .modifier(LabelModifier(label: "URL"))
                 MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+                    .frame(maxWidth: .infinity, minHeight: 512, maxHeight: .infinity, alignment: .top)
             }
         }
     }

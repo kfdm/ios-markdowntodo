@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "ink",
+      "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Ink",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
       "state" : {
-        "revision" : "bd223a2482449507bd3286cb262c962d32d81e4b",
-        "version" : "0.5.0"
+        "revision" : "b89d6e4b60f86d3a8163cc97bf48d4c959015370",
+        "version" : "2.0.0"
       }
     }
   ],
