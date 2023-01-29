@@ -14,7 +14,7 @@ import WebKit
 
 struct MarkdownView: View {
     var label: String
-    @Binding var text
+    @Binding var text: String
     @State private var buffer = ""
     @State private var showPreview = true
 
