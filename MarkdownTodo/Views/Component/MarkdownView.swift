@@ -41,7 +41,7 @@ struct MarkdownView: View {
                 }
                 if mode == .both || mode == .preview {
                     Markdown(buffer)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .border(.green)
                 }
             }
