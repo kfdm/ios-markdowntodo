@@ -8,6 +8,7 @@
 
 import EventKit
 import SwiftUI
+import swift_markdown_editor
 
 struct EKReminderEditView: View {
     @Binding var reminder: EKReminder
@@ -32,7 +33,7 @@ struct EKReminderEditViewSimple: View {
     var body: some View {
         List {
             TextField("Title", text: $reminder.title)
-            MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+            SplitMarkdownEdit(label: "Description", text: $reminder.unwrappedNotes)
                 .frame(maxWidth: .infinity, minHeight: 512, maxHeight: .infinity, alignment: .top)
         }
     }
@@ -72,7 +73,7 @@ struct EKReminderEditViewFull: View {
             Section(header: Text("Other")) {
                 LinkField(url: $reminder.url)
                     .modifier(LabelModifier(label: "URL"))
-                MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+                SplitMarkdownEdit(label: "Description", text: $reminder.unwrappedNotes)
                     .frame(maxWidth: .infinity, minHeight: 512, maxHeight: .infinity, alignment: .top)
             }
         }
