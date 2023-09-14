@@ -34,7 +34,6 @@ struct EKReminderEditViewSimple: View {
         List {
             TextField("Title", text: $reminder.title)
             SplitMarkdownEdit(label: "Description", text: $reminder.unwrappedNotes)
-                .frame(maxWidth: .infinity, minHeight: 512, maxHeight: .infinity, alignment: .top)
         }
     }
 }
