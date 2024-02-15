@@ -16,9 +16,9 @@ struct EKReminderEditView: View {
     var body: some View {
         Group {
             if showFull {
-                EKReminderEditViewFull(reminder: $reminder, showFull: $showFull)
+                EKReminderEditViewFull(reminder: $reminder)
             } else {
-                EKReminderEditViewSimple(reminder: $reminder, showFull: $showFull)
+                EKReminderEditViewSimple(reminder: $reminder)
             }
         }.toolbar {
             Toggle("Detail", isOn: $showFull)
@@ -28,11 +28,10 @@ struct EKReminderEditView: View {
 
 struct EKReminderEditViewSimple: View {
     @Binding var reminder: EKReminder
-    @Binding var showFull: Bool
     var body: some View {
         List {
             TextField("Title", text: $reminder.title)
-            MarkdownEditor(buffer: $reminder.unwrappedNotes)
+            MarkdownEditor(text: $reminder.unwrappedNotes)
                 .frame(minHeight: 500, maxHeight: .infinity)
         }
     }
@@ -40,7 +39,6 @@ struct EKReminderEditViewSimple: View {
 
 struct EKReminderEditViewFull: View {
     @Binding var reminder: EKReminder
-    @Binding var showFull: Bool
     var body: some View {
         List {
             Section {
