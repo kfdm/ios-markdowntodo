@@ -24,11 +24,13 @@ struct EKReminderEditView: View {
 struct EKReminderEditViewSimple: View {
     @Binding var reminder: EKReminder
     @Binding var showFull: Bool
+    @State private var showPreview: Bool = false
     var body: some View {
         List {
             Toggle("Show Full", isOn: $showFull)
+            Toggle("Show Preview", isOn: $showPreview)
             TextField("Title", text: $reminder.title)
-            MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+            MarkdownView(label: "Description", text: $reminder.unwrappedNotes, showPreview: $showPreview)
         }
     }
 }
@@ -36,10 +38,12 @@ struct EKReminderEditViewSimple: View {
 struct EKReminderEditViewFull: View {
     @Binding var reminder: EKReminder
     @Binding var showFull: Bool
+    @State private var showPreview: Bool = false
     var body: some View {
         List {
             Section {
                 Toggle("Show Full", isOn: $showFull)
+                Toggle("Show Markdown", isOn: $showPreview)
                 TextField("Title", text: $reminder.title)
             }
             Section(header: Text("Detail")) {
@@ -69,7 +73,7 @@ struct EKReminderEditViewFull: View {
             Section(header: Text("Other")) {
                 LinkField(url: $reminder.url)
                     .modifier(LabelModifier(label: "URL"))
-                MarkdownView(label: "Description", text: $reminder.unwrappedNotes)
+                MarkdownView(label: "Description", text: $reminder.unwrappedNotes, showPreview: $showPreview)
             }
         }
     }

@@ -53,9 +53,11 @@ struct WeekView<DateView>: View where DateView: View {
 
     let week: Date
     let content: (Date) -> DateView
+    @Binding var selectedDate: Date
 
-    init(week: Date, @ViewBuilder content: @escaping (Date) -> DateView) {
+    init(week: Date, selectedDate: Binding<Date>, @ViewBuilder content: @escaping (Date) -> DateView) {
         self.week = week
+        self._selectedDate = selectedDate
         self.content = content
     }
 
@@ -75,12 +77,19 @@ struct WeekView<DateView>: View where DateView: View {
                 HStack {
                     if self.calendar.isDate(self.week, equalTo: date, toGranularity: .month) {
                         self.content(date)
+                            .onAppear(perform: {
+                                self.updateDate(date: date)
+                            })
                     } else {
                         self.content(date).hidden()
                     }
                 }
             }
         }
+    }
+
+    private func updateDate(date: Date) {
+        self.selectedDate = date
     }
 }
 
@@ -90,14 +99,17 @@ struct MonthView<DateView>: View where DateView: View {
     let month: Date
     let showHeader: Bool
     let content: (Date) -> DateView
+    @Binding var selectedDate: Date
 
     init(
         month: Date,
         showHeader: Bool = true,
+        selectedDate: Binding<Date>,
         @ViewBuilder content: @escaping (Date) -> DateView
     ) {
         self.month = month
         self.content = content
+        self._selectedDate = selectedDate
         self.showHeader = showHeader
     }
 
@@ -126,7 +138,7 @@ struct MonthView<DateView>: View where DateView: View {
             }
 
             ForEach(weeks, id: \.self) { week in
-                WeekView(week: week, content: self.content)
+                WeekView(week: week, selectedDate: $selectedDate, content: self.content)
             }
         }
     }
@@ -137,10 +149,12 @@ struct CalendarView<DateView>: View where DateView: View {
 
     let interval: DateInterval
     let content: (Date) -> DateView
+    @Binding var selectedDate: Date
 
-    init(interval: DateInterval, @ViewBuilder content: @escaping (Date) -> DateView) {
+    init(interval: DateInterval, selectedDate: Binding<Date>, @ViewBuilder content: @escaping (Date) -> DateView) {
         self.interval = interval
         self.content = content
+        self._selectedDate = selectedDate
     }
 
     private var months: [Date] {
@@ -154,7 +168,7 @@ struct CalendarView<DateView>: View where DateView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 ForEach(months, id: \.self) { month in
-                    MonthView(month: month, content: self.content)
+                    MonthView(month: month, selectedDate: $selectedDate, content: self.content)
                 }
             }
         }

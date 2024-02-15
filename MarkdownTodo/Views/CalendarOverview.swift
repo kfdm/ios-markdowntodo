@@ -22,12 +22,11 @@ struct CalendarOverview: View {
     @State private var reminders: [EKReminder] = []
 
     private func destination(for date: Date) -> some View {
-        selectedDate = date
         return SelectedDateView(date: date)
     }
 
     var body: some View {
-        CalendarView(interval: month) { date in
+        CalendarView(interval: month, selectedDate: $selectedDate) { date in
             NavigationLink(destination: destination(for: date)) {
                 Text(String(self.calendar.component(.day, from: date)))
                     .frame(
