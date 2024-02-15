@@ -18,7 +18,7 @@ struct CalendarDatePicker: View {
     var action: (Date) -> Void
 
     var body: some View {
-        CalendarView(interval: month) { date in
+        CalendarView(interval: month, selectedDate: $selectedDate) { date in
             Button(String(self.calendar.component(.day, from: date))) {
                 action(date)
             }

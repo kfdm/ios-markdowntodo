@@ -27,7 +27,7 @@ struct MarkdownPreviewView: UIViewRepresentable {
 struct MarkdownView: View {
     var label: String
     @Binding var text: String
-    @State private var showPreview = false
+    @Binding var showPreview: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -48,6 +48,6 @@ struct MarkdownView: View {
 
 struct MarkdownView_Previews: PreviewProvider {
     static var previews: some View {
-        MarkdownView(label: "Test", text: .constant("Some description"))
+        MarkdownView(label: "Test", text: .constant("Some description"), showPreview: .constant(true))
     }
 }
