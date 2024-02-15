@@ -1,12 +1,30 @@
 {
   "pins" : [
     {
-      "identity" : "ink",
+      "identity" : "codeeditor",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Ink",
+      "location" : "https://github.com/ZeeZide/CodeEditor",
       "state" : {
-        "revision" : "bd223a2482449507bd3286cb262c962d32d81e4b",
-        "version" : "0.5.0"
+        "revision" : "180bde07b44dea839b32873bd8586ba146fa9106",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "highlightr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/raspu/Highlightr",
+      "state" : {
+        "revision" : "93199b9e434f04bda956a613af8f571933f9f037",
+        "version" : "2.1.2"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "state" : {
+        "revision" : "12b351a75201a8124c2f2e1f9fc6ef5cd812c0b9",
+        "version" : "2.1.0"
       }
     }
   ],

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910B24DE545C00979076 /* EventKit+Extensions.swift */; };
 		870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B910D24DE54DC00979076 /* Date+Extensions.swift */; };
 		870B93CF25A9DFE300E7934E /* EKCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */; };
+		8729D7872A1F62D100C465DA /* swift-markdown-editor in Frameworks */ = {isa = PBXBuildFile; productRef = 8729D7862A1F62D100C465DA /* swift-markdown-editor */; };
 		872EF4E924DE90B5005384DF /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EF4E824DE90B5005384DF /* SortButton.swift */; };
 		87371CA724B9BBB8005EA9F7 /* MarkdownTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */; };
 		87371CA924B9BBB8005EA9F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CA824B9BBB8005EA9F7 /* ContentView.swift */; };
@@ -20,12 +21,10 @@
 		87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CB824B9C042005EA9F7 /* CalendarListView.swift */; };
 		87371CBC24B9C0BC005EA9F7 /* MarkdownEventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBB24B9C0BC005EA9F7 /* MarkdownEventStore.swift */; };
 		87371CBF24B9C9CA005EA9F7 /* SortedRemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87371CBE24B9C9CA005EA9F7 /* SortedRemindersView.swift */; };
-		8739B16425B999D300DC5256 /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 8739B16325B999D300DC5256 /* Ink */; };
 		874E646824DC19C800603EAE /* BackgroundColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E646724DC19C800603EAE /* BackgroundColorModifier.swift */; };
-		8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* CalendarView.swift */; };
+		8758210A24DCBBC70034EF24 /* MecidCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758210924DCBBC70034EF24 /* MecidCalendarView.swift */; };
 		875B541C24E7E6F800D7F10C /* CalendarOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B541B24E7E6F800D7F10C /* CalendarOverview.swift */; };
 		876EAE8E25B04DB40017A767 /* LinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EAE8D25B04DB40017A767 /* LinkField.swift */; };
-		8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773DF1224BB018C00BC255E /* MarkdownView.swift */; };
 		8785078025B2A7D500EE44D9 /* EKCalendarEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */; };
 		8785078725B2B78000EE44D9 /* EKReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078625B2B78000EE44D9 /* EKReminderEditView.swift */; };
 		8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785078925B2B7E100EE44D9 /* PriorityPicker.swift */; };
@@ -62,6 +61,7 @@
 		870B910D24DE54DC00979076 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		870B93CE25A9DFE300E7934E /* EKCalendarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKCalendarPicker.swift; sourceTree = "<group>"; };
 		871DA265292B9BC500C32E33 /* MarkdownTodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownTodo.entitlements; sourceTree = "<group>"; };
+		8729D7892A1F635D00C465DA /* swift-markdown-editor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-markdown-editor"; path = "../swift-markdown-editor"; sourceTree = "<group>"; };
 		872EF4E824DE90B5005384DF /* SortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButton.swift; sourceTree = "<group>"; };
 		87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87371CA624B9BBB8005EA9F7 /* MarkdownTodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTodoApp.swift; sourceTree = "<group>"; };
@@ -74,10 +74,9 @@
 		87371CBB24B9C0BC005EA9F7 /* MarkdownEventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEventStore.swift; sourceTree = "<group>"; };
 		87371CBE24B9C9CA005EA9F7 /* SortedRemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedRemindersView.swift; sourceTree = "<group>"; };
 		874E646724DC19C800603EAE /* BackgroundColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorModifier.swift; sourceTree = "<group>"; };
-		8758210924DCBBC70034EF24 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		8758210924DCBBC70034EF24 /* MecidCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MecidCalendarView.swift; sourceTree = "<group>"; };
 		875B541B24E7E6F800D7F10C /* CalendarOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOverview.swift; sourceTree = "<group>"; };
 		876EAE8D25B04DB40017A767 /* LinkField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkField.swift; sourceTree = "<group>"; };
-		8773DF1224BB018C00BC255E /* MarkdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownView.swift; sourceTree = "<group>"; };
 		8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKCalendarEditView.swift; sourceTree = "<group>"; };
 		8785078625B2B78000EE44D9 /* EKReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKReminderEditView.swift; sourceTree = "<group>"; };
 		8785078925B2B7E100EE44D9 /* PriorityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityPicker.swift; sourceTree = "<group>"; };
@@ -102,17 +101,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8729D7872A1F62D100C465DA /* swift-markdown-editor in Frameworks */,
 				87B2E0712929F646002C8DA9 /* EventKitExtensions in Frameworks */,
-				8739B16425B999D300DC5256 /* Ink in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8729D7882A1F635D00C465DA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				8729D7892A1F635D00C465DA /* swift-markdown-editor */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		87371C9824B9BBB8005EA9F7 = {
 			isa = PBXGroup;
 			children = (
+				8729D7882A1F635D00C465DA /* Packages */,
 				87B2E0722929F64F002C8DA9 /* EventKitExtensions */,
 				87371CA324B9BBB8005EA9F7 /* MarkdownTodo */,
 				87EA66DA26B2A7EF00922E9C /* Frameworks */,
@@ -212,7 +220,7 @@
 		87687699292E073B00409A42 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				8758210924DCBBC70034EF24 /* CalendarView.swift */,
+				8758210924DCBBC70034EF24 /* MecidCalendarView.swift */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -223,7 +231,6 @@
 				87687699292E073B00409A42 /* ThirdParty */,
 				8751C16725AC56FF000B1794 /* Pickers */,
 				87687698292E06F800409A42 /* Buttons */,
-				8773DF1224BB018C00BC255E /* MarkdownView.swift */,
 				8785078625B2B78000EE44D9 /* EKReminderEditView.swift */,
 				8785077F25B2A7D500EE44D9 /* EKCalendarEditView.swift */,
 				87D342F926B2BAE80032C41D /* PriorityStripe.swift */,
@@ -268,8 +275,8 @@
 			);
 			name = MarkdownTodo;
 			packageProductDependencies = (
-				8739B16325B999D300DC5256 /* Ink */,
 				87B2E0702929F646002C8DA9 /* EventKitExtensions */,
+				8729D7862A1F62D100C465DA /* swift-markdown-editor */,
 			);
 			productName = MarkdownTodo;
 			productReference = 87371CA124B9BBB8005EA9F7 /* MarkdownTodo.app */;
@@ -300,8 +307,8 @@
 			);
 			mainGroup = 87371C9824B9BBB8005EA9F7;
 			packageReferences = (
-				8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */,
 				87B2E06F2929F646002C8DA9 /* XCRemoteSwiftPackageReference "EventKitExtensions" */,
+				8729D7852A1F62D100C465DA /* XCRemoteSwiftPackageReference "swift-markdown-editor" */,
 			);
 			productRefGroup = 87371CA224B9BBB8005EA9F7 /* Products */;
 			projectDirPath = "";
@@ -336,7 +343,7 @@
 				87930DCD25BAE891003F8426 /* PruneCompletedView.swift in Sources */,
 				87371CBC24B9C0BC005EA9F7 /* MarkdownEventStore.swift in Sources */,
 				8785078A25B2B7E100EE44D9 /* PriorityPicker.swift in Sources */,
-				8758210A24DCBBC70034EF24 /* CalendarView.swift in Sources */,
+				8758210A24DCBBC70034EF24 /* MecidCalendarView.swift in Sources */,
 				87371CB924B9C042005EA9F7 /* CalendarListView.swift in Sources */,
 				87A9D44324B9D67600086541 /* ReminderRow.swift in Sources */,
 				87371CBF24B9C9CA005EA9F7 /* SortedRemindersView.swift in Sources */,
@@ -344,7 +351,6 @@
 				876EAE8E25B04DB40017A767 /* LinkField.swift in Sources */,
 				870B910C24DE545C00979076 /* EventKit+Extensions.swift in Sources */,
 				8785078D25B2C4B400EE44D9 /* QuickDatePicker.swift in Sources */,
-				8773DF1324BB018C00BC255E /* MarkdownView.swift in Sources */,
 				870B93CF25A9DFE300E7934E /* EKCalendarPicker.swift in Sources */,
 				872EF4E924DE90B5005384DF /* SortButton.swift in Sources */,
 				870B910E24DE54DC00979076 /* Date+Extensions.swift in Sources */,
@@ -411,7 +417,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 79;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -474,7 +480,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 79;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -504,7 +510,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_ASSET_PATHS = "\"MarkdownTodo/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +538,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarkdownTodo/MarkdownTodo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_ASSET_PATHS = "\"MarkdownTodo/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
 				ENABLE_PREVIEWS = YES;
@@ -577,12 +583,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */ = {
+		8729D7852A1F62D100C465DA /* XCRemoteSwiftPackageReference "swift-markdown-editor" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JohnSundell/Ink";
+			repositoryURL = "https://github.com/kfdm/swift-markdown-editor";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		87B2E06F2929F646002C8DA9 /* XCRemoteSwiftPackageReference "EventKitExtensions" */ = {
@@ -596,10 +602,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8739B16325B999D300DC5256 /* Ink */ = {
+		8729D7862A1F62D100C465DA /* swift-markdown-editor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8739B16225B999D200DC5256 /* XCRemoteSwiftPackageReference "Ink" */;
-			productName = Ink;
+			package = 8729D7852A1F62D100C465DA /* XCRemoteSwiftPackageReference "swift-markdown-editor" */;
+			productName = "swift-markdown-editor";
 		};
 		87B2E0702929F646002C8DA9 /* EventKitExtensions */ = {
 			isa = XCSwiftPackageProductDependency;

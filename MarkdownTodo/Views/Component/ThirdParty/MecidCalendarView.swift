@@ -1,5 +1,5 @@
 //
-//  CalendarView.swift
+//  MecidCalendarView.swift
 //  MarkdownTodo
 //
 //  Created by Paul Traylor on 2020/08/07.
@@ -132,7 +132,7 @@ struct MonthView<DateView>: View where DateView: View {
     }
 }
 
-struct CalendarView<DateView>: View where DateView: View {
+struct MecidCalendarView<DateView>: View where DateView: View {
     @Environment(\.calendar) var calendar
 
     let interval: DateInterval
