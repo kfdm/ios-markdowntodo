@@ -8,15 +8,20 @@
 
 import EventKit
 import SwiftUI
+import swift_markdown_editor
 
 struct EKReminderEditView: View {
     @Binding var reminder: EKReminder
     @State var showFull = false
     var body: some View {
-        if showFull {
-            EKReminderEditViewFull(reminder: $reminder, showFull: $showFull)
-        } else {
-            EKReminderEditViewSimple(reminder: $reminder, showFull: $showFull)
+        Group {
+            if showFull {
+                EKReminderEditViewFull(reminder: $reminder, showFull: $showFull)
+            } else {
+                EKReminderEditViewSimple(reminder: $reminder, showFull: $showFull)
+            }
+        }.toolbar {
+            Toggle("Detail", isOn: $showFull)
         }
     }
 }
@@ -24,13 +29,11 @@ struct EKReminderEditView: View {
 struct EKReminderEditViewSimple: View {
     @Binding var reminder: EKReminder
     @Binding var showFull: Bool
-    @State private var showPreview: Bool = false
     var body: some View {
         List {
-            Toggle("Show Full", isOn: $showFull)
-            Toggle("Show Preview", isOn: $showPreview)
             TextField("Title", text: $reminder.title)
-            MarkdownView(label: "Description", text: $reminder.unwrappedNotes, showPreview: $showPreview)
+            MarkdownEditor(buffer: $reminder.unwrappedNotes)
+                .frame(minHeight: 500, maxHeight: .infinity)
         }
     }
 }
@@ -38,12 +41,9 @@ struct EKReminderEditViewSimple: View {
 struct EKReminderEditViewFull: View {
     @Binding var reminder: EKReminder
     @Binding var showFull: Bool
-    @State private var showPreview: Bool = false
     var body: some View {
         List {
             Section {
-                Toggle("Show Full", isOn: $showFull)
-                Toggle("Show Markdown", isOn: $showPreview)
                 TextField("Title", text: $reminder.title)
             }
             Section(header: Text("Detail")) {
@@ -73,7 +73,8 @@ struct EKReminderEditViewFull: View {
             Section(header: Text("Other")) {
                 LinkField(url: $reminder.url)
                     .modifier(LabelModifier(label: "URL"))
-                MarkdownView(label: "Description", text: $reminder.unwrappedNotes, showPreview: $showPreview)
+                SplitMarkdownEdit(label: "Description", text: $reminder.unwrappedNotes)
+                    .frame(minHeight: 500, maxHeight: .infinity)
             }
         }
     }
